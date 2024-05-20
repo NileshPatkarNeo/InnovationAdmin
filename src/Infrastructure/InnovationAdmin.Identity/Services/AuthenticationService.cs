@@ -185,15 +185,14 @@ namespace InnovationAdmin.Identity.Services
                 return response;
             }
 
-            //Revoke Current Refresh Token
+          
             refreshToken.Revoked = DateTime.UtcNow;
 
-            //Generate new Refresh Token and save to Database
+           
             var newRefreshToken = GenerateRefreshToken();
             user.RefreshTokens.Add(newRefreshToken);
             await _userManager.UpdateAsync(user);
 
-            //Generates new jwt
             response.IsAuthenticated = true;
             JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
             response.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
