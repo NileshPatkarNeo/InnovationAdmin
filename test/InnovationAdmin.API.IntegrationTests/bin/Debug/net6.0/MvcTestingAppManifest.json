@@ -1,0 +1,8 @@
+{
+  "InnovationAdmin.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Power To Perform\\InnovationAdmin\\src\\API\\InnovationAdmin.Api",
+  "InnovationAdmin.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application",
+  "InnovationAdmin.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain",
+  "InnovationAdmin.Identity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Identity",
+  "InnovationAdmin.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Infrastructure",
+  "InnovationAdmin.Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Persistence"
+}

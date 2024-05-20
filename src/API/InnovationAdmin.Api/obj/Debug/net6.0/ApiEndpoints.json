@@ -1,0 +1,86 @@
+[
+  {
+    "ContainingType": "InnovationAdmin.Api.Controllers.AccountController",
+    "Method": "AuthenticateAsync",
+    "RelativePath": "api/v1/Account/authenticate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "InnovationAdmin.Application.Models.Authentication.AuthenticationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "InnovationAdmin.Application.Models.Authentication.AuthenticationResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "InnovationAdmin.Api.Controllers.AccountController",
+    "Method": "RefreshTokenAsync",
+    "RelativePath": "api/v1/Account/refresh-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "InnovationAdmin.Application.Models.Authentication.RefreshTokenRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "InnovationAdmin.Api.Controllers.AccountController",
+    "Method": "RegisterAsync",
+    "RelativePath": "api/v1/Account/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "InnovationAdmin.Application.Models.Authentication.RegistrationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "InnovationAdmin.Application.Models.Authentication.RegistrationResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "InnovationAdmin.Api.Controllers.AccountController",
+    "Method": "RevokeTokenAsync",
+    "RelativePath": "api/v1/Account/revoke-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "InnovationAdmin.Application.Models.Authentication.RevokeTokenRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

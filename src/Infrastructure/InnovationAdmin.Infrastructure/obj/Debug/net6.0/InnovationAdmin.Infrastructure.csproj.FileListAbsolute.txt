@@ -1,0 +1,35 @@
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Infrastructure.deps.json
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Infrastructure.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Infrastructure.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Application.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Domain.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Application.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Domain.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.csproj.AssemblyReference.cache
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.AssemblyInfoInputs.cache
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.AssemblyInfo.cs
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\Innovati.BD6D1EC8.Up2Date
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\refint\InnovationAdmin.Infrastructure.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\ref\InnovationAdmin.Infrastructure.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Infrastructure.deps.json
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Infrastructure.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Infrastructure.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Application.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Domain.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Application.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\bin\Debug\net6.0\InnovationAdmin.Domain.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.csproj.AssemblyReference.cache
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.AssemblyInfoInputs.cache
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.AssemblyInfo.cs
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.sourcelink.json
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\Innovati.BD6D1EC8.Up2Date
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\refint\InnovationAdmin.Infrastructure.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\InnovationAdmin.Infrastructure.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Infrastructure\obj\Debug\net6.0\ref\InnovationAdmin.Infrastructure.dll

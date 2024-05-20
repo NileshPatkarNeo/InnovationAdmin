@@ -1,0 +1,39 @@
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.deps.json
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.runtimeconfig.json
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Application.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Domain.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Application.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Domain.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.csproj.AssemblyReference.cache
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.AssemblyInfoInputs.cache
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.AssemblyInfo.cs
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.csproj.CoreCompileInputs.cache
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\Innovati.DA003C41.Up2Date
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\refint\InnovationAdmin.Identity.dll
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.pdb
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.genruntimeconfig.cache
+C:\Project - Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\ref\InnovationAdmin.Identity.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.deps.json
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.runtimeconfig.json
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Identity.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Application.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Domain.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Application.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\bin\Debug\net6.0\InnovationAdmin.Domain.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.csproj.AssemblyReference.cache
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.AssemblyInfoInputs.cache
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.AssemblyInfo.cs
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.csproj.CoreCompileInputs.cache
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.sourcelink.json
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\Innovati.DA003C41.Up2Date
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\refint\InnovationAdmin.Identity.dll
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.pdb
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\InnovationAdmin.Identity.genruntimeconfig.cache
+C:\Power To Perform\InnovationAdmin\src\Infrastructure\InnovationAdmin.Identity\obj\Debug\net6.0\ref\InnovationAdmin.Identity.dll
