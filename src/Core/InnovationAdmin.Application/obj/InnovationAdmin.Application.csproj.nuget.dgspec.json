@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj": {}
+    "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj": {}
   },
   "projects": {
-    "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj": {
+    "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj",
+        "projectUniqueName": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj",
         "projectName": "InnovationAdmin.Application",
-        "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\obj\\",
+        "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj": {
-                "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj"
+              "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj": {
+                "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj"
               }
             }
           }
@@ -38,11 +38,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -107,26 +102,40 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.26, 6.0.26]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.26, 6.0.26]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.26, 6.0.26]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj": {
+    "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj",
+        "projectUniqueName": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj",
         "projectName": "InnovationAdmin.Domain",
-        "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\obj\\",
+        "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\InnovationAdmin.Domain.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -146,11 +155,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -173,12 +177,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.26, 6.0.26]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.26, 6.0.26]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.26, 6.0.26]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

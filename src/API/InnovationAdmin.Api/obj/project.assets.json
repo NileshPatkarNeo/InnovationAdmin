@@ -11488,19 +11488,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Power To Perform\\InnovationAdmin\\src\\API\\InnovationAdmin.Api\\InnovationAdmin.Api.csproj",
+      "projectUniqueName": "C:\\PowerToPerform\\InnovationAdmin\\src\\API\\InnovationAdmin.Api\\InnovationAdmin.Api.csproj",
       "projectName": "InnovationAdmin.Api",
-      "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\API\\InnovationAdmin.Api\\InnovationAdmin.Api.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Power To Perform\\InnovationAdmin\\src\\API\\InnovationAdmin.Api\\obj\\",
+      "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\API\\InnovationAdmin.Api\\InnovationAdmin.Api.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\API\\InnovationAdmin.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11514,17 +11514,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj": {
-              "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj"
+            "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj": {
+              "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Core\\InnovationAdmin.Application\\InnovationAdmin.Application.csproj"
             },
-            "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Identity\\InnovationAdmin.Identity.csproj": {
-              "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Identity\\InnovationAdmin.Identity.csproj"
+            "C:\\PowerToPerform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Identity\\InnovationAdmin.Identity.csproj": {
+              "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Identity\\InnovationAdmin.Identity.csproj"
             },
-            "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Infrastructure\\InnovationAdmin.Infrastructure.csproj": {
-              "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Infrastructure\\InnovationAdmin.Infrastructure.csproj"
+            "C:\\PowerToPerform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Infrastructure\\InnovationAdmin.Infrastructure.csproj": {
+              "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Infrastructure\\InnovationAdmin.Infrastructure.csproj"
             },
-            "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Persistence\\InnovationAdmin.Persistence.csproj": {
-              "projectPath": "C:\\Power To Perform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Persistence\\InnovationAdmin.Persistence.csproj"
+            "C:\\PowerToPerform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Persistence\\InnovationAdmin.Persistence.csproj": {
+              "projectPath": "C:\\PowerToPerform\\InnovationAdmin\\src\\Infrastructure\\InnovationAdmin.Persistence\\InnovationAdmin.Persistence.csproj"
             }
           }
         }
@@ -11533,11 +11533,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -11646,6 +11641,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.26, 6.0.26]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.26, 6.0.26]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.26, 6.0.26]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.26, 6.0.26]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -11654,7 +11667,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

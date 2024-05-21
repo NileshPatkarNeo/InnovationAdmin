@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InnovationAdmin.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e1cabee88c64d045caefd9f6098e036da5aa36e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb7943627a75b408375c8eb49ed183c61cdba988")]
 [assembly: System.Reflection.AssemblyProductAttribute("InnovationAdmin.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InnovationAdmin.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
