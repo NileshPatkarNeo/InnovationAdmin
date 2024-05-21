@@ -10,7 +10,7 @@ namespace InnovationAdmin.Api.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        //Testing
+        
         private readonly IAuthenticationService _authenticationService;
         public AccountController(IAuthenticationService authenticationService)
         {
