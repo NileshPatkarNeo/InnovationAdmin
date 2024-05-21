@@ -29,6 +29,7 @@ namespace InnovationAdmin.Persistence
 
        
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Admin_User> Admin_Users { get; set; }
 
         private IDbContextTransaction _transaction;
 
@@ -82,11 +83,11 @@ namespace InnovationAdmin.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedDate = DateTime.UtcNow;
+                        entry.Entity.CreatedDate = DateTime.Now;
                         entry.Entity.CreatedBy = _loggedInUserService.UserId;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedDate = DateTime.UtcNow;
+                        entry.Entity.LastModifiedDate = DateTime.Now;
                         entry.Entity.LastModifiedBy = _loggedInUserService.UserId;
                         break;
                 }
