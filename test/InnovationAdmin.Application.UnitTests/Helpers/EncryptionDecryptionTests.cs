@@ -1,4 +1,4 @@
-﻿using InnovationAdmin.Infrastructure.EncryptDecrypt;
+﻿using InnovationAdmin.Application.Helper;
 using Shouldly;
 using System.Threading.Tasks;
 using Xunit;

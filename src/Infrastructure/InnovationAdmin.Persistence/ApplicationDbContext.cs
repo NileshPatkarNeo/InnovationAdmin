@@ -3,8 +3,7 @@ using InnovationAdmin.Domain.Common;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InnovationAdmin.Persistence
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]   
     public class ApplicationDbContext:DbContext
     {
         private readonly ILoggedInUserService _loggedInUserService;
@@ -26,8 +25,8 @@ namespace InnovationAdmin.Persistence
         {
         }
 
+        public DbSet<SysPrefCompany> SysPrefCompanies { get; set; }
 
-       
         public DbSet<Message> Messages { get; set; }
 
         private IDbContextTransaction _transaction;
@@ -82,11 +81,11 @@ namespace InnovationAdmin.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedDate = DateTime.UtcNow;
+                        entry.Entity.CreatedDate = DateTime.Now;
                         entry.Entity.CreatedBy = _loggedInUserService.UserId;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedDate = DateTime.UtcNow;
+                        entry.Entity.LastModifiedDate = DateTime.Now;
                         entry.Entity.LastModifiedBy = _loggedInUserService.UserId;
                         break;
                 }

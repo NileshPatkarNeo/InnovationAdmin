@@ -52,5 +52,9 @@
     <ProjectReference Include="..\..\Infrastructure\InnovationAdmin.Infrastructure\InnovationAdmin.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\InnovationAdmin.Persistence\InnovationAdmin.Persistence.csproj" />
   </ItemGroup>
+	<Target Name="CleanBinObjFolders" AfterTargets="Clean">
+		<RemoveDir Directories="$(BaseOutputPath)\bin" />
+		<RemoveDir Directories="$(BaseIntermediateOutputPath)\obj" />
+	</Target>
 
 </Project>
