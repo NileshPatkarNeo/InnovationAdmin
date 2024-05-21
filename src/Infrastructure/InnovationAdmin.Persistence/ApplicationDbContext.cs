@@ -28,6 +28,7 @@ namespace InnovationAdmin.Persistence
         public DbSet<SysPrefCompany> SysPrefCompanies { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Admin_User> Admin_Users { get; set; }
 
         private IDbContextTransaction _transaction;
 

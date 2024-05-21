@@ -15,6 +15,8 @@ namespace InnovationAdmin.Persistence
             options.UseSqlServer(configuration.GetConnectionString("ApplicationConnectionString")));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IAdminUserRepository, AdminUserRepository>();
+
             services.AddScoped<ISysPrefCompanyRepository, SysPrefCompanyRepository>();
             return services;
         }
