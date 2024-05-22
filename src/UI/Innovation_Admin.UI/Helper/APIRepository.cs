@@ -7,7 +7,7 @@ using static Innovation_Admin.UI.Helper.APIBaseUrl;
 
 namespace Innovation_Admin.UI.Helper
 {
-    public class APIRepository:IAPIRepository
+    public class APIRepository
     {
         private readonly IConfiguration _configuration;
         public IOptions<ApiBaseUrl> _apiBaseUrl { get; private set; }
