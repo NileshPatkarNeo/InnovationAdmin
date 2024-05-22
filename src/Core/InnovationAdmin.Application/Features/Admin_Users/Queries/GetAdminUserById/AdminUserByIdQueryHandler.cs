@@ -31,22 +31,40 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserB
 
         public async Task<Response<AdminUserByIdVm>> Handle(AdminUserByIdQuery request, CancellationToken cancellationToken)
         {
-            string id = _protector.Unprotect(request.User_ID);
 
-            var @adminuser = await _admiuserRepository.GetByIdAsync(new Guid(id));
-            var eventDetailDto = _mapper.Map<AdminUserByIdVm>(@adminuser);
 
-            var category = await _admiuserRepository.GetByIdAsync(@adminuser.User_ID);
+            var @system = await _admiuserRepository.GetByIdAsync(new Guid(request.User_ID));
+            var systemDto = _mapper.Map<AdminUserByIdVm>(system);
 
-            if (category == null)
+
+            if (@system == null)
             {
-                throw new NotFoundException(nameof(Admin_User), @adminuser.User_ID);
+                throw new NotFoundException(nameof(AdminUserByIdVm), @system.User_ID);
             }
-            //eventDetailDto.User_Name = _mapper.Map<AdminUserByIdDto>(category);
 
-            var response = new Response<AdminUserByIdVm>(eventDetailDto);
+            var response = new Response<AdminUserByIdVm>(systemDto);
             return response;
         }
+
+
+        //public async Task<Response<AdminUserByIdVm>> Handle(AdminUserByIdQuery request, CancellationToken cancellationToken)
+        //{
+        //    string id = _protector.Unprotect(request.User_ID);
+
+        //    var @adminuser = await _admiuserRepository.GetByIdAsync(new Guid(id));
+        //    var eventDetailDto = _mapper.Map<AdminUserByIdVm>(@adminuser);
+
+        //    var category = await _admiuserRepository.GetByIdAsync(@adminuser.User_ID);
+
+        //    if (category == null)
+        //    {
+        //        throw new NotFoundException(nameof(Admin_User), @adminuser.User_ID);
+        //    }
+        //    //eventDetailDto.User_Name = _mapper.Map<AdminUserByIdDto>(category);
+
+        //    var response = new Response<AdminUserByIdVm>(eventDetailDto);
+        //    return response;
+        //}
 
         //public async Task<Response<AdminUserByIdVm>> Handle(AdminUserByIdQuery request, CancellationToken cancellationToken)
         //{
