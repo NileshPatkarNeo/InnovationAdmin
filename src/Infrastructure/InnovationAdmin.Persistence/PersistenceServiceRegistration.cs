@@ -18,6 +18,7 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 
             services.AddScoped<ISysPrefCompanyRepository, SysPrefCompanyRepository>();
+            services.AddScoped<ISysPref_GeneralBehaviourRepository, SysPref_GeneralBehaviourRepository>();
             return services;
         }
     }
