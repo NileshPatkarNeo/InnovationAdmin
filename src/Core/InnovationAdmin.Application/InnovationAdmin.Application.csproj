@@ -26,10 +26,9 @@
   <ItemGroup>
     <ProjectReference Include="..\InnovationAdmin.Domain\InnovationAdmin.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\TemplateMaster\Commands\" />
-    <Folder Include="Features\TemplateMaster\Queries\GetTemplateMasterList\" />
-  </ItemGroup>
+	<Target Name="CleanBinObjFolders" AfterTargets="Clean">
+		<RemoveDir Directories="$(BaseOutputPath)\bin" />
+		<RemoveDir Directories="$(BaseIntermediateOutputPath)\obj" />
+	</Target>
 
 </Project>
