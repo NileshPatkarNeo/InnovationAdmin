@@ -18,29 +18,14 @@ namespace InnovationAdmin.Application.Profiles
         {
             CreateMap<Admin_User, CreateAdminUserDto>();
             CreateMap<Admin_User, AdminUserListVm>().ReverseMap();
-         
+
             CreateMap<Admin_User, CreateAdminUserCommand>();
             CreateMap<Admin_User, UpdateAdminUserCommand>().ReverseMap();
             CreateMap<Admin_User, DeleteAdminUserCommand>();
-            
-          
-        
-
-    
-
-       
-           // CreateMap<Category, UpdateCategoryCommand>().ReverseMap();
-        {
             CreateMap<SysPrefCompany, CreateSysPrefCompanyDto>().ReverseMap();
-           CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
+            CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
             CreateMap<SysPrefCompany, UpdateSysPrefCompanyDto>().ReverseMap();
-            //CreateMap<Event, UpdateEventCommand>().ReverseMap();
-            //CreateMap<Event, EventDetailVm>().ReverseMap();
-            //CreateMap<Event, CategoryEventDto>().ReverseMap();
-            //CreateMap<Event, EventExportDto>().ReverseMap();
-
-
-
+            
         }
     }
 }
