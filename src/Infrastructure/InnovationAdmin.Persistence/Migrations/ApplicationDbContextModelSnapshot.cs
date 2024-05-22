@@ -66,6 +66,39 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.ToTable("Admin_Users");
                 });
 
+            modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_Role", b =>
+                {
+                    b.Property<Guid>("Role_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Role_Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Role_ID");
+
+                    b.ToTable("AdminRoles");
+                });
+
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.Message", b =>
                 {
                     b.Property<Guid>("MessageId")
@@ -117,6 +150,84 @@ namespace InnovationAdmin.Persistence.Migrations
                             MessageContent = "An event with the same name and date already exists.",
                             Type = "Error"
                         });
+                });
+
+            modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPrefCompany", b =>
+                {
+                    b.Property<Guid>("CompanyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TermForPharmacy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CompanyID");
+
+                    b.ToTable("SysPrefCompanies");
+                });
+
+            modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPref_GeneralBehaviours", b =>
+                {
+                    b.Property<Guid>("Preference_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Auto_Change_Claim_Status")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Payment")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Procare_Claim_Load")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Receipting")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Zero_Paid")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Logout_Redirect")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Records_Locked_Seconds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_Timeout")
+                        .HasColumnType("int");
+
+                    b.HasKey("Preference_ID");
+
+                    b.ToTable("SysPref_GeneralBehaviour");
                 });
 #pragma warning restore 612, 618
         }

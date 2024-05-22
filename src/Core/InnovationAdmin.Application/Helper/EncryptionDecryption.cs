@@ -4,14 +4,14 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace InnovationAdmin.Infrastructure.EncryptDecrypt
+namespace InnovationAdmin.Application.Helper
 {
     public static class EncryptionDecryption
     {
         //This function for Encryption which accepts the plain text and Key and return Encrypted string
         public static string EncryptString(string clearText)
         {
-            string EncryptionKey = Environment.GetEnvironmentVariable("EncryptionDeckryptionKey")?.ToString().Length > 0  ? Environment.GetEnvironmentVariable("EncryptionDeckryptionKey") : "";
+            string EncryptionKey = Environment.GetEnvironmentVariable("EncryptionDeckryptionKey")?.ToString().Length > 0 ? Environment.GetEnvironmentVariable("EncryptionDeckryptionKey") : "";
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
