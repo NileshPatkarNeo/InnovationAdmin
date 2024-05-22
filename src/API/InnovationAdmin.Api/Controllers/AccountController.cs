@@ -1,7 +1,7 @@
 ﻿using InnovationAdmin.Application.Contracts.Identity;
 using InnovationAdmin.Application.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+
 
 namespace InnovationAdmin.Api.Controllers
 {
@@ -10,7 +10,7 @@ namespace InnovationAdmin.Api.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        //Testing
+        
         private readonly IAuthenticationService _authenticationService;
         public AccountController(IAuthenticationService authenticationService)
         {
