@@ -55,8 +55,9 @@ namespace InnovationAdmin.Application.Profiles
            // CreateMap<Category, UpdateCategoryCommand>().ReverseMap();
        
             CreateMap<SysPrefCompany, CreateSysPrefCompanyDto>().ReverseMap();
-           CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
+            CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
             CreateMap<SysPrefCompany, UpdateSysPrefCompanyDto>().ReverseMap();
+            
          
 
             CreateMap<Admin_Role, AdminRoleVM>();
