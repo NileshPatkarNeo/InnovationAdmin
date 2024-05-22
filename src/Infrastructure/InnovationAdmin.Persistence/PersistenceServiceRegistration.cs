@@ -1,5 +1,5 @@
 ﻿using InnovationAdmin.Application.Contracts.Persistence;
-using InnovationAdmin.Infrastructure.EncryptDecrypt;
+
 using InnovationAdmin.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +19,9 @@ namespace InnovationAdmin.Persistence
 
 
 
+            services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 
+            services.AddScoped<ISysPrefCompanyRepository, SysPrefCompanyRepository>();
             return services;
         }
     }

@@ -3,8 +3,7 @@ using InnovationAdmin.Domain.Common;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
+
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InnovationAdmin.Persistence
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]   
     public class ApplicationDbContext:DbContext
     {
         private readonly ILoggedInUserService _loggedInUserService;
@@ -26,9 +25,10 @@ namespace InnovationAdmin.Persistence
         {
         }
 
+        public DbSet<SysPrefCompany> SysPrefCompanies { get; set; }
 
-       
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Admin_User> Admin_Users { get; set; }
 
         public DbSet<Admin_Role> AdminRoles { get; set; }
 
