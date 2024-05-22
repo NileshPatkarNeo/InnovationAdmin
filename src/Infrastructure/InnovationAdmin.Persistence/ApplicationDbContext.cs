@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InnovationAdmin.Persistence
 {
-    [ExcludeFromCodeCoverage]   
+    
     public class ApplicationDbContext:DbContext
     {
         private readonly ILoggedInUserService _loggedInUserService;
@@ -29,6 +29,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<Message> Messages { get; set; }
         public DbSet<Admin_User> Admin_Users { get; set; }
+        public DbSet<SysPref_GeneralBehaviours> SysPref_GeneralBehaviour { get; set; }
+
 
         public DbSet<Admin_Role> AdminRoles { get; set; }
 
