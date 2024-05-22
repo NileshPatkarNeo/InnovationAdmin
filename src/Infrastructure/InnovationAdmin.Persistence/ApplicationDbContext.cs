@@ -32,6 +32,8 @@ namespace InnovationAdmin.Persistence
         public DbSet<SysPref_GeneralBehaviours> SysPref_GeneralBehaviour { get; set; }
 
 
+        public DbSet<Admin_Role> AdminRoles { get; set; }
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

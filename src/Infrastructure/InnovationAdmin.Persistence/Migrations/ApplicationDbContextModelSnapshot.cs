@@ -66,6 +66,39 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.ToTable("Admin_Users");
                 });
 
+            modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_Role", b =>
+                {
+                    b.Property<Guid>("Role_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Role_Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Role_ID");
+
+                    b.ToTable("AdminRoles");
+                });
+
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.Message", b =>
                 {
                     b.Property<Guid>("MessageId")

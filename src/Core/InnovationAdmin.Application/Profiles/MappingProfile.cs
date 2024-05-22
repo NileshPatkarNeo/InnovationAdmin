@@ -1,4 +1,9 @@
 ﻿using AutoMapper;
+using InnovationAdmin.Application.Features.AdminRoles.Commands.CreateAdminRole;
+using InnovationAdmin.Application.Features.AdminRoles.Commands.DeleteAdminRole;
+using InnovationAdmin.Application.Features.AdminRoles.Commands.UpdateAdminRole;
+using InnovationAdmin.Application.Features.AdminRoles.Queries.GetAdminRole;
+using InnovationAdmin.Application.Features.AdminRoles.Queries.GetAdminRoleList;
 using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands.Create_SysPref_GeneralBehaviour;
 using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands.Update_SysPref_GeneralBehaviour;
 using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Queries.Get_SysPref_GeneralBehaviour_List;
@@ -43,8 +48,27 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPref_GeneralBehaviours, Update_SysPref_GeneralBehaviour_Command>().ReverseMap();
             CreateMap<SysPref_GeneralBehaviours, Get_SysPref_GeneralBehaviour_List_Query>().ReverseMap();
             CreateMap<SysPref_GeneralBehaviours, GetById_SysPref_GeneralBehaviours_VM>();
+        
+            CreateMap<SysPrefCompany, CreateSysPrefCompanyDto>().ReverseMap();
+           CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
+            CreateMap<SysPrefCompany, UpdateSysPrefCompanyDto>().ReverseMap();
+         
 
+            CreateMap<Admin_Role, AdminRoleVM>();
+            CreateMap<Admin_Role, CreateAdminRoleCommand>();
+            CreateMap<Admin_Role, CreateAdminRoleCommand>();
+            CreateMap<Admin_Role, DeleteAdminRoleCommand>();
+            CreateMap<Admin_Role, UpdateAdminRoleCommand>();
+            CreateMap<Admin_Role, AdminRoleListVm>();
 
+            CreateMap<Admin_Role, AdminRoleVM>().ReverseMap();
+            CreateMap<Admin_Role, CreateAdminRoleCommand>().ReverseMap();
+            CreateMap<Admin_Role, CreateAdminRoleCommand>().ReverseMap();
+            CreateMap<Admin_Role, DeleteAdminRoleCommand>().ReverseMap();
+            CreateMap<Admin_Role, UpdateAdminRoleCommand>().ReverseMap();
+            CreateMap<Admin_Role, AdminRoleListVm>().ReverseMap();
+
+            CreateMap<Admin_Role, CreateAdminRoleDto>();
         }
     }
 }
