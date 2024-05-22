@@ -1,42 +1,32 @@
-﻿namespace Innovation_Admin.UI.Models.ResponsesModel
+﻿using Newtonsoft.Json;
+using System.Net;
+
+namespace Innovation_Admin.UI.Models.ResponsesModel
 {
     public class Response<T>
     {
-        public Response()
-        {
-        }
-        public Response(T data, string message = null)
-        {
-            Succeeded = true;
-            Message = message;
-            Data = data;
-        }
-        public Response(string message)
-        {
-            Succeeded = false;
-            Message = message;
-        }
-        public bool Succeeded { get; set; }
-        public string Message { get; set; }
-        public List<string> Errors { get; set; }
-        public T Data { get; set; }
+        public HttpStatusCode statusCode { get; set; }
+        public T data { get; set; }
+        public String Message { get; set; }
+        public Boolean Success { get; set; }
+        public string NotificationType { get; set; }
+        public string ReturnToUrl { get; set; }
+        private List<ErrorMessage> ErrorMessages { get; set; }
+        private string Token { get; set; }
+
     }
 
-    public class PagedResponse<T> : Response<T>
+    public class ErrorMessage
     {
-        public int TotalCount { get; set; }
-        public int Page { get; set; }
-        public int PageSize { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string Code { get; }
 
-        public PagedResponse(T data, int totalCount, int page, int pageSize)
+        public string Message { get; }
+
+        public ErrorMessage(string code, string message)
         {
-            this.TotalCount = totalCount;
-            this.Page = page;
-            this.PageSize = pageSize;
-            this.Data = data;
-            this.Message = null;
-            this.Succeeded = true;
-            this.Errors = null;
+            Code = code != string.Empty ? code : null;
+            Message = message;
         }
     }
 }

@@ -1,7 +1,19 @@
+using Innovation_Admin.UI.Helper;
+using Innovation_Admin.UI.Services.IRepositories;
+using Microsoft.Extensions.Configuration;
+using static Innovation_Admin.UI.Helper.APIBaseUrl;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var Configuration = builder.Configuration;
+
+// ApiBaseUrl Keys
+builder.Services.Configure<ApiBaseUrl>(Configuration.GetSection("ApiBaseUrl"));
+
+builder.Services.AddScoped<IAPIRepository, APIRepository>();
 
 var app = builder.Build();
 
