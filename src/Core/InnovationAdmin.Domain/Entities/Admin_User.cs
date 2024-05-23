@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InnovationAdmin.Domain.Entities
 {
-    public class Admin_User : AuditableEntity
+    public class Admin_User : AuditableEntity 
     {
         [Key]
         public Guid User_ID { get; set; }

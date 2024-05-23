@@ -1,9 +1,8 @@
 ﻿using Innovation_Admin.UI.Helper;
+using Innovation_Admin.UI.Models.AdminUser;
 using Innovation_Admin.UI.Models.ResponsesModel;
-using Innovation_Admin.UI.Models.ResponsesModel.SysPrefCompany;
-using Innovation_Admin.UI.Models.SysPrefCompany;
+using Innovation_Admin.UI.Models.ResponsesModel.AdminUser;
 using Innovation_Admin.UI.Services.IRepositories;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
@@ -11,7 +10,7 @@ using static Innovation_Admin.UI.Helper.APIBaseUrl;
 
 namespace Innovation_Admin.UI.Services.Repositories
 {
-    public class SysPrefCompanies : ISysPrefCompanies
+    public class AdminUser : IAdminUser
     {
         private APIRepository _apiRepository;
 
@@ -19,25 +18,28 @@ namespace Innovation_Admin.UI.Services.Repositories
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-        public SysPrefCompanies(IOptions<ApiBaseUrl> apiBaseUrl)
+
+
+
+        public AdminUser(IOptions<ApiBaseUrl> apiBaseUrl)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(_configuration);
         }
 
-        public async Task<GetAllSysPrefCompanyResponseModel> GetAllSysPrefCompanies()
+        public async Task<GetAllAdminUserResponseModel> GetAllAdminUser()
         {
-            GetAllSysPrefCompanyResponseModel response = new GetAllSysPrefCompanyResponseModel();
+            GetAllAdminUserResponseModel response = new GetAllAdminUserResponseModel();
 
             _apiRepository = new APIRepository(_configuration);
 
             _oApiResponse = new Response<string>();
             byte[] content = Array.Empty<byte>();
             var bytes = new ByteArrayContent(content);
-            _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl, URLHelper.GetAllSysPrefCompany, HttpMethod.Get, bytes, _sToken);
+            _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl, URLHelper.GetAllAdminUser, HttpMethod.Get, bytes, _sToken);
             if (_oApiResponse.data != null)
             {
-                response = JsonConvert.DeserializeObject<GetAllSysPrefCompanyResponseModel>(_oApiResponse.data);
+                response = JsonConvert.DeserializeObject<GetAllAdminUserResponseModel>(_oApiResponse.data);
 
                 response.IsSuccess = true;
             }
@@ -45,9 +47,10 @@ namespace Innovation_Admin.UI.Services.Repositories
             return response;
         }
 
-        public async Task<CreateSysPrefCompanyResponseModel> CreateSysPrefCompany(SysPrefCompanyDto company)
+
+        public async Task<CreateAdminUserResponseModel> CreateAdminUser(CreateAdminUserDto company)
         {
-            var response = new CreateSysPrefCompanyResponseModel();
+            var response = new CreateAdminUserResponseModel();
 
             try
             {
@@ -56,14 +59,14 @@ namespace Innovation_Admin.UI.Services.Repositories
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.CreateSysPrefCompany,
+                    URLHelper.CreateAdminUser,
                     HttpMethod.Post,
                     content,
                     string.Empty);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
-                    var apiResponseObject = JsonConvert.DeserializeObject<CreateSysPrefCompanyResponseModel>(apiResponse.data);
+                    var apiResponseObject = JsonConvert.DeserializeObject<CreateAdminUserResponseModel>(apiResponse.data);
                     response.IsSuccess = apiResponseObject.IsSuccess;
                     response.Data = apiResponseObject.Data;
                 }
@@ -77,25 +80,25 @@ namespace Innovation_Admin.UI.Services.Repositories
             return response;
         }
 
-        public async Task<UpdateSysPrefCompanyResponseModel> UpdateSysPrefCompany(SysPrefCompanyDto updatedCompany)
+        public async Task<UpdateAdminUserResponseModel> UpdateAdminUser(AdminUserDto updatedAdmin)
         {
-            var response = new UpdateSysPrefCompanyResponseModel();
+            var response = new UpdateAdminUserResponseModel();
 
             try
             {
-                var jsonContent = JsonConvert.SerializeObject(updatedCompany);
+                var jsonContent = JsonConvert.SerializeObject(updatedAdmin);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.UpdateSysPrefCompany.Replace("{id}", updatedCompany.CompanyID.ToString()), // Define the 
+                    URLHelper.UpdateAdminUser.Replace("{id}", updatedAdmin.User_ID.ToString()), // Define the 
                     HttpMethod.Put, // Use PUT method for updates
                     content,
                     string.Empty);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
-                    response = JsonConvert.DeserializeObject<UpdateSysPrefCompanyResponseModel>(apiResponse.data);
+                    response = JsonConvert.DeserializeObject<UpdateAdminUserResponseModel>(apiResponse.data);
                     response.IsSuccess = apiResponse.Success;
                 }
             }
@@ -108,26 +111,26 @@ namespace Innovation_Admin.UI.Services.Repositories
             return response;
         }
 
-        public async Task<GetSysPrefCompanyByIdResponseModel> GetSysPrefCompanyById(Guid companyId)
+        public async Task<GetAdminUserByIdResponseModel> GetAdminUserById(Guid companyId)
         {
-            var response = new GetSysPrefCompanyByIdResponseModel();
+            var response = new GetAdminUserByIdResponseModel();
 
             try
             {
-               
+
                 // Make the API call to fetch the SysPrefCompany by its ID
-                _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl,URLHelper.GetSysPrefCompaynyById.Replace("{id}",companyId.ToString()), HttpMethod.Get, null, _sToken);
+                _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl, URLHelper.GetAdminUserById.Replace("{id}", companyId.ToString()), HttpMethod.Get, null, _sToken);
 
                 if (_oApiResponse != null && !string.IsNullOrEmpty(_oApiResponse.data))
                 {
-                   
-                    response = JsonConvert.DeserializeObject<GetSysPrefCompanyByIdResponseModel>(_oApiResponse.data);
+
+                    response = JsonConvert.DeserializeObject<GetAdminUserByIdResponseModel>(_oApiResponse.data);
 
                     response.IsSuccess = true;
                 }
                 else
                 {
-                   
+                    // If no data is returned, set IsSuccess to false and provide an appropriate message
                     response.IsSuccess = false;
                     response.Message = "No data found for the specified company ID.";
                 }
@@ -142,12 +145,12 @@ namespace Innovation_Admin.UI.Services.Repositories
             return response;
         }
 
-       
-        public async Task<bool> DeleteSysPrefCompany(Guid companyId)
+
+        public async Task<bool> DeleteAdminUser(Guid companyId)
         {
             try
             {
-                string url = URLHelper.DeleteSysPrefCompany.Replace("{id}", companyId.ToString());
+                string url = URLHelper.DeleteAdminUser.Replace("{id}", companyId.ToString());
                 var response = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     url,
@@ -164,8 +167,5 @@ namespace Innovation_Admin.UI.Services.Repositories
                 return false;
             }
         }
-
-
-
     }
 }

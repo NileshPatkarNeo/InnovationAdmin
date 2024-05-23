@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header, footer {
+            background-color: #f8f9fa;
+            padding: 1rem 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+        }
+
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .button-group {
+            text-align: center;
+        }
+
+            .button-group button {
+                margin: 0.5rem;
+            }
+    </style>
+</head>
+<body>
+   
+    <header>
+        <div class="brand">
+            <h1>InnovationAdmin</h1>
+        </div>
+        <div class="logout">
+            <a href="@Url.Action("Logout", "Account")" class="btn btn-danger">Logout</a>
+        </div>
+    </header>
+
+    
+    <div class="container">
+        <div class="button-group">
+            <button type="submit">
+                <a asp-action="SysPrefCompany" asp-controller="Common" class="btn hello btn-primary">SysPrefCompany</a>
+            </button>
+            <button type="button" class="btn btn-secondary"> <a asp-action="SysPrefGeneralBehaviour" asp-controller="Common"></a>SysPrefGeneralBehaviour</button>
+            <button type="button" class="btn btn-success"> <a asp-action="AdminUser" asp-controller="Common"></a> AdminUser</button>
+            <button type="button" class="btn btn-warning"> <a asp-action="AdminRole" asp-controller="Common"></a>  AdminRole</button>
+           
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <span>&copy; 2024 Innovation Admin. All rights reserved.</span>
+        </div>
+    </footer>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
