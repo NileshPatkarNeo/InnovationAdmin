@@ -17,9 +17,9 @@ namespace InnovationAdmin.Application.Features.AdminRoles.Commands.CreateAdminRo
             _adminRoleRepository = adminRoleRepository;
 
             RuleFor(p => p.Name)
-                .NotEmpty().WithMessage("Name should not be Null")
-                .NotNull().WithMessage("Name should not be Null")
-                .MaximumLength(10).WithMessage("Max Length of name Is 10");
+                .NotEmpty().WithMessage("Name should not be empty")
+                .NotNull().WithMessage("Name should not be empty")
+                .MaximumLength(10).WithMessage("Max Length of Name is 10");
         }
 
        
