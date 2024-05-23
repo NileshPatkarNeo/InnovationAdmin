@@ -1,9 +1,11 @@
-﻿using Innovation_Admin.UI.Models;
+﻿using Innovation_Admin.UI.Filter;
+using Innovation_Admin.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Innovation_Admin.UI.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,6 +20,8 @@ namespace Innovation_Admin.UI.Controllers
             var token = HttpContext.Session.GetString("JWToken");
             return View();
         }
+       
+       
 
         public IActionResult Privacy()
         {
