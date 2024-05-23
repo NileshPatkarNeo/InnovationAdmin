@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using InnovationAdmin.Application.Contracts.Persistence;
+using System;
 
 namespace InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands.Create_SysPref_GeneralBehaviour
 {
@@ -10,15 +11,16 @@ namespace InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands
         {
             _messageRepository = messageRepository;
 
-            //RuleFor(p => p.Name)
-            //    .NotEmpty().WithMessage(GetMessage("1", ApplicationConstants.LANG_ENG))
-            //    .NotNull()
-            //    .MaximumLength(10).WithMessage(GetMessage("2", ApplicationConstants.LANG_ENG));
+            //RuleFor(p => p.Auto_Change_Claim_Status)
+            //    .NotNull().WithMessage("{PropertyName} is required.")
+            //    .Must(Boolean).WithMessage("{PropertyName} must be a boolean value (true or false).");
+
         }
 
-        private string GetMessage(string Code, string Lang)
+        private bool Boolean(bool arg)
         {
-            return _messageRepository.GetMessage(Code, Lang).Result.MessageContent.ToString();
+            throw new NotImplementedException();
         }
     }
-}
+    }
+

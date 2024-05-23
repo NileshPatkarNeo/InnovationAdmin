@@ -12,6 +12,7 @@ using InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_User
 using InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdminUser;
 using InnovationAdmin.Application.Features.Admin_Users.Commands.DeleteAdminUser;
 using InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminUser;
+using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserById;
 using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserList;
 using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateSysPrefCompany;
 using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPrefCompany;
@@ -40,6 +41,11 @@ namespace InnovationAdmin.Application.Profiles
 
             CreateMap<SysPref_GeneralBehaviours, Update_SysPref_GeneralBehaviour_Command>().ReverseMap();
             CreateMap<SysPref_GeneralBehaviours, SysPref_GeneralBehaviour_ListVM>().ReverseMap();
+            CreateMap<Admin_User, AdminUserByIdVm>().ReverseMap();
+
+
+
+
 
             CreateMap<SysPref_GeneralBehaviours, Create_SysPref_GeneralBehaviour_Dto>();
             CreateMap<SysPref_GeneralBehaviours, SysPref_GeneralBehaviour_ListVM>();
@@ -66,6 +72,10 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Admin_Role, DeleteAdminRoleCommand>();
             CreateMap<Admin_Role, UpdateAdminRoleCommand>();
             CreateMap<Admin_Role, AdminRoleListVm>();
+
+
+
+            // CreateMap<Category, UpdateCategoryCommand>().ReverseMap();
 
             CreateMap<Admin_Role, AdminRoleVM>().ReverseMap();
             CreateMap<Admin_Role, CreateAdminRoleCommand>().ReverseMap();
