@@ -41,6 +41,26 @@ namespace Innovation_Admin.UI.Common
             return new List<SysPrefCompanyDto>();
         }
 
+        public async Task<CreateSysPrefCompanyResponseModel> CreateSysPrefCompany(SysPrefCompanyDto company)
+        {
+            return await sysPrefCompanies.CreateSysPrefCompany(company);
+        }
+
+
+        public async Task<UpdateSysPrefCompanyResponseModel> UpdateSysPrefCompany(SysPrefCompanyDto updatedCompany)
+        {
+            return await sysPrefCompanies.UpdateSysPrefCompany(updatedCompany);
+        }
+        public async Task<GetSysPrefCompanyByIdResponseModel> GetSysPrefCompanyById(Guid companyId)
+        {
+            return await sysPrefCompanies.GetSysPrefCompanyById(companyId);
+        }
+
+        public async Task<bool> DeleteSysPrefCompany(Guid companyId)
+        {
+            return await sysPrefCompanies.DeleteSysPrefCompany(companyId);
+        }
+
         public async Task<IEnumerable<AdminUserDto>> GetAllAdminUser()
         {
             GetAllAdminUserResponseModel getAllAdminUserResponseModel = new GetAllAdminUserResponseModel();
