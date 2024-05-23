@@ -25,6 +25,7 @@ namespace InnovationAdmin.Api.Controllers
         [Route("create")]
         public async Task<ActionResult<Admin_Role>> Create(CreateAdminRoleCommand command)
         {
+
             var adminRole = await _mediator.Send(command);
             Log.Information("AdminRole Info: {@adminRole}", adminRole);
             return Ok(adminRole);

@@ -19,7 +19,7 @@ namespace InnovationAdmin.Domain.Entities
         [MaxLength(50)]
         public string Role_Name { get; set; }
 
-        
+        [Required]
         [MaxLength(200)]
         public string Description { get; set; }
     }
