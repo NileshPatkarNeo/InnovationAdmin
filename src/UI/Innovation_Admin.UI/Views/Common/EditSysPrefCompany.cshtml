@@ -1,0 +1,38 @@
+﻿@model Innovation_Admin.UI.Models.SysPrefCompany.SysPrefCompanyDto
+
+<h1>Edit SysPrefCompany</h1>
+
+<h4>SysPrefCompany</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditSysPrefCompany" method="post">
+           
+            @Html.HiddenFor(model => model.CompanyID)
+
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TermForPharmacy" class="control-label"></label>
+                <input asp-for="TermForPharmacy" class="form-control" />
+                <span asp-validation-for="TermForPharmacy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="SysPrefCompany">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

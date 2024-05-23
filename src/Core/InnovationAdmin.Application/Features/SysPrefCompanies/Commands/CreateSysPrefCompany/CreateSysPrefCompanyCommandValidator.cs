@@ -17,20 +17,20 @@ namespace InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateS
             _messageRepository = messageRepository;
 
             RuleFor(p => p.CompanyName)
-                .NotEmpty().WithMessage(GetMessage("1", ApplicationConstants.LANG_ENG))
+                .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
-                .MaximumLength(50).WithMessage(GetMessage("2", ApplicationConstants.LANG_ENG));
+                .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
+
+
 
             RuleFor(p => p.TermForPharmacy)
-                .NotEmpty().WithMessage(GetMessage("1", ApplicationConstants.LANG_ENG))
+               .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
-                .MaximumLength(50).WithMessage(GetMessage("2", ApplicationConstants.LANG_ENG));
+                .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
+
+
+
         }
 
-        private string GetMessage(string Code, string Lang)
-        {
-            return _messageRepository.GetMessage(Code, Lang).Result.MessageContent.ToString();
-        }
     }
-
 }

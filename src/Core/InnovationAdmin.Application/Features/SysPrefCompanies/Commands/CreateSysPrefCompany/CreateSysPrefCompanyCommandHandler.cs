@@ -27,7 +27,7 @@ namespace InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateS
             var validator = new CreateSysPrefCompanyCommandValidator(_messageRepository);
             var validationResult = await validator.ValidateAsync(request);
 
-            if (validationResult.Errors.Count > 0)
+             if (validationResult.Errors.Count > 0)
             {
                 throw new ValidationException(validationResult);
             }
