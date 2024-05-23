@@ -1,0 +1,73 @@
+﻿@model Innovation_Admin.UI.Models.SysPrefGeneralBehaviour.SysPrefGeneralBehaviourDto
+
+@{
+    ViewData["Title"] = "EditSysPrefGeneralBehaviour";
+}
+
+<h1>EditSysPrefGeneralBehaviour</h1>
+
+<h4>SysPrefGeneralBehaviourDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditSysPrefGeneralBehaviour">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Preference_ID" class="control-label"></label>
+                <input asp-for="Preference_ID" class="form-control" />
+                <span asp-validation-for="Preference_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Auto_Change_Claim_Status" /> @Html.DisplayNameFor(model => model.Auto_Change_Claim_Status)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Receipting" /> @Html.DisplayNameFor(model => model.Claim_Status_Receipting)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Payment" /> @Html.DisplayNameFor(model => model.Claim_Status_Payment)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Zero_Paid" /> @Html.DisplayNameFor(model => model.Claim_Status_Zero_Paid)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Procare_Claim_Load" /> @Html.DisplayNameFor(model => model.Claim_Status_Procare_Claim_Load)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Logout_Redirect" /> @Html.DisplayNameFor(model => model.Logout_Redirect)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Records_Locked_Seconds" class="control-label"></label>
+                <input asp-for="Records_Locked_Seconds" class="form-control" />
+                <span asp-validation-for="Records_Locked_Seconds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User_Timeout" class="control-label"></label>
+                <input asp-for="User_Timeout" class="form-control" />
+                <span asp-validation-for="User_Timeout" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -24,7 +24,6 @@ namespace InnovationAdmin.Api.Controllers
 
         //[Authorize]
         [HttpGet("all", Name = "GetSysPref_GeneralBehaviour")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetAllSysPref()
         {
             _logger.LogInformation("GetSysPref_GeneralBehaviour Initiated");
@@ -40,6 +39,7 @@ namespace InnovationAdmin.Api.Controllers
             return Ok(await _mediator.Send(gettSysPref_GeneralBehaviourlQuery));
         }
 
+
         [HttpPost(Name = "AddSysPref_GeneralBehaviour")]
         public async Task<ActionResult> Create([FromBody] Create_SysPref_GeneralBehaviour_Command createSyspref_generalBehaviourCommand)
         {
@@ -48,18 +48,15 @@ namespace InnovationAdmin.Api.Controllers
         }
 
         [HttpPut(Name = "UpdateSysPref_GeneralBehaviour")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
-        public async Task<ActionResult> Update([FromBody] Update_SysPref_GeneralBehaviour_Command updatesysCommand)
+         public async Task<ActionResult> Update([FromBody] Update_SysPref_GeneralBehaviour_Command updatesysCommand)
         {
             var response = await _mediator.Send(updatesysCommand);
             return Ok(response);
         }
 
+
         [HttpDelete("{id}", Name = "DeleteSysPref_GeneralBehaviour")]
        
-        
         public async Task<ActionResult> Delete(string id)
         {
             var deleteSysCommand = new Delete_SysPref_GeneralBehaviour_Command() { Preference_ID = (new Guid (id ))};

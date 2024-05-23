@@ -16,6 +16,8 @@ var Configuration = builder.Configuration;
 builder.Services.Configure<ApiBaseUrl>(Configuration.GetSection("ApiBaseUrl"));
 
 builder.Services.AddScoped<ISysPrefCompanies, SysPrefCompanies>();
+builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
+
 builder.Services.AddScoped<Common>();
 var app = builder.Build();
 

@@ -36,10 +36,10 @@ namespace InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands
                 throw new ValidationException(validationResult);
             }
 
-            // Map the update request to the category entity
+            // Map the update request to the  entity
             _mapper.Map(request, SysToUpdate);
 
-            // Update the category in the repository
+            // Update in the repository
             await _sysPref_generalbehaviourRepository.UpdateAsync(SysToUpdate);
 
             // Prepare the response DTO
