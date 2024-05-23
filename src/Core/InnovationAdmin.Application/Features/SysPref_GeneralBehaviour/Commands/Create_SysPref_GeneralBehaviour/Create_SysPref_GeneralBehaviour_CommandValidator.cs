@@ -15,6 +15,7 @@ namespace InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands
             //    .NotNull().WithMessage("{PropertyName} is required.")
             //    .Must(Boolean).WithMessage("{PropertyName} must be a boolean value (true or false).");
 
+                       
         }
 
         private bool Boolean(bool arg)

@@ -14,6 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ResponsesModel\NewFolder\**" />
+    <Content Remove="Models\ResponsesModel\NewFolder\**" />
+    <EmbeddedResource Remove="Models\ResponsesModel\NewFolder\**" />
+    <None Remove="Models\ResponsesModel\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>

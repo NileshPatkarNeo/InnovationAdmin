@@ -20,6 +20,8 @@ builder.Services.AddScoped<ISysPrefCompanies, SysPrefCompanies>();
 builder.Services.AddScoped<IAdminUser, AdminUser>();
 builder.Services.AddScoped<IAdminRoles, AdminRoles>();
 
+builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
+
 builder.Services.AddScoped<Common>();
 
 
