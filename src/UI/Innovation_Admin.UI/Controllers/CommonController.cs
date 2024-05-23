@@ -2,17 +2,51 @@
 using Microsoft.AspNetCore.Mvc;
 using CommonCall = Innovation_Admin.UI.Common;
 using Innovation_Admin.UI.Models.ResponsesModel.SysPrefCompany;
+using Innovation_Admin.UI.Models.ResponsesModel.Login;
+using Innovation_Admin.UI.Services.IRepositories;
 
 namespace Innovation_Admin.UI.Controllers
 {
     public class CommonController : Controller
     {
         private readonly CommonCall.Common _common;
-        public CommonController(CommonCall.Common common) {
+        private readonly IAuthenticationService _authenticationService;
+
+
+        public CommonController(CommonCall.Common common, IAuthenticationService authenticationService) {
 
             _common = common;
+            _authenticationService = authenticationService;
         }
-       
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(AuthenticationRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+               
+                return View(request);
+            }
+            var response = await _authenticationService.AuthenticateAsync(request);
+            if (!response.IsAuthenticated || string.IsNullOrEmpty(response.Token))
+            {
+                 ModelState.AddModelError(string.Empty, response.Message ?? "Authentication failed, please try again.");
+                return View(request);
+            }
+            HttpContext.Session.SetString("JWToken", response.Token);
+
+            return RedirectToAction("SysPrefCompany", "Common");
+        }
+
+
+
+
         public async Task<IActionResult> SysPrefCompany()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefCompanies();

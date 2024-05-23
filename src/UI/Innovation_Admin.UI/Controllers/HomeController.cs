@@ -15,6 +15,7 @@ namespace Innovation_Admin.UI.Controllers
 
         public IActionResult Index()
         {
+            var token = HttpContext.Session.GetString("JWToken");
             return View();
         }
 

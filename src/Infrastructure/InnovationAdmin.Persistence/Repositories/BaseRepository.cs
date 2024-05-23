@@ -63,7 +63,7 @@ namespace InnovationAdmin.Persistence.Repositories
             return await _dbContext.Set<T>().FromSqlRaw(string.Format("{0} {1}", storedProcedureName, string.Join(",", parameterNames)), parameters).ToListAsync();
         }
 
-        //For Insert, Update, Delete Operations
+       
         public async Task<int> StoredProcedureCommandAsync(string storedProcedureName, SqlParameter[] parameters = null)
         {
             var parameterNames = GetParameterNames(parameters);

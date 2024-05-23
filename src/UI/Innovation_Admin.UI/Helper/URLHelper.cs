@@ -13,5 +13,10 @@
         
         public const string DeleteSysPrefCompany = "/api/SysPrefCompany/{id}?api-version=1";
         #endregion
+
+
+        #region Authenticate
+        public const string Authenticate = "/api/v1/Account/authenticate";
+        #endregion
     }
 }
