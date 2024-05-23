@@ -16,6 +16,7 @@ var Configuration = builder.Configuration;
 builder.Services.Configure<ApiBaseUrl>(Configuration.GetSection("ApiBaseUrl"));
 
 builder.Services.AddScoped<ISysPrefCompanies, SysPrefCompanies>();
+builder.Services.AddScoped<IAdminUser, AdminUser>();
 builder.Services.AddScoped<Common>();
 var app = builder.Build();
 
@@ -36,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Common}/{action=AdminUser}/{id?}");
 
 app.Run();
