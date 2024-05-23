@@ -6,6 +6,7 @@ using Innovation_Admin.UI.Services.IRepositories;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Text;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
 
 namespace Innovation_Admin.UI.Services.Repositories
@@ -21,6 +22,7 @@ namespace Innovation_Admin.UI.Services.Repositories
         public SysPrefCompanies(IOptions<ApiBaseUrl> apiBaseUrl)
         {
             _apiBaseUrl = apiBaseUrl;
+            _apiRepository = new APIRepository(_configuration);
         }
 
         public async Task<GetAllSysPrefCompanyResponseModel> GetAllSysPrefCompanies()
@@ -42,5 +44,128 @@ namespace Innovation_Admin.UI.Services.Repositories
 
             return response;
         }
+
+        public async Task<CreateSysPrefCompanyResponseModel> CreateSysPrefCompany(SysPrefCompanyDto company)
+        {
+            var response = new CreateSysPrefCompanyResponseModel();
+
+            try
+            {
+                var jsonContent = JsonConvert.SerializeObject(company);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var apiResponse = await _apiRepository.APICommunication(
+                    _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
+                    URLHelper.CreateSysPrefCompany,
+                    HttpMethod.Post,
+                    content,
+                    string.Empty);
+
+                if (!string.IsNullOrEmpty(apiResponse.data))
+                {
+                    var apiResponseObject = JsonConvert.DeserializeObject<CreateSysPrefCompanyResponseModel>(apiResponse.data);
+                    response.IsSuccess = apiResponseObject.IsSuccess;
+                    response.Data = apiResponseObject.Data;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = ex.Message; // Ideally, log this exception
+            }
+
+            return response;
+        }
+
+        public async Task<UpdateSysPrefCompanyResponseModel> UpdateSysPrefCompany(SysPrefCompanyDto updatedCompany)
+        {
+            var response = new UpdateSysPrefCompanyResponseModel();
+
+            try
+            {
+                var jsonContent = JsonConvert.SerializeObject(updatedCompany);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var apiResponse = await _apiRepository.APICommunication(
+                    _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
+                    URLHelper.UpdateSysPrefCompany.Replace("{id}", updatedCompany.CompanyID.ToString()), // Define the 
+                    HttpMethod.Put, // Use PUT method for updates
+                    content,
+                    string.Empty);
+
+                if (!string.IsNullOrEmpty(apiResponse.data))
+                {
+                    response = JsonConvert.DeserializeObject<UpdateSysPrefCompanyResponseModel>(apiResponse.data);
+                    response.IsSuccess = apiResponse.Success;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = ex.Message; // Ideally, log this exception
+            }
+
+            return response;
+        }
+
+        public async Task<GetSysPrefCompanyByIdResponseModel> GetSysPrefCompanyById(Guid companyId)
+        {
+            var response = new GetSysPrefCompanyByIdResponseModel();
+
+            try
+            {
+               
+                // Make the API call to fetch the SysPrefCompany by its ID
+                _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl,URLHelper.GetSysPrefCompaynyById.Replace("{id}",companyId.ToString()), HttpMethod.Get, null, _sToken);
+
+                if (_oApiResponse != null && !string.IsNullOrEmpty(_oApiResponse.data))
+                {
+                   
+                    response = JsonConvert.DeserializeObject<GetSysPrefCompanyByIdResponseModel>(_oApiResponse.data);
+
+                    response.IsSuccess = true;
+                }
+                else
+                {
+                   
+                    response.IsSuccess = false;
+                    response.Message = "No data found for the specified company ID.";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                response.IsSuccess = false;
+                response.Message = ex.Message; // Log this exception
+            }
+
+            return response;
+        }
+
+       
+        public async Task<bool> DeleteSysPrefCompany(Guid companyId)
+        {
+            try
+            {
+                string url = URLHelper.DeleteSysPrefCompany.Replace("{id}", companyId.ToString());
+                var response = await _apiRepository.APICommunication(
+                    _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
+                    url,
+                    HttpMethod.Delete,
+                    new ByteArrayContent(Array.Empty<byte>()),
+                    string.Empty
+                );
+
+                return response != null && response.Success;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return false;
+            }
+        }
+
+
+
     }
 }

@@ -5,6 +5,8 @@ using Innovation_Admin.UI.Models.ResponsesModel.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Models.SysPrefCompany;
 using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Services.IRepositories;
+using Innovation_Admin.UI.Services.Repositories;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
 
@@ -39,6 +41,26 @@ namespace Innovation_Admin.UI.Common
             }
 
             return new List<SysPrefCompanyDto>();
+        }
+
+        public async Task<CreateSysPrefCompanyResponseModel> CreateSysPrefCompany(SysPrefCompanyDto company)
+        {
+            return await sysPrefCompanies.CreateSysPrefCompany(company);
+        }
+
+
+        public async Task<UpdateSysPrefCompanyResponseModel> UpdateSysPrefCompany(SysPrefCompanyDto updatedCompany)
+        {
+            return await sysPrefCompanies.UpdateSysPrefCompany(updatedCompany);
+        }
+        public async Task<GetSysPrefCompanyByIdResponseModel> GetSysPrefCompanyById(Guid companyId)
+        {
+            return await sysPrefCompanies.GetSysPrefCompanyById(companyId);
+        }
+
+        public async Task<bool> DeleteSysPrefCompany(Guid companyId)
+        {
+            return await sysPrefCompanies.DeleteSysPrefCompany(companyId);
         }
 
         

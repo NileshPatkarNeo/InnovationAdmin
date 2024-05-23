@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using InnovationAdmin.Application.Contracts.Persistence;
+using System;
 
 namespace InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands.Create_SysPref_GeneralBehaviour
 {
@@ -12,9 +13,10 @@ namespace InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands
                        
         }
 
-        private string GetMessage(string Code, string Lang)
+        private bool Boolean(bool arg)
         {
-            return _messageRepository.GetMessage(Code, Lang).Result.MessageContent.ToString();
+            throw new NotImplementedException();
         }
     }
-}
+    }
+
