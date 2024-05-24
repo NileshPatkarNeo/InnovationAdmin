@@ -17,6 +17,8 @@ builder.Services.Configure<ApiBaseUrl>(Configuration.GetSection("ApiBaseUrl"));
 builder.Services.AddScoped<IAuthenticationService, Authentication>();
 
 builder.Services.AddScoped<ISysPrefCompanies, SysPrefCompanies>();
+builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
+
 builder.Services.AddScoped<IAdminUser, AdminUser>();
 builder.Services.AddScoped<IAdminRoles, AdminRoles>();
 

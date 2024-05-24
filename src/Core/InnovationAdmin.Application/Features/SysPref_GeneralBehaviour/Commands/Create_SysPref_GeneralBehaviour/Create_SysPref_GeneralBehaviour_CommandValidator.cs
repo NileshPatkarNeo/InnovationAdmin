@@ -10,11 +10,7 @@ namespace InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands
         public Create_SysPref_GeneralBehaviour_CommandValidator(IMessageRepository messageRepository)
         {
             _messageRepository = messageRepository;
-
-            //RuleFor(p => p.Auto_Change_Claim_Status)
-            //    .NotNull().WithMessage("{PropertyName} is required.")
-            //    .Must(Boolean).WithMessage("{PropertyName} must be a boolean value (true or false).");
-
+                       
         }
 
         private bool Boolean(bool arg)

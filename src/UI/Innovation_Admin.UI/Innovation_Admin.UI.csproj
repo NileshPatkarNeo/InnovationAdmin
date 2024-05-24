@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ResponsesModel\NewFolder\**" />
+    <Content Remove="Models\ResponsesModel\NewFolder\**" />
+    <EmbeddedResource Remove="Models\ResponsesModel\NewFolder\**" />
+    <None Remove="Models\ResponsesModel\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Models\Admin_Role\**" />
     <Content Remove="Models\Admin_Role\**" />
     <EmbeddedResource Remove="Models\Admin_Role\**" />
