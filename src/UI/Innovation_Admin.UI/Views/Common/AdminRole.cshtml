@@ -2,9 +2,11 @@
 
 @{
     ViewData["Title"] = "AdminRole";
+        Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+
 }
 
-<h1>AdminRole</h1>
+<h1>Admin Roles</h1>
 
 <p>
     <a asp-action="CreateAdminRole">Create New</a>
@@ -46,7 +48,7 @@
     </tbody>
 </table>
 
-@section Scripts {
+
     <script type="text/javascript">
         function confirmDelete(adminRoleId) {
             if (confirm("Are you sure you want to delete this Admin Role?")) {
@@ -67,4 +69,4 @@
         }
         
     </script>
-    }
+    

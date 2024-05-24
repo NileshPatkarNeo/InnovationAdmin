@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "EditAdminRole";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>EditAdminRole</h1>
+<h1>Edit Admin Role</h1>
 
-<h4>AdminRoleDto</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,13 +20,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Role_Name" class="control-label"></label>
-                <input asp-for="Role_Name" class="form-control" />
-                <span asp-validation-for="Role_Name" class="text-danger"></span>
+                <input asp-for="Role_Name" class="form-control" required /> 
+               
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <input asp-for="Description" class="form-control" required /> 
+               
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -35,9 +36,5 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="AdminRole">Back to List</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
