@@ -1,6 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-    Layout = null;
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
 <!DOCTYPE html>
@@ -8,122 +7,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Admin Home Page</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
-
-        header, footer {
-            background-color: #f8f9fa;
-            padding: 1rem 0;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        footer {
-            margin-top: auto;
-            text-align: center;
-        }
-
 
         .container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-decoration: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .button-group {
-            text-align: center;
+        .admin-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-            .button-group button {
-                margin: 0.5rem;
+            .admin-info h2 {
+                color: #333;
+            }
+
+            .admin-info p {
+                color: #666;
+            }
+
+        .admin-images {
+            margin-top: 20px;
+            
+
+        }
+
+            .admin-images img {
+                
+                justify-content:center;
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+                border-radius: 140px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             }
     </style>
 </head>
 <body>
-   
-    <header>
-        <div class="brand">
-            <h1>InnovationAdmin</h1>
-        </div>
-        <div class="logout">
-            <a href="@Url.Action("Logout", "Account")" class="btn btn-danger">Logout</a>
-        </div>
-    </header>
 
-    
-    <div class="container">
-        <div class="button-group">
-            <button type="submit">
-                <a asp-action="SysPrefCompany" asp-controller="Common" class="btn hello btn-primary">SysPrefCompany</a>
-            </button>
-            <button type="submit">
-                <a asp-action="AdminRole" asp-controller="Common" class="btn hello btn-secondary">AdminRole</a>
-            </button>
-            <button type="submit">
-                <a asp-action="AdminUser" asp-controller="Common" class="btn hello btn-success">AdminUser</a>
-            </button>
+    <div class="admin-images" >
+        <img src="~/Image/image_2024_05_24T10_38_20_592Z.png" alt="Admin Image 1">
 
-           
-        </div>
+
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <span>&copy; 2024 Innovation Admin. All rights reserved.</span>
+    <div class="container">
+        <div class="admin-info">
+            <h2>Welcome to Innvoation  Admin</h2>
+            <p>This is your Innovation Admin home page. Here, you can manage various aspects of your system.</p>
+         
+     
         </div>
-    </footer>
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+    </div>
 </body>
 </html>
-

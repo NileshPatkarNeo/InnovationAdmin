@@ -1,0 +1,63 @@
+﻿
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Innovation_Admin.UI.styles.css" asp-append-version="true" />
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Innovation Admin</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="/Common/HomePage" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                        </a>
+                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="/Common/SysPrefCompany" class="nav-link px-0"> <span class="d-none d-sm-inline">System Company Prefrence</span></a>
+                            </li>
+                            <li>
+                                <a href="/Common/SysPrefGeneralBehaviour" class="nav-link px-0"> <span class="d-none d-sm-inline">System General Behaviour</span> </a>
+                            </li>
+                            <li>
+                                <a href="/Common/AdminUser" class="nav-link px-0"> <span class="d-none d-sm-inline">Admin User</span></a>
+                            </li>
+                            <li>
+                                <a href="/Common/AdminRole" class="nav-link px-0"> <span class="d-none d-sm-inline">Admin Role</span> </a>
+                            </li>
+                        </ul>
+                    </li>
+                  
+                   
+                </ul>
+                <hr>
+                <div class=" pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="d-none d-sm-inline mx-1">SignOut</span>
+                    </a>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="col py-3">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+   
+
+</body>
