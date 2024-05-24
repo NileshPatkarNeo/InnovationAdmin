@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Innovation_Admin.UI.Models.SysPrefCompany.SysPrefCompanyDto>
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
 
-
-<h1>SysPrefCompany</h1>
+<h1>System Preference Company</h1>
 
 <p>
     <a asp-action="CreateSysPrefCompany">Create New</a>
@@ -42,7 +44,7 @@
     </tbody>
 </table>
 
-@section Scripts {
+
     <script type="text/javascript">
         function confirmDelete(companyId) {
             if (confirm("Are you sure you want to delete this company?")) {
@@ -61,4 +63,4 @@
             }
         }
     </script>
-}
+
