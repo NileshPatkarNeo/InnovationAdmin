@@ -20,8 +20,7 @@ namespace Innovation_Admin.UI.Common
         private readonly IAdminRoles adminRoles;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl)
-        public Common(ISysPrefCompanies _sysPrefCompanies, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles)
+        public Common(ISysPrefCompanies _sysPrefCompanies, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminUser _adminUser, IAdminRoles _adminRoles)
         {
             adminUser = _adminUser;
             sysPrefCompanies = _sysPrefCompanies;
