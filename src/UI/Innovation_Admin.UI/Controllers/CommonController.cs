@@ -91,9 +91,6 @@ namespace Innovation_Admin.UI.Controllers
             }
          return RedirectToAction("SysPrefCompany");
         }
-    }
-}
-
         public async Task<IActionResult> SysPrefGeneralBehaviour()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefBehaviouries();
@@ -177,5 +174,9 @@ namespace Innovation_Admin.UI.Controllers
 
     }
 }
+    
+
+
+ 
 
 
