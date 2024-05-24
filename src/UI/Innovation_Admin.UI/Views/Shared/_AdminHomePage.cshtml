@@ -41,12 +41,17 @@
                    
                 </ul>
                 <hr>
-                <div class=" pb-4">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="d-none d-sm-inline mx-1">SignOut</span>
-                    </a>
-                  
-                </div>
+@*                     <form asp-action="Logout"asp-controller="Account" method="post">
+        
+ *@   
+                           
+                            
+                            <div class="pb-4" >
+                            
+                            <a href="@Url.Action("Logout","Account")" class="btn btn-danger">Logout</a>
+                        </div>
+@*                     </form>
+ *@
             </div>
         </div>
         <div class="col py-3">

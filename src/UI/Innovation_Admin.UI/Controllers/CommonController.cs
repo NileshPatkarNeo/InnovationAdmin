@@ -10,7 +10,7 @@ using Innovation_Admin.UI.Filter;
 namespace Innovation_Admin.UI.Controllers
 {
 
-   // [AuthFilter]
+   [AuthFilter]
     public class CommonController : Controller
     {
         private readonly CommonCall.Common _common;
