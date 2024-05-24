@@ -20,6 +20,31 @@
         #endregion
 
 
+        #region - AdminUser
+
+        public const string GetAllAdminUser = "/api/AdminUser/all?api-version=1";
+
+        public const string CreateAdminUser = "/api/AdminUser?api-version=1";
+
+        public const string GetAdminUserById = "/api/AdminUser/{id}?api-version=1";
+        public const string UpdateAdminUser = "/api/AdminUser?api-version=1";
+
+        public const string DeleteAdminUser = "/api/AdminUser/{id}?api-version=1";
+        #endregion
+
+        #region - AdminROle
+        public const string GetAllAdminRole = "/api/AdminRole?api-version=1";
+
+        public const string CreateAdminRole = "/api/AdminRole/create?api-version=1";
+
+        public const string GetAdminRoleById = "/api/AdminRole/{id}?api-version=1"; 
+
+        public const string UpdateAdminRole = "/api/AdminRole?api-version=1";
+
+        public const string DeleteAdminRole = "/api/AdminRole/{id}?api-version=1";
+        #endregion
+
+
 
 
         public const string GetAllSysPrefGeneralBehaviour = "/api/SysPref_GeneralBehaviour/all?api-version=1";

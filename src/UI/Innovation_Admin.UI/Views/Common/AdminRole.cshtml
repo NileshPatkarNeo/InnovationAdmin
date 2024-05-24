@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Innovation_Admin.UI.Models.AdminRole.AdminRoleDto>
+
+@{
+    ViewData["Title"] = "AdminRole";
+}
+
+<h1>AdminRole</h1>
+
+<p>
+    <a asp-action="CreateAdminRole">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th style="display:none">
+                @Html.DisplayNameFor(model => model.Role_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Role_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "EditAdminRole", new { adminRoleId = item.Role_ID })
+                    <a href="#" onclick="confirmDelete('@item.Role_ID')">Delete</a>
+              
+           </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        function confirmDelete(adminRoleId) {
+            if (confirm("Are you sure you want to delete this Admin Role?")) {
+                var form = document.createElement("form");
+                form.method = "post";
+                form.action = "/Common/DeleteAdminRole";
+
+                var hiddenField = document.createElement("input");
+                hiddenField.type = "hidden";
+                hiddenField.name = "adminRoleId";
+                hiddenField.value = adminRoleId;
+                form.appendChild(hiddenField);
+
+                document.body.appendChild(form);
+                form.submit();
+            
+            }
+        }
+        
+    </script>
+    }

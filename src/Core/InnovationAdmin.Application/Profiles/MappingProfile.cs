@@ -55,6 +55,11 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPref_GeneralBehaviours, Get_SysPref_GeneralBehaviour_List_Query>().ReverseMap();
             CreateMap<SysPref_GeneralBehaviours, GetById_SysPref_GeneralBehaviours_VM>();
         
+    
+
+       
+           // CreateMap<Category, UpdateCategoryCommand>().ReverseMap();
+       
             CreateMap<SysPrefCompany, CreateSysPrefCompanyDto>().ReverseMap();
             CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
             CreateMap<SysPrefCompany, UpdateSysPrefCompanyDto>().ReverseMap();

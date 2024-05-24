@@ -11,17 +11,23 @@ namespace InnovationAdmin.Application.Features.AdminRoles.Commands.CreateAdminRo
 {
     public class CreateAdminRoleCommandValidator : AbstractValidator<CreateAdminRoleCommand>
     {
-        private readonly IAdminRoleRepository _adminRoleRepository;
-        public CreateAdminRoleCommandValidator(IAdminRoleRepository adminRoleRepository)
-        {
-            _adminRoleRepository = adminRoleRepository;
+        public CreateAdminRoleCommandValidator() {
+       
+
+        
+
+           
+            RuleFor(p => p.Description)
+            .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotNull()
+            .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
             RuleFor(p => p.Name)
-                .NotEmpty().WithMessage("Name should not be Null")
-                .NotNull().WithMessage("Name should not be Null")
-                .MaximumLength(10).WithMessage("Max Length of name Is 10");
+           .NotEmpty().WithMessage("{PropertyName} is required.")
+           .NotNull()
+           .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
+
         }
 
-       
     }
 }
