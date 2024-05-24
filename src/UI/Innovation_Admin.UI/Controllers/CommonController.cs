@@ -23,11 +23,18 @@ namespace Innovation_Admin.UI.Controllers
             _authenticationService = authenticationService;
         }
 
+
+        #region HomePage
         public IActionResult HomePage()
         {
             var token = HttpContext.Session.GetString("JWToken");
             return View();
         }
+        #endregion
+
+
+
+        #region SysPrefCompany
 
         [HttpGet]
         public async Task<IActionResult> SysPrefCompany()
@@ -92,6 +99,11 @@ namespace Innovation_Admin.UI.Controllers
             }
          return RedirectToAction("SysPrefCompany");
         }
+
+        #endregion
+
+
+        #region AdminUser
 
         public async Task<IActionResult> AdminUser()
         {
@@ -166,5 +178,7 @@ namespace Innovation_Admin.UI.Controllers
             }
             return RedirectToAction("AdminUser");
         }
+
+        #endregion
     }
 }
