@@ -179,6 +179,80 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("AdminUser");
         }
 
+        public async Task<IActionResult> AdminRole()
+        {
+            var getAllAdminRoles = await _common.GetAllAdminRoles();
+            return View(getAllAdminRoles);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateAdminRole()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateAdminRole(CreateAdminRoleDto adminRole)
+        {
+
+            var result = await _common.CreateAdminRole(adminRole);
+
+            if (!result.IsSuccess)
+            {
+
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the AdminRole.");
+                }
+
+
+                return RedirectToAction("AdminRole");
+            }
+
+
+            return RedirectToAction("AdminRole");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAdminRole([FromQuery] string adminRoleId)
+        {
+            var adminRole = await _common.GetAdminRoleById(Guid.Parse(adminRoleId));
+            return View(adminRole.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAdminRole(AdminRoleDto updatedAdminRole)
+        {
+            var result = await _common.UpdateAdminRole(updatedAdminRole);
+
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedAdminRole); // Return to the edit form with error messages
+            }
+
+            return RedirectToAction("AdminRole");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAdminRole(Guid adminRoleId)
+        {
+            var isDeleted = await _common.DeleteAdminRole(adminRoleId);
+            if (!isDeleted)
+            {
+
+                ModelState.AddModelError(string.Empty, "Failed to delete the adminRole.");
+            }
+            return RedirectToAction("AdminRole");
+        }
+
         #endregion
     }
 }
