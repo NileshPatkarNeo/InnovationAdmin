@@ -22,11 +22,21 @@ namespace InnovationAdmin.Api.Controllers
             _logger = logger;
         }
 
-        [HttpPost(Name = "AddSysPrefCompany")]
+        [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateSysPrefCompanyCommand createSysPrefCompanyCommand)
         {
+            if (string.IsNullOrWhiteSpace(createSysPrefCompanyCommand.CompanyName) ||
+                string.IsNullOrWhiteSpace(createSysPrefCompanyCommand.TermForPharmacy))
+            {
+                return BadRequest();
+            }
+
             var response = await _mediator.Send(createSysPrefCompanyCommand);
-            return Ok(response);
+            if (response.Succeeded)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
         }
 
 
@@ -47,9 +57,17 @@ namespace InnovationAdmin.Api.Controllers
         [HttpGet(Name = "GetAllSysPrefCompanies")]
         public async Task<ActionResult> GetAll()
         {
-            var query = new GetAllSysPrefCompaniesQuery();
-            var result = await _mediator.Send(query);
-            return Ok(result);
+            try
+            {
+                var query = new GetAllSysPrefCompaniesQuery();
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while processing the request.");
+                return BadRequest(ex.Message);
+            }
         }
 
        
@@ -80,6 +98,7 @@ namespace InnovationAdmin.Api.Controllers
             }
             return NotFound(result);
         }
+
 
 
     }

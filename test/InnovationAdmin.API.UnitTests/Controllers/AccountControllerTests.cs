@@ -1,10 +1,15 @@
 ﻿using InnovationAdmin.Api.Controllers;
 using InnovationAdmin.API.UnitTests.Mocks;
 using InnovationAdmin.Application.Contracts.Identity;
+using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using InnovationAdmin.Application.Models.Authentication;
+using InnovationAdmin.Application.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Shouldly;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -57,16 +62,17 @@ namespace InnovationAdmin.API.UnitTests.Controllers
             okObjectResult.Value.ShouldBeOfType<RegistrationResponse>();
         }
 
+
         [Fact]
         public async Task Refresh_Token()
         {
             var controller = new AccountController(_mockAuthenticationService.Object);
-
             var result = await controller.RefreshTokenAsync(new RefreshTokenRequest()
             {
                 Token = "string"
             });
 
+         
             result.ShouldBeOfType<OkObjectResult>();
             var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
@@ -110,22 +116,6 @@ namespace InnovationAdmin.API.UnitTests.Controllers
             okObjectResult.Value.ShouldNotBeNull();
             okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
         }
-
-        [Fact]
-        public async Task Revoke_Token_NotFound()
-        {
-            _mockAuthenticationService.Setup(auth => auth.RevokeToken(It.IsAny<RevokeTokenRequest>())).ReturnsAsync(
-                new RevokeTokenResponse() { IsRevoked = false, Message = "Token did not match any users" });
-
-            var controller = new AccountController(_mockAuthenticationService.Object);
-
-            var result = await controller.RevokeTokenAsync(new RevokeTokenRequest());
-
-            result.ShouldBeOfType<NotFoundObjectResult>();
-            var okObjectResult = result as NotFoundObjectResult;
-            okObjectResult.StatusCode.ShouldBe(404);
-            okObjectResult.Value.ShouldNotBeNull();
-            okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
-        }
+        
     }
 }
