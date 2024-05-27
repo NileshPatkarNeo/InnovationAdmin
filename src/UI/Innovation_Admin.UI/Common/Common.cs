@@ -18,21 +18,19 @@ namespace Innovation_Admin.UI.Common
     public class Common
     {
         private readonly ISysPrefCompanies sysPrefCompanies;
-        private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly IAdminUser adminUser;
         private readonly IAdminRoles adminRoles;
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
      
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles)
-        public Common(ISysPrefCompanies _sysPrefCompanies, IConfiguration configuration, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IOptions<ApiBaseUrl> apiBaseUrl)
+        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries)
+       
         {
             adminUser = _adminUser;
             sysPrefCompanies = _sysPrefCompanies;
             _configuration = configuration;
             _apiBaseUrl = apiBaseUrl;
-            sysPrefBehaviouries = _sysPrefBehaviouries;
             adminRoles = _adminRoles;
             sysPrefBehaviouries = _sysPrefBehaviouries;
         }
