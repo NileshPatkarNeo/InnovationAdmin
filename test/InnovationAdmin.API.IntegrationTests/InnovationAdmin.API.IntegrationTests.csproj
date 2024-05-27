@@ -36,6 +36,7 @@
     <ProjectReference Include="..\..\src\Infrastructure\InnovationAdmin.Identity\InnovationAdmin.Identity.csproj" />
     <ProjectReference Include="..\..\src\Infrastructure\InnovationAdmin.Infrastructure\InnovationAdmin.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Infrastructure\InnovationAdmin.Persistence\InnovationAdmin.Persistence.csproj" />
+    <ProjectReference Include="..\..\src\UI\Innovation_Admin.UI\Innovation_Admin.UI.csproj" />
   </ItemGroup>
 
 </Project>

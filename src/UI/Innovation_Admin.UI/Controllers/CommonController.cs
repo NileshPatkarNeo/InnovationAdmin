@@ -257,7 +257,6 @@ namespace Innovation_Admin.UI.Controllers
         #endregion
     
 
-
         public async Task<IActionResult> SysPrefGeneralBehaviour()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefBehaviouries();
