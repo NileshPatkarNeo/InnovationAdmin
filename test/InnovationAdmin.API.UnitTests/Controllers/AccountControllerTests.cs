@@ -57,75 +57,75 @@ namespace InnovationAdmin.API.UnitTests.Controllers
             okObjectResult.Value.ShouldBeOfType<RegistrationResponse>();
         }
 
-        //[Fact]
-        //public async Task Refresh_Token()
-        //{
-        //    var controller = new AccountController(_mockAuthenticationService.Object);
+        [Fact]
+        public async Task Refresh_Token()
+        {
+            var controller = new AccountController(_mockAuthenticationService.Object);
 
-        //    var result = await controller.RefreshTokenAsync(new RefreshTokenRequest()
-        //    {
-        //        Token = "string"
-        //    });
+            var result = await controller.RefreshTokenAsync(new RefreshTokenRequest()
+            {
+                Token = "string"
+            });
 
-        //    result.ShouldBeOfType<OkObjectResult>();
-        //    var okObjectResult = result as OkObjectResult;
-        //    okObjectResult.StatusCode.ShouldBe(200);
-        //    okObjectResult.Value.ShouldNotBeNull();
-        //    okObjectResult.Value.ShouldBeOfType<RefreshTokenResponse>();
-        //}
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            okObjectResult.Value.ShouldNotBeNull();
+            okObjectResult.Value.ShouldBeOfType<RefreshTokenResponse>();
+        }
 
-        //[Fact]
-        //public async Task Revoke_Token()
-        //{
-        //    _mockAuthenticationService.Setup(auth => auth.RevokeToken(It.IsAny<RevokeTokenRequest>())).ReturnsAsync(
-        //        new RevokeTokenResponse() { IsRevoked = true, Message = "Token revoked" });
+        [Fact]
+        public async Task Revoke_Token()
+        {
+            _mockAuthenticationService.Setup(auth => auth.RevokeToken(It.IsAny<RevokeTokenRequest>())).ReturnsAsync(
+                new RevokeTokenResponse() { IsRevoked = true, Message = "Token revoked" });
 
-        //    var controller = new AccountController(_mockAuthenticationService.Object);
+            var controller = new AccountController(_mockAuthenticationService.Object);
 
-        //    var result = await controller.RevokeTokenAsync(new RevokeTokenRequest()
-        //    {
-        //        Token = "string"
-        //    });
+            var result = await controller.RevokeTokenAsync(new RevokeTokenRequest()
+            {
+                Token = "string"
+            });
 
-        //    result.ShouldBeOfType<OkObjectResult>();
-        //    var okObjectResult = result as OkObjectResult;
-        //    okObjectResult.StatusCode.ShouldBe(200);
-        //    okObjectResult.Value.ShouldNotBeNull();
-        //    okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
-        //}
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            okObjectResult.Value.ShouldNotBeNull();
+            okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
+        }
 
-        //[Fact]
-        //public async Task Revoke_EmptyToken()
-        //{
-        //    _mockAuthenticationService.Setup(auth => auth.RevokeToken(It.IsAny<RevokeTokenRequest>())).ReturnsAsync(
-        //        new RevokeTokenResponse() { IsRevoked = false, Message = "Token is required" });
+        [Fact]
+        public async Task Revoke_EmptyToken()
+        {
+            _mockAuthenticationService.Setup(auth => auth.RevokeToken(It.IsAny<RevokeTokenRequest>())).ReturnsAsync(
+                new RevokeTokenResponse() { IsRevoked = false, Message = "Token is required" });
 
-        //    var controller = new AccountController(_mockAuthenticationService.Object);
+            var controller = new AccountController(_mockAuthenticationService.Object);
 
-        //    var result = await controller.RevokeTokenAsync(new RevokeTokenRequest());
+            var result = await controller.RevokeTokenAsync(new RevokeTokenRequest());
 
-        //    result.ShouldBeOfType<BadRequestObjectResult>();
-        //    var okObjectResult = result as BadRequestObjectResult;
-        //    okObjectResult.StatusCode.ShouldBe(400);
-        //    okObjectResult.Value.ShouldNotBeNull();
-        //    okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
-        //}
+            result.ShouldBeOfType<BadRequestObjectResult>();
+            var okObjectResult = result as BadRequestObjectResult;
+            okObjectResult.StatusCode.ShouldBe(400);
+            okObjectResult.Value.ShouldNotBeNull();
+            okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
+        }
 
-        //[Fact]
-        //public async Task Revoke_Token_NotFound()
-        //{
-        //    _mockAuthenticationService.Setup(auth => auth.RevokeToken(It.IsAny<RevokeTokenRequest>())).ReturnsAsync(
-        //        new RevokeTokenResponse() { IsRevoked = false, Message = "Token did not match any users" });
+        [Fact]
+        public async Task Revoke_Token_NotFound()
+        {
+            _mockAuthenticationService.Setup(auth => auth.RevokeToken(It.IsAny<RevokeTokenRequest>())).ReturnsAsync(
+                new RevokeTokenResponse() { IsRevoked = false, Message = "Token did not match any users" });
 
-        //    var controller = new AccountController(_mockAuthenticationService.Object);
+            var controller = new AccountController(_mockAuthenticationService.Object);
 
-        //    var result = await controller.RevokeTokenAsync(new RevokeTokenRequest());
+            var result = await controller.RevokeTokenAsync(new RevokeTokenRequest());
 
-        //    result.ShouldBeOfType<NotFoundObjectResult>();
-        //    var okObjectResult = result as NotFoundObjectResult;
-        //    okObjectResult.StatusCode.ShouldBe(404);
-        //    okObjectResult.Value.ShouldNotBeNull();
-        //    okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
-        //}
+            result.ShouldBeOfType<NotFoundObjectResult>();
+            var okObjectResult = result as NotFoundObjectResult;
+            okObjectResult.StatusCode.ShouldBe(404);
+            okObjectResult.Value.ShouldNotBeNull();
+            okObjectResult.Value.ShouldBeOfType<RevokeTokenResponse>();
+        }
     }
 }
