@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "CreateSysPrefGeneralBehaviour";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>CreateSysPrefGeneralBehaviour</h1>
+<h1>Create System Prefernce General Behaviour</h1>
 
-<h4>CreateSysPrefGeneralBehaviourDto</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -68,6 +69,6 @@
     <a asp-action="SysPrefGeneralBehaviour">Back to List</a>
 </div>
 
-@section Scripts {
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+

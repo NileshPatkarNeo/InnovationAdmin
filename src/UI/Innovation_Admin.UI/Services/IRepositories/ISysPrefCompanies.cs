@@ -7,6 +7,7 @@ namespace Innovation_Admin.UI.Services.IRepositories
     public interface ISysPrefCompanies
     {
         Task<GetAllSysPrefCompanyResponseModel> GetAllSysPrefCompanies();
+
         Task<CreateSysPrefCompanyResponseModel> CreateSysPrefCompany(SysPrefCompanyDto company);
         Task<UpdateSysPrefCompanyResponseModel> UpdateSysPrefCompany(SysPrefCompanyDto updatedCompany);
         Task<GetSysPrefCompanyByIdResponseModel> GetSysPrefCompanyById(Guid companyId);
