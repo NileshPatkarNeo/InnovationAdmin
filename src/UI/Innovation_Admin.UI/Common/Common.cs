@@ -9,8 +9,6 @@ using Innovation_Admin.UI.Models.ResponsesModel.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Models.SysPrefCompany;
 using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Services.IRepositories;
-using Innovation_Admin.UI.Services.Repositories;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using System.Drawing;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
@@ -20,9 +18,9 @@ namespace Innovation_Admin.UI.Common
     public class Common
     {
         private readonly ISysPrefCompanies sysPrefCompanies;
-        private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly IAdminUser adminUser;
         private readonly IAdminRoles adminRoles;
+        private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
      
@@ -32,8 +30,8 @@ namespace Innovation_Admin.UI.Common
             sysPrefCompanies = _sysPrefCompanies;
             _configuration = configuration;
             _apiBaseUrl = apiBaseUrl;
-            sysPrefBehaviouries = _sysPrefBehaviouries;
             adminRoles = _adminRoles;
+            sysPrefBehaviouries = _sysPrefBehaviouries;
         }
 
         public async Task<IEnumerable<SysPrefCompanyDto>> GetAllSysPrefCompanies()

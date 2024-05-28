@@ -2,9 +2,10 @@
 
 @{
     ViewData["Title"] = "SysPrefGeneralBehaviour";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>SysPrefGeneralBehaviour</h1>
+<h1>System Prefernce General Behaviour</h1>
 
 <p>
     <a asp-action="CreateSysPrefGeneralBehaviour">Create New</a>
@@ -88,7 +89,7 @@
 
 </table>
 
-    @section Scripts {
+  
     <script type="text/javascript">
         function confirmDelete(Preference_ID) {
             if (confirm("Are you sure you want to delete this General Behaviour?")) {
@@ -107,4 +108,3 @@
             }
         }
     </script>
-}

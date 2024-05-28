@@ -11,11 +11,6 @@ namespace InnovationAdmin.Application.Contracts.Persistence
 {
     public interface IAdminRoleRepository : IAsyncRepository<Admin_Role>
     {
-        Task<CreateAdminRoleDto> CreateAdminRoleAsync(CreateAdminRoleCommand command);
 
-        Task<Admin_Role> GetAdminRoleByIdAsync(int id);
-        Task<Admin_Role> UpdateAdminRoleAsync(UpdateAdminRoleCommand command);
-        Task<bool> DeleteAdminRoleAsync(int id);
-        Task<IEnumerable<Admin_Role>> GetAllAdminRolesAsync();
     }
 }

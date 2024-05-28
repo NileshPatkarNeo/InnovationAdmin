@@ -2,6 +2,7 @@
 using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Models.AdminUser;
 using Innovation_Admin.UI.Models.AdminRole;
+using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Microsoft.AspNetCore.Mvc;
 using CommonCall = Innovation_Admin.UI.Common;
 
@@ -263,9 +264,6 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
-
-
-
         [HttpGet]
         public IActionResult CreateSysPrefGeneralBehaviour()
         {
@@ -336,6 +334,7 @@ namespace Innovation_Admin.UI.Controllers
             }
             return RedirectToAction("SysPrefGeneralBehaviour");
         }
+      
 
     }
 }
@@ -343,5 +342,7 @@ namespace Innovation_Admin.UI.Controllers
 
 
  
+
+
 
 
