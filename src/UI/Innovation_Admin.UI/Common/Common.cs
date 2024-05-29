@@ -12,6 +12,9 @@ using Innovation_Admin.UI.Services.IRepositories;
 using Microsoft.Extensions.Options;
 using System.Drawing;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
+using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Models.ResponsesModel.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Services.Repositories;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -23,8 +26,9 @@ namespace Innovation_Admin.UI.Common
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
-     
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles)
+        private readonly ISysPrefSecurityEmails sysPrefSecurityEmails;
+
+        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefSecurityEmails _sysPrefSecurityEmails)
         {
             adminUser = _adminUser;
             sysPrefCompanies = _sysPrefCompanies;
@@ -32,6 +36,7 @@ namespace Innovation_Admin.UI.Common
             _apiBaseUrl = apiBaseUrl;
             adminRoles = _adminRoles;
             sysPrefBehaviouries = _sysPrefBehaviouries;
+            sysPrefSecurityEmails = _sysPrefSecurityEmails;
         }
 
         public async Task<IEnumerable<SysPrefCompanyDto>> GetAllSysPrefCompanies()
@@ -185,6 +190,45 @@ namespace Innovation_Admin.UI.Common
         public async Task<bool> DeleteSysPrefGeneralBehaviour(Guid Preference_ID)
         {
             return await sysPrefBehaviouries.DeleteSysPrefGeneralBehaviour(Preference_ID);
+        }
+
+
+        public async Task<IEnumerable<SysPrefSecurityEmailDto>> GetAllSysPrefSecurityEmail()
+        {
+            GetAllSysPrefSecurityEmailResponseModel getAllSysPrefSecurityEmailResponseModel = new GetAllSysPrefSecurityEmailResponseModel();
+
+            getAllSysPrefSecurityEmailResponseModel = await sysPrefSecurityEmails.GetAllSysPrefSecurityEmail();
+
+            if (getAllSysPrefSecurityEmailResponseModel.IsSuccess)
+            {
+                if (getAllSysPrefSecurityEmailResponseModel != null && getAllSysPrefSecurityEmailResponseModel.Data.Count() > 0)
+                {
+                    return getAllSysPrefSecurityEmailResponseModel.Data;
+                }
+            }
+
+            return new List<SysPrefSecurityEmailDto>();
+        }
+
+
+        public async Task<CreateSysPrefSecurityEmailResponseModel> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
+        {
+            return await sysPrefSecurityEmails.CreateSysPrefSecurityEmail(email);
+        }
+
+        public async Task<UpdateSysPrefSecurityEmailResponseModel> UpdateSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedemail)
+        {
+            return await sysPrefSecurityEmails.UpdateSysPrefSecurityEmail(updatedemail);
+        }
+
+        public async Task<GetSysPrefSecurityEmailByIdResponseModel> GetSysPrefSecurityEmailById(Guid companyId)
+        {
+            return await sysPrefSecurityEmails.GetSysPrefSecurityEmailById(companyId);
+        }
+
+        public async Task<bool> DeleteSysPrefSecurityEmail(Guid emailId)
+        {
+            return await sysPrefSecurityEmails.DeleteSysPrefSecurityEmail(emailId);
         }
 
     }

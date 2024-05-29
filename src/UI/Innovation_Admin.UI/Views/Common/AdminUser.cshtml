@@ -8,7 +8,8 @@
 <h1>Admin Users</h1>
 
 <p>
-    <a asp-action="CreateAdminUser" asp-controller="Common">Create New</a>
+    @Html.ActionLink("Create", "CreateAdminUser");
+    <a asp-action="CreateAdminUser">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -61,9 +62,7 @@
                     <a href="#" onclick="confirmDelete('@item.User_ID')">Delete</a>
 
 
-               @*  @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
-                
-                  @*   @Html.ActionLink("Delete", "DeleteAdminUser", new { companyId = item.User_ID }) *@
+               
             </td>
         </tr>
 }

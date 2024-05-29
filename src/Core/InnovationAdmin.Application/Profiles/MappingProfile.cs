@@ -19,6 +19,11 @@ using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPr
 using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.CreateSysPrefSecurityEmail;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailById;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailList;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.UpdateSysPrefSecurityEmail;
+
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -26,12 +31,13 @@ namespace InnovationAdmin.Application.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Admin_User, CreateAdminUserDto>();
+            CreateMap<Admin_User, CreateAdminUserDto>().ReverseMap();
             CreateMap<Admin_User, AdminUserListVm>().ReverseMap();
 
-            CreateMap<Admin_User, CreateAdminUserCommand>();
+            CreateMap<Admin_User, CreateAdminUserCommand>().ReverseMap();
             CreateMap<Admin_User, UpdateAdminUserCommand>().ReverseMap();
             CreateMap<Admin_User, DeleteAdminUserCommand>();
+         
 
             CreateMap<SysPrefCompany, CreateSysPrefCompanyDto>().ReverseMap();
             CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
@@ -43,6 +49,7 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPref_GeneralBehaviours, SysPref_GeneralBehaviour_ListVM>().ReverseMap();
             CreateMap<Admin_User, AdminUserByIdVm>().ReverseMap();
 
+     
 
 
 
@@ -85,6 +92,16 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Admin_Role, AdminRoleListVm>().ReverseMap();
 
             CreateMap<Admin_Role, CreateAdminRoleDto>();
+
+
+        
+            CreateMap<SysPrefSecurityEmail, CreateSysPrefSecurityEmailDto>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, GetSysPrefSecurityEmailByIdVm>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, GetSysPrefSecurityEmailListVm>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, UpdateSysPrefSecurityEmailCommand>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, GetSysPrefSecurityEmailByIdVm>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, CreateSysPrefSecurityEmailCommand>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, UpdateSysPrefSecurityEmailCommandDto>().ReverseMap();
         }
     }
 }

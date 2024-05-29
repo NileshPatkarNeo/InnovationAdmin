@@ -24,6 +24,8 @@ builder.Services.AddScoped<IAdminRoles, AdminRoles>();
 
 builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
 
+builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();
+
 builder.Services.AddScoped<Common>();
 
 
