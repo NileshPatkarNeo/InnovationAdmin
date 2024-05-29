@@ -44,9 +44,7 @@
         public const string DeleteAdminRole = "/api/AdminRole/{id}?api-version=1";
         #endregion
 
-
-
-
+        #region GeneralSysBehaviour
         public const string GetAllSysPrefGeneralBehaviour = "/api/SysPref_GeneralBehaviour/all?api-version=1";
 
         public const string CreatelSysPrefGeneralBehaviour = "/api/SysPref_GeneralBehaviour?api-version=1";
@@ -58,7 +56,20 @@
         public const string GetSysPrefGeneralBehaviourById = "/api/SysPref_GeneralBehaviour/{id}?api-version=1";
 
 
+        #endregion
 
-       
+
+        #region Accoun_Manager
+
+        public const string GetAllAccountManagers = "/api/AccountManager?api-version=1";
+        public const string CreateAccountManager = "/api/AccountManager?api-version=1";
+        public const string UpdateAccountManager = "/api/AccountManager?api-version=1";
+        public const string GetAccountManagerById = "/api/AccountManager/{id}?api-version=1";
+        public const string DeleteAccountManager = "/api/AccountManager/{id}?api-version=1";
+
+
+        #endregion
+
+
     }
 }
