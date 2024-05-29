@@ -24,6 +24,8 @@ namespace InnovationAdmin.Persistence
 
             services.AddScoped<ISysPrefCompanyRepository, SysPrefCompanyRepository>();
             services.AddScoped<ISysPref_GeneralBehaviourRepository, SysPref_GeneralBehaviourRepository>();
+            services.AddScoped<ISysPrefFinancialRepository, SysPrefFinancialRepository>();
+
             return services;
         }
     }
