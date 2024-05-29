@@ -59,9 +59,20 @@ namespace Innovation_Admin.UI.Helper
 
         public const string GetSysPrefGeneralBehaviourById = "/api/SysPref_GeneralBehaviour/{id}?api-version=1";
 
+
         #endregion
 
 
+        #region Accoun_Manager
+
+        public const string GetAllAccountManagers = "/api/AccountManager?api-version=1";
+        public const string CreateAccountManager = "/api/AccountManager?api-version=1";
+        public const string UpdateAccountManager = "/api/AccountManager?api-version=1";
+        public const string GetAccountManagerById = "/api/AccountManager/{id}?api-version=1";
+        public const string DeleteAccountManager = "/api/AccountManager/{id}?api-version=1";
+
+
+        #endregion
 
         public const string GetAllPharmacyGroup = "/api/Category/all? api-version=1";
 
@@ -72,6 +83,7 @@ namespace Innovation_Admin.UI.Helper
         public const string GetPharmacyGroupById = "/api/Category/{id}?api-version=1";
 
         public const string DeletePharmacyGroup = "/api/Category/{id}?api-version=1";
+
 
     }
 }

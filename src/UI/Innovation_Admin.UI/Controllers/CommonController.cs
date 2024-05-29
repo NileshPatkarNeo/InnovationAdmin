@@ -10,11 +10,12 @@ using Innovation_Admin.UI.Services.IRepositories;
 using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.PharmacyGroup;
 using System.Reflection;
+using Innovation_Admin.UI.Models.Account_Manager;
 
 namespace Innovation_Admin.UI.Controllers
 {
 
-   [AuthFilter]
+    //  [AuthFilter]
     public class CommonController : Controller
     {
         private readonly CommonCall.Common _common;
@@ -49,14 +50,13 @@ namespace Innovation_Admin.UI.Controllers
 
         [HttpGet]
         public IActionResult CreateSysPrefCompany()
-        {  
+        {
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefCompany(SysPrefCompanyDto company)
         {
-           
             var result = await _common.CreateSysPrefCompany(company);
             if (!result.IsSuccess)
             {
@@ -74,6 +74,10 @@ namespace Innovation_Admin.UI.Controllers
         }
 
           [HttpGet]
+            return RedirectToAction("SysPrefCompany");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> EditSysPrefCompany([FromQuery] string companyId)
         {
             var sysPrefCompany = await _common.GetSysPrefCompanyById(Guid.Parse(companyId));
@@ -85,11 +89,6 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditSysPrefCompany(SysPrefCompanyDto updatedCompany)
         {
             var result = await _common.UpdateSysPrefCompany(updatedCompany);
-             if (!result.IsSuccess)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedCompany); 
-            }
             return RedirectToAction("SysPrefCompany");
         }
 
@@ -97,11 +96,6 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteSysPrefCompany(Guid companyId)
         {
             var isDeleted = await _common.DeleteSysPrefCompany(companyId);
-            if (!isDeleted)
-            {
-                
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
-            }
          return RedirectToAction("SysPrefCompany");
         }
 
@@ -284,26 +278,7 @@ namespace Innovation_Admin.UI.Controllers
                 return View(company);
             }
             var result = await _common.CreateSysPrefGeneralBehaviour(company);
-
-            if (!result.IsSuccess)
-            {
-
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefGeneralBehaviour.");
-                }
-
-
                 return RedirectToAction("SysPrefGeneralBehaviour");
-            }
-
-
-            return RedirectToAction("SysPrefGeneralBehaviour");
         }
 
         [HttpGet]
@@ -468,6 +443,61 @@ namespace Innovation_Admin.UI.Controllers
                 ModelState.AddModelError(string.Empty, "Failed to delete the group.");
             }
             return RedirectToAction("PharmacyGroups");
+        }
+
+
+        #endregion
+
+
+        #endregion
+
+
+
+        #region Lookup_Table_Account_Manager
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllAccountManagers()
+        {
+            var accountManagers = await _common.GetAllAccountManagers();
+            return View(accountManagers);
+        }
+
+        [HttpGet]
+        public IActionResult CreateAccountManager()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateAccountManager(AccountManagerDto manager)
+        {
+            var result = await _common.CreateAccountManager(manager);
+           
+            return RedirectToAction("GetAllAccountManagers");
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditAccountManager( string Id)
+        {
+            var accountManager = await _common.GetAccountManagerById(Guid.Parse(Id));
+            return View(accountManager.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAccountManager(AccountManagerDto manager)
+        {
+            var result = await _common.UpdateAccountManager(manager);
+            return RedirectToAction("GetAllAccountManagers");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAccountManager(Guid Id)
+        {
+            var isDeleted = await _common.DeleteAccountManager(Id);
+            return RedirectToAction("GetAllAccountManagers");
         }
 
 

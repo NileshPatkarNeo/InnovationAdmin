@@ -22,6 +22,8 @@ using Microsoft.Extensions.Logging;
 using InnovationAdmin.Application.Features.PharmacyGroup.Commands.CreatePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Commands.UpdatePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetPharmacyGroupQuery;
+using InnovationAdmin.Application.Features.AccountManager.Commands.CreateAccountManager;
+using InnovationAdmin.Application.Features.AccountManager.Queries.GetAccountManagerById;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -29,6 +31,11 @@ namespace InnovationAdmin.Application.Profiles
     {
         public MappingProfile()
         {
+
+            //ACCOunt Manager
+            CreateMap<AccountManager, CreateAccountManagerDto>().ReverseMap();
+            CreateMap<AccountManager,AccountManagerDto>().ReverseMap();
+
             CreateMap<Admin_User, CreateAdminUserDto>();
             CreateMap<Admin_User, AdminUserListVm>().ReverseMap();
 
@@ -96,6 +103,9 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Admin_Role, AdminRoleListVm>().ReverseMap();
 
             CreateMap<Admin_Role, CreateAdminRoleDto>();
+
+
+           
         }
     }
 }
