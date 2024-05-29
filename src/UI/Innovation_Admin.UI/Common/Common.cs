@@ -12,6 +12,8 @@ using Innovation_Admin.UI.Services.IRepositories;
 using Microsoft.Extensions.Options;
 using System.Drawing;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
+using Innovation_Admin.UI.Models.ResponsesModel.SysPrefFinancial;
+using Innovation_Admin.UI.Models.SysPrefFinancial;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -21,10 +23,11 @@ namespace Innovation_Admin.UI.Common
         private readonly IAdminUser adminUser;
         private readonly IAdminRoles adminRoles;
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
+        private readonly ISysPrefFinancials sysPrefFinancial;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
      
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries)
        
         {
             adminUser = _adminUser;
@@ -33,6 +36,7 @@ namespace Innovation_Admin.UI.Common
             _apiBaseUrl = apiBaseUrl;
             adminRoles = _adminRoles;
             sysPrefBehaviouries = _sysPrefBehaviouries;
+            sysPrefFinancial = _sysPrefFinancial;
         }
 
         public async Task<IEnumerable<SysPrefCompanyDto>> GetAllSysPrefCompanies()
@@ -187,6 +191,45 @@ namespace Innovation_Admin.UI.Common
         {
             return await sysPrefBehaviouries.DeleteSysPrefGeneralBehaviour(Preference_ID);
         }
+
+        public async Task<IEnumerable<SysPrefFinancialDto>> GetAllSysPrefFinancials()
+        {
+            GetAllSysPrefFinancialResponseModel getAllSysPrefFinancialResponseModel = new GetAllSysPrefFinancialResponseModel();
+
+            getAllSysPrefFinancialResponseModel = await sysPrefFinancial.GetAllSysPrefFinancials();
+
+            if (getAllSysPrefFinancialResponseModel.IsSuccess)
+            {
+                if (getAllSysPrefFinancialResponseModel != null && getAllSysPrefFinancialResponseModel.Data.Count() > 0)
+                {
+                    return getAllSysPrefFinancialResponseModel.Data;
+                }
+            }
+
+            return new List<SysPrefFinancialDto>();
+        }
+
+        public async Task<CreateSysPrefFinancialResponseModel> CreateSysPrefFinancial(SysPrefFinancialDto sysPrefFinancialDto)
+        {
+            return await sysPrefFinancial.CreateSysPrefFinancial(sysPrefFinancialDto);
+        }
+
+        public async Task<UpdateSysPrefFinancialResponseModel> UpdateSysPrefFinancial(SysPrefFinancialDto updatedSysPrefFinancial)
+        {
+            return await sysPrefFinancial.UpdateSysPrefFinancial(updatedSysPrefFinancial);
+        }
+
+        public async Task<GetSysPrefFinancialByIdResponseModel> GetSysPrefFinancialById(Guid financialId)
+        {
+            return await sysPrefFinancial.GetSysPrefFinancialById(financialId);
+        }
+
+        public async Task<bool> DeleteSysPrefFinancial(Guid financialId)
+        {
+            return await sysPrefFinancial.DeleteSysPrefFinancial(financialId);
+        }
+
+     
 
     }
 }

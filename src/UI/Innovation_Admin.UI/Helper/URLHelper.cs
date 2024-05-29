@@ -58,7 +58,14 @@
         public const string GetSysPrefGeneralBehaviourById = "/api/SysPref_GeneralBehaviour/{id}?api-version=1";
 
 
+        public const string GetAllSysPrefFinancial = "/api/SysPrefFinancial/list?api-version=1";
+        public const string CreateSysPrefFinancial = "/api/SysPrefFinancial/create?api-version=1";
+        public const string UpdateSysPrefFinancial = "/api/SysPrefFinancial/update?api-version=1";
+        public const string GetSysPrefFinancialById = "/api/SysPrefFinancial/{id}?api-version=1";
+        public const string DeleteSysPrefFinancial = "/api/SysPrefFinancial/{id}?api-version=1";
 
-       
+
+
+
     }
 }

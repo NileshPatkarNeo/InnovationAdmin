@@ -8,6 +8,8 @@ using CommonCall = Innovation_Admin.UI.Common;
 
 using Innovation_Admin.UI.Services.IRepositories;
 using Innovation_Admin.UI.Filter;
+using Innovation_Admin.UI.Models.SysPrefFinancial;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -335,7 +337,121 @@ namespace Innovation_Admin.UI.Controllers
             }
             return RedirectToAction("SysPrefGeneralBehaviour");
         }
-      
+
+        [HttpGet]
+        public async Task<IActionResult> SysPrefFinancial()
+        {
+            var getAllSysPrefFinancials = await _common.GetAllSysPrefFinancials();
+            return View(getAllSysPrefFinancials);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateSysPrefFinancial()
+        {
+            var sysPrefCompanies = await _common.GetAllSysPrefCompanies();
+            ViewBag.CompanyList = new SelectList(sysPrefCompanies, "CompanyID", "CompanyName");
+            return View();
+        }
+
+
+        //[HttpGet]
+        //public IActionResult CreateSysPrefFinancial()
+        //{
+        //    return View();
+        //}
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSysPrefFinancial(SysPrefFinancialDto financial)
+        {
+            var result = await _common.CreateSysPrefFinancial(financial);
+            if (!result.IsSuccess)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefFinancial.");
+                }
+                return RedirectToAction("SysPrefFinancial");
+            }
+            return RedirectToAction("SysPrefFinancial");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditSysPrefFinancial([FromQuery] string financialId)
+        {
+            var sysPrefFinancial = await _common.GetSysPrefFinancialById(Guid.Parse(financialId));
+            var sysPrefCompanies = await _common.GetAllSysPrefCompanies();
+            ViewBag.CompanyList = new SelectList(sysPrefCompanies, "CompanyID", "CompanyName");
+            return View(sysPrefFinancial.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSysPrefFinancial(SysPrefFinancialDto updatedFinancial)
+        {
+            var result = await _common.UpdateSysPrefFinancial(updatedFinancial);
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedFinancial);
+            }
+            return RedirectToAction("SysPrefFinancial");
+        }
+
+        //[HttpGet]
+        //public async Task<IActionResult> EditSysPrefFinancial([FromQuery] string financialId)
+        //{
+        //    var sysPrefFinancial = await _common.GetSysPrefFinancialById(Guid.Parse(financialId));
+        //    if (sysPrefFinancial == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    // Retrieve the list of companies from your repository
+        //    var companies = await _common.GetCompanies();
+        //    ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
+
+        //    return View(sysPrefFinancial.Data);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> EditSysPrefFinancial(SysPrefFinancialDto updatedFinancial)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        // Retrieve the list of companies again if model state is invalid
+        //        var companies = await _common.GetCompanies();
+        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
+        //        return View(updatedFinancial);
+        //    }
+
+        //    var result = await _common.UpdateSysPrefFinancial(updatedFinancial);
+        //    if (!result.IsSuccess)
+        //    {
+        //        ModelState.AddModelError(string.Empty, result.Message);
+        //        // Retrieve the list of companies again if update failed
+        //        var companies = await _common.GetCompanies();
+        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
+        //        return View(updatedFinancial);
+        //    }
+        //    return RedirectToAction("SysPrefFinancial");
+        //}
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteSysPrefFinancial(Guid financialId)
+        {
+            var isDeleted = await _common.DeleteSysPrefFinancial(financialId);
+            if (!isDeleted)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to delete the financial record.");
+            }
+            return RedirectToAction("SysPrefFinancial");
+        }
 
     }
 }

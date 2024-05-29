@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8E30F6E5-1497-43DF-A8FB-DAD5595B6003}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A09B22D1-C913-4517-AA6A-AF121E988F34}"
+	ProjectSection(SolutionItems) = preProject
+		src\Core\InnovationAdmin.Domain\CreateSysPrefFinancialCommandHandler.cs = src\Core\InnovationAdmin.Domain\CreateSysPrefFinancialCommandHandler.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InnovationAdmin.Application", "src\Core\InnovationAdmin.Application\InnovationAdmin.Application.csproj", "{62ABD5F0-6E18-418A-A150-6879C6E0F080}"
 EndProject
@@ -45,7 +48,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InnovationAdmin.API.UnitTes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C0E15C72-5F88-4703-BD78-2D42F6AE56E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovation_Admin.UI", "src\UI\Innovation_Admin.UI\Innovation_Admin.UI.csproj", "{465EB93B-C413-4596-8318-C31CCD9E5C64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Innovation_Admin.UI", "src\UI\Innovation_Admin.UI\Innovation_Admin.UI.csproj", "{465EB93B-C413-4596-8318-C31CCD9E5C64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
