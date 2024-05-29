@@ -64,9 +64,6 @@ namespace InnovationAdmin.Api.Controllers
             {
                 return BadRequest("Records_Locked_Seconds and User_Timeout must be greater than 0.");
             }
-
-            // Check for other invalid inputs if any
-            // Add more conditions as per your requirements
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

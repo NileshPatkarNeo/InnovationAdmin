@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Innovation_Admin.UI.Models.ResponsesModel;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Innovation_Admin.UI.Models.SysPrefGeneralBehaviour
 {
@@ -26,9 +28,13 @@ namespace Innovation_Admin.UI.Models.SysPrefGeneralBehaviour
         public bool Logout_Redirect { get; set; }
 
         [JsonProperty("records_Locked_Seconds")]
+        [Required(ErrorMessage = "Records Locked Seconds is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Records Locked Seconds must be a positive integer")]
         public int Records_Locked_Seconds { get; set; }
 
         [JsonProperty("user_Timeout")]
+        [Required(ErrorMessage = "Records Locked Seconds is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "user_Timeout must be a positive integer")]
         public int User_Timeout { get; set; }
     }
 }

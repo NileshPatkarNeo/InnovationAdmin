@@ -5,106 +5,58 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>System Prefernce General Behaviour</h1>
+<h1>System Preference General Behaviour</h1>
 
 <p>
     <a asp-action="CreateSysPrefGeneralBehaviour">Create New</a>
-     @* @Html.ActionLink("Create New", "CreateSysPrefGeneralBehaviour"); *@
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Preference_ID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Auto_Change_Claim_Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Claim_Status_Receipting)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Claim_Status_Payment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Claim_Status_Zero_Paid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Claim_Status_Procare_Claim_Load)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Logout_Redirect)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Records_Locked_Seconds)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User_Timeout)
-            </th>
-            <th></th>
+            <th>Sr.No</th>
+            <th>Records Locked Seconds</th>
+            <th>User Timeout</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preference_ID)
-            </td>
-            <td>
-                @(item.Auto_Change_Claim_Status ? "True" :"False")
-            </td>
-            <td>
-                    @(item.Claim_Status_Receipting ? "True" :"False")
-            </td>
-            <td>
-                    @(item.Claim_Status_Payment ? "True" : "False")
-            </td>
-            <td>
-                    @(item.Claim_Status_Zero_Paid ? "True" : "False")
-            </td>
-            <td>
-                    @(item.Claim_Status_Procare_Claim_Load ? "True" : "False")
-            </td>
-            <td>
-                    @(item.Logout_Redirect ? "True" : "False")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Records_Locked_Seconds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User_Timeout)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditSysPrefGeneralBehaviour", new { Preference_ID=item.Preference_ID }) |
-                @* @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
-               @*  @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+        @{
+            int serialNumber = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@serialNumber</td>
+                <td>@Html.DisplayFor(modelItem => item.Records_Locked_Seconds)</td>
+                <td>@Html.DisplayFor(modelItem => item.User_Timeout)</td>
+                <td>
+                    @Html.ActionLink("Edit", "EditSysPrefGeneralBehaviour", new { Preference_ID = item.Preference_ID }) |
+                    @Html.ActionLink("Details", "SysPrefGeneralBehaviourDetails", new { Preference_ID = item.Preference_ID }) |
 
                     <a href="#" onclick="confirmDelete('@item.Preference_ID')">Delete</a>
-
-
-            </td>
-        </tr>
-    }
+                </td>
+            </tr>
+            serialNumber++;
+        }
     </tbody>
-
 </table>
 
-  
-    <script type="text/javascript">
-        function confirmDelete(Preference_ID) {
-            if (confirm("Are you sure you want to delete this General Behaviour?")) {
-                var form = document.createElement("form");
-                form.method = "post";
-                form.action = "/Common/DeleteSysPrefGeneralBehaviour";
+<script type="text/javascript">
+    function confirmDelete(Preference_ID) {
+        if (confirm("Are you sure ?")) {
+            var form = document.createElement("form");
+            form.method = "post";
+            form.action = "/Common/DeleteSysPrefGeneralBehaviour";
 
-                var hiddenField = document.createElement("input");
-                hiddenField.type = "hidden";
-                hiddenField.name = "Preference_ID";
-                hiddenField.value = Preference_ID;
-                form.appendChild(hiddenField);
+            var hiddenField = document.createElement("input");
+            hiddenField.type = "hidden";
+            hiddenField.name = "Preference_ID";
+            hiddenField.value = Preference_ID;
+            form.appendChild(hiddenField);
 
-                document.body.appendChild(form);
-                form.submit();
-            }
+            document.body.appendChild(form);
+            form.submit();
         }
-    </script>
+    }
+</script>

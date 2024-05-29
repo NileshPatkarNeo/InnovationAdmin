@@ -12,6 +12,8 @@ using Innovation_Admin.UI.Services.IRepositories;
 using Microsoft.Extensions.Options;
 using System.Drawing;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
+using Innovation_Admin.UI.Models.PharmacyGroup;
+using Innovation_Admin.UI.Models.ResponsesModel.PharmacyGroup;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -21,11 +23,13 @@ namespace Innovation_Admin.UI.Common
         private readonly IAdminUser adminUser;
         private readonly IAdminRoles adminRoles;
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
+        private readonly IPharmacyGroup pharmacyGroups;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
-     
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries)
-       
+
+
+        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups)
+
         {
             adminUser = _adminUser;
             sysPrefCompanies = _sysPrefCompanies;
@@ -33,6 +37,7 @@ namespace Innovation_Admin.UI.Common
             _apiBaseUrl = apiBaseUrl;
             adminRoles = _adminRoles;
             sysPrefBehaviouries = _sysPrefBehaviouries;
+            pharmacyGroups = _pharmacyGroups;
         }
 
         public async Task<IEnumerable<SysPrefCompanyDto>> GetAllSysPrefCompanies()
@@ -147,7 +152,9 @@ namespace Innovation_Admin.UI.Common
         }
         #endregion
 
-        
+
+        #region GeneralBehaviour
+
         public async Task<IEnumerable<SysPrefGeneralBehaviourDto>> GetAllSysPrefBehaviouries()
         {
             GetAllSysPrefGeneralBehaviourResponseModel getAllSysPrefCompanyResponseModel = new GetAllSysPrefGeneralBehaviourResponseModel();
@@ -166,7 +173,6 @@ namespace Innovation_Admin.UI.Common
         }
 
 
-       
         public async Task<CreateSysPrefGeneralBehaviourResponseModel> CreateSysPrefGeneralBehaviour(CreateSysPrefGeneralBehaviourDto company)
         {
             return await sysPrefBehaviouries.CreateSysPrefGeneralBehaviour(company);
@@ -177,6 +183,7 @@ namespace Innovation_Admin.UI.Common
         {
             return await sysPrefBehaviouries.UpdateSysPrefGeneralBehaviour(updatedCompany);
         }
+
         public async Task<GetSysPrefGeneralBehaviourByIdResponseModel> GetSysPrefGeneralBehaviourById(Guid Preference_ID)
         {
             return await sysPrefBehaviouries.GetPrefGeneralBehaviourById(Preference_ID);
@@ -186,6 +193,50 @@ namespace Innovation_Admin.UI.Common
         public async Task<bool> DeleteSysPrefGeneralBehaviour(Guid Preference_ID)
         {
             return await sysPrefBehaviouries.DeleteSysPrefGeneralBehaviour(Preference_ID);
+        }
+
+
+        #endregion
+
+
+
+
+        public async Task<IEnumerable<PharmacyGroupDto>> GetAllPharmcayGroup()
+        {
+            GetAllPharmacyGroupResponseModel getAllPharmacyProupyResponseModel = new GetAllPharmacyGroupResponseModel();
+
+            getAllPharmacyProupyResponseModel = await pharmacyGroups.GetAllPharmacyGroups();
+
+            if (getAllPharmacyProupyResponseModel.IsSuccess)
+            {
+                if (getAllPharmacyProupyResponseModel != null && getAllPharmacyProupyResponseModel.Data.Count() > 0)
+                {
+                    return getAllPharmacyProupyResponseModel.Data;
+                }
+            }
+
+            return new List<PharmacyGroupDto>();
+        }
+
+
+        public async Task<CreatePharmacyGroupResponseModel> CreatePharmacyGroup(PharmacyGroupDto group)
+        {
+            return await pharmacyGroups.CreatePharmacyGroup(group);
+        }
+
+        public async Task<UpdatePharmacyGroupResponseModel> UpdatePharmacyGroup(PharmacyGroupDto updatedGroup)
+        {
+            return await pharmacyGroups.UpdatePharmacyGroup(updatedGroup);
+        }
+
+        public async Task<GetPharmacyGroupByIdResponseModel> GetPharmacyGroupById(Guid Id)
+        {
+            return await pharmacyGroups.GetPharmacyGroupById(Id);
+        }
+
+        public async Task<bool> DeletePharmacyGroup(Guid Id)
+        {
+            return await pharmacyGroups.DeletePharmacyGroup(Id);
         }
 
     }

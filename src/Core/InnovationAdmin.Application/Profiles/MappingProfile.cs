@@ -19,6 +19,9 @@ using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPr
 using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using InnovationAdmin.Application.Features.PharmacyGroup.Commands.CreatePharmacyGroup;
+using InnovationAdmin.Application.Features.PharmacyGroup.Commands.UpdatePharmacyGroup;
+using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetPharmacyGroupQuery;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -44,6 +47,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Admin_User, AdminUserByIdVm>().ReverseMap();
 
 
+            CreateMap<PharmacyGroup, CreatePharmacyGroupCommand>().ReverseMap();
+            CreateMap<PharmacyGroup, CreatePharmacyGroupDto>().ReverseMap();
+            CreateMap<PharmacyGroup, UpdateSysPrefCompanyCommand>().ReverseMap();
+            CreateMap<PharmacyGroup, UpdatePharmacyGroupDto>().ReverseMap();
+            CreateMap<PharmacyGroup, PharmacyGroupDto>().ReverseMap();
+            CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
+            CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
+            
 
 
 

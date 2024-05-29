@@ -1,0 +1,75 @@
+﻿@model Innovation_Admin.UI.Models.SysPrefGeneralBehaviour.SysPrefGeneralBehaviourDto
+
+@{
+    ViewData["Title"] = "SysPrefGeneralBehaviourDetails";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+
+}
+
+<h1 class="mt-4">General Behaviour Details</h1>
+
+<div class="card">
+    <div class="card-body">
+        
+        <dl class="row">
+            <dt class="col-sm-2">
+                Preference ID
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Preference_ID)
+            </dd>
+            <dt class="col-sm-2">
+               Auto Change Claim Status
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Auto_Change_Claim_Status)
+            </dd>
+            <dt class="col-sm-2">
+              Claim Status Receipting
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Claim_Status_Receipting)
+            </dd>
+            <dt class="col-sm-2">
+                Claim Status Payment
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Claim_Status_Payment)
+            </dd>
+            <dt class="col-sm-2">
+               Claim Status Zero Paid
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Claim_Status_Zero_Paid)
+            </dd>
+            <dt class="col-sm-2">
+                Claim Status Procare Claim Load
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Claim_Status_Procare_Claim_Load)
+            </dd>
+            <dt class="col-sm-2">
+                Logout Redirect
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Logout_Redirect)
+            </dd>
+            <dt class="col-sm-2">
+                Records Locked Seconds
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Records_Locked_Seconds)
+            </dd>
+            <dt class="col-sm-2">
+                User Timeout
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User_Timeout)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="SysPrefGeneralBehaviour" class="btn btn-primary">Back to List</a>
+</div>

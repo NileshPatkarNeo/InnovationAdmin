@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Innovation_Admin.UI.Models.PharmacyGroup.PharmacyGroupDto>
+
+@{
+    ViewData["Title"] = "PharmacyGroups";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<h1>Pharmacy Groups</h1>
+
+<p>
+    <a asp-action="CreatePharmacyGroup">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sr.No</th>
+            <th>
+                Pharmacy Name 
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int serialNumber = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@serialNumber</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PharmacyName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditPharmacyGroup", new { Id = item.Id }) |
+                    <a href="#" onclick="confirmDelete('@item.Id')">Delete</a>
+                </td>
+            </tr>
+            serialNumber++;
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    function confirmDelete(Id) {
+        if (confirm("Are you sure ?")) {
+            var form = document.createElement("form");
+            form.method = "post";
+            form.action = "/Common/DeletePharmacyGroup";
+
+            var hiddenField = document.createElement("input");
+            hiddenField.type = "hidden";
+            hiddenField.name = "Id";
+            hiddenField.value = Id;
+            form.appendChild(hiddenField);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+</script>
