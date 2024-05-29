@@ -12,6 +12,9 @@ using Innovation_Admin.UI.Services.IRepositories;
 using Microsoft.Extensions.Options;
 using System.Drawing;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
+using Innovation_Admin.UI.Models.Account_Manager;
+using Innovation_Admin.UI.Models.ResponsesModel.AccountManager;
+using Innovation_Admin.UI.Services.Repositories;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -20,12 +23,13 @@ namespace Innovation_Admin.UI.Common
         private readonly ISysPrefCompanies sysPrefCompanies;
         private readonly IAdminUser adminUser;
         private readonly IAdminRoles adminRoles;
+        private readonly IAccountManager accountManager;
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
-     
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries)
-       
+
+        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IAccountManager _accountManager)
+
         {
             adminUser = _adminUser;
             sysPrefCompanies = _sysPrefCompanies;
@@ -33,7 +37,12 @@ namespace Innovation_Admin.UI.Common
             _apiBaseUrl = apiBaseUrl;
             adminRoles = _adminRoles;
             sysPrefBehaviouries = _sysPrefBehaviouries;
+            accountManager = _accountManager;
         }
+
+        #region System_Preference
+
+
 
         public async Task<IEnumerable<SysPrefCompanyDto>> GetAllSysPrefCompanies()
         {
@@ -73,6 +82,11 @@ namespace Innovation_Admin.UI.Common
         {
             return await sysPrefCompanies.DeleteSysPrefCompany(companyId);
         }
+        #endregion
+
+
+        #region Admin_User
+
 
         public async Task<IEnumerable<AdminUserDto>> GetAllAdminUser()
         {
@@ -109,6 +123,7 @@ namespace Innovation_Admin.UI.Common
         {
             return await adminUser.DeleteAdminUser(companyId);
         }
+        #endregion
 
         #region - AdminRole
         public async Task<IEnumerable<AdminRoleDto>> GetAllAdminRoles()
@@ -147,7 +162,9 @@ namespace Innovation_Admin.UI.Common
         }
         #endregion
 
-        
+        #region General_Behaviour
+
+
         public async Task<IEnumerable<SysPrefGeneralBehaviourDto>> GetAllSysPrefBehaviouries()
         {
             GetAllSysPrefGeneralBehaviourResponseModel getAllSysPrefCompanyResponseModel = new GetAllSysPrefGeneralBehaviourResponseModel();
@@ -166,7 +183,7 @@ namespace Innovation_Admin.UI.Common
         }
 
 
-       
+
         public async Task<CreateSysPrefGeneralBehaviourResponseModel> CreateSysPrefGeneralBehaviour(CreateSysPrefGeneralBehaviourDto company)
         {
             return await sysPrefBehaviouries.CreateSysPrefGeneralBehaviour(company);
@@ -187,6 +204,49 @@ namespace Innovation_Admin.UI.Common
         {
             return await sysPrefBehaviouries.DeleteSysPrefGeneralBehaviour(Preference_ID);
         }
+        #endregion
+
+        #region Account_Manager
+
+        public async Task<IEnumerable<AccountManagerDto>> GetAllAccountManagers()
+        {
+            GetAllAccountManagerResponseModel getAllAccountManagersResponseModel = new GetAllAccountManagerResponseModel();
+
+            getAllAccountManagersResponseModel = await accountManager.GetAllAccountManagers();
+
+            if (getAllAccountManagersResponseModel.IsSuccess)
+            {
+                if (getAllAccountManagersResponseModel != null && getAllAccountManagersResponseModel.Data != null && getAllAccountManagersResponseModel.Data.Count() > 0)
+                {
+                    return getAllAccountManagersResponseModel.Data;
+                }
+            }
+
+            return new List<AccountManagerDto>();
+        }
+
+        public async Task<CreateAccountManagerResponseModel> CreateAccountManager(AccountManagerDto manager)
+        {
+            return await accountManager.CreateAccountManager(manager);
+        }
+
+        public async Task<UpdateAccountManagerResponseModel> UpdateAccountManager(AccountManagerDto manager)
+        {
+            return await accountManager.UpdateAccountManager(manager);
+        }
+        public async Task<GetAccountManagerByIdResponseModel> GetAccountManagerById(Guid Id)
+        {
+            return await accountManager.GetAccountManagerById(Id);
+        }
+
+
+        public async Task<bool> DeleteAccountManager(Guid Id)
+        {
+            return await accountManager.DeleteAccountManager(Id);
+        }
+
+        #endregion
+
 
     }
-}
+    }

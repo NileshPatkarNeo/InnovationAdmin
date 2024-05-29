@@ -1,35 +1,40 @@
 ﻿@model Innovation_Admin.UI.Models.SysPrefCompany.SysPrefCompanyDto
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+<style>
+    .test
+    {
+    margin-top:70px;}
+    .test2
+    {margin-top:50px;
+    }
+</style>
+<h1 class="text-center test" >Create System Preference</h1>
 
-<h1>Create System Preference Company</h1>
-
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateSysPrefCompany" method="post">
-            <div class="form-group">
-                <label asp-for="CompanyName" class="control-label"></label>
-                <input asp-for="CompanyName" class="form-control" />
-                <span asp-validation-for="CompanyName" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 test2">
+            <div class="card bg-light shadow">
+                <div class="card-body ">
+                    <form asp-action="CreateSysPrefCompany" method="post" id="createCompanyForm">
+                        <div class="form-group mb-4">
+                            <label asp-for="CompanyName" class="control-label">Company Name <span class="text-danger">*</span></label>
+                            <input asp-for="CompanyName" class="form-control" required />
+                            <span asp-validation-for="CompanyName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="TermForPharmacy" class="control-label">Term For Pharmacy <span class="text-danger">*</span></label>
+                            <input asp-for="TermForPharmacy" class="form-control" required />
+                            <span asp-validation-for="TermForPharmacy" class="text-danger"></span>
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" value="Create" class="btn btn-primary mr-3" />
+                            <a asp-action="SysPrefCompany" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="TermForPharmacy" class="control-label"></label>
-                <input asp-for="TermForPharmacy" class="form-control" />
-                <span asp-validation-for="TermForPharmacy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="SysPrefCompany">Back to List</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

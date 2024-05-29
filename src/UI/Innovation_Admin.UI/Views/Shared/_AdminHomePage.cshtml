@@ -1,68 +1,122 @@
-﻿
-<head>
+﻿<head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Innovation_Admin.UI.styles.css" asp-append-version="true" />
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    
+   @*  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMZ/6pWkU/iw4Uu9I7tAwVfRQF4Oe5P1n8r6l3" crossorigin="anonymous" />
+   *@  <style>
+        .bg-dark .nav-link {
+            color: white;
+        }
+
+            .bg-dark .nav-link:hover {
+                color: #ddd;
+            }
+
+        .bg-dark .nav-pills .nav-link.active, .bg-dark .nav-pills .show > .nav-link {
+            color: white;
+            background-color: #495057;
+        }
+
+        .nav .collapse > .nav-link {
+            color: yellowgreen;
+        }
+
+            .nav .collapse > .nav-link:hover {
+                background-color: #e9ecef;
+                color: black;
+            }
+
+        .nav .collapse.show .nav-link {
+            color: yellowgreen;
+        }
+
+        .nav .collapse .submenu-icon {
+            margin-right: 5px;
+        }
+
+        .nav .collapse .submenu-link {
+            padding-left: 30px;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Innovation Admin</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="/Common/HomePage" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
-                        </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="/Common/SysPrefCompany" class="nav-link px-0"> <span class="d-none d-sm-inline">System Company Prefrence</span></a>
-                            </li>
-                            <li>
-                                <a href="/Common/SysPrefGeneralBehaviour" class="nav-link px-0"> <span class="d-none d-sm-inline">System General Behaviour</span> </a>
-                            </li>
-                            <li>
-                                <a href="/Common/AdminUser" class="nav-link px-0"> <span class="d-none d-sm-inline">Admin User</span></a>
-                            </li>
-                            <li>
-                                <a href="/Common/AdminRole" class="nav-link px-0"> <span class="d-none d-sm-inline">Admin Role</span> </a>
-                            </li>
-                        </ul>
-                    </li>
-                  
-                   
-                </ul>
-                <hr>
-@*                     <form asp-action="Logout"asp-controller="Account" method="post">
-        
- *@   
-                           
-                            
-                            <div class="pb-4" >
-                            
-                            <a href="@Url.Action("Logout","Account")" class="btn btn-danger">Logout</a>
-                        </div>
-@*                     </form>
- *@
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto  col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+
+
+
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    
+                    
+                    <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Innovation Admin</span>
+                    </a>
+
+
+
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="/Common/HomePage" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">System Preference</span>
+                            </a>
+                            <ul  class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="/Common/SysPrefCompany" class="nav-link px-0 ">
+                                        <i class="fas fa-building submenu-icon"></i> <span class="d-none d-sm-inline">System Company Preference</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Common/SysPrefGeneralBehaviour" class="nav-link px-0 ">
+                                        <i class="fas fa-cogs submenu-icon"></i> <span class="d-none d-sm-inline">System General Behaviour</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Common/AdminUser" class="nav-link px-0">
+                                        <i class="fas fa-user submenu-icon"></i> <span class="d-none d-sm-inline">Admin User</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Common/AdminRole" class="nav-link px-0">
+                                        <i class="fas fa-user-tag submenu-icon"></i> <span class="d-none d-sm-inline">Admin Role</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Lookup Tables</span>
+                            </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li>
+                                    <a href="/Common/GetAllAccountManagers" class="nav-link px-0 submenu-link">
+                                        <i class="fas fa-users submenu-icon"></i> <span class="d-none d-sm-inline">Account Manager</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="pb-4">
+                        <a href="@Url.Action("Logout","Account")" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col py-3">
+                @RenderBody()
             </div>
         </div>
-        <div class="col py-3">
-            @RenderBody()
-        </div>
     </div>
-</div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-   
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
