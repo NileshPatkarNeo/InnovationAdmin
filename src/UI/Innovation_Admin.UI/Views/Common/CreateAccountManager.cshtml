@@ -1,0 +1,35 @@
+﻿@model Innovation_Admin.UI.Models.Account_Manager.AccountManagerDto
+
+@{
+    ViewData["Title"] = "CreateAccountManager";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+<style>
+    .btntest {
+        margin-top: 10px;
+    }
+</style>
+
+<h1 class="text-center">Create Account Manager</h1>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4" style="background-color: #f8f9fa;">
+                <form asp-action="CreateAccountManager" method="post" >
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
+                        <input asp-for="Name" class="form-control" required maxlength="20" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center btntest">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a asp-action="GetAllAccountManagers" class="btn btn-secondary">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

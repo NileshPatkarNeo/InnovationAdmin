@@ -19,6 +19,8 @@ using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPr
 using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using InnovationAdmin.Application.Features.AccountManager.Commands.CreateAccountManager;
+using InnovationAdmin.Application.Features.AccountManager.Queries.GetAccountManagerById;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.CreateSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
@@ -31,6 +33,11 @@ namespace InnovationAdmin.Application.Profiles
     {
         public MappingProfile()
         {
+
+            //ACCOunt Manager
+            CreateMap<AccountManager, CreateAccountManagerDto>().ReverseMap();
+            CreateMap<AccountManager,AccountManagerDto>().ReverseMap();
+
             CreateMap<Admin_User, CreateAdminUserDto>();
             CreateMap<Admin_User, AdminUserListVm>().ReverseMap();
 
@@ -90,6 +97,9 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Admin_Role, AdminRoleListVm>().ReverseMap();
 
             CreateMap<Admin_Role, CreateAdminRoleDto>();
+
+
+           
 
 
             CreateMap<SysPrefFinancial, CreateSysPrefFinancialDto>().ReverseMap();

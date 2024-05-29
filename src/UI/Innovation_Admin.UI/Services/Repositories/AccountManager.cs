@@ -1,9 +1,8 @@
 ﻿using Innovation_Admin.UI.Helper;
+using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.ResponsesModel;
-using Innovation_Admin.UI.Models.ResponsesModel.SysPrefCompany;
-using Innovation_Admin.UI.Models.SysPrefCompany;
+using Innovation_Admin.UI.Models.ResponsesModel.AccountManager;
 using Innovation_Admin.UI.Services.IRepositories;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
@@ -11,59 +10,73 @@ using static Innovation_Admin.UI.Helper.APIBaseUrl;
 
 namespace Innovation_Admin.UI.Services.Repositories
 {
-    public class SysPrefCompanies : ISysPrefCompanies
+    public class AccountManager : IAccountManager
     {
         private APIRepository _apiRepository;
-
         private Response<string> _oApiResponse;
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-        public SysPrefCompanies(IOptions<ApiBaseUrl> apiBaseUrl)
+
+        public AccountManager(IOptions<ApiBaseUrl> apiBaseUrl, IConfiguration configuration)
         {
             _apiBaseUrl = apiBaseUrl;
+            _configuration = configuration;
             _apiRepository = new APIRepository(_configuration);
         }
 
-        public async Task<GetAllSysPrefCompanyResponseModel> GetAllSysPrefCompanies()
+        public async Task<GetAllAccountManagerResponseModel> GetAllAccountManagers()
         {
-            GetAllSysPrefCompanyResponseModel response = new GetAllSysPrefCompanyResponseModel();
+            GetAllAccountManagerResponseModel response = new GetAllAccountManagerResponseModel();
 
-            _apiRepository = new APIRepository(_configuration);
-
-            _oApiResponse = new Response<string>();
-            byte[] content = Array.Empty<byte>();
-            var bytes = new ByteArrayContent(content);
-            _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl, URLHelper.GetAllSysPrefCompany, HttpMethod.Get, bytes, _sToken);
-            if (_oApiResponse.data != null)
+            try
             {
-                response = JsonConvert.DeserializeObject<GetAllSysPrefCompanyResponseModel>(_oApiResponse.data);
+                _oApiResponse = await _apiRepository.APICommunication(
+                    _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
+                    URLHelper.GetAllAccountManagers, // Define the correct URL in URLHelper
+                    HttpMethod.Get,
+                    null,
+                    _sToken);
 
-                response.IsSuccess = true;
+                if (_oApiResponse != null && !string.IsNullOrEmpty(_oApiResponse.data))
+                {
+                    response = JsonConvert.DeserializeObject<GetAllAccountManagerResponseModel>(_oApiResponse.data);
+                    response.IsSuccess = true;
+                }
+                else
+                {
+                    response.IsSuccess = false;
+                    response.Message = "No data found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = ex.Message;
             }
 
             return response;
         }
 
-        public async Task<CreateSysPrefCompanyResponseModel> CreateSysPrefCompany(SysPrefCompanyDto company)
+        public async Task<CreateAccountManagerResponseModel> CreateAccountManager(AccountManagerDto manager)
         {
-            var response = new CreateSysPrefCompanyResponseModel();
+            var response = new CreateAccountManagerResponseModel();
 
             try
             {
-                var jsonContent = JsonConvert.SerializeObject(company);
+                var jsonContent = JsonConvert.SerializeObject(manager);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.CreateSysPrefCompany,
+                    URLHelper.CreateAccountManager,
                     HttpMethod.Post,
                     content,
                     string.Empty);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
-                    var apiResponseObject = JsonConvert.DeserializeObject<CreateSysPrefCompanyResponseModel>(apiResponse.data);
+                    var apiResponseObject = JsonConvert.DeserializeObject<CreateAccountManagerResponseModel>(apiResponse.data);
                     response.IsSuccess = apiResponseObject.IsSuccess;
                     response.Data = apiResponseObject.Data;
                 }
@@ -79,25 +92,26 @@ namespace Innovation_Admin.UI.Services.Repositories
 
 
 
-        public async Task<UpdateSysPrefCompanyResponseModel> UpdateSysPrefCompany(SysPrefCompanyDto updatedCompany)
+
+        public async Task<UpdateAccountManagerResponseModel> UpdateAccountManager(AccountManagerDto manager)
         {
-            var response = new UpdateSysPrefCompanyResponseModel();
+            var response = new UpdateAccountManagerResponseModel();
 
             try
             {
-                var jsonContent = JsonConvert.SerializeObject(updatedCompany);
+                var jsonContent = JsonConvert.SerializeObject(manager);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.UpdateSysPrefCompany.Replace("{id}", updatedCompany.CompanyID.ToString()), // Define the 
+                    URLHelper.UpdateAccountManager.Replace("{id}", manager.Id.ToString()), // Define the 
                     HttpMethod.Put, // Use PUT method for updates
                     content,
                     string.Empty);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
-                    response = JsonConvert.DeserializeObject<UpdateSysPrefCompanyResponseModel>(apiResponse.data);
+                    response = JsonConvert.DeserializeObject<UpdateAccountManagerResponseModel>(apiResponse.data);
                     response.IsSuccess = apiResponse.Success;
                 }
             }
@@ -110,26 +124,26 @@ namespace Innovation_Admin.UI.Services.Repositories
             return response;
         }
 
-        public async Task<GetSysPrefCompanyByIdResponseModel> GetSysPrefCompanyById(Guid companyId)
+        public async Task<GetAccountManagerByIdResponseModel> GetAccountManagerById(Guid Id)
         {
-            var response = new GetSysPrefCompanyByIdResponseModel();
+            var response = new   GetAccountManagerByIdResponseModel();
 
             try
             {
-               
+
                 // Make the API call to fetch the SysPrefCompany by its ID
-                _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl,URLHelper.GetSysPrefCompaynyById.Replace("{id}",companyId.ToString()), HttpMethod.Get, null, _sToken);
+                _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl, URLHelper.GetAccountManagerById.Replace("{id}", Id.ToString()), HttpMethod.Get, null, _sToken);
 
                 if (_oApiResponse != null && !string.IsNullOrEmpty(_oApiResponse.data))
                 {
-                   
-                    response = JsonConvert.DeserializeObject<GetSysPrefCompanyByIdResponseModel>(_oApiResponse.data);
+
+                    response = JsonConvert.DeserializeObject<GetAccountManagerByIdResponseModel>(_oApiResponse.data);
 
                     response.IsSuccess = true;
                 }
                 else
                 {
-                   
+
                     response.IsSuccess = false;
                     response.Message = "No data found for the specified company ID.";
                 }
@@ -144,12 +158,11 @@ namespace Innovation_Admin.UI.Services.Repositories
             return response;
         }
 
-       
-        public async Task<bool> DeleteSysPrefCompany(Guid companyId)
+        public async Task<bool> DeleteAccountManager(Guid Id)
         {
             try
             {
-                string url = URLHelper.DeleteSysPrefCompany.Replace("{id}", companyId.ToString());
+                string url = URLHelper.DeleteAccountManager.Replace("{id}", Id.ToString());
                 var response = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     url,
@@ -162,7 +175,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             }
             catch (Exception ex)
             {
-                // Log the exception
+                
                 return false;
             }
         }
