@@ -25,7 +25,7 @@ namespace InnovationAdmin.Persistence.Migrations
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.AccountManager", b =>
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_Role", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("Id");
                     b.Property<Guid>("Role_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
@@ -54,7 +54,7 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AccountManagers");
-                });
+                }));
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_User", b =>
                 {

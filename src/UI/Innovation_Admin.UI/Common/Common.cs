@@ -31,11 +31,11 @@ namespace Innovation_Admin.UI.Common
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
 
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IAccountManager _accountManager)
+        
 
         private readonly ISysPrefSecurityEmails sysPrefSecurityEmails;
 
-        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefSecurityEmails _sysPrefSecurityEmails)
+        public Common(ISysPrefCompanies _sysPrefCompanies, IAdminUser _adminUser, IConfiguration configuration, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefSecurityEmails _sysPrefSecurityEmails, IAccountManager _accountManager)
         {
             adminUser = _adminUser;
             sysPrefCompanies = _sysPrefCompanies;
