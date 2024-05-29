@@ -4,6 +4,7 @@ using InnovationAdmin.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InnovationAdmin.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240528071736_AccountManager")]
+    partial class AccountManager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,10 +25,8 @@ namespace InnovationAdmin.Persistence.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.AccountManager", b =>
-            modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_Role", b =>
                 {
                     b.Property<Guid>("Id")
-                    b.Property<Guid>("Role_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -35,11 +35,6 @@ namespace InnovationAdmin.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -56,9 +51,9 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.ToTable("AccountManagers");
                 });
 
-            modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_User", b =>
+            modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_Role", b =>
                 {
-                    b.Property<Guid>("User_ID")
+                    b.Property<Guid>("Role_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -68,10 +63,10 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -79,25 +74,14 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("User_Name")
+                    b.Property<string>("Role_Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("User_ID");
+                    b.HasKey("Role_ID");
 
-                    b.ToTable("Admin_Users");
+                    b.ToTable("AdminRoles");
                 });
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_User", b =>
@@ -197,42 +181,26 @@ namespace InnovationAdmin.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPrefCompany", b =>
-                {
-                    b.Property<Guid>("CompanyID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TermForPharmacy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CompanyID");
-
-                    b.ToTable("SysPrefCompanies");
-                });
-
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPref_GeneralBehaviours", b =>
                 {
-                    b.Property<Guid>("SysPrefSecurityEmailId")
+                    b.Property<Guid>("Preference_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Auto_Change_Claim_Status")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Payment")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Procare_Claim_Load")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Receipting")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Claim_Status_Zero_Paid")
+                        .HasColumnType("bit");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -240,38 +208,24 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DefaultFromAddress")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("DefaultFromName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("DefaultReplyToAddress")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("DefaultReplyToName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
+                    b.Property<bool>("Logout_Redirect")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Records_Locked_Seconds")
                         .HasColumnType("int");
 
-                    b.HasKey("SysPrefSecurityEmailId");
+                    b.Property<int>("User_Timeout")
+                        .HasColumnType("int");
 
-                    b.ToTable("SysPrefSecurityEmails");
+                    b.HasKey("Preference_ID");
+
+                    b.ToTable("SysPref_GeneralBehaviour");
                 });
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPrefCompany", b =>

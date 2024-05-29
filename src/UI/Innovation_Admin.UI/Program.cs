@@ -21,12 +21,16 @@ builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouri
 
 builder.Services.AddScoped<IAdminUser, AdminUser>();
 builder.Services.AddScoped<IAdminRoles, AdminRoles>();
+builder.Services.AddScoped<IAccountManager, AccountManager>();
 
 builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
 
 builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();
 
 builder.Services.AddScoped<Common>();
+
+
+
 
 
 builder.Services.AddDistributedMemoryCache();

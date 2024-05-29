@@ -19,6 +19,8 @@ using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPr
 using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using InnovationAdmin.Application.Features.AccountManager.Commands.CreateAccountManager;
+using InnovationAdmin.Application.Features.AccountManager.Queries.GetAccountManagerById;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.CreateSysPrefSecurityEmail;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailById;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailList;
@@ -31,6 +33,12 @@ namespace InnovationAdmin.Application.Profiles
     {
         public MappingProfile()
         {
+
+            //ACCOunt Manager
+            CreateMap<AccountManager, CreateAccountManagerDto>().ReverseMap();
+            CreateMap<AccountManager,AccountManagerDto>().ReverseMap();
+
+            CreateMap<Admin_User, CreateAdminUserDto>();
             CreateMap<Admin_User, CreateAdminUserDto>().ReverseMap();
             CreateMap<Admin_User, AdminUserListVm>().ReverseMap();
 
