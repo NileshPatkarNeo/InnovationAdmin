@@ -1,0 +1,58 @@
+﻿@model Innovation_Admin.UI.Models.SysPrefSecurityEmail.CreateSysPrefSecurityEmailDto
+
+@{
+    ViewData["Title"] = "CreateSysPrefSecurityEmail";
+}
+
+<h1>CreateSysPrefSecurityEmail</h1>
+
+<h4>CreateSysPrefSecurityEmailDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateSysPrefSecurityEmail">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @*  <div class="form-group">
+                <label asp-for="SysPrefSecurityEmailId" class="control-label"></label>
+                <input asp-for="SysPrefSecurityEmailId" class="form-control" />
+                <span asp-validation-for="SysPrefSecurityEmailId" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="DefaultFromName" class="control-label"></label>
+                <input asp-for="DefaultFromName" class="form-control" />
+                <span asp-validation-for="DefaultFromName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultFromAddress" class="control-label"></label>
+                <input asp-for="DefaultFromAddress" class="form-control" />
+                <span asp-validation-for="DefaultFromAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultReplyToAddress" class="control-label"></label>
+                <input asp-for="DefaultReplyToAddress" class="form-control" />
+                <span asp-validation-for="DefaultReplyToAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultReplyToName" class="control-label"></label>
+                <input asp-for="DefaultReplyToName" class="form-control" />
+                <span asp-validation-for="DefaultReplyToName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

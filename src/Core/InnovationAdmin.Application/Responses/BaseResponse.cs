@@ -24,6 +24,7 @@ namespace InnovationAdmin.Application.Responses
         public string Message { get; set; }
         public List<string> Errors { get; set; }
         public T Data { get; set; }
+     
     }
 
     public class PagedResponse<T> : Response<T>
