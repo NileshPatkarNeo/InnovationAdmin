@@ -24,7 +24,7 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_
 
         public async Task<Response<CreateAdminUserDto>> Handle(CreateAdminUserCommand request, CancellationToken cancellationToken)
         {
-            Response<CreateAdminUserDto> createAdminUserCommandResponse = null;
+            Response<CreateAdminUserDto> createAdminUserCommandResponse = new Response<CreateAdminUserDto>();
 
             var validator = new CreateAdminUserValidator();
             var validationResult = await validator.ValidateAsync(request);
@@ -35,14 +35,8 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_
             }
             else
             {
-                var adminUser = new Admin_User()
-                {
-                    User_Name = request.User_Name,
-                    Password = request.Password,
-                    Role = request.Role,
-                    Email = request.Email,
-                    Status = request.Status
-                };
+                var adminUser = _mapper.Map<Admin_User>(request);
+              
 
                 adminUser = await _adminuserRepository.AddAsync(adminUser);
                 createAdminUserCommandResponse = new Response<CreateAdminUserDto>(_mapper.Map<CreateAdminUserDto>(adminUser), "success");
