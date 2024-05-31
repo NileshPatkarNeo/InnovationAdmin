@@ -20,15 +20,19 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Up
             RuleFor(p => p.DefaultFromAddress)
                 .NotEmpty().WithMessage("Error")
                 .NotNull().WithErrorCode("Name is Requied")
-                .MinimumLength(8).WithMessage("Error");
+                  .EmailAddress().WithMessage("Error");
+               
 
             RuleFor(p => p.DefaultReplyToAddress)
                 .NotEmpty().WithMessage("Error")
-                .MinimumLength(0).WithMessage("Error");
+                .NotNull().WithErrorCode("ReplyToAddress is Requied")
+                 .EmailAddress().WithMessage("Error");
+               
 
             RuleFor(p => p.DefaultReplyToName)
                 .NotEmpty().WithMessage("Error")
-                .EmailAddress().WithMessage("Error");
+                     .NotNull().WithErrorCode("ReplyToName is Requied")
+             .MinimumLength(8).WithMessage("Error");
 
             RuleFor(p => p.Status)
              .NotNull().WithMessage("Error");

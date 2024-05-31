@@ -2,57 +2,98 @@
 
 @{
     ViewData["Title"] = "CreateSysPrefSecurityEmail";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
 <h1>CreateSysPrefSecurityEmail</h1>
 
-<h4>CreateSysPrefSecurityEmailDto</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateSysPrefSecurityEmail">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           @*  <div class="form-group">
-                <label asp-for="SysPrefSecurityEmailId" class="control-label"></label>
-                <input asp-for="SysPrefSecurityEmailId" class="form-control" />
-                <span asp-validation-for="SysPrefSecurityEmailId" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <label asp-for="DefaultFromName" class="control-label"></label>
-                <input asp-for="DefaultFromName" class="form-control" />
-                <span asp-validation-for="DefaultFromName" class="text-danger"></span>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="CreateSysPrefSecurityEmail" method="post" id="createSysPrefSecurityEmailForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="DefaultFromName" class="control-label">Default From Name</label>
+                        <input asp-for="DefaultFromName" class="form-control" id="defaultFromName" />
+                        <span asp-validation-for="DefaultFromName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DefaultFromAddress" class="control-label">Default From Address</label>
+                        <input asp-for="DefaultFromAddress" class="form-control" id="defaultFromAddress" />
+                        <span asp-validation-for="DefaultFromAddress" class="text-danger" id="defaultFromAddressError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DefaultReplyToAddress" class="control-label">Default Reply To Address</label>
+                        <input asp-for="DefaultReplyToAddress" class="form-control" id="defaultReplyToAddress" />
+                        <span asp-validation-for="DefaultReplyToAddress" class="text-danger" id="defaultReplyToAddressError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DefaultReplyToName" class="control-label">Default Reply To Name</label>
+                        <input asp-for="DefaultReplyToName" class="form-control" id="defaultReplyToName" />
+                        <span asp-validation-for="DefaultReplyToName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label">Status</label>
+                        <input asp-for="Status" class="form-control" id="status" />
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
+                        <a asp-action="SysPrefSecurityEmail" class="btn btn-secondary btn-lg flex-fill">Back</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="DefaultFromAddress" class="control-label"></label>
-                <input asp-for="DefaultFromAddress" class="form-control" />
-                <span asp-validation-for="DefaultFromAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DefaultReplyToAddress" class="control-label"></label>
-                <input asp-for="DefaultReplyToAddress" class="form-control" />
-                <span asp-validation-for="DefaultReplyToAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DefaultReplyToName" class="control-label"></label>
-                <input asp-for="DefaultReplyToName" class="form-control" />
-                <span asp-validation-for="DefaultReplyToName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-check {
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        width: auto;
+    }
+
+    .form-group .btn {
+        display: inline-block;
+    }
+
+        .form-group .btn + .btn {
+            margin-left: 10px;
+        }
+
+    .flex-fill {
+        flex: 1;
+    }
+</style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+    <script src="~/js/CreateSysPrefSecurityEmail.js"></script>
+}
+<!-- Include the JavaScript file -->
+@* <script src="~/js/CreateSysPrefSecurityEmail.js"></script> *@

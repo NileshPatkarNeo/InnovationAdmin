@@ -8,7 +8,7 @@ namespace Innovation_Admin.UI.Models.AdminUser
     {
         [JsonProperty("user_Name")]
         [Required(ErrorMessage = "User Name is required")]
-        [StringLength(100, ErrorMessage = "User Name cannot be longer than 100 characters")]
+        [StringLength(15, ErrorMessage = "User Name cannot be longer than 15 characters")]
         public string User_Name { get; set; }
 
         [JsonProperty("role")]
@@ -23,7 +23,7 @@ namespace Innovation_Admin.UI.Models.AdminUser
 
         [JsonProperty("password")]
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 100 characters long")]
+        [StringLength(10, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 10 characters long")]
         public string Password { get; set; }
 
         [JsonProperty("status")]

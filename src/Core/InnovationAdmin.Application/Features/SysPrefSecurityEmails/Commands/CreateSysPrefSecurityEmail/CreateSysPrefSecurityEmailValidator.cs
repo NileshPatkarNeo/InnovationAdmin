@@ -23,17 +23,20 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Cr
             RuleFor(p => p.DefaultFromAddress)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull().WithMessage("{PropertyName} is required")
-                .MinimumLength(8).WithMessage("Error in DefaultFromAddress");
+                 .EmailAddress().WithMessage("Error in DefaultReplyToName");
+                //.MinimumLength(8).WithMessage("Error in DefaultFromAddress");
 
             RuleFor(p => p.DefaultReplyToAddress)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                          .NotNull().WithMessage("{PropertyName} is required")
-                .MinimumLength(8).WithMessage("Error in DefaultReplyToAddress");
+                         .EmailAddress().WithMessage("Error in DefaultReplyToName");
+                //.MinimumLength(8).WithMessage("Error in DefaultReplyToAddress");
 
             RuleFor(p => p.DefaultReplyToName)
                 .NotEmpty().WithMessage("Error")
                          .NotNull().WithMessage("{PropertyName} is required")
-                .EmailAddress().WithMessage("Error in DefaultReplyToName");
+                           .MinimumLength(8).WithMessage("Error in DefaultReplyToAddress");
+                //.EmailAddress().WithMessage("Error in DefaultReplyToName");
 
             RuleFor(p => p.Status)
                 .NotEmpty().WithMessage("Error")
