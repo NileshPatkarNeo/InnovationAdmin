@@ -26,6 +26,10 @@ builder.Services.AddScoped<IAccountManager, AccountManager>();
 builder.Services.AddScoped<IPharmacyGroup, PharmacyGroups>();
 builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
 
+builder.Services.AddScoped<ISysPrefFinancials, SysPrefFinancials>();
+
+
+
 
 builder.Services.AddScoped<Common>();
 

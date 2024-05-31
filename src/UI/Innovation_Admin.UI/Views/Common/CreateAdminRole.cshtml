@@ -5,46 +5,82 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>Create Admin Role</h1>
+<style>
+    h1.text-center,
+    hr {
+        margin-bottom: 20px;
+    }
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateAdminRole">
-            <div class="text-danger">
-                @if (ViewData.ModelState.ErrorCount > 0)
-                {
-                    <div class="alert alert-danger">
-                        <p>Please fix the errors below:</p>
-                        <ul>
-                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                            {
-                                <li>@error.ErrorMessage</li>
-                            }
-                        </ul>
+    .form-box {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+        .btn-group .btn {
+            margin: 0 5px;
+        }
+</style>
+
+<h1 class="text-center">Create Admin Role</h1>
+
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="form-box">
+            <form id="createAdminRoleForm" asp-action="CreateAdminRole" novalidate>
+                <div class="text-danger">
+                    @if (ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div class="alert alert-danger">
+                            <p>Please fix the errors below:</p>
+                            <ul>
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Role_Name" class="control-label">
+                        Role Name <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Role_Name" class="form-control" maxlength="21" required id="Role_Name" />
+                    <span asp-validation-for="Role_Name" class="text-danger"></span>
+                    <span class="text-danger" id="Role_Name_error"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Description" class="control-label">
+                        Description <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Description" class="form-control" maxlength="61" required id="Description" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <span class="text-danger" id="Description_error"></span>
+                </div>
+                <div class="btn-group">
+                    <div>
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     </div>
-                }
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Role_Name" class="control-label"></label>
-                <input asp-for="Role_Name" class="form-control" required />
-                <span asp-validation-for="Role_Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" required />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                    <div>
+                        <a asp-action="AdminRole" class="btn btn-secondary">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="AdminRole">Back to List</a>
-</div>
-
-
+    <script src="~/js/CreateAdminRole.js"></script>

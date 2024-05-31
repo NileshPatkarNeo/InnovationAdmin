@@ -24,6 +24,11 @@ using InnovationAdmin.Application.Features.PharmacyGroup.Commands.UpdatePharmacy
 using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetPharmacyGroupQuery;
 using InnovationAdmin.Application.Features.AccountManager.Commands.CreateAccountManager;
 using InnovationAdmin.Application.Features.AccountManager.Queries.GetAccountManagerById;
+using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.CreateSysPrefFinancial;
+using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysPrefFinancial;
+using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
+using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancialList;
+using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancial;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -106,6 +111,19 @@ namespace InnovationAdmin.Application.Profiles
 
 
            
+
+
+            CreateMap<SysPrefFinancial, CreateSysPrefFinancialDto>().ReverseMap();
+            CreateMap<SysPrefFinancial, UpdateSysPrefFinancialDto>().ReverseMap();
+            CreateMap<SysPrefFinancial, DeleteSysPrefFinancialCommand>();
+            CreateMap<SysPrefFinancial, SysPrefFinancialListVM>();
+            CreateMap<SysPrefFinancial, SysPrefFinancialVM>();
+
+
+
+
+
+
         }
     }
 }
