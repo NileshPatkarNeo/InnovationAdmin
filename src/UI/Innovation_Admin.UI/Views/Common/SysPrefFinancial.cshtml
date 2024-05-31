@@ -2,89 +2,155 @@
 
 @{
     ViewData["Title"] = "SysPrefFinancial";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>System Preference Financial</h1>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <style>
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 40%;
+        }
 
-<p>
-    <a asp-action="CreateSysPrefFinancial" asp-controller="Common">Create New</a>
-</p>
-<table class="table">
-    <thead>
+        .search-bar {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .search-buttons button {
+            margin-left: 5px;
+        }
+
+        h1.text-center {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            margin-top: 70px;
+        }
+
+        .text-end {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<h1 class="text-center">System Preference Financial</h1>
+
+<div class="search-container">
+    <div class="search-bar">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by Company Name">
+    </div>
+    <div class="search-buttons">
+        <button id="searchButton" class="btn btn-primary"><i class="bi bi-search"></i> Search</button>
+        <button id="sortButton" class="btn btn-secondary"><i class="bi bi-sort-numeric-down"></i> Sort</button>
+    </div>
+</div>
+
+<div class="col-auto">
+    <a asp-action="CreateSysPrefFinancial" asp-controller="Common" class="btn btn-primary float-end">
+        ADD <i class="bi bi-plus-circle"></i>
+    </a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
         <tr>
-          
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DefaultPaymentMethod)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastCheckNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimAgeCollectionStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimAgeCollectionEnd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DefaultReceiptBatchDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimPaidThreshold)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClaimStatusWriteOff)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DaysToBlock)
-            </th>
-            <th></th>
+            <th>Sr.No</th>
+            <th>@Html.DisplayNameFor(model => model.CompanyName)</th>
+            <th>@Html.DisplayNameFor(model => model.DefaultPaymentMethod)</th>
+            <th>@Html.DisplayNameFor(model => model.DaysToBlock)</th>
+            <th>Action</th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-          
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DefaultPaymentMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastCheckNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClaimAgeCollectionStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClaimAgeCollectionEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DefaultReceiptBatchDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClaimPaidThreshold)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClaimStatusWriteOff)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DaysToBlock)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "EditSysPrefFinancial", new { financialId = item.FinancialID })
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    <a href="#" onclick="confirmDelete('@item.FinancialID')">Delete</a>
-             </td>
-        </tr>
-}
+    <tbody id="tableBody">
+        @foreach (var item in Model.Select((value, index) => new { value, index }))
+        {
+            <tr>
+                <td>@(item.index + 1)</td>
+                <td>@Html.DisplayFor(modelItem => item.value.CompanyName)</td>
+                <td>@Html.DisplayFor(modelItem => item.value.DefaultPaymentMethod)</td>
+                <td>@Html.DisplayFor(modelItem => item.value.DaysToBlock)</td>
+                <td>
+                    <a asp-action="EditSysPrefFinancial" asp-controller="Common" asp-route-financialId="@item.value.FinancialID" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <a asp-action="DetailsSysPrefFinancial" asp-controller="Common" asp-route-financialId="@item.value.FinancialID" class="btn btn-info btn-sm">
+                        <i class="bi bi-info-circle-fill"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.value.FinancialID')">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
-<script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#searchButton').on('click', function () {
+            searchTable();
+        });
+
+        $('#sortButton').on('click', function () {
+            sortTable();
+        });
+
+        $('#searchInput').on('input', function () {
+            if (!this.value) {
+                resetTable();
+            }
+        });
+    });
+
+    function searchTable() {
+        var value = $('#searchInput').val().toLowerCase();
+        $('#tableBody tr').each(function () {
+            var companyName = $(this).find('td:eq(1)').text().toLowerCase();
+            $(this).toggle(companyName.includes(value));
+        });
+        updateSerialNumbers();
+    }
+
+    function resetTable() {
+        $('#tableBody tr').show();
+        updateSerialNumbers();
+    }
+
+    function sortTable() {
+        var rows = $('#tableBody tr').get();
+        var order = $('#sortButton').data('order') || 'asc';
+
+        rows.sort(function (a, b) {
+            var valueA = parseInt($(a).find('td:eq(0)').text());
+            var valueB = parseInt($(b).find('td:eq(0)').text());
+
+            if (order === 'asc') {
+                return valueA - valueB;
+            } else {
+                return valueB - valueA;
+            }
+        });
+
+        $.each(rows, function (index, row) {
+            $('#tableBody').append(row);
+        });
+
+        $('#sortButton').data('order', order === 'asc' ? 'desc' : 'asc');
+        $('#sortButton').find('i').toggleClass('bi-sort-numeric-down bi-sort-numeric-up');
+    }
+
+    function updateSerialNumbers() {
+        $('#tableBody tr:visible').each(function (index) {
+            $(this).find('td:eq(0)').text(index + 1);
+        });
+    }
+
     function confirmDelete(financialId) {
         if (confirm("Are you sure you want to delete this SysPrefFinancial?")) {
             var form = document.createElement("form");
@@ -99,8 +165,6 @@
 
             document.body.appendChild(form);
             form.submit();
-
         }
     }
-
 </script>

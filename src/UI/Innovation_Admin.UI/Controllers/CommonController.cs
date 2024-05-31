@@ -447,6 +447,22 @@ namespace Innovation_Admin.UI.Controllers
         //    }
         //    return RedirectToAction("SysPrefFinancial");
         //}
+        [HttpGet]
+        public async Task<IActionResult> DetailsSysPrefFinancial(Guid financialID)
+        {
+            if (financialID == Guid.Empty)
+            {
+                return BadRequest("Financial ID is required");
+            }
+
+            var sysPrefFinancial = await _common.GetSysPrefFinancialById(financialID);
+            if (sysPrefFinancial == null || sysPrefFinancial.Data == null)
+            {
+                return NotFound("System Preference Financial not found");
+            }
+
+            return View(sysPrefFinancial.Data);
+        }
 
 
         [HttpPost]
