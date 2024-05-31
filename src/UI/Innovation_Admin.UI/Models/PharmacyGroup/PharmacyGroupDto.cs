@@ -11,7 +11,7 @@ namespace Innovation_Admin.UI.Models.PharmacyGroup
 
         [JsonProperty("pharmacyName")]
         [Required(ErrorMessage = "Pharmacy Name is required")]
-        [StringLength(100, ErrorMessage = "Pharmacy Name cannot be longer than 100 characters")]
+        [StringLength(25, ErrorMessage = "Pharmacy Name cannot be longer than 100 characters")]
         public string PharmacyName { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Models.AdminUser;
 using Innovation_Admin.UI.Models.AdminRole;
-using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Microsoft.AspNetCore.Mvc;
 using CommonCall = Innovation_Admin.UI.Common;
 
@@ -73,10 +72,7 @@ namespace Innovation_Admin.UI.Controllers
            return RedirectToAction("SysPrefCompany");
         }
 
-          [HttpGet]
-            return RedirectToAction("SysPrefCompany");
-        }
-
+          
         [HttpGet]
         public async Task<IActionResult> EditSysPrefCompany([FromQuery] string companyId)
         {
@@ -392,7 +388,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("PharmacyGroups");
         }
 
-
+        
 
         [HttpGet]
         public async Task<IActionResult> EditPharmacyGroup( string Id)
@@ -402,30 +398,30 @@ namespace Innovation_Admin.UI.Controllers
                 return BadRequest("Invalid ID");
             }
 
-            var sysPrefCompany = await _common.GetPharmacyGroupById(prefId);
-            if (sysPrefCompany == null || sysPrefCompany.Data == null)
+            var group = await _common.GetPharmacyGroupById(prefId);
+            if (group == null || group.Data == null)
             {
                 return NotFound("group not found");
             }
 
-            return View(sysPrefCompany.Data);
+            return View(group.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPharmacyGroup(PharmacyGroupDto updatedCompany)
+        public async Task<IActionResult> EditPharmacyGroup(PharmacyGroupDto updatedgroup)
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedCompany); // Return view with validation errors
+                return View(updatedgroup); // Return view with validation errors
             }
 
-            var result = await _common.UpdatePharmacyGroup(updatedCompany);
+            var result = await _common.UpdatePharmacyGroup(updatedgroup);
 
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedCompany); // Return to the edit form with error messages
+                return View(updatedgroup); // Return to the edit form with error messages
             }
 
             return RedirectToAction("PharmacyGroups");
@@ -449,7 +445,7 @@ namespace Innovation_Admin.UI.Controllers
         #endregion
 
 
-        #endregion
+        
 
 
 

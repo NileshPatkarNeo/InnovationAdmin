@@ -1,39 +1,45 @@
 ﻿@model Innovation_Admin.UI.Models.PharmacyGroup.PharmacyGroupDto
-
 @{
-    ViewData["Title"] = "CreatePharmacyGroup";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
+<style>
+    .test {
+        margin-top: 70px;
+    }
 
-<h1>Create Pharmacy Group</h1>
+    .test2 {
+        margin-top: 50px;
+    }
 
+    .required {
+        color: red;
+    }
+</style>
+<h1 class="text-center test">Create Pharmacy Group</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreatePharmacyGroup">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           @*  <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <label asp-for="PharmacyName" class="control-label">Pharmacy Name<span style="color: red;">*</span></label>
-                <input asp-for="PharmacyName" class="form-control" />
-                <span asp-validation-for="PharmacyName" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 test2">
+            <div class="card bg-light shadow">
+                <div class="card-body">
+                    <form asp-action="CreatePharmacyGroup" method="post" id="createCompanyForm">
+                        <div class="form-group mb-4">
+                            <label asp-for="PharmacyName" class="control-label">Pharmacy Name <span class="required">*</span></label>
+                            <input asp-for="PharmacyName" class="form-control" />
+                            <span asp-validation-for="PharmacyName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <input type="submit" value="Create" class="btn btn-primary mr-3" />
+                            <a asp-action="PharmacyGroups" class="btn btn-secondary">Back</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="PharmacyGroups">Back to List</a>
-</div>
-
-
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

@@ -13,6 +13,8 @@ namespace InnovationAdmin.Domain.Entities
         [Key]
         public Guid Id { get; set; }
 
+        [Required]
+        [MaxLength(25)]
         public string PharmacyName { get; set; }
     }
 }

@@ -29,12 +29,12 @@ namespace Innovation_Admin.UI.Models.SysPrefGeneralBehaviour
 
         [JsonProperty("records_Locked_Seconds")]
         [Required(ErrorMessage = "Records Locked Seconds is required")]
-        [Range(1, int.MaxValue, ErrorMessage = "Records Locked Seconds must be a positive integer")]
+        [Range(1, 7200, ErrorMessage = "Records Locked Seconds must be between 1-7200")]
         public int Records_Locked_Seconds { get; set; }
 
         [JsonProperty("user_Timeout")]
-        [Required(ErrorMessage = "Records Locked Seconds is required")]
-        [Range(1, int.MaxValue, ErrorMessage = "user_Timeout must be a positive integer")]
+        [Required(ErrorMessage = "User Timeout is required")]
+        [Range(1, 7200, ErrorMessage = "user_Timeout must be between 1-7200")]
         public int User_Timeout { get; set; }
     }
 }

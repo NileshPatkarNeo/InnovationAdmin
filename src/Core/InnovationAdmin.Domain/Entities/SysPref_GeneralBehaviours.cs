@@ -20,10 +20,10 @@ namespace InnovationAdmin.Domain.Entities
         public bool Claim_Status_Procare_Claim_Load { get; set; }
         public bool Logout_Redirect { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage = "Invalid seconds")]
+        [Range(1, 7200, ErrorMessage = "Invalid seconds")]
         public int Records_Locked_Seconds { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage = "Invalid seconds")]
+        [Range(1, 7200, ErrorMessage = "Invalid seconds")]
         public int User_Timeout { get; set; }
 
     }
