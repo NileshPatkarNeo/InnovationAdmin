@@ -1,0 +1,108 @@
+﻿@model Innovation_Admin.UI.Models.SysPrefFinancial.SysPrefFinancialDto
+
+@{
+    ViewData["Title"] = "DetailsSysPrefFinancial";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+</head>
+
+<h1 class="text-center">Details System Preference Financial</h1>
+
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.FinancialID)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.FinancialID)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CompanyID)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CompanyID)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.DefaultPaymentMethod)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.DefaultPaymentMethod)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.LastCheckNo)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.LastCheckNo)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ClaimAgeCollectionStart)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ClaimAgeCollectionStart)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ClaimAgeCollectionEnd)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ClaimAgeCollectionEnd)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.DefaultReceiptBatchDescription)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.DefaultReceiptBatchDescription)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ClaimPaidThreshold)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ClaimPaidThreshold)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ClaimStatusWriteOff)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ClaimStatusWriteOff)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.DaysToBlock)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.DaysToBlock)
+            </dd>
+        </dl>
+        <div class="text-center">
+            <a asp-action="SysPrefFinancial" asp-controller="Common" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Back
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    h1.text-center, hr {
+        margin-bottom: 20px;
+    }
+
+    .dl-horizontal dt {
+        text-align: left;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 0;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .btn i {
+            margin-right: 5px;
+        }
+</style>
