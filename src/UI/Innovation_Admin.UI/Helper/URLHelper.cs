@@ -1,4 +1,6 @@
-﻿namespace Innovation_Admin.UI.Helper
+﻿using System;
+
+namespace Innovation_Admin.UI.Helper
 {
     public static class URLHelper
     {
@@ -44,7 +46,9 @@
         public const string DeleteAdminRole = "/api/AdminRole/{id}?api-version=1";
         #endregion
 
-        #region GeneralSysBehaviour
+
+        #region SysPrefGeneralBehaviour
+
         public const string GetAllSysPrefGeneralBehaviour = "/api/SysPref_GeneralBehaviour/all?api-version=1";
 
         public const string CreatelSysPrefGeneralBehaviour = "/api/SysPref_GeneralBehaviour?api-version=1";
@@ -86,6 +90,16 @@
         public const string DeleteSysPrefFinancial = "/api/SysPrefFinancial/{id}?api-version=1";
 
 
+
+        public const string GetAllPharmacyGroup = "/api/Category/all? api-version=1";
+
+        public const string CreatePharmacyGroup = "/api/Category?api-version=1";
+
+        public const string UpdatePharmacyGroup = "/api/Category/{id}?api-version=1";
+
+        public const string GetPharmacyGroupById = "/api/Category/{id}?api-version=1";
+
+        public const string DeletePharmacyGroup = "/api/Category/{id}?api-version=1";
 
 
     }
