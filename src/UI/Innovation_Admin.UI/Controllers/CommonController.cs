@@ -11,6 +11,7 @@ using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -93,6 +94,7 @@ namespace Innovation_Admin.UI.Controllers
             var getAllAdminUser = await _common.GetAllAdminUser();
             return View(getAllAdminUser);
         }
+
 
 
         [HttpGet]
@@ -243,6 +245,7 @@ namespace Innovation_Admin.UI.Controllers
         #region SysPrefGeneralBehaviour
 
        
+    
         public async Task<IActionResult> SysPrefGeneralBehaviour()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefBehaviouries();
@@ -342,6 +345,82 @@ namespace Innovation_Admin.UI.Controllers
         {
             var result = await _common.UpdateAccountManager(manager);
             return RedirectToAction("GetAllAccountManagers");
+        }
+
+
+
+        public async Task<IActionResult> SysPrefSecurityEmail()
+        {
+            var getAllSysPrefSecurityEmail = await _common.GetAllSysPrefSecurityEmail();
+            return View(getAllSysPrefSecurityEmail);
+        }
+
+        [HttpGet]
+        public IActionResult CreateSysPrefSecurityEmail()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
+        {
+
+           var result = await _common.CreateSysPrefSecurityEmail(email);
+
+            if (!result.IsSuccess)
+            {
+
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
+                }
+
+
+                return RedirectToAction("SysPrefSecurityEmail");
+            }
+
+
+            return RedirectToAction("SysPrefSecurityEmail");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditSysPrefSecurityEmail([FromQuery]string emailId)
+        {
+            var sysPrefSecurityEMail = await _common.GetSysPrefSecurityEmailById(Guid.Parse(emailId));
+            return View(sysPrefSecurityEMail.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedAdmin)
+        {
+            var result = await _common.UpdateSysPrefSecurityEmail(updatedAdmin);
+
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedAdmin); // Return to the edit form with error messages
+            }
+
+            return RedirectToAction("SysPrefSecurityEmail");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteSysPrefSecurityEmail(Guid emailId)
+        {
+            var isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
+            if (!isDeleted)
+            {
+
+                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            }
+            return RedirectToAction("SysPrefSecurityEmail");
         }
 
 
@@ -447,6 +526,22 @@ namespace Innovation_Admin.UI.Controllers
         //    }
         //    return RedirectToAction("SysPrefFinancial");
         //}
+        [HttpGet]
+        public async Task<IActionResult> DetailsSysPrefFinancial(Guid financialID)
+        {
+            if (financialID == Guid.Empty)
+            {
+                return BadRequest("Financial ID is required");
+            }
+
+            var sysPrefFinancial = await _common.GetSysPrefFinancialById(financialID);
+            if (sysPrefFinancial == null || sysPrefFinancial.Data == null)
+            {
+                return NotFound("System Preference Financial not found");
+            }
+
+            return View(sysPrefFinancial.Data);
+        }
 
 
         [HttpPost]
