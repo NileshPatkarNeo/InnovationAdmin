@@ -40,10 +40,10 @@ namespace InnovationAdmin.Persistence.Migrations
                 b.Property<DateTime>("CreatedDate")
                     .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -63,25 +63,8 @@ namespace InnovationAdmin.Persistence.Migrations
 
                 b.HasKey("Id");
 
-                    b.ToTable("AccountManagers");
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Role_ID");
-
-                    b.ToTable("AdminRoles");
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("User_Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("User_ID");
-
-                    b.ToTable("Admin_Users");
-                });
+                b.ToTable("AccountManagers");
+            }));
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.Admin_User", b =>
                 {
@@ -115,16 +98,16 @@ namespace InnovationAdmin.Persistence.Migrations
                 b.Property<DateTime?>("LastModifiedDate")
                     .HasColumnType("datetime2");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Password")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                b.Property<int>("Role")
+                    .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                b.Property<bool>("Status")
+                    .HasColumnType("bit");
 
                     b.Property<string>("User_Name")
                         .IsRequired()
@@ -336,119 +319,85 @@ namespace InnovationAdmin.Persistence.Migrations
 
                 b.HasKey("CompanyID");
 
-                    b.ToTable("SysPrefCompanies");
-                });
-
-            modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPrefFinancial", b =>
-
-                    b.Property<string>("TermForPharmacy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CompanyID");
-
-                    b.ToTable("SysPrefCompanies");
-                });
+                b.ToTable("SysPrefCompanies");
+            });
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPref_GeneralBehaviours", b =>
-                {
-                    b.Property<Guid>("FinancialID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("SysPrefSecurityEmailId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ClaimAgeCollectionEnd")
-                        .HasColumnType("datetime2");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ClaimAgeCollectionStart")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("CreatedDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<int>("ClaimPaidThreshold")
-                        .HasColumnType("int");
+                b.Property<string>("DefaultFromAddress")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ClaimStatusWriteOff")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                b.Property<string>("DefaultFromName")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<Guid>("CompanyID")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<string>("DefaultReplyToAddress")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("DefaultReplyToName")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DaysToBlock")
-                        .HasColumnType("int");
+                b.Property<DateTime?>("LastModifiedDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("DefaultPaymentMethod")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                b.Property<int>("Status")
+                    .HasColumnType("int");
 
-                    b.Property<string>("DefaultReceiptBatchDescription")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.HasKey("SysPrefSecurityEmailId");
 
-                    b.Property<int>("LastCheckNo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("FinancialID");
-
-                    b.HasIndex("CompanyID");
-
-                    b.ToTable("SysPrefFinancials");
-                });
-
-            modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPrefFinancial", b =>
-                {
-                    b.HasOne("InnovationAdmin.Domain.Entities.SysPrefCompany", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
+                b.ToTable("SysPrefSecurityEmails");
+            });
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.SysPrefCompany", b =>
-                {
-                    b.Property<Guid>("CompanyID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("CompanyID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CompanyName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("CreatedDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("LastModifiedDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("TermForPharmacy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("TermForPharmacy")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CompanyID");
+                b.HasKey("CompanyID");
 
-                    b.ToTable("SysPrefCompanies");
-                });
+                b.ToTable("SysPrefCompanies");
+            });
 #pragma warning restore 612, 618
         }
     }

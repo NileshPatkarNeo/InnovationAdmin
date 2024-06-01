@@ -3,6 +3,8 @@ using InnovationAdmin.Application.Features.Admin_Users.Commands.DeleteAdminUser;
 using InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminUser;
 using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserById;
 using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserList;
+using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPrefCompany;
+using InnovationAdmin.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,7 @@ namespace InnovationAdmin.Api.Controllers
     public class AdminUserController : ControllerBase
     {
         private readonly IMediator _mediator;
+
         private readonly ILogger _logger;
 
         public AdminUserController(IMediator mediator, ILogger<AdminUserController> logger)
@@ -45,7 +48,14 @@ namespace InnovationAdmin.Api.Controllers
         public async Task<ActionResult> Create([FromBody] CreateAdminUserCommand createAdminUserCommand)
         {
             var response = await _mediator.Send(createAdminUserCommand);
+            if (!response.Succeeded)
+            {
+                return BadRequest(response.Message);
+            }
+
             return Ok(response);
+
+
         }
 
 
@@ -57,6 +67,7 @@ namespace InnovationAdmin.Api.Controllers
         {
             var deleteAdminUserCommand = new DeleteAdminUserCommand() { User_ID = id };
             await _mediator.Send(deleteAdminUserCommand);
+
             return NoContent();
         }
 
@@ -66,9 +77,20 @@ namespace InnovationAdmin.Api.Controllers
         //[ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Update([FromBody] UpdateAdminUserCommand updateAdminUserCommand)
+        public async Task<ActionResult> Update(Guid id,[FromBody] UpdateAdminUserCommand updateAdminUserCommand)
         {
+
+            if (id != updateAdminUserCommand.User_ID)
+            {
+                return BadRequest("ID mismatch");
+            }
+
             var response = await _mediator.Send(updateAdminUserCommand);
+            if (response.Succeeded)
+            {
+                return Ok(response);
+            }
+            
             return Ok(response);
         }
     }

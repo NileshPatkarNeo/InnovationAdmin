@@ -37,6 +37,7 @@ namespace InnovationAdmin.Persistence
 
 
 
+        public DbSet<SysPrefSecurityEmail> SysPrefSecurityEmails { get; set; }
         public DbSet<Admin_Role> AdminRoles { get; set; }
 
         public DbSet<SysPrefFinancial> SysPrefFinancials { get; set; }

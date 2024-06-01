@@ -29,7 +29,7 @@ namespace Innovation_Admin.UI.Helper
         public const string CreateAdminUser = "/api/AdminUser?api-version=1";
 
         public const string GetAdminUserById = "/api/AdminUser/{id}?api-version=1";
-        public const string UpdateAdminUser = "/api/AdminUser?api-version=1";
+        public const string UpdateAdminUser = "/api/AdminUser?id={id}&api-version=1";
 
         public const string DeleteAdminUser = "/api/AdminUser/{id}?api-version=1";
         #endregion
@@ -58,6 +58,16 @@ namespace Innovation_Admin.UI.Helper
         public const string DeleteSysPrefGeneralBehaviour = "/api/SysPref_GeneralBehaviour/{id}?api-version=1";
 
         public const string GetSysPrefGeneralBehaviourById = "/api/SysPref_GeneralBehaviour/{id}?api-version=1";
+
+        public const string GetAllSysPrefSecurityEmail = "/api/SysPrefSecurityEmail/all?api-version=1";
+
+        public const string CreateSysPrefSecurityEmail = "/api/SysPrefSecurityEmail?api-version=1";
+
+        public const string GetSysPrefSecurityEmailById = "/api/SysPrefSecurityEmail/{id}?api-version=1";
+        public const string UpdateSysPrefSecurityEmail = "/api/SysPrefSecurityEmail?api-version=1";
+
+        public const string DeleteSysPrefSecurityEmail = "/api/SysPrefSecurityEmail/{id}?api-version=1";
+
 
 
         #endregion

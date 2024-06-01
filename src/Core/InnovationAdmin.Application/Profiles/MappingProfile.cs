@@ -24,6 +24,11 @@ using InnovationAdmin.Application.Features.PharmacyGroup.Commands.UpdatePharmacy
 using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetPharmacyGroupQuery;
 using InnovationAdmin.Application.Features.AccountManager.Commands.CreateAccountManager;
 using InnovationAdmin.Application.Features.AccountManager.Queries.GetAccountManagerById;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.CreateSysPrefSecurityEmail;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailById;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailList;
+using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.UpdateSysPrefSecurityEmail;
+
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.CreateSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
@@ -42,11 +47,13 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<AccountManager,AccountManagerDto>().ReverseMap();
 
             CreateMap<Admin_User, CreateAdminUserDto>();
+            CreateMap<Admin_User, CreateAdminUserDto>().ReverseMap();
             CreateMap<Admin_User, AdminUserListVm>().ReverseMap();
 
-            CreateMap<Admin_User, CreateAdminUserCommand>();
+            CreateMap<Admin_User, CreateAdminUserCommand>().ReverseMap();
             CreateMap<Admin_User, UpdateAdminUserCommand>().ReverseMap();
             CreateMap<Admin_User, DeleteAdminUserCommand>();
+         
 
             CreateMap<SysPrefCompany, CreateSysPrefCompanyDto>().ReverseMap();
             CreateMap<SysPrefCompany, SysPrefCompanyDto>().ReverseMap();
@@ -58,6 +65,7 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPref_GeneralBehaviours, SysPref_GeneralBehaviour_ListVM>().ReverseMap();
             CreateMap<Admin_User, AdminUserByIdVm>().ReverseMap();
 
+     
 
             CreateMap<PharmacyGroup, CreatePharmacyGroupCommand>().ReverseMap();
             CreateMap<PharmacyGroup, CreatePharmacyGroupDto>().ReverseMap();
@@ -110,6 +118,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Admin_Role, CreateAdminRoleDto>();
 
 
+        
+            CreateMap<SysPrefSecurityEmail, CreateSysPrefSecurityEmailDto>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, GetSysPrefSecurityEmailByIdVm>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, GetSysPrefSecurityEmailListVm>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, UpdateSysPrefSecurityEmailCommand>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, GetSysPrefSecurityEmailByIdVm>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, CreateSysPrefSecurityEmailCommand>().ReverseMap();
+            CreateMap<SysPrefSecurityEmail, UpdateSysPrefSecurityEmailCommandDto>().ReverseMap();
            
 
 

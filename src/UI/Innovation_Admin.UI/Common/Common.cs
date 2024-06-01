@@ -15,6 +15,9 @@ using static Innovation_Admin.UI.Helper.APIBaseUrl;
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.ResponsesModel.AccountManager;
 using Innovation_Admin.UI.Services.Repositories;
+using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Models.ResponsesModel.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Services.Repositories;
 using Innovation_Admin.UI.Models.ResponsesModel.SysPrefFinancial;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Innovation_Admin.UI.Models.PharmacyGroup;
@@ -34,6 +37,7 @@ namespace Innovation_Admin.UI.Common
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
 
+        
       
         public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager)
 
@@ -45,6 +49,7 @@ namespace Innovation_Admin.UI.Common
             adminRoles = _adminRoles;
             sysPrefBehaviouries = _sysPrefBehaviouries;
             accountManager = _accountManager;
+            sysPrefSecurityEmails = _sysPrefSecurityEmails;
             sysPrefFinancial = _sysPrefFinancial;
             pharmacyGroups = _pharmacyGroups;
         }
@@ -317,6 +322,45 @@ namespace Innovation_Admin.UI.Common
 
         
 
+
+
+        public async Task<IEnumerable<SysPrefSecurityEmailDto>> GetAllSysPrefSecurityEmail()
+        {
+            GetAllSysPrefSecurityEmailResponseModel getAllSysPrefSecurityEmailResponseModel = new GetAllSysPrefSecurityEmailResponseModel();
+
+            getAllSysPrefSecurityEmailResponseModel = await sysPrefSecurityEmails.GetAllSysPrefSecurityEmail();
+
+            if (getAllSysPrefSecurityEmailResponseModel.IsSuccess)
+            {
+                if (getAllSysPrefSecurityEmailResponseModel != null && getAllSysPrefSecurityEmailResponseModel.Data.Count() > 0)
+                {
+                    return getAllSysPrefSecurityEmailResponseModel.Data;
+                }
+            }
+
+            return new List<SysPrefSecurityEmailDto>();
+        }
+
+
+        public async Task<CreateSysPrefSecurityEmailResponseModel> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
+        {
+            return await sysPrefSecurityEmails.CreateSysPrefSecurityEmail(email);
+        }
+
+        public async Task<UpdateSysPrefSecurityEmailResponseModel> UpdateSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedemail)
+        {
+            return await sysPrefSecurityEmails.UpdateSysPrefSecurityEmail(updatedemail);
+        }
+
+        public async Task<GetSysPrefSecurityEmailByIdResponseModel> GetSysPrefSecurityEmailById(Guid companyId)
+        {
+            return await sysPrefSecurityEmails.GetSysPrefSecurityEmailById(companyId);
+        }
+
+        public async Task<bool> DeleteSysPrefSecurityEmail(Guid emailId)
+        {
+            return await sysPrefSecurityEmails.DeleteSysPrefSecurityEmail(emailId);
+        }
 
         public async Task<CreateSysPrefFinancialResponseModel> CreateSysPrefFinancial(SysPrefFinancialDto sysPrefFinancialDto)
         {
