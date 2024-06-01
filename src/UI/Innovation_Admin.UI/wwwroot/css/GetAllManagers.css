@@ -1,0 +1,40 @@
+﻿
+
+h1 {
+    text-align:center;
+}
+.test-table {
+  
+    margin-top: 50px;
+
+}
+
+.custom-table {
+    
+    text-align: center;
+    border: 2px solid #ddd;
+    border-collapse: collapse;
+}
+
+    .custom-table th, .custom-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .custom-table th {
+        background-color: #f2f2f2;
+        color: #333;
+        text-align: center;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .custom-table tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    .custom-table tr:hover {
+        background-color: #f1f1f1;
+    }
