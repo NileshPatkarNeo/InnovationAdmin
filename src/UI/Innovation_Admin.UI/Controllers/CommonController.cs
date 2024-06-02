@@ -2,12 +2,12 @@
 using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Models.AdminUser;
 using Innovation_Admin.UI.Models.AdminRole;
-using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
+
 using Microsoft.AspNetCore.Mvc;
 using CommonCall = Innovation_Admin.UI.Common;
 
 using Innovation_Admin.UI.Services.IRepositories;
-using Innovation_Admin.UI.Filter;
+
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -164,6 +164,12 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("AdminUser");
         }
 
+
+        #endregion
+
+        #region AdminRole
+
+
         public async Task<IActionResult> AdminRole()
         {
             var getAllAdminRoles = await _common.GetAllAdminRoles();
@@ -242,10 +248,11 @@ namespace Innovation_Admin.UI.Controllers
 
 
 
+
         #region SysPrefGeneralBehaviour
 
-       
-    
+
+
         public async Task<IActionResult> SysPrefGeneralBehaviour()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefBehaviouries();
@@ -308,7 +315,7 @@ namespace Innovation_Admin.UI.Controllers
 
 
 
-        #region Lookup_Table_Account_Manager
+        #region Account_Manager
 
         [HttpGet]
         public async Task<IActionResult> GetAllAccountManagers()
@@ -347,82 +354,18 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("GetAllAccountManagers");
         }
 
-
-
-        public async Task<IActionResult> SysPrefSecurityEmail()
-        {
-            var getAllSysPrefSecurityEmail = await _common.GetAllSysPrefSecurityEmail();
-            return View(getAllSysPrefSecurityEmail);
-        }
-
-        [HttpGet]
-        public IActionResult CreateSysPrefSecurityEmail()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
-        {
-
-           var result = await _common.CreateSysPrefSecurityEmail(email);
-
-            if (!result.IsSuccess)
-            {
-
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
-
-
-                return RedirectToAction("SysPrefSecurityEmail");
-            }
-
-
-            return RedirectToAction("SysPrefSecurityEmail");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> EditSysPrefSecurityEmail([FromQuery]string emailId)
-        {
-            var sysPrefSecurityEMail = await _common.GetSysPrefSecurityEmailById(Guid.Parse(emailId));
-            return View(sysPrefSecurityEMail.Data);
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedAdmin)
+        public async Task<IActionResult> DeleteAccountManager(Guid Id)
         {
-            var result = await _common.UpdateSysPrefSecurityEmail(updatedAdmin);
-
-
-            if (!result.IsSuccess)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); // Return to the edit form with error messages
-            }
-
-            return RedirectToAction("SysPrefSecurityEmail");
+            var isDeleted = await _common.DeleteAccountManager(Id);
+            return RedirectToAction("GetAllAccountManagers");
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteSysPrefSecurityEmail(Guid emailId)
-        {
-            var isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
-            if (!isDeleted)
-            {
+        #endregion
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
-            }
-            return RedirectToAction("SysPrefSecurityEmail");
-        }
 
+        #region SysPrefFinancial
 
         [HttpGet]
         public async Task<IActionResult> SysPrefFinancial()
@@ -440,11 +383,6 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult CreateSysPrefFinancial()
-        //{
-        //    return View();
-        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefFinancial(SysPrefFinancialDto financial)
@@ -555,16 +493,84 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefFinancial");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteAccountManager(Guid Id)
+        #endregion
+
+        #region SysPrefSecurityEmail
+        public async Task<IActionResult> SysPrefSecurityEmail()
         {
-            var isDeleted = await _common.DeleteAccountManager(Id);
-            return RedirectToAction("GetAllAccountManagers");
+            var getAllSysPrefSecurityEmail = await _common.GetAllSysPrefSecurityEmail();
+            return View(getAllSysPrefSecurityEmail);
+        }
+
+        [HttpGet]
+        public IActionResult CreateSysPrefSecurityEmail()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
+        {
+
+            var result = await _common.CreateSysPrefSecurityEmail(email);
+
+            if (!result.IsSuccess)
+            {
+
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
+                }
+
+
+                return RedirectToAction("SysPrefSecurityEmail");
+            }
+
+
+            return RedirectToAction("SysPrefSecurityEmail");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditSysPrefSecurityEmail([FromQuery] string emailId)
+        {
+            var sysPrefSecurityEMail = await _common.GetSysPrefSecurityEmailById(Guid.Parse(emailId));
+            return View(sysPrefSecurityEMail.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedAdmin)
+        {
+            var result = await _common.UpdateSysPrefSecurityEmail(updatedAdmin);
+
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedAdmin); // Return to the edit form with error messages
+            }
+
+            return RedirectToAction("SysPrefSecurityEmail");
         }
 
 
-        #endregion
+        [HttpPost]
+        public async Task<IActionResult> DeleteSysPrefSecurityEmail(Guid emailId)
+        {
+            var isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
+            if (!isDeleted)
+            {
 
+                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            }
+            return RedirectToAction("SysPrefSecurityEmail");
+        }
+
+        #endregion
 
 
     }
