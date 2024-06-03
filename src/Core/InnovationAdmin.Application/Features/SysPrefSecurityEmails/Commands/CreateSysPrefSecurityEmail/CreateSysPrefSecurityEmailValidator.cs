@@ -18,30 +18,26 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Cr
             RuleFor(p => p.DefaultFromName)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull().WithMessage("{PropertyName} is required.")
-                .MaximumLength(50).WithMessage("Error");
+                .MaximumLength(50).WithMessage("Length should be less than 50 characters");
 
             RuleFor(p => p.DefaultFromAddress)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull().WithMessage("{PropertyName} is required")
-                 .EmailAddress().WithMessage("Error in DefaultReplyToName");
-                //.MinimumLength(8).WithMessage("Error in DefaultFromAddress");
+                .EmailAddress().WithMessage("Invalid Email Format");
 
             RuleFor(p => p.DefaultReplyToAddress)
                 .NotEmpty().WithMessage("{PropertyName} is required")
-                         .NotNull().WithMessage("{PropertyName} is required")
-                         .EmailAddress().WithMessage("Error in DefaultReplyToName");
-                //.MinimumLength(8).WithMessage("Error in DefaultReplyToAddress");
+                .NotNull().WithMessage("{PropertyName} is required")
+                .EmailAddress().WithMessage("Invalid Email Format");
 
             RuleFor(p => p.DefaultReplyToName)
-                .NotEmpty().WithMessage("Error")
-                         .NotNull().WithMessage("{PropertyName} is required")
-                           .MinimumLength(8).WithMessage("Error in DefaultReplyToAddress");
-                //.EmailAddress().WithMessage("Error in DefaultReplyToName");
+                .NotEmpty().WithMessage("{PropertyName} is required")
+                .NotNull().WithMessage("{PropertyName} is required")
+                .MaximumLength(50).WithMessage("Length should be less than 50 characters");
 
             RuleFor(p => p.Status)
-                .NotEmpty().WithMessage("Error")
-                     .NotNull().WithMessage("{PropertyName} is required");
-
+                .NotEmpty().WithMessage("{PropertyName} is required")
+                .NotNull().WithMessage("{PropertyName} is required");
 
         }
 

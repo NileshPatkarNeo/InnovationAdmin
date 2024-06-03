@@ -1,74 +1,88 @@
 ﻿@model Innovation_Admin.UI.Models.SysPrefGeneralBehaviour.CreateSysPrefGeneralBehaviourDto
 
 @{
-    ViewData["Title"] = "CreateSysPrefGeneralBehaviour";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>Create System Prefernce General Behaviour</h1>
+<style>
+    .test2 {
+        margin-top: 30px;
+    }
 
+    .margin-bottom-lg {
+        margin-bottom: 50px; 
+    }
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateSysPrefGeneralBehaviour">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @* <div class="form-group">
-                <label asp-for="Preference_ID" class="control-label"></label>
-                <input asp-for="Preference_ID" class="form-control" />
-                <span asp-validation-for="Preference_ID" class="text-danger"></span>
-            </div> *@
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Auto_Change_Claim_Status" /> @Html.DisplayNameFor(model => model.Auto_Change_Claim_Status)
-                </label>
+    .test3 {
+        padding: 11px;
+    }
+</style>
+
+<h1 class="text-center test">Create System Preference General Behaviour</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 test2">
+            <div class="card bg-light shadow">
+                <div class="card-body">
+                    <form asp-action="CreateSysPrefGeneralBehaviour" method="post" id="createForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Auto_Change_Claim_Status" /> Auto Change Claim Status
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Claim_Status_Receipting" /> Claim Status Receipting
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Claim_Status_Payment" /> Claim Status Payment
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Claim_Status_Zero_Paid" /> Claim Status Zero Paid
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Claim_Status_Procare_Claim_Load" /> Claim Status Procare Claim Load
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Logout_Redirect" /> Logout Redirect
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Records_Locked_Seconds" class="control-label">Records Locked Seconds <span class="text-danger">*</span></label>
+                            <input asp-for="Records_Locked_Seconds" class="form-control" />
+                            <span asp-validation-for="Records_Locked_Seconds" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="User_Timeout" class="control-label">User Timeout <span class="text-danger">*</span></label>
+                            <input asp-for="User_Timeout" class="form-control" />
+                            <span asp-validation-for="User_Timeout" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-center test3">
+                            <input type="submit" value="Create" class="btn btn-primary mr-3" />
+                            <a asp-action="SysPrefGeneralBehaviour" class="btn btn-secondary">Back</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Claim_Status_Receipting" /> @Html.DisplayNameFor(model => model.Claim_Status_Receipting)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Claim_Status_Payment" /> @Html.DisplayNameFor(model => model.Claim_Status_Payment)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Claim_Status_Zero_Paid" /> @Html.DisplayNameFor(model => model.Claim_Status_Zero_Paid)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Claim_Status_Procare_Claim_Load" /> @Html.DisplayNameFor(model => model.Claim_Status_Procare_Claim_Load)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Logout_Redirect" /> @Html.DisplayNameFor(model => model.Logout_Redirect)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Records_Locked_Seconds" class="control-label"></label>
-                <input asp-for="Records_Locked_Seconds" class="form-control" />
-                <span asp-validation-for="Records_Locked_Seconds" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User_Timeout" class="control-label"></label>
-                <input asp-for="User_Timeout" class="form-control" />
-                <span asp-validation-for="User_Timeout" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="SysPrefGeneralBehaviour">Back to List</a>
-</div>
-
-
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/CreateSysPrefGeneralBehaviour.js"></script>
+}

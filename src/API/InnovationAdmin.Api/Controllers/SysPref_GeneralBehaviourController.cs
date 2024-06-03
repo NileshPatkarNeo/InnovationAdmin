@@ -58,15 +58,12 @@ namespace InnovationAdmin.Api.Controllers
         [HttpPost(Name = "AddSysPref_GeneralBehaviour")]
         public async Task<ActionResult> Create([FromBody] Create_SysPref_GeneralBehaviour_Command createSyspref_generalBehaviourCommand)
         {
-            // Additional manual validations
+            
             if (createSyspref_generalBehaviourCommand.Records_Locked_Seconds <= 0 ||
                 createSyspref_generalBehaviourCommand.User_Timeout <= 0)
             {
                 return BadRequest("Records_Locked_Seconds and User_Timeout must be greater than 0.");
             }
-
-            // Check for other invalid inputs if any
-            // Add more conditions as per your requirements
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

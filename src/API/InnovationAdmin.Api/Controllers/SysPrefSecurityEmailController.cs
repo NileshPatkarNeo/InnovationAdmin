@@ -1,10 +1,4 @@
-﻿using InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_User;
-using InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminUser;
-using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserById;
-using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserList;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateSysPrefCompany;
-
-using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.CreateSysPrefSecurityEmail;
+﻿using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.CreateSysPrefSecurityEmail;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.DeleteSysPrefSecurityEmail;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.UpdateSysPrefSecurityEmail;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailById;
@@ -49,23 +43,6 @@ namespace InnovationAdmin.Api.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<ActionResult> Create([FromBody] CreateSysPrefSecurityEmailCommand createSysPrefSecurityEmailCommand)
-        //{
-        //    if (string.IsNullOrWhiteSpace(createSysPrefSecurityEmailCommand.DefaultFromName) ||
-        //        string.IsNullOrWhiteSpace(createSysPrefSecurityEmailCommand.DefaultFromAddress))
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    var response = await _mediator.Send(createSysPrefSecurityEmailCommand);
-        //    if (response.Succeeded)
-        //    {
-        //        return Ok(response);
-        //    }
-        //    return BadRequest(response);
-        //}
-
         [HttpGet("{id}", Name = "GetSysPrefSecurityEmailById")]
         public async Task<ActionResult> GetSysPrefSecurityEmailById(string id)
         {
@@ -86,7 +63,7 @@ namespace InnovationAdmin.Api.Controllers
 
         [HttpPut(Name = "UpdateSysPrefSecurityEmail")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+       
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateSysPrefSecurityEmailCommand updateSysPrefSecurityEmailCommand)

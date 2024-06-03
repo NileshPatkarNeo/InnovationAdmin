@@ -2,11 +2,13 @@
 using Innovation_Admin.UI.Models.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Models.AdminUser;
 using Innovation_Admin.UI.Models.AdminRole;
-
 using Microsoft.AspNetCore.Mvc;
 using CommonCall = Innovation_Admin.UI.Common;
 
 using Innovation_Admin.UI.Services.IRepositories;
+using Innovation_Admin.UI.Filter;
+using Innovation_Admin.UI.Models.PharmacyGroup;
+using System.Reflection;
 
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
@@ -16,7 +18,7 @@ using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
 namespace Innovation_Admin.UI.Controllers
 {
 
-    //  [AuthFilter]
+     [AuthFilter]
     public class CommonController : Controller
     {
         private readonly CommonCall.Common _common;
@@ -59,9 +61,22 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> CreateSysPrefCompany(SysPrefCompanyDto company)
         {
             var result = await _common.CreateSysPrefCompany(company);
-            return RedirectToAction("SysPrefCompany");
+            if (!result.IsSuccess)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
+                }
+                return RedirectToAction("SysPrefCompany");
+            }
+           return RedirectToAction("SysPrefCompany");
         }
 
+          
         [HttpGet]
         public async Task<IActionResult> EditSysPrefCompany([FromQuery] string companyId)
         {
@@ -146,7 +161,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); // Return to the edit form with error messages
+                return View(updatedAdmin);  
             }
 
             return RedirectToAction("AdminUser");
@@ -226,7 +241,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdminRole); // Return to the edit form with error messages
+                return View(updatedAdminRole);  
             }
 
             return RedirectToAction("AdminRole");
@@ -247,18 +262,13 @@ namespace Innovation_Admin.UI.Controllers
         #endregion
 
 
-
-
         #region SysPrefGeneralBehaviour
-
-
-
         public async Task<IActionResult> SysPrefGeneralBehaviour()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefBehaviouries();
             return View(getAllSysPrefCompanies);
         }
-
+                
 
         [HttpGet]
         public IActionResult CreateSysPrefGeneralBehaviour()
@@ -267,37 +277,73 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> CreateSysPrefGeneralBehaviour(CreateSysPrefGeneralBehaviourDto company)
         {
-
+            if (!ModelState.IsValid)
+            {
+                
+                return View(company);
+            }
             var result = await _common.CreateSysPrefGeneralBehaviour(company);
                 return RedirectToAction("SysPrefGeneralBehaviour");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditSysPrefGeneralBehaviour([FromQuery] string Preference_ID)
+        {
+            if (string.IsNullOrEmpty(Preference_ID) || !Guid.TryParse(Preference_ID, out Guid prefId))
+            {
+                return BadRequest("Invalid Preference ID");
+            }
+
+            var sysPrefCompany = await _common.GetSysPrefGeneralBehaviourById(prefId);
+            if (sysPrefCompany == null || sysPrefCompany.Data == null)
+            {
+                return NotFound("System Preference General Behaviour not found");
+            }
+
+            return View(sysPrefCompany.Data);
         }
 
 
 
         [HttpGet]
-        public async Task<IActionResult> EditSysPrefGeneralBehaviour([FromQuery] string Preference_ID)
+        public async Task<IActionResult> SysPrefGeneralBehaviourDetails(Guid Preference_ID)
         {
-            var sysPrefCompany = await _common.GetSysPrefGeneralBehaviourById(Guid.Parse(Preference_ID));
-            return View(sysPrefCompany.Data);
+            if (Preference_ID == Guid.Empty)
+            {
+                return BadRequest("Preference ID is required");
+            }
+
+            var sysPrefGeneralBehaviour = await _common.GetSysPrefGeneralBehaviourById(Preference_ID);
+            if (sysPrefGeneralBehaviour == null || sysPrefGeneralBehaviour.Data == null)
+            {
+                return NotFound("System Preference General Behaviour not found");
+            }
+
+            return View(sysPrefGeneralBehaviour.Data);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditSysPrefGeneralBehaviour(SysPrefGeneralBehaviourDto updatedCompany)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(updatedCompany);  
+            }
+
             var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
 
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedCompany); // Return to the edit form with error messages
+                return View(updatedCompany);  
             }
 
             return RedirectToAction("SysPrefGeneralBehaviour");
         }
+
 
 
         [HttpPost]
@@ -311,7 +357,106 @@ namespace Innovation_Admin.UI.Controllers
             }
             return RedirectToAction("SysPrefGeneralBehaviour");
         }
+
         #endregion
+
+
+        #region PharmacyGroup
+        [HttpGet]
+        public async Task<IActionResult> PharmacyGroups()
+        {
+            var getAllgroup = await _common.GetAllPharmcayGroup();
+            return View(getAllgroup);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreatePharmacyGroup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePharmacyGroup(PharmacyGroupDto group)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(group); 
+            }
+            var result = await _common.CreatePharmacyGroup(group);
+            if (!result.IsSuccess)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the Pharmacy Group.");
+                }
+                return RedirectToAction("PharmacyGroups");
+            }
+            return RedirectToAction("PharmacyGroups");
+        }
+
+        
+
+        [HttpGet]
+        public async Task<IActionResult> EditPharmacyGroup( string Id)
+        {
+            if (string.IsNullOrEmpty(Id) || !Guid.TryParse(Id, out Guid prefId))
+            {
+                return BadRequest("Invalid ID");
+            }
+
+            var group = await _common.GetPharmacyGroupById(prefId);
+            if (group == null || group.Data == null)
+            {
+                return NotFound("group not found");
+            }
+
+            return View(group.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPharmacyGroup(PharmacyGroupDto updatedgroup)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(updatedgroup); 
+            }
+
+            var result = await _common.UpdatePharmacyGroup(updatedgroup);
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedgroup); 
+            }
+
+            return RedirectToAction("PharmacyGroups");
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePharmacyGroup(Guid Id)
+        {
+            var isDeleted = await _common.DeletePharmacyGroup(Id);
+            if (!isDeleted)
+            {
+
+                ModelState.AddModelError(string.Empty, "Failed to delete the group.");
+            }
+            return RedirectToAction("PharmacyGroups");
+        }
+
+
+        #endregion
+
+
+        
 
 
 
@@ -425,46 +570,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefFinancial");
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> EditSysPrefFinancial([FromQuery] string financialId)
-        //{
-        //    var sysPrefFinancial = await _common.GetSysPrefFinancialById(Guid.Parse(financialId));
-        //    if (sysPrefFinancial == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Retrieve the list of companies from your repository
-        //    var companies = await _common.GetCompanies();
-        //    ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-
-        //    return View(sysPrefFinancial.Data);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> EditSysPrefFinancial(SysPrefFinancialDto updatedFinancial)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Retrieve the list of companies again if model state is invalid
-        //        var companies = await _common.GetCompanies();
-        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-        //        return View(updatedFinancial);
-        //    }
-
-        //    var result = await _common.UpdateSysPrefFinancial(updatedFinancial);
-        //    if (!result.IsSuccess)
-        //    {
-        //        ModelState.AddModelError(string.Empty, result.Message);
-        //        // Retrieve the list of companies again if update failed
-        //        var companies = await _common.GetCompanies();
-        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-        //        return View(updatedFinancial);
-        //    }
-        //    return RedirectToAction("SysPrefFinancial");
-        //}
-        [HttpGet]
+         [HttpGet]
         public async Task<IActionResult> DetailsSysPrefFinancial(Guid financialID)
         {
             if (financialID == Guid.Empty)
@@ -551,7 +657,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); // Return to the edit form with error messages
+                return View(updatedAdmin); 
             }
 
             return RedirectToAction("SysPrefSecurityEmail");

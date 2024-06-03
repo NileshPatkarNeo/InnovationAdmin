@@ -23,6 +23,7 @@ builder.Services.AddScoped<IAdminUser, AdminUser>();
 builder.Services.AddScoped<IAdminRoles, AdminRoles>();
 builder.Services.AddScoped<IAccountManager, AccountManager>();
 
+builder.Services.AddScoped<IPharmacyGroup, PharmacyGroups>();
 builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
 
 builder.Services.AddScoped<ISysPrefFinancials, SysPrefFinancials>();
