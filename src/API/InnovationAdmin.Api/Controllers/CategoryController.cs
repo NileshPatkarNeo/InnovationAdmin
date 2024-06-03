@@ -1,20 +1,10 @@
-﻿using InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_User;
-using InnovationAdmin.Application.Features.PharmacyGroup.Commands.CreatePharmacyGroup;
+﻿using InnovationAdmin.Application.Features.PharmacyGroup.Commands.CreatePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Commands.DeletePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Commands.UpdatePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetAllListPharmacyGroupQuery;
 using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetPharmacyGroupQuery;
-using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Queries.Get_SysPref_GeneralBehaviour_List;
-using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Queries.GetById_SysPref_GeneralBehaviour;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateSysPrefCompany;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.DeleteSysPrefCommand;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPrefCompany;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetAllListSysPrefCompnayQuery;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace InnovationAdmin.Api.Controllers
 {
@@ -33,13 +23,21 @@ namespace InnovationAdmin.Api.Controllers
 
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreatePharmacyGroupCommand createPharmacyGroupCommand)
-        {                
+        {
+            if (string.IsNullOrEmpty(createPharmacyGroupCommand.PharmacyName))
+            {
+                return BadRequest("PharmacyName cannot be null or empty");
+            }
+
             var response = await _mediator.Send(createPharmacyGroupCommand);
+            if (response.Succeeded)
+            {
                 return Ok(response);
-            
+            }
+            return BadRequest(response);
         }
 
-      
+
         [HttpDelete("{id}", Name = "DeletePharmacyGroup")]
         public async Task<ActionResult> Delete(Guid id)
         {
@@ -48,6 +46,10 @@ namespace InnovationAdmin.Api.Controllers
             if (result.Data)
             {
                 return Ok(result);
+            }
+            else if (!result.Succeeded)
+            {
+                return StatusCode(500, result); 
             }
             return NotFound(result);
         }
@@ -90,7 +92,7 @@ namespace InnovationAdmin.Api.Controllers
         [HttpGet("all", Name = "GetPharmacyGroup")]
         public async Task<ActionResult> GetPharmacyGroup()
         {
-            _logger.LogInformation("PharmacyGroupr Initiated");
+            _logger.LogInformation("PharmacyGroup Initiated");
             var dtos = await _mediator.Send(new GetAllPharmacyGroupQuery());
             _logger.LogInformation("PharmacyGroup Completed");
             return Ok(dtos);

@@ -30,6 +30,7 @@ namespace Innovation_Admin.UI.Common
         private readonly ISysPrefCompanies sysPrefCompanies;
         private readonly IAdminUser adminUser;
         private readonly IAdminRoles adminRoles;
+        private readonly ISysPrefSecurityEmails sysPrefSecurityEmails;
         private readonly IAccountManager accountManager;
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly ISysPrefFinancials sysPrefFinancial;
@@ -39,7 +40,7 @@ namespace Innovation_Admin.UI.Common
 
         
       
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails )
 
         {
             adminUser = _adminUser;
@@ -260,7 +261,7 @@ namespace Innovation_Admin.UI.Common
         #endregion
 
 
-
+        #region Pharmacy Group
 
         public async Task<IEnumerable<PharmacyGroupDto>> GetAllPharmcayGroup()
         {
@@ -299,6 +300,7 @@ namespace Innovation_Admin.UI.Common
         {
             return await pharmacyGroups.DeletePharmacyGroup(Id);
         }
+        #endregion
 
         public async Task<CreateAccountManagerResponseModel> CreateAccountManager(AccountManagerDto manager)
         {
@@ -321,9 +323,6 @@ namespace Innovation_Admin.UI.Common
         }
 
         
-
-
-
         public async Task<IEnumerable<SysPrefSecurityEmailDto>> GetAllSysPrefSecurityEmail()
         {
             GetAllSysPrefSecurityEmailResponseModel getAllSysPrefSecurityEmailResponseModel = new GetAllSysPrefSecurityEmailResponseModel();

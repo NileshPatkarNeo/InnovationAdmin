@@ -16,7 +16,6 @@ using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
 
 namespace Innovation_Admin.UI.Controllers
 {
-
     //  [AuthFilter]
     public class CommonController : Controller
     {
@@ -447,10 +446,6 @@ namespace Innovation_Admin.UI.Controllers
 
 
         #endregion
-
-
-        
-
 
 
         #region Lookup_Table_Account_Manager

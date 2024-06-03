@@ -31,12 +31,11 @@ namespace InnovationAdmin.API.UnitTests.Controllers
             _controller = new SysPref_GeneralBehaviourController(_mediatorMock.Object, _loggerMock.Object);
         }
 
-        
+
 
         [Fact]
         public async Task Create_ShouldReturnBadRequest_WhenCommandIsNotValid()
         {
-            // Arrange
             var command = new Create_SysPref_GeneralBehaviour_Command
             {
                 Auto_Change_Claim_Status = true,
@@ -45,17 +44,15 @@ namespace InnovationAdmin.API.UnitTests.Controllers
                 Claim_Status_Zero_Paid = false,
                 Claim_Status_Procare_Claim_Load = true,
                 Logout_Redirect = false,
-                Records_Locked_Seconds = -9, // Invalid negative value
-                User_Timeout = 0 // Invalid zero value
+                Records_Locked_Seconds = -9, 
+                User_Timeout = 0 
             };
 
             _controller.ModelState.AddModelError("Records_Locked_Seconds", "Records_Locked_Seconds must be greater than 0");
             _controller.ModelState.AddModelError("User_Timeout", "User_Timeout must be greater than 0");
 
-            // Act
             var result = await _controller.Create(command);
 
-            // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             var modelState = Assert.IsType<SerializableError>(badRequestResult.Value);
             Assert.True(modelState.ContainsKey("Records_Locked_Seconds"));
@@ -67,7 +64,6 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task Update_ShouldReturnOkResult_WhenCommandIsValid()
         {
-            // Arrange
             var command = new Update_SysPref_GeneralBehaviour_Command
             {
                 Preference_ID = Guid.NewGuid(),
@@ -104,10 +100,8 @@ namespace InnovationAdmin.API.UnitTests.Controllers
                 .Setup(m => m.Send(It.IsAny<Update_SysPref_GeneralBehaviour_Command>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
-            // Act
             var result = await _controller.Update(command);
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnedResponse = Assert.IsType<Response<Update_SysPref_GeneralBehaviour_Dto>>(okResult.Value);
             Assert.Equal(responseDto, returnedResponse.Data);
@@ -116,28 +110,26 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task Update_ShouldReturnBadRequest_WhenCommandIsNotValid()
         {
-            // Arrange
+
             var command = new Update_SysPref_GeneralBehaviour_Command
             {
-                Preference_ID = Guid.Empty, // Invalid GUID
+                Preference_ID = Guid.Empty, 
                 Auto_Change_Claim_Status = true,
                 Claim_Status_Receipting = false,
                 Claim_Status_Payment = true,
                 Claim_Status_Zero_Paid = false,
                 Claim_Status_Procare_Claim_Load = true,
                 Logout_Redirect = false,
-                Records_Locked_Seconds = -1, // Invalid negative value
-                User_Timeout = 0 // Invalid zero value
+                Records_Locked_Seconds = -1, 
+                User_Timeout = 0 
             };
 
             _controller.ModelState.AddModelError("Preference_ID", "Invalid GUID format");
             _controller.ModelState.AddModelError("Records_Locked_Seconds", "Records_Locked_Seconds must be greater than 0");
             _controller.ModelState.AddModelError("User_Timeout", "User_Timeout must be greater than 0");
 
-            // Act
             var result = await _controller.Update(command);
 
-            // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             var modelState = Assert.IsType<SerializableError>(badRequestResult.Value);
             Assert.True(modelState.ContainsKey("Preference_ID"));
@@ -149,30 +141,24 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task Delete_ShouldReturnNoContent_WhenCommandIsValid()
         {
-            // Arrange
             var id = Guid.NewGuid().ToString();
 
             _mediatorMock
                 .Setup(m => m.Send(It.IsAny<Delete_SysPref_GeneralBehaviour_Command>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(Unit.Value);
 
-            // Act
             var result = await _controller.Delete(id);
 
-            // Assert
             Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
         public async Task Delete_ShouldReturnBadRequest_WhenCommandIsNotValid()
         {
-            // Arrange
             var invalidId = "invalid-guid";
 
-            // Act
             var result = await _controller.Delete(invalidId);
 
-            // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal("Invalid GUID format", badRequestResult.Value);
         }
@@ -181,7 +167,6 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task GetAllSysPref_ShouldReturnOkResult_WithListOfSysPref()
         {
-            // Arrange
             var sysPrefList = new List<SysPref_GeneralBehaviour_ListVM>
             {
                 new SysPref_GeneralBehaviour_ListVM
@@ -220,10 +205,8 @@ namespace InnovationAdmin.API.UnitTests.Controllers
                 .Setup(m => m.Send(It.IsAny<Get_SysPref_GeneralBehaviour_List_Query>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
-            // Act
             var result = await _controller.GetAllSysPref();
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnedResponse = Assert.IsType<Response<IEnumerable<SysPref_GeneralBehaviour_ListVM>>>(okResult.Value);
             Assert.Equal(sysPrefList, returnedResponse.Data);
@@ -233,7 +216,6 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task GetSysPref_GeneralBehaviourId_ShouldReturnOkResult_WithSysPref()
         {
-            // Arrange
             var preferenceId = Guid.NewGuid();
             var sysPref = new GetById_SysPref_GeneralBehaviours_VM
             {
@@ -258,10 +240,8 @@ namespace InnovationAdmin.API.UnitTests.Controllers
                 .Setup(m => m.Send(It.IsAny<GetById_SysPref_GeneralBehaviours_Query>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
-            // Act
             var result = await _controller.GetSysPref_GeneralBehaviourId(preferenceId.ToString());
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnedResponse = Assert.IsType<Response<GetById_SysPref_GeneralBehaviours_VM>>(okResult.Value);
             Assert.Equal(sysPref, returnedResponse.Data);
@@ -270,13 +250,10 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task GetSysPref_GeneralBehaviourId_ShouldReturnBadRequest_WhenIdIsInvalid()
         {
-            // Arrange
             string invalidId = "invalid-guid";
 
-            // Act
             var result = await _controller.GetSysPref_GeneralBehaviourId(invalidId);
 
-            // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal("Invalid ID format.", badRequestResult.Value);
         }
@@ -284,17 +261,15 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task GetSysPref_GeneralBehaviourId_ShouldReturnNotFound_WhenSysPrefDoesNotExist()
         {
-            // Arrange
+
             var nonExistingId = Guid.NewGuid();
 
             _mediatorMock
                 .Setup(m => m.Send(It.IsAny<GetById_SysPref_GeneralBehaviours_Query>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync((Response<GetById_SysPref_GeneralBehaviours_VM>)null);
 
-            // Act
             var result = await _controller.GetSysPref_GeneralBehaviourId(nonExistingId.ToString());
 
-            // Assert
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             Assert.Equal("System preference not found.", notFoundResult.Value);
         }
