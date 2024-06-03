@@ -11,6 +11,6 @@ namespace InnovationAdmin.Application.Features.AccountManager.Queries.GetAllAcco
 {
     public class GetAllAccountManagersQuery : IRequest<Response<IEnumerable<AccountManagerDto>>>
     {
-        // You can add any necessary properties or parameters here
+        
     }
 }

@@ -17,10 +17,12 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IAdminRoleRepository, AdminRoleRepository>();
             services.AddScoped<IAccountManagerRepository, AccountManagerRepository>();
+            services.AddScoped<IPharmacyGroupRepository, PharmacyGroupRepository>();
 
 
 
             services.AddScoped<IAdminUserRepository, AdminUserRepository>();
+            services.AddScoped<ISysPrefSecurityEmailRepository,  SysPrefSecurityEmailRepository>();
 
             services.AddScoped<ISysPrefCompanyRepository, SysPrefCompanyRepository>();
             services.AddScoped<ISysPref_GeneralBehaviourRepository, SysPref_GeneralBehaviourRepository>();

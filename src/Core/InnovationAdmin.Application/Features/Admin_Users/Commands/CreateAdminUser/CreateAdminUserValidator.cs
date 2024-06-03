@@ -11,36 +11,32 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_
 {
     public class CreateAdminUserValidator : AbstractValidator<CreateAdminUserCommand>
     {
-        
+
         public CreateAdminUserValidator()
         {
-            
+
 
             RuleFor(p => p.User_Name)
-                .NotEmpty().WithMessage("Error")
-                .NotNull()
-                .MaximumLength(50).WithMessage("Error");
+     .NotEmpty().WithMessage("UserName is not valid")
+         .NotNull()
+     .MaximumLength(50).WithMessage("Length should be less than 50 characters");
 
             RuleFor(p => p.Password)
-                .NotEmpty().WithMessage("Error")
+                .NotEmpty().WithMessage("Password is not valid")
                 .NotNull()
-                .MinimumLength(8).WithMessage("Error");
+                .MaximumLength(40).WithMessage("Length should be less than 40 characters");
 
             RuleFor(p => p.Role)
-                .NotEmpty().WithMessage("Error")
-                .GreaterThan(0).WithMessage("Error");
+                .NotEmpty().WithMessage("Role is an int value")
+                .GreaterThan(0).WithMessage("Number should be greater than 0");
 
             RuleFor(p => p.Email)
-                .NotEmpty().WithMessage("Error")
-                .EmailAddress().WithMessage("Error");
+                .NotEmpty().WithMessage("Email is not valid")
+                .EmailAddress().WithMessage("Put valid format of Email");
 
             RuleFor(p => p.Status)
-                .NotNull().WithMessage("Error");
+                .NotNull().WithMessage("Boolean value");
         }
 
-        //private string GetMessage(string Code, string Lang)
-        //{
-        //    return _messageRepository.GetMessage(Code, Lang).Result.MessageContent.ToString();
-        //}
     }
 }

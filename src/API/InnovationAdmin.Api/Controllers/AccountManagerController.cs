@@ -3,6 +3,7 @@ using InnovationAdmin.Application.Features.AccountManager.Commands.DeleteAccount
 using InnovationAdmin.Application.Features.AccountManager.Commands.UpdateAccountManager;
 using InnovationAdmin.Application.Features.AccountManager.Queries.GetAccountManagerById;
 using InnovationAdmin.Application.Features.AccountManager.Queries.GetAllAccountManager;
+using InnovationAdmin.Application.Features.PharmacyGroup.Commands.CreatePharmacyGroup;
 using InnovationAdmin.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -17,19 +18,32 @@ namespace InnovationAdmin.Api.Controllers
 
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
+      
 
-        public AccountManagerController(IMediator mediator, ILogger<SysPrefCompanyController> logger)
+        public AccountManagerController(IMediator mediator, ILogger<AccountManagerController> logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
+
+      
+
         [HttpPost]
         public async Task<ActionResult<Response<CreateAccountManagerDto>>> Create([FromBody] CreateAccountManagerCommand createAccountManagerCommand)
         {
-          
-                var response = await _mediator.Send(createAccountManagerCommand);
+
+            if (string.IsNullOrEmpty(createAccountManagerCommand.Name))
+            {
+                return BadRequest("Name cannot be null or empty");
+            }
+
+            var response = await _mediator.Send(createAccountManagerCommand);
+            if (response.Succeeded)
+            {
                 return Ok(response);
-         
+            }
+            return BadRequest(response);
+
         }
 
         [HttpGet("{accountId}")]
@@ -62,8 +76,10 @@ namespace InnovationAdmin.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            _logger.LogInformation("Account Manager Initiated");
             var query = new GetAllAccountManagersQuery();
             var response = await _mediator.Send(query);
+            _logger.LogInformation("Account Manager Completed");
             return Ok(response);
         }
 
@@ -82,9 +98,11 @@ namespace InnovationAdmin.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
+            
             var command = new DeleteAccountManagerCommand { Id = id };
             var response = await _mediator.Send(command);
             return Ok(response);
+
         }
     }
 }
