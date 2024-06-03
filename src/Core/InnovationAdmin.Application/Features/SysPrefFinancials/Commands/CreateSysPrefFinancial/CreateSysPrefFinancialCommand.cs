@@ -18,6 +18,7 @@ namespace InnovationAdmin.Application.Features.SysPrefFinancials.Commands.Create
         [StringLength(50)]
         public string DefaultPaymentMethod { get; set; }
 
+        [Required]
         [Range(0, int.MaxValue)]
         public int LastCheckNo { get; set; }
 
@@ -27,15 +28,19 @@ namespace InnovationAdmin.Application.Features.SysPrefFinancials.Commands.Create
         [Required]
         public DateTime ClaimAgeCollectionEnd { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string DefaultReceiptBatchDescription { get; set; }
 
+        [Required]
         [Range(0, int.MaxValue)]
         public int ClaimPaidThreshold { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string ClaimStatusWriteOff { get; set; }
 
+        [Required]
         [Range(0, int.MaxValue)]
         public int DaysToBlock { get; set; }
     }

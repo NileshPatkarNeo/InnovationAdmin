@@ -70,8 +70,12 @@ $(document).ready(function () {
 
     function validateDefaultReceiptBatchDescription() {
         var description = $('#DefaultReceiptBatchDescription').val();
+        var regex = /^[a-zA-Z]+\d*$/; // Regex to match a string followed by numbers
         if (!description) {
             $('#defaultReceiptBatchDescriptionError').text('Default Receipt Batch Description is required.');
+            return false;
+        } else if (!regex.test(description)) {
+            $('#defaultReceiptBatchDescriptionError').text('Default Receipt Batch Description must start with letters followed by numbers.');
             return false;
         } else if (description.length > 200) {
             $('#defaultReceiptBatchDescriptionError').text('Default Receipt Batch Description cannot exceed 200 characters.');
@@ -98,8 +102,12 @@ $(document).ready(function () {
 
     function validateClaimStatusWriteOff() {
         var statusWriteOff = $('#ClaimStatusWriteOff').val();
+        var regex = /^[a-zA-Z]+\d*$/; // Regex to match a string followed by numbers
         if (!statusWriteOff) {
             $('#claimStatusWriteOffError').text('Claim Status Write Off is required.');
+            return false;
+        } else if (!regex.test(statusWriteOff)) {
+            $('#claimStatusWriteOffError').text('Claim Status Write Off must start with letters followed by numbers.');
             return false;
         } else if (statusWriteOff.length > 200) {
             $('#claimStatusWriteOffError').text('Claim Status Write Off cannot exceed 200 characters.');

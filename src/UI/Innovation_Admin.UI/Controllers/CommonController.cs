@@ -361,11 +361,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult CreateSysPrefFinancial()
-        //{
-        //    return View();
-        //}
+      
 
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefFinancial(SysPrefFinancialDto financial)
@@ -408,45 +404,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefFinancial");
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> EditSysPrefFinancial([FromQuery] string financialId)
-        //{
-        //    var sysPrefFinancial = await _common.GetSysPrefFinancialById(Guid.Parse(financialId));
-        //    if (sysPrefFinancial == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Retrieve the list of companies from your repository
-        //    var companies = await _common.GetCompanies();
-        //    ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-
-        //    return View(sysPrefFinancial.Data);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> EditSysPrefFinancial(SysPrefFinancialDto updatedFinancial)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Retrieve the list of companies again if model state is invalid
-        //        var companies = await _common.GetCompanies();
-        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-        //        return View(updatedFinancial);
-        //    }
-
-        //    var result = await _common.UpdateSysPrefFinancial(updatedFinancial);
-        //    if (!result.IsSuccess)
-        //    {
-        //        ModelState.AddModelError(string.Empty, result.Message);
-        //        // Retrieve the list of companies again if update failed
-        //        var companies = await _common.GetCompanies();
-        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-        //        return View(updatedFinancial);
-        //    }
-        //    return RedirectToAction("SysPrefFinancial");
-        //}
+      
         [HttpGet]
         public async Task<IActionResult> DetailsSysPrefFinancial(Guid financialID)
         {
