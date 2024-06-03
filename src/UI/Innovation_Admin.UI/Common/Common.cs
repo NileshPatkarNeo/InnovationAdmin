@@ -33,7 +33,7 @@ namespace Innovation_Admin.UI.Common
         private readonly IPharmacyGroup pharmacyGroups;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
-        private readonly ISysPrefSecurityEmails sysPrefSecurityEmails;
+       
 
         
       
