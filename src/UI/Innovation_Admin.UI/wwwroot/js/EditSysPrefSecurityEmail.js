@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (defaultFromName.trim() === "") {
             defaultFromNameError.textContent = "Default From Name is required.";
             isValid = false;
-        } else if (defaultFromName.length > 15) {
-            defaultFromNameError.textContent = "Default From Name cannot exceed 15 characters.";
+        } else if (defaultFromName.length > 20) {
+            defaultFromNameError.textContent = "Default From Name cannot exceed 20 characters.";
             isValid = false;
         } else {
             defaultFromNameError.textContent = "";
@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (defaultReplyToName.trim() === "") {
             defaultReplyToNameError.textContent = "Default Reply To Name is required.";
             isValid = false;
-        } else if (defaultReplyToName.length > 15) {
-            defaultReplyToNameError.textContent = "Default Reply To Name cannot exceed 15 characters.";
+        } else if (defaultReplyToName.length > 20) {
+            defaultReplyToNameError.textContent = "Default Reply To Name cannot exceed 20 characters.";
             isValid = false;
         } else {
             defaultReplyToNameError.textContent = "";

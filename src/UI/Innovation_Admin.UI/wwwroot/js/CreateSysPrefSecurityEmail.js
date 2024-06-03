@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (defaultFromName.trim() === "") {
             defaultFromNameError.textContent = "Default From Name is required.";
             isValid = false;
-        } else if (defaultFromName.length > 15) {
-            defaultFromNameError.textContent = "Default From Name cannot exceed 15 characters.";
+        } else if (defaultFromName.length > 20) {
+            defaultFromNameError.textContent = "Default From Name cannot exceed 20 characters.";
             isValid = false;
         } else {
             defaultFromNameError.textContent = "";
@@ -28,8 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (!validateEmail(defaultFromAddress)) {
             defaultFromAddressError.textContent = "Please enter a valid email address.";
             isValid = false;
-        } else if (defaultFromAddress.length > 100) {
-            defaultFromAddressError.textContent = "Default From Address cannot exceed 100 characters.";
+        } else if (!emailRegex.test(email)) {
+            emailError.textContent = "Invalid email format.";
+            isValid = false;
+        } else if (!defaultFromAddress.includes(".com")) {
+            defaultFromAddressError.textContent = "Email address must contain .com";
+            isValid = false;
+
+        } else if (defaultFromAddress.length > 20) {
+            defaultFromAddressError.textContent = "Default From Address cannot exceed 20 characters.";
             isValid = false;
         } else {
             defaultFromAddressError.textContent = "";
@@ -44,8 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (!validateEmail(defaultReplyToAddress)) {
             defaultReplyToAddressError.textContent = "Please enter a valid email address.";
             isValid = false;
-        } else if (defaultReplyToAddress.length > 100) {
-            defaultReplyToAddressError.textContent = "Default Reply To Address cannot exceed 100 characters.";
+        } else if (!defaultFromAddress.includes(".com")) {
+            defaultFromAddressError.textContent = "Email address must contain .com";
+            isValid = false;
+        }else if (defaultReplyToAddress.length > 20) {
+            defaultReplyToAddressError.textContent = "Default Reply To Address cannot exceed 20 characters.";
             isValid = false;
         } else {
             defaultReplyToAddressError.textContent = "";
@@ -57,8 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (defaultReplyToName.trim() === "") {
             defaultReplyToNameError.textContent = "Default Reply To Name is required.";
             isValid = false;
-        } else if (defaultReplyToName.length > 15) {
-            defaultReplyToNameError.textContent = "Default Reply To Name cannot exceed 15 characters.";
+        } else if (defaultReplyToName.length > 20) {
+            defaultReplyToNameError.textContent = "Default Reply To Name cannot exceed 20 characters.";
             isValid = false;
         } else {
             defaultReplyToNameError.textContent = "";

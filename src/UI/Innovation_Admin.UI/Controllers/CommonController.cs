@@ -146,7 +146,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); // Return to the edit form with error messages
+                return View(updatedAdmin); 
             }
 
             return RedirectToAction("AdminUser");
@@ -195,10 +195,8 @@ namespace Innovation_Admin.UI.Controllers
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the AdminRole.");
                 }
 
-
                 return RedirectToAction("AdminRole");
             }
-
 
             return RedirectToAction("AdminRole");
         }
@@ -220,7 +218,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdminRole); // Return to the edit form with error messages
+                return View(updatedAdminRole); 
             }
 
             return RedirectToAction("AdminRole");
@@ -404,7 +402,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); // Return to the edit form with error messages
+                return View(updatedAdmin); 
             }
 
             return RedirectToAction("SysPrefSecurityEmail");

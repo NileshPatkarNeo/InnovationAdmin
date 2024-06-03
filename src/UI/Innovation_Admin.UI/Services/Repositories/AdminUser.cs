@@ -13,13 +13,10 @@ namespace Innovation_Admin.UI.Services.Repositories
     public class AdminUser : IAdminUser
     {
         private APIRepository _apiRepository;
-
         private Response<string> _oApiResponse;
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-
-
 
         public AdminUser(IOptions<ApiBaseUrl> apiBaseUrl)
         {
@@ -74,7 +71,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = ex.Message; // Ideally, log this exception
+                response.Message = ex.Message; 
             }
 
             return response;
@@ -91,8 +88,8 @@ namespace Innovation_Admin.UI.Services.Repositories
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.UpdateAdminUser.Replace("{id}", updatedAdmin.User_ID.ToString()), // Define the 
-                    HttpMethod.Put, // Use PUT method for updates
+                    URLHelper.UpdateAdminUser.Replace("{id}", updatedAdmin.User_ID.ToString()), 
+                    HttpMethod.Put, 
                     content,
                     string.Empty);
 
@@ -105,7 +102,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = ex.Message; // Ideally, log this exception
+                response.Message = ex.Message;
             }
 
             return response;
@@ -117,31 +114,25 @@ namespace Innovation_Admin.UI.Services.Repositories
 
             try
             {
-
-                // Make the API call to fetch the SysPrefCompany by its ID
                 _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl, URLHelper.GetAdminUserById.Replace("{id}", companyId.ToString()), HttpMethod.Get, null, _sToken);
 
                 if (_oApiResponse != null && !string.IsNullOrEmpty(_oApiResponse.data))
                 {
-
                     response = JsonConvert.DeserializeObject<GetAdminUserByIdResponseModel>(_oApiResponse.data);
-
                     response.IsSuccess = true;
                 }
                 else
                 {
-                    // If no data is returned, set IsSuccess to false and provide an appropriate message
                     response.IsSuccess = false;
                     response.Message = "No data found for the specified company ID.";
                 }
             }
             catch (Exception ex)
             {
-                // Handle exception
+                
                 response.IsSuccess = false;
-                response.Message = ex.Message; // Log this exception
+                response.Message = ex.Message; 
             }
-
             return response;
         }
 
@@ -163,7 +154,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             }
             catch (Exception ex)
             {
-                // Log the exception
+                
                 return false;
             }
         }
