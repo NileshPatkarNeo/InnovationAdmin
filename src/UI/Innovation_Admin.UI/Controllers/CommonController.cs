@@ -216,10 +216,8 @@ namespace Innovation_Admin.UI.Controllers
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the AdminRole.");
                 }
 
-
                 return RedirectToAction("AdminRole");
             }
-
 
             return RedirectToAction("AdminRole");
         }

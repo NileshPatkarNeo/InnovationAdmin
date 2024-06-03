@@ -14,7 +14,6 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Cr
         public CreateSysPrefSecurityEmailValidator()
         {
 
-
             RuleFor(p => p.DefaultFromName)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull().WithMessage("{PropertyName} is required.")
