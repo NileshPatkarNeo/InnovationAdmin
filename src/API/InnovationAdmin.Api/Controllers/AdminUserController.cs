@@ -78,6 +78,7 @@ namespace InnovationAdmin.Api.Controllers
 
         [HttpPut(Name = "UpdateAdminUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+     
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Update(Guid id,[FromBody] UpdateAdminUserCommand updateAdminUserCommand)

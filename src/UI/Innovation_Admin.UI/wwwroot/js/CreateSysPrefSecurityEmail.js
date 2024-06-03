@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (!defaultFromAddress.includes(".com")) {
             defaultFromAddressError.textContent = "Email address must contain .com";
             isValid = false;
-        }else if (defaultReplyToAddress.length > 20) {
+        } else if (defaultReplyToAddress.length > 20) {
             defaultReplyToAddressError.textContent = "Default Reply To Address cannot exceed 20 characters.";
             isValid = false;
         } else {

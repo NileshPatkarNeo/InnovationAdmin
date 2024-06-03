@@ -11,14 +11,15 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_
 {
     public class CreateAdminUserValidator : AbstractValidator<CreateAdminUserCommand>
     {
-        
+
         public CreateAdminUserValidator()
         {
 
+
             RuleFor(p => p.User_Name)
-                .NotEmpty().WithMessage("UserName is not valid")
-                .NotNull()
-                .MaximumLength(50).WithMessage("Length should be less than 50 characters");
+     .NotEmpty().WithMessage("UserName is not valid")
+         .NotNull()
+     .MaximumLength(50).WithMessage("Length should be less than 50 characters");
 
             RuleFor(p => p.Password)
                 .NotEmpty().WithMessage("Password is not valid")

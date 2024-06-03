@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (userName.trim() === "") {
             userNameError.textContent = "User Name is required.";
             isValid = false;
-        } else if (userName.length > 50) {
-            userNameError.textContent = "User Name should be 50 characters or less.";
+        } else if (userName.length > 20) {
+            userNameError.textContent = "User Name should be 20 characters or less.";
             isValid = false;
         } else {
             userNameError.textContent = "";

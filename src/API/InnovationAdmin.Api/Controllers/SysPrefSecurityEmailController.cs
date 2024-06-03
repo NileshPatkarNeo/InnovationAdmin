@@ -35,6 +35,7 @@ namespace InnovationAdmin.Api.Controllers
 
         }
 
+
         [HttpGet("{id}", Name = "GetSysPrefSecurityEmailById")]
         public async Task<ActionResult> GetSysPrefSecurityEmailById(string id)
         {
@@ -69,6 +70,7 @@ namespace InnovationAdmin.Api.Controllers
 
         [HttpPut(Name = "UpdateSysPrefSecurityEmail")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+       
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateSysPrefSecurityEmailCommand updateSysPrefSecurityEmailCommand)

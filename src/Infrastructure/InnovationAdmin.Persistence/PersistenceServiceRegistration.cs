@@ -17,6 +17,7 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IAdminRoleRepository, AdminRoleRepository>();
             services.AddScoped<IAccountManagerRepository, AccountManagerRepository>();
+            services.AddScoped<IPharmacyGroupRepository, PharmacyGroupRepository>();
 
 
 

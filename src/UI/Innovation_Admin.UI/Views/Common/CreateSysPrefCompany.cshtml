@@ -3,66 +3,49 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 <style>
-    .test
+    body
     {
-    margin-top:70px;}
-    .test2
-    {margin-top:50px;
+
+    height:50vh;}
+    
+    .test {
+        margin-top: 30px;
+    }
+
+    .test2 {
+        margin-top: 50px;
     }
 </style>
-<h1 class="text-center test" >Create System Preference</h1>
 
+<body>
+<h1 class="text-center test">Create System Preference</h1>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 test2">
             <div class="card bg-light shadow">
-                <div class="card-body ">
-                    <form asp-action="CreateSysPrefCompany" method="post" id="createCompanyForm">
+                <div class="card-body">
+                    <form asp-action="CreateSysPrefCompany" method="post" id="createCompanyForm" onsubmit="return validateForm()">
                         <div class="form-group mb-4">
                             <label asp-for="CompanyName" class="control-label">Company Name <span class="text-danger">*</span></label>
-                            <input asp-for="CompanyName" class="form-control" required />
-                            <span asp-validation-for="CompanyName" class="text-danger"></span>
+                            <input asp-for="CompanyName" id="CompanyName" class="form-control" maxlength="60" />
+                            <span id="companyNameError" class="text-danger"></span>
                         </div>
                         <div class="form-group mb-4">
                             <label asp-for="TermForPharmacy" class="control-label">Term For Pharmacy <span class="text-danger">*</span></label>
-                            <input asp-for="TermForPharmacy" class="form-control" required />
-                            <span asp-validation-for="TermForPharmacy" class="text-danger"></span>
+                            <input asp-for="TermForPharmacy" id="TermForPharmacy" class="form-control" maxlength="60" />
+                            <span id="termForPharmacyError" class="text-danger"></span>
                         </div>
                         <div class="form-group text-center">
                             <input type="submit" value="Create" class="btn btn-primary mr-3" />
-                            <a asp-action="SysPrefCompany" class="btn btn-secondary">Back to List</a>
+                            <a asp-action="SysPrefCompany" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-}
-
-<h1>Create System Preference Company</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateSysPrefCompany" method="post">
-            <div class="form-group">
-                <label for="CompanyName" class="control-label">Company Name</label>
-                <input id="CompanyName" name="CompanyName" class="form-control" required />
-                <span asp-validation-for="CompanyName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="TermForPharmacy" class="control-label">Term for Pharmacy</label>
-                <input id="TermForPharmacy" name="TermForPharmacy" class="form-control" required />
-                <span asp-validation-for="TermForPharmacy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
 </div>
 
-<div>
-    <a asp-action="SysPrefCompany">Back to List</a>
-</div>
+</body>
+<script src="~/js/CreateSysPrefCompanyy.js"></script>

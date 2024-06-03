@@ -10,7 +10,7 @@ namespace Innovation_Admin.UI.Models.SysPrefSecurityEmail
 
         [JsonProperty("defaultFromName")]
         [Required(ErrorMessage = "Default From Name is required.")]
-        [MaxLength(20, ErrorMessage = "Default From Name cannot exceed 50 characters.")]
+        [MaxLength(20, ErrorMessage = "Default From Name cannot exceed 20 characters.")]
         public string DefaultFromName { get; set; }
 
         [JsonProperty("defaultFromAddress")]
@@ -27,7 +27,7 @@ namespace Innovation_Admin.UI.Models.SysPrefSecurityEmail
 
         [JsonProperty("defaultReplyToName")]
         [Required(ErrorMessage = "Default Reply To Name is required.")]
-        [MaxLength(20, ErrorMessage = "Default Reply To Name cannot exceed 50 characters.")]
+        [MaxLength(20, ErrorMessage = "Default Reply To Name cannot exceed 20 characters.")]
         public string DefaultReplyToName { get; set; }
 
         [JsonProperty("status")]

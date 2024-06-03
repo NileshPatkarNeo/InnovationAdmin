@@ -23,12 +23,12 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Cr
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull().WithMessage("{PropertyName} is required")
                 .EmailAddress().WithMessage("Invalid Email Format");
-             
+
             RuleFor(p => p.DefaultReplyToAddress)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull().WithMessage("{PropertyName} is required")
                 .EmailAddress().WithMessage("Invalid Email Format");
-          
+
             RuleFor(p => p.DefaultReplyToName)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull().WithMessage("{PropertyName} is required")
@@ -37,7 +37,6 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Cr
             RuleFor(p => p.Status)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull().WithMessage("{PropertyName} is required");
-
 
         }
 
