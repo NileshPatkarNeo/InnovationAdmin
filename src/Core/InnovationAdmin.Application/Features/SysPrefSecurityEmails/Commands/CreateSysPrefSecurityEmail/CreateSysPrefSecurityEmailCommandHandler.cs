@@ -12,13 +12,10 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Cr
     {
         private readonly IMapper _mapper;
         private readonly ISysPrefSecurityEmailRepository _sysPrefSecurityEmailRepository;
-
-
         public CreateSysPrefSecurityEmailCommandHandler(IMapper mapper, ISysPrefSecurityEmailRepository sysPrefSecurityEmailRepository)
         {
             _mapper = mapper;
             _sysPrefSecurityEmailRepository = sysPrefSecurityEmailRepository;
-
         }
 
         public async Task<Response<CreateSysPrefSecurityEmailDto>> Handle(CreateSysPrefSecurityEmailCommand request, CancellationToken cancellationToken)

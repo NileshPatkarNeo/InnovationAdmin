@@ -13,26 +13,26 @@ namespace InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.Up
         public UpdateSysPrefSecurityEmailCommandValidator()
         {
             RuleFor(p => p.DefaultFromName)
-            .NotEmpty().WithMessage("Error")
-            .NotNull().WithErrorCode("Name is Requied")
-            .MaximumLength(50).WithMessage("Error");
+.NotEmpty().WithMessage("{PropertyName} is required.")
+.NotNull().WithErrorCode("Name is Requied")
+.MaximumLength(50).WithMessage("Length should be less than 50 characters");
 
             RuleFor(p => p.DefaultFromAddress)
-                .NotEmpty().WithMessage("Error")
-                .NotNull().WithErrorCode("Name is Requied")
-                  .EmailAddress().WithMessage("Error");
-               
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull().WithErrorCode("{PropertyName} is required.")
+                .EmailAddress().WithMessage("Invalid Email Format");
+
 
             RuleFor(p => p.DefaultReplyToAddress)
-                .NotEmpty().WithMessage("Error")
+                .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull().WithErrorCode("ReplyToAddress is Requied")
-                 .EmailAddress().WithMessage("Error");
-               
+                .EmailAddress().WithMessage("Invalid Email Format");
+
 
             RuleFor(p => p.DefaultReplyToName)
-                .NotEmpty().WithMessage("Error")
-                     .NotNull().WithErrorCode("ReplyToName is Requied")
-             .MinimumLength(8).WithMessage("Error");
+                .NotEmpty().WithMessage("{PropertyName} is required")
+                .NotNull().WithErrorCode("ReplyToName is Requied")
+                .MaximumLength(50).WithMessage("Length should be less than 50 characters");
 
             RuleFor(p => p.Status)
              .NotNull().WithMessage("Error");

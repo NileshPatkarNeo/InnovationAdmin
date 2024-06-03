@@ -1,20 +1,11 @@
-﻿using InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_User;
-using InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminUser;
-using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserById;
-using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserList;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateSysPrefCompany;
-
-using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.CreateSysPrefSecurityEmail;
+﻿using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.CreateSysPrefSecurityEmail;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.DeleteSysPrefSecurityEmail;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Commands.UpdateSysPrefSecurityEmail;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailById;
 using InnovationAdmin.Application.Features.SysPrefSecurityEmails.Queries.GetSysPrefSecurityEmailList;
 using MediatR;
-
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
+
 
 namespace InnovationAdmin.Api.Controllers
 {
@@ -23,16 +14,13 @@ namespace InnovationAdmin.Api.Controllers
     public class SysPrefSecurityEmailController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger _logger;
+        private readonly ILogger<SysPrefSecurityEmailController> _logger;
 
-        public SysPrefSecurityEmailController(IMediator mediator, ILogger<SysPrefCompanyController> logger)
+        public SysPrefSecurityEmailController(IMediator mediator, ILogger<SysPrefSecurityEmailController> logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
-
-
-
 
         [HttpPost(Name = "SysPrefSecurityEmail")]
         public async Task<ActionResult> Create([FromBody] CreateSysPrefSecurityEmailCommand createAdminUserCommand)
@@ -45,64 +33,56 @@ namespace InnovationAdmin.Api.Controllers
 
             return Ok(response);
 
-
         }
 
-
-        //[HttpPost]
-        //public async Task<ActionResult> Create([FromBody] CreateSysPrefSecurityEmailCommand createSysPrefSecurityEmailCommand)
-        //{
-        //    if (string.IsNullOrWhiteSpace(createSysPrefSecurityEmailCommand.DefaultFromName) ||
-        //        string.IsNullOrWhiteSpace(createSysPrefSecurityEmailCommand.DefaultFromAddress))
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    var response = await _mediator.Send(createSysPrefSecurityEmailCommand);
-        //    if (response.Succeeded)
-        //    {
-        //        return Ok(response);
-        //    }
-        //    return BadRequest(response);
-        //}
 
         [HttpGet("{id}", Name = "GetSysPrefSecurityEmailById")]
         public async Task<ActionResult> GetSysPrefSecurityEmailById(string id)
         {
-            var getEventDetailQuery = new GetSysPrefSecurityEmailByIdQuery() { SysPrefSecurityEmailId = id };
-            return Ok(await _mediator.Send(getEventDetailQuery));
+            var getEventDetailQuery = new GetSysPrefSecurityEmailByIdQuery { SysPrefSecurityEmailId = id };
+            var response = await _mediator.Send(getEventDetailQuery);
+
+            if (!response.Succeeded)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
         }
+
 
         [HttpGet("all", Name = "GetAllSysPrefSecurityEmail")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetAllSysPrefSecurityEmail()
         {
             _logger.LogInformation("GetAllSysPrefSecurityEmail Initiated");
-            var dtos = await _mediator.Send(new GetSysPrefSecurityEmailListQuery());
+            var response = await _mediator.Send(new GetSysPrefSecurityEmailListQuery());
             _logger.LogInformation("GetAllSysPrefSecurityEmail Completed");
-            return Ok(dtos);
-        }
 
+            if (!response.Succeeded)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
+        }
 
         [HttpPut(Name = "UpdateSysPrefSecurityEmail")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+       
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateSysPrefSecurityEmailCommand updateSysPrefSecurityEmailCommand)
         {
-
-           
-
             var response = await _mediator.Send(updateSysPrefSecurityEmailCommand);
             if (response.Succeeded)
             {
                 return Ok(response);
             }
 
-            return Ok(response);
+            return NotFound(response.Message);
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
@@ -113,12 +93,22 @@ namespace InnovationAdmin.Api.Controllers
             }
 
             var command = new DeleteSysPrefSecurityEmailCommand() { SysPrefSecurityEmailId = guid };
-            var result = await _mediator.Send(command);
+            try
+            {
+                var result = await _mediator.Send(command);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Resource not found");
+            }
 
 
-
-    
-            return NoContent();
         }
+
+
+
+
+
     }
 }

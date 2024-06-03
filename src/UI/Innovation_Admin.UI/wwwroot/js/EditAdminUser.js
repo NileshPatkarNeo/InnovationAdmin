@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (userName.trim() === "") {
             userNameError.textContent = "User Name is required.";
             isValid = false;
-        } else if (userName.length > 14) {
-            userNameError.textContent = "User Name should be 100 characters or less.";
+        } else if (userName.length > 20) {
+            userNameError.textContent = "User Name should be 20 characters or less.";
             isValid = false;
         } else {
             userNameError.textContent = "";
@@ -52,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (password.trim() === "") {
             passwordError.textContent = "Password is required.";
             isValid = false;
-        } else if (password.length < 6 || password.length > 100) {
-            passwordError.textContent = "Password should be between 6 and 100 characters.";
+        } else if (password.length < 6 || password.length > 40) {
+            passwordError.textContent = "Password should be between 6 and 40 characters.";
             isValid = false;
         } else {
             passwordError.textContent = "";

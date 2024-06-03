@@ -29,6 +29,7 @@ namespace Innovation_Admin.UI.Helper
         public const string CreateAdminUser = "/api/AdminUser?api-version=1";
 
         public const string GetAdminUserById = "/api/AdminUser/{id}?api-version=1";
+
         public const string UpdateAdminUser = "/api/AdminUser?id={id}&api-version=1";
 
         public const string DeleteAdminUser = "/api/AdminUser/{id}?api-version=1";
@@ -59,6 +60,9 @@ namespace Innovation_Admin.UI.Helper
 
         public const string GetSysPrefGeneralBehaviourById = "/api/SysPref_GeneralBehaviour/{id}?api-version=1";
 
+        #endregion
+
+        #region SysPrefSecurityEmail
         public const string GetAllSysPrefSecurityEmail = "/api/SysPrefSecurityEmail/all?api-version=1";
 
         public const string CreateSysPrefSecurityEmail = "/api/SysPrefSecurityEmail?api-version=1";
@@ -67,8 +71,6 @@ namespace Innovation_Admin.UI.Helper
         public const string UpdateSysPrefSecurityEmail = "/api/SysPrefSecurityEmail?api-version=1";
 
         public const string DeleteSysPrefSecurityEmail = "/api/SysPrefSecurityEmail/{id}?api-version=1";
-
-
 
         #endregion
 
@@ -83,13 +85,19 @@ namespace Innovation_Admin.UI.Helper
 
 
         #endregion
+
+
+        #region SysPrefFinancial
         public const string GetAllSysPrefFinancial = "/api/SysPrefFinancial/list?api-version=1";
         public const string CreateSysPrefFinancial = "/api/SysPrefFinancial/create?api-version=1";
         public const string UpdateSysPrefFinancial = "/api/SysPrefFinancial/update?api-version=1";
         public const string GetSysPrefFinancialById = "/api/SysPrefFinancial/{id}?api-version=1";
         public const string DeleteSysPrefFinancial = "/api/SysPrefFinancial/{id}?api-version=1";
 
+        #endregion
 
+
+        #region Category
 
         public const string GetAllPharmacyGroup = "/api/Category/all? api-version=1";
 
@@ -100,6 +108,9 @@ namespace Innovation_Admin.UI.Helper
         public const string GetPharmacyGroupById = "/api/Category/{id}?api-version=1";
 
         public const string DeletePharmacyGroup = "/api/Category/{id}?api-version=1";
+
+        #endregion
+
 
 
     }

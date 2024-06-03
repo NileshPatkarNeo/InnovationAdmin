@@ -16,14 +16,12 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminU
         private readonly IAdminUserRepository _adminuserRepository;
         private readonly IMapper _mapper;
        
-
         public UpdateAdminUserCommandHandler(IMapper mapper, IAdminUserRepository adminuserRepository)
         {
             _mapper = mapper;
             _adminuserRepository = adminuserRepository;
             
         }
-
 
         public async Task<Response<UpdateAdminUserCommandDto>> Handle(UpdateAdminUserCommand request, CancellationToken cancellationToken)
         {

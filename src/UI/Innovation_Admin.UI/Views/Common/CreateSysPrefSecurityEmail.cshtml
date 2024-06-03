@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>CreateSysPrefSecurityEmail</h1>
+<h1>Create System Preference Security Email</h1>
 
 <hr />
 <div class="row justify-content-center">
@@ -15,27 +15,27 @@
                 <form asp-action="CreateSysPrefSecurityEmail" method="post" id="createSysPrefSecurityEmailForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="DefaultFromName" class="control-label">Default From Name</label>
+                        <label asp-for="DefaultFromName" class="control-label">Default From Name<span class="text-danger">*</span></label>
                         <input asp-for="DefaultFromName" class="form-control" id="defaultFromName" />
                         <span asp-validation-for="DefaultFromName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="DefaultFromAddress" class="control-label">Default From Address</label>
+                        <label asp-for="DefaultFromAddress" class="control-label">Default From Address<span class="text-danger">*</span></label>
                         <input asp-for="DefaultFromAddress" class="form-control" id="defaultFromAddress" />
                         <span asp-validation-for="DefaultFromAddress" class="text-danger" id="defaultFromAddressError"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="DefaultReplyToAddress" class="control-label">Default Reply To Address</label>
+                        <label asp-for="DefaultReplyToAddress" class="control-label">Default Reply To Address<span class="text-danger">*</span></label>
                         <input asp-for="DefaultReplyToAddress" class="form-control" id="defaultReplyToAddress" />
                         <span asp-validation-for="DefaultReplyToAddress" class="text-danger" id="defaultReplyToAddressError"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="DefaultReplyToName" class="control-label">Default Reply To Name</label>
+                        <label asp-for="DefaultReplyToName" class="control-label">Default Reply To Name<span class="text-danger">*</span></label>
                         <input asp-for="DefaultReplyToName" class="form-control" id="defaultReplyToName" />
                         <span asp-validation-for="DefaultReplyToName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Status" class="control-label">Status</label>
+                        <label asp-for="Status" class="control-label">Status<span class="text-danger">*</span></label>
                         <input asp-for="Status" class="form-control" id="status" />
                         <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
@@ -91,9 +91,7 @@
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="~/js/CreateSysPrefSecurityEmail.js"></script>
 }
-<!-- Include the JavaScript file -->
-@* <script src="~/js/CreateSysPrefSecurityEmail.js"></script> *@

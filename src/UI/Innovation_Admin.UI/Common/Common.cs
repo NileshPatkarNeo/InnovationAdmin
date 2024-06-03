@@ -2,8 +2,6 @@
 using Innovation_Admin.UI.Models.ResponsesModel.AdminUser;
 using Innovation_Admin.UI.Models.AdminRole;
 using Innovation_Admin.UI.Models.ResponsesModel.AdminRole;
-
-
 using Innovation_Admin.UI.Models.ResponsesModel.SysPrefCompany;
 using Innovation_Admin.UI.Models.ResponsesModel.SysPrefGeneralBehaviour;
 using Innovation_Admin.UI.Models.SysPrefCompany;
@@ -14,10 +12,8 @@ using System.Drawing;
 using static Innovation_Admin.UI.Helper.APIBaseUrl;
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.ResponsesModel.AccountManager;
-using Innovation_Admin.UI.Services.Repositories;
 using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
 using Innovation_Admin.UI.Models.ResponsesModel.SysPrefSecurityEmail;
-using Innovation_Admin.UI.Services.Repositories;
 using Innovation_Admin.UI.Models.ResponsesModel.SysPrefFinancial;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Innovation_Admin.UI.Models.PharmacyGroup;
@@ -37,6 +33,7 @@ namespace Innovation_Admin.UI.Common
         private readonly IPharmacyGroup pharmacyGroups;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
+        private readonly ISysPrefSecurityEmails sysPrefSecurityEmails;
 
         
       

@@ -3,8 +3,6 @@ using InnovationAdmin.Application.Features.Admin_Users.Commands.DeleteAdminUser;
 using InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminUser;
 using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserById;
 using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserList;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPrefCompany;
-using InnovationAdmin.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +14,12 @@ namespace InnovationAdmin.Api.Controllers
     public class AdminUserController : ControllerBase
     {
         private readonly IMediator _mediator;
-
-        private readonly ILogger _logger;
-
+        private readonly ILogger<AdminUserController> _logger;
         public AdminUserController(IMediator mediator, ILogger<AdminUserController> logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
-
 
         //[Authorize]
         [HttpGet("all", Name = "GetAllAdminUsers")]
@@ -58,33 +53,40 @@ namespace InnovationAdmin.Api.Controllers
 
         }
 
-
         [HttpDelete("{id}", Name = "DeleteAdminUser")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(string id)
         {
+            if (!Guid.TryParse(id, out var guid))
+            {
+                return BadRequest("Invalid GUID format");
+            }
+
             var deleteAdminUserCommand = new DeleteAdminUserCommand() { User_ID = id };
-            await _mediator.Send(deleteAdminUserCommand);
-
-            return NoContent();
+            try
+            {
+                await _mediator.Send(deleteAdminUserCommand);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Resource not found");
+            }
         }
-
 
         [HttpPut(Name = "UpdateAdminUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+     
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Update(Guid id,[FromBody] UpdateAdminUserCommand updateAdminUserCommand)
         {
-
             if (id != updateAdminUserCommand.User_ID)
             {
                 return BadRequest("ID mismatch");
             }
-
             var response = await _mediator.Send(updateAdminUserCommand);
             if (response.Succeeded)
             {

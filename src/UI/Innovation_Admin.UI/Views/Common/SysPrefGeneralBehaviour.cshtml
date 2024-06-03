@@ -13,21 +13,28 @@
     <title>System Preference General Behaviour</title>
 
     <style>
+        h1{
+        text-align:center;}
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
         }
+        .add-test
+        {
+        height:50px;
+        margin:0 20px;}
     </style>
 </head>
 
 <body>
     <h1>System Preference General Behaviour</h1>
 
-    <p>
-        <a asp-action="CreateSysPrefGeneralBehaviour" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Add
-        </a>
-    </p>
+    <div class="add-test">
+        <p>
+            <a asp-action="CreateSysPrefGeneralBehaviour" class="btn btn-primary float-end"><i class="bi bi-plus-circle"></i> Add</a>
+        </p>
+    </div>
+    
 
     <table class="table table-striped" id="generalBehaviour">
         <thead>
