@@ -3,9 +3,7 @@ using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands.Del
 using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Commands.Update_SysPref_GeneralBehaviour;
 using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Queries.Get_SysPref_GeneralBehaviour_List;
 using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Queries.GetById_SysPref_GeneralBehaviour;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateSysPrefCompany;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnovationAdmin.Api.Controllers

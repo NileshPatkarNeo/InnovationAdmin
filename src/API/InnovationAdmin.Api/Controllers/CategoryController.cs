@@ -26,13 +26,21 @@ namespace InnovationAdmin.Api.Controllers
 
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreatePharmacyGroupCommand createPharmacyGroupCommand)
-        {                
+        {
+            if (string.IsNullOrEmpty(createPharmacyGroupCommand.PharmacyName))
+            {
+                return BadRequest("PharmacyName cannot be null or empty");
+            }
+
             var response = await _mediator.Send(createPharmacyGroupCommand);
+            if (response.Succeeded)
+            {
                 return Ok(response);
-            
+            }
+            return BadRequest(response);
         }
 
-      
+
         [HttpDelete("{id}", Name = "DeletePharmacyGroup")]
         public async Task<ActionResult> Delete(Guid id)
         {
@@ -41,6 +49,10 @@ namespace InnovationAdmin.Api.Controllers
             if (result.Data)
             {
                 return Ok(result);
+            }
+            else if (!result.Succeeded)
+            {
+                return StatusCode(500, result); 
             }
             return NotFound(result);
         }
@@ -83,7 +95,7 @@ namespace InnovationAdmin.Api.Controllers
         [HttpGet("all", Name = "GetPharmacyGroup")]
         public async Task<ActionResult> GetPharmacyGroup()
         {
-            _logger.LogInformation("PharmacyGroupr Initiated");
+            _logger.LogInformation("PharmacyGroup Initiated");
             var dtos = await _mediator.Send(new GetAllPharmacyGroupQuery());
             _logger.LogInformation("PharmacyGroup Completed");
             return Ok(dtos);
