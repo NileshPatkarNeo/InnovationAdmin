@@ -10,8 +10,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-    <title>System Preference General Behaviour</title>
+   
     <style>
+        h1{
+        text-align:center;}
+        .add-div
+        {
+            height: 50px;
+            margin: 0 20px;
+        }
                 .table-responsive {
             margin-top: 20px; 
         }
@@ -38,9 +45,12 @@
     </style>
 </head>
 
-<p>
-    <a asp-action="CreatePharmacyGroup" class="btn btn-primary">Create New</a>
-</p>
+<div class="add-div">
+    <p>
+        <a asp-action="CreatePharmacyGroup" class="btn btn-primary float-end"><i class="bi bi-plus-circle"></i> Add</a>
+    </p>
+</div>
+
 
     <table class="table table-striped" id="pharmacyGroup">
         <thead>

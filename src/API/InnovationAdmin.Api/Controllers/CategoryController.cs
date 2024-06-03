@@ -1,20 +1,13 @@
-﻿using InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_User;
+﻿
 using InnovationAdmin.Application.Features.PharmacyGroup.Commands.CreatePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Commands.DeletePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Commands.UpdatePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetAllListPharmacyGroupQuery;
 using InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetPharmacyGroupQuery;
-using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Queries.Get_SysPref_GeneralBehaviour_List;
-using InnovationAdmin.Application.Features.SysPref_GeneralBehaviour.Queries.GetById_SysPref_GeneralBehaviour;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateSysPrefCompany;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.DeleteSysPrefCommand;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPrefCompany;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetAllListSysPrefCompnayQuery;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using MediatR;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using System;
+
 
 namespace InnovationAdmin.Api.Controllers
 {

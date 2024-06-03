@@ -6,13 +6,19 @@
 }
 
 <style>
-    .test
-    {
-    margin-top:50px}
+    .test {
+        margin-top: 50px;
+    }
 
-    .btntest
-    {
-    margin-top:5px;}
+    .btntest {
+        margin-top: 5px;
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 5px;
+        font-size: 0.875em;
+    }
 </style>
 
 <h1 class="text-center">Edit Account Manager</h1>
@@ -28,16 +34,20 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
-                    <input asp-for="Name" class="form-control" required />
+                    <input asp-for="Name" class="form-control" id="Name" />
                     <span asp-validation-for="Name" class="text-danger"></span>
+                    <span id="name-error" class="error-message"></span>
                 </div>
                 <div class="form-group text-center btntest">
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <a asp-action="GetAllAccountManagers" class="btn btn-secondary">Back to List</a>
+                    <a asp-action="GetAllAccountManagers" class="btn btn-secondary">Back</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/AccountManager.js">
 
+</script>

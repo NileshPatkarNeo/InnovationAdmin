@@ -58,7 +58,7 @@ namespace InnovationAdmin.Api.Controllers
         [HttpPost(Name = "AddSysPref_GeneralBehaviour")]
         public async Task<ActionResult> Create([FromBody] Create_SysPref_GeneralBehaviour_Command createSyspref_generalBehaviourCommand)
         {
-            // Additional manual validations
+            
             if (createSyspref_generalBehaviourCommand.Records_Locked_Seconds <= 0 ||
                 createSyspref_generalBehaviourCommand.User_Timeout <= 0)
             {

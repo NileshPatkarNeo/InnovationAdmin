@@ -9,6 +9,7 @@ using Innovation_Admin.UI.Services.IRepositories;
 using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.PharmacyGroup;
 using System.Reflection;
+
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,7 +18,7 @@ using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
 namespace Innovation_Admin.UI.Controllers
 {
 
-    //  [AuthFilter]
+     [AuthFilter]
     public class CommonController : Controller
     {
         private readonly CommonCall.Common _common;
@@ -160,7 +161,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); // Return to the edit form with error messages
+                return View(updatedAdmin);  
             }
 
             return RedirectToAction("AdminUser");
@@ -177,6 +178,12 @@ namespace Innovation_Admin.UI.Controllers
             }
             return RedirectToAction("AdminUser");
         }
+
+
+        #endregion
+
+        #region AdminRole
+
 
         public async Task<IActionResult> AdminRole()
         {
@@ -234,7 +241,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdminRole); // Return to the edit form with error messages
+                return View(updatedAdminRole);  
             }
 
             return RedirectToAction("AdminRole");
@@ -323,7 +330,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedCompany); // Return view with validation errors
+                return View(updatedCompany);  
             }
 
             var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
@@ -331,7 +338,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedCompany); // Return to the edit form with error messages
+                return View(updatedCompany);  
             }
 
             return RedirectToAction("SysPrefGeneralBehaviour");
@@ -374,7 +381,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(group); // Return view with validation errors
+                return View(group); 
             }
             var result = await _common.CreatePharmacyGroup(group);
             if (!result.IsSuccess)
@@ -417,7 +424,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedgroup); // Return view with validation errors
+                return View(updatedgroup); 
             }
 
             var result = await _common.UpdatePharmacyGroup(updatedgroup);
@@ -425,7 +432,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedgroup); // Return to the edit form with error messages
+                return View(updatedgroup); 
             }
 
             return RedirectToAction("PharmacyGroups");
@@ -453,7 +460,7 @@ namespace Innovation_Admin.UI.Controllers
 
 
 
-        #region Lookup_Table_Account_Manager
+        #region Account_Manager
 
         [HttpGet]
         public async Task<IActionResult> GetAllAccountManagers()
@@ -492,82 +499,18 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("GetAllAccountManagers");
         }
 
-
-
-        public async Task<IActionResult> SysPrefSecurityEmail()
-        {
-            var getAllSysPrefSecurityEmail = await _common.GetAllSysPrefSecurityEmail();
-            return View(getAllSysPrefSecurityEmail);
-        }
-
-        [HttpGet]
-        public IActionResult CreateSysPrefSecurityEmail()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
-        {
-
-           var result = await _common.CreateSysPrefSecurityEmail(email);
-
-            if (!result.IsSuccess)
-            {
-
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
-
-
-                return RedirectToAction("SysPrefSecurityEmail");
-            }
-
-
-            return RedirectToAction("SysPrefSecurityEmail");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> EditSysPrefSecurityEmail([FromQuery]string emailId)
-        {
-            var sysPrefSecurityEMail = await _common.GetSysPrefSecurityEmailById(Guid.Parse(emailId));
-            return View(sysPrefSecurityEMail.Data);
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedAdmin)
+        public async Task<IActionResult> DeleteAccountManager(Guid Id)
         {
-            var result = await _common.UpdateSysPrefSecurityEmail(updatedAdmin);
-
-
-            if (!result.IsSuccess)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); // Return to the edit form with error messages
-            }
-
-            return RedirectToAction("SysPrefSecurityEmail");
+            var isDeleted = await _common.DeleteAccountManager(Id);
+            return RedirectToAction("GetAllAccountManagers");
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteSysPrefSecurityEmail(Guid emailId)
-        {
-            var isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
-            if (!isDeleted)
-            {
+        #endregion
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
-            }
-            return RedirectToAction("SysPrefSecurityEmail");
-        }
 
+        #region SysPrefFinancial
 
         [HttpGet]
         public async Task<IActionResult> SysPrefFinancial()
@@ -585,11 +528,6 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
-        //[HttpGet]
-        //public IActionResult CreateSysPrefFinancial()
-        //{
-        //    return View();
-        //}
 
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefFinancial(SysPrefFinancialDto financial)
@@ -632,46 +570,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefFinancial");
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> EditSysPrefFinancial([FromQuery] string financialId)
-        //{
-        //    var sysPrefFinancial = await _common.GetSysPrefFinancialById(Guid.Parse(financialId));
-        //    if (sysPrefFinancial == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Retrieve the list of companies from your repository
-        //    var companies = await _common.GetCompanies();
-        //    ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-
-        //    return View(sysPrefFinancial.Data);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> EditSysPrefFinancial(SysPrefFinancialDto updatedFinancial)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Retrieve the list of companies again if model state is invalid
-        //        var companies = await _common.GetCompanies();
-        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-        //        return View(updatedFinancial);
-        //    }
-
-        //    var result = await _common.UpdateSysPrefFinancial(updatedFinancial);
-        //    if (!result.IsSuccess)
-        //    {
-        //        ModelState.AddModelError(string.Empty, result.Message);
-        //        // Retrieve the list of companies again if update failed
-        //        var companies = await _common.GetCompanies();
-        //        ViewBag.CompanyList = companies.Select(c => new { Value = c.CompanyId, Text = c.CompanyName }).ToList();
-        //        return View(updatedFinancial);
-        //    }
-        //    return RedirectToAction("SysPrefFinancial");
-        //}
-        [HttpGet]
+         [HttpGet]
         public async Task<IActionResult> DetailsSysPrefFinancial(Guid financialID)
         {
             if (financialID == Guid.Empty)
@@ -700,16 +599,84 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefFinancial");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteAccountManager(Guid Id)
+        #endregion
+
+        #region SysPrefSecurityEmail
+        public async Task<IActionResult> SysPrefSecurityEmail()
         {
-            var isDeleted = await _common.DeleteAccountManager(Id);
-            return RedirectToAction("GetAllAccountManagers");
+            var getAllSysPrefSecurityEmail = await _common.GetAllSysPrefSecurityEmail();
+            return View(getAllSysPrefSecurityEmail);
+        }
+
+        [HttpGet]
+        public IActionResult CreateSysPrefSecurityEmail()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
+        {
+
+            var result = await _common.CreateSysPrefSecurityEmail(email);
+
+            if (!result.IsSuccess)
+            {
+
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
+                }
+
+
+                return RedirectToAction("SysPrefSecurityEmail");
+            }
+
+
+            return RedirectToAction("SysPrefSecurityEmail");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditSysPrefSecurityEmail([FromQuery] string emailId)
+        {
+            var sysPrefSecurityEMail = await _common.GetSysPrefSecurityEmailById(Guid.Parse(emailId));
+            return View(sysPrefSecurityEMail.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedAdmin)
+        {
+            var result = await _common.UpdateSysPrefSecurityEmail(updatedAdmin);
+
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedAdmin); 
+            }
+
+            return RedirectToAction("SysPrefSecurityEmail");
         }
 
 
-        #endregion
+        [HttpPost]
+        public async Task<IActionResult> DeleteSysPrefSecurityEmail(Guid emailId)
+        {
+            var isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
+            if (!isDeleted)
+            {
 
+                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            }
+            return RedirectToAction("SysPrefSecurityEmail");
+        }
+
+        #endregion
 
 
     }
