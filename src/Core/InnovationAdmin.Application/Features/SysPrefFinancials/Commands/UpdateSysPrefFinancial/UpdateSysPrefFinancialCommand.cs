@@ -31,12 +31,14 @@ namespace InnovationAdmin.Application.Features.SysPrefFinancials.Commands.Update
         [Required]
         public DateTime ClaimAgeCollectionEnd { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string DefaultReceiptBatchDescription { get; set; }
 
         [Range(0, int.MaxValue)]
         public int ClaimPaidThreshold { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string ClaimStatusWriteOff { get; set; }
 

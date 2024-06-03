@@ -18,26 +18,36 @@
         h1.text-center {
             margin-bottom: 20px;
         }
-     
+
         .table {
             margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center; 
         }
+
+            .table th, .table td {
+                vertical-align: middle; 
+            }
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+
 
         .btn-container {
             text-align: right;
             margin-bottom: 10px;
-            padding-right:29px;
+            padding-right: 29px;
         }
 
         .table-container {
-            margin-top: 25px; 
+            margin-top: 25px;
         }
 
-     
-            margin-top:px;
-        } */
+        .add-button-container {
+            margin-right: 20px;
+        }
     </style>
-
 </head>
 
 <h1 class="text-center">System Preference Financial</h1>
@@ -49,7 +59,7 @@
     </a>
 </div>
 
-<div class="table-container ">
+<div class="table-container">
     <table class="table table-bordered table-hover" id="sysPrefFinancialTable">
         <thead class="table-light">
             <tr>
@@ -94,48 +104,6 @@
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
-    function sortTable(n) {
-        var table = document.getElementById("sysPrefFinancialTable");
-        var rows = table.rows;
-        var switching = true;
-        var shouldSwitch;
-        var dir = "asc";
-        var switchcount = 0;
-
-        while (switching) {
-            switching = false;
-            var rowsArray = Array.from(rows).slice(1);
-
-            for (var i = 0; i < rowsArray.length - 1; i++) {
-                shouldSwitch = false;
-                var x = rowsArray[i].getElementsByTagName("TD")[n];
-                var y = rowsArray[i + 1].getElementsByTagName("TD")[n];
-
-                if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldSwitch) {
-                rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
-                switching = true;
-                switchcount++;
-            } else {
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
-        }
-    }
-
     $('#sysPrefFinancialTable').dataTable({
         pageLength: 5,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]

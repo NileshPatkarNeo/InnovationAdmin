@@ -30,92 +30,96 @@
             margin-top: 5px;
             font-size: 0.875em;
         }
+
+        .card-shadow {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 
 <h1 class="text-center">Edit System Preference Financial</h1>
 
-<hr />
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <form asp-action="EditSysPrefFinancial">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-            <input type="hidden" asp-for="FinancialID" class="hidden" />
+    <div class="col-md-10 col-lg-8">
+        <div class="card card-shadow">
+            <div class="card-body">
+                <form asp-action="EditSysPrefFinancial">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    <input type="hidden" asp-for="FinancialID" class="hidden" />
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label asp-for="CompanyID" class="control-label">Company <span class="text-danger">*</span></label>
-                        <select asp-for="CompanyID" class="form-control" asp-items="@ViewBag.CompanyList" id="CompanyID"></select>
-                        <span id="companyIDError" class="error-message"></span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="CompanyID" class="control-label">Company <span class="text-danger">*</span></label>
+                                <select asp-for="CompanyID" class="form-control" asp-items="@ViewBag.CompanyList" id="CompanyID"></select>
+                                <span id="companyIDError" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="DefaultPaymentMethod" class="control-label">Default Payment Method <span class="text-danger">*</span></label>
+                                <input asp-for="DefaultPaymentMethod" class="form-control" id="DefaultPaymentMethod" />
+                                <span id="defaultPaymentMethodError" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="LastCheckNo" class="control-label">Last Check No <span class="text-danger">*</span></label>
+                                <input asp-for="LastCheckNo" class="form-control" id="LastCheckNo" />
+                                <span id="lastCheckNoError" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="ClaimAgeCollectionStart" class="control-label">Claim Age Collection Start <span class="text-danger">*</span></label>
+                                <input asp-for="ClaimAgeCollectionStart" class="form-control" id="ClaimAgeCollectionStart" type="date" />
+                                <span id="claimAgeCollectionStartError" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="ClaimAgeCollectionEnd" class="control-label">Claim Age Collection End <span class="text-danger">*</span></label>
+                                <input asp-for="ClaimAgeCollectionEnd" class="form-control" id="ClaimAgeCollectionEnd" type="date" />
+                                <span id="claimAgeCollectionEndError" class="error-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="DefaultReceiptBatchDescription" class="control-label">Default Receipt Batch Description <span class="text-danger">*</span></label>
+                                <input asp-for="DefaultReceiptBatchDescription" class="form-control" id="DefaultReceiptBatchDescription" />
+                                <span id="defaultReceiptBatchDescriptionError" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="ClaimPaidThreshold" class="control-label">Claim Paid Threshold <span class="text-danger">*</span></label>
+                                <input asp-for="ClaimPaidThreshold" class="form-control" id="ClaimPaidThreshold" />
+                                <span id="claimPaidThresholdError" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="ClaimStatusWriteOff" class="control-label">Claim Status Write Off <span class="text-danger">*</span></label>
+                                <input asp-for="ClaimStatusWriteOff" class="form-control" id="ClaimStatusWriteOff" />
+                                <span id="claimStatusWriteOffError" class="error-message"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="DaysToBlock" class="control-label">Days To Block <span class="text-danger">*</span></label>
+                                <input asp-for="DaysToBlock" class="form-control" id="DaysToBlock" />
+                                <span id="daysToBlockError" class="error-message"></span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">
-                        <label asp-for="DefaultPaymentMethod" class="control-label">Default Payment Method <span class="text-danger">*</span></label>
-                        <input asp-for="DefaultPaymentMethod" class="form-control" id="DefaultPaymentMethod" />
-                        <span id="defaultPaymentMethodError" class="error-message"></span>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Save
+                        </button>
+                        <a asp-action="SysPrefFinancial" class="btn btn-secondary ms-2">
+                            <i class="bi bi-arrow-left-circle"></i> Back
+                        </a>
                     </div>
-
-                    <div class="form-group mb-3">
-                        <label asp-for="LastCheckNo" class="control-label">Last Check No <span class="text-danger">*</span></label>
-                        <input asp-for="LastCheckNo" class="form-control" id="LastCheckNo" />
-                        <span id="lastCheckNoError" class="error-message"></span>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label asp-for="ClaimAgeCollectionStart" class="control-label">Claim Age Collection Start <span class="text-danger">*</span></label>
-                        <input asp-for="ClaimAgeCollectionStart" class="form-control" id="ClaimAgeCollectionStart" type="date" />
-                        <span id="claimAgeCollectionStartError" class="error-message"></span>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label asp-for="ClaimAgeCollectionEnd" class="control-label">Claim Age Collection End <span class="text-danger">*</span></label>
-                        <input asp-for="ClaimAgeCollectionEnd" class="form-control" id="ClaimAgeCollectionEnd" type="date" />
-                        <span id="claimAgeCollectionEndError" class="error-message"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label asp-for="DefaultReceiptBatchDescription" class="control-label">Default Receipt Batch Description <span class="text-danger">*</span></label>
-                        <input asp-for="DefaultReceiptBatchDescription" class="form-control" id="DefaultReceiptBatchDescription" />
-                        <span id="defaultReceiptBatchDescriptionError" class="error-message"></span>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label asp-for="ClaimPaidThreshold" class="control-label">Claim Paid Threshold <span class="text-danger">*</span></label>
-                        <input asp-for="ClaimPaidThreshold" class="form-control" id="ClaimPaidThreshold" />
-                        <span id="claimPaidThresholdError" class="error-message"></span>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label asp-for="ClaimStatusWriteOff" class="control-label">Claim Status Write Off <span class="text-danger">*</span></label>
-                        <input asp-for="ClaimStatusWriteOff" class="form-control" id="ClaimStatusWriteOff" />
-                        <span id="claimStatusWriteOffError" class="error-message"></span>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label asp-for="DaysToBlock" class="control-label">Days To Block <span class="text-danger">*</span></label>
-                        <input asp-for="DaysToBlock" class="form-control" id="DaysToBlock" />
-                        <span id="daysToBlockError" class="error-message"></span>
-                    </div>
-                </div>
+                </form>
             </div>
-
-            <div class="form-group mb-3">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-check-circle"></i> Save
-                </button>
-                <a asp-action="SysPrefFinancial" class="btn btn-secondary ms-2">
-                    <i class="bi bi-arrow-left-circle"></i> Back
-                </a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/EditSysPrefFinancial.js">
-      
-    </script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/EditSysPrefFinancial.js"></script>
