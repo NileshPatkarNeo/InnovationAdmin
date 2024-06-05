@@ -31,6 +31,7 @@ builder.Services.AddScoped<ISysPrefFinancials, SysPrefFinancials>();
 
 
 builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();
+builder.Services.AddScoped<IDataSources, DataSources>();
 
 builder.Services.AddScoped<Common>();
 

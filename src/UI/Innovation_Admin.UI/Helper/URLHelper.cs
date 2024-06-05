@@ -111,6 +111,19 @@ namespace Innovation_Admin.UI.Helper
 
         #endregion
 
+        #region DataSource
+        public const string GetAllDataSource = "/api/SysPrefSecurityEmail/all?api-version=1";
+
+        public const string CreateDataSource = "/api/SysPrefSecurityEmail?api-version=1";
+
+        public const string GetDataSourceById = "/api/SysPrefSecurityEmail/{id}?api-version=1";
+        public const string UpdateDataSource = "/api/SysPrefSecurityEmail?api-version=1";
+
+        public const string DeleteDataSource = "/api/SysPrefSecurityEmail/{id}?api-version=1";
+
+
+        #endregion
+
 
 
     }

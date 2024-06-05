@@ -18,6 +18,9 @@ using Innovation_Admin.UI.Models.ResponsesModel.SysPrefFinancial;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Innovation_Admin.UI.Models.PharmacyGroup;
 using Innovation_Admin.UI.Models.ResponsesModel.PharmacyGroup;
+using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.ResponsesModel.DataSource;
+using Innovation_Admin.UI.Services.Repositories;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -33,11 +36,12 @@ namespace Innovation_Admin.UI.Common
         private readonly IPharmacyGroup pharmacyGroups;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
+        private readonly IDataSources dataSources;
        
 
         
       
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails )
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources)
 
         {
             adminUser = _adminUser;
@@ -50,6 +54,7 @@ namespace Innovation_Admin.UI.Common
             sysPrefSecurityEmails = _sysPrefSecurityEmails;
             sysPrefFinancial = _sysPrefFinancial;
             pharmacyGroups = _pharmacyGroups;
+            dataSources = _dataSources;
         }
 
         #region System_Preference
@@ -378,7 +383,50 @@ namespace Innovation_Admin.UI.Common
             return await sysPrefFinancial.DeleteSysPrefFinancial(financialId);
         }
 
-     
+
+        #region DataSource
+
+        public async Task<IEnumerable<DataSourceDto>> GetAllDataSource()
+        {
+            GetAllDataSourceResponseModel getAllDataSourceResponseModel = new GetAllDataSourceResponseModel();
+
+            getAllDataSourceResponseModel = await dataSources.GetAllDataSource();
+
+            if (getAllDataSourceResponseModel.IsSuccess)
+            {
+                if (getAllDataSourceResponseModel != null && getAllDataSourceResponseModel.Data.Count() > 0)
+                {
+                    return getAllDataSourceResponseModel.Data;
+                }
+            }
+
+            return new List<DataSourceDto>();
+        }
+
+
+        public async Task<CreateDataSourceResponseModel> CreateDataSource(CreateDataSourceDto data)
+        {
+            return await dataSources.CreateDataSource(data);
+        }
+
+        public async Task<UpdateDataSourceResponseModel> UpdateDataSource(DataSourceDto updateddata)
+        {
+            return await dataSources.UpdateDataSource(updateddata);
+        }
+
+        public async Task<GetDataSourceByIdResponseModel> GetDataSourceById(Guid dataId)
+        {
+            return await dataSources.GetDataSourceById(dataId);
+        }
+
+        public async Task<bool> DeleteDataSource(Guid dataId)
+        {
+            return await dataSources.DeleteDataSource(dataId);
+        }
+
+        #endregion        
+
+
 
     }
-    }
+}

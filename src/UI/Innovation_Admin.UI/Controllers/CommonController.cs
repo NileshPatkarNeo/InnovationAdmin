@@ -14,6 +14,7 @@ using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Models.DataSource;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -674,6 +675,85 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefSecurityEmail");
         }
 
+        #endregion
+
+        #region DataSources
+   
+        public async Task<IActionResult> DataSource()
+        {
+            var getAllDataSource = await _common.GetAllDataSource();
+            return View(getAllDataSource);
+        }
+
+        [HttpGet]
+        public IActionResult CreateDataSource()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateDataSource(CreateDataSourceDto data)
+        {
+
+            var result = await _common.CreateDataSource(data);
+
+            if (!result.IsSuccess)
+            {
+
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the DataSource.");
+                }
+
+
+                return RedirectToAction("DataSource");
+            }
+
+
+            return RedirectToAction("DataSource");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditDataSource([FromQuery] string dataId)
+        {
+            var dataSource = await _common.GetDataSourceById(Guid.Parse(dataId));
+            return View(dataSource.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditDataSource(DataSourceDto updatedData)
+        {
+            var result = await _common.UpdateDataSource(updatedData);
+
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedData);
+            }
+
+            return RedirectToAction("DataSource");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDataSource(Guid dataId)
+        {
+            var isDeleted = await _common.DeleteDataSource(dataId);
+            if (!isDeleted)
+            {
+
+                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            }
+            return RedirectToAction("DataSource");
+        }
+
+   
         #endregion
 
 

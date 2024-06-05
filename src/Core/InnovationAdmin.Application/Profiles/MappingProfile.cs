@@ -34,6 +34,10 @@ using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysP
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancialList;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancial;
+using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource;
+using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceById;
+using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceList;
+using InnovationAdmin.Application.Features.DataSources.Commands.UpdateDataSource;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -134,6 +138,15 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPrefFinancial, DeleteSysPrefFinancialCommand>();
             CreateMap<SysPrefFinancial, SysPrefFinancialListVM>();
             CreateMap<SysPrefFinancial, SysPrefFinancialVM>();
+
+
+            CreateMap<DataSource, CreateDataSourceDto>().ReverseMap();
+            CreateMap<DataSource, GetDataSourceByIdVm>().ReverseMap();
+            CreateMap<DataSource, GetDataSourceListVm>().ReverseMap();
+            CreateMap<DataSource, UpdateDataSourceCommand>().ReverseMap();
+            CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
+            CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
+
 
 
 

@@ -28,6 +28,8 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<ISysPref_GeneralBehaviourRepository, SysPref_GeneralBehaviourRepository>();
             services.AddScoped<ISysPrefFinancialRepository, SysPrefFinancialRepository>();
 
+            services.AddScoped<IDataSourceRepository, DataSourceRepository>();
+
             return services;
         }
     }
