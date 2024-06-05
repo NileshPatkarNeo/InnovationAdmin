@@ -34,6 +34,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<PharmacyGroup> PharmacyGroups { get; set; }
 
+        public DbSet<Quotes> Quotes { get; set; }
+
 
 
 

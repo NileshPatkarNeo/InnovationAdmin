@@ -34,6 +34,11 @@ using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysP
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancialList;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancial;
+using InnovationAdmin.Application.Features.Quote.Commands.CreateQuote;
+using InnovationAdmin.Application.Features.Quote.Commands.UpdateQuote;
+using InnovationAdmin.Application.Features.Quote.Commands.DeleteQuote;
+using InnovationAdmin.Application.Features.Quote.Queries.GetQuote;
+using InnovationAdmin.Application.Features.Quote.Queries.GetQuotesList;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -134,6 +139,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPrefFinancial, DeleteSysPrefFinancialCommand>();
             CreateMap<SysPrefFinancial, SysPrefFinancialListVM>();
             CreateMap<SysPrefFinancial, SysPrefFinancialVM>();
+
+
+            CreateMap<Quotes, CreateQuoteDto>().ReverseMap();
+            CreateMap<Quotes, UpdateQuoteDto>().ReverseMap();
+            CreateMap<Quotes, DeleteQuoteCommand>().ReverseMap();
+            CreateMap<Quotes, QuoteListVM>();
+            CreateMap<Quotes, QuoteVM>();
+            CreateMap<Quotes, UpdateQuoteCommand>().ReverseMap();
 
 
 
