@@ -34,6 +34,9 @@ using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysP
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancialList;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancial;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.CreateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.UpdateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Queries.GetRemittanceTypeQuery;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -74,8 +77,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<PharmacyGroup, PharmacyGroupDto>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
-            
 
+            CreateMap<RemittanceType, CreateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, CreateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, RemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
 
 
             CreateMap<SysPref_GeneralBehaviours, Create_SysPref_GeneralBehaviour_Dto>();

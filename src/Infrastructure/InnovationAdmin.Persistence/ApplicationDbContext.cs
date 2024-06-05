@@ -33,7 +33,7 @@ namespace InnovationAdmin.Persistence
         public DbSet<SysPref_GeneralBehaviours> SysPref_GeneralBehaviour { get; set; }
 
         public DbSet<PharmacyGroup> PharmacyGroups { get; set; }
-
+        public DbSet<RemittanceType> RemittanceTypes { get; set; }
 
 
 
