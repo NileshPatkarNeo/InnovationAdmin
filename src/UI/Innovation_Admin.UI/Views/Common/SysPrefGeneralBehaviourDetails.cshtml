@@ -1,0 +1,102 @@
+﻿@model Innovation_Admin.UI.Models.SysPrefGeneralBehaviour.SysPrefGeneralBehaviourDto
+
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<h1 class="mt-4">General Behaviour Details</h1>
+<style>
+    .mt-4 {
+        text-align: center;
+    }
+
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .card {
+        max-width: 800px; 
+        width: 100%; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        border-radius: 10px; 
+        padding: 20px; 
+    }
+    .dl-row dt {
+        flex-basis: 50%; 
+    }
+    .dl-row dd {
+        margin-left: 30%; 
+    }
+</style>
+
+<div class="center-container">
+    <div class="card">
+        <div class="card-body">
+            <dl class="row dl-row">
+                <dt class="col-sm-4">
+                    Preference ID
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Preference_ID)
+                </dd>
+                <dt class="col-sm-4">
+                    Auto Change Claim Status
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Auto_Change_Claim_Status)
+                </dd>
+                <dt class="col-sm-4">
+                    Claim Status Receipting
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Claim_Status_Receipting)
+                </dd>
+                <dt class="col-sm-4">
+                    Claim Status Payment
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Claim_Status_Payment)
+                </dd>
+                <dt class="col-sm-4">
+                    Claim Status Zero Paid
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Claim_Status_Zero_Paid)
+                </dd>
+                <dt class="col-sm-4">
+                    Claim Status Procare Claim Load
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Claim_Status_Procare_Claim_Load)
+                </dd>
+                <dt class="col-sm-4">
+                    Logout Redirect
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Logout_Redirect)
+                </dd>
+                <dt class="col-sm-4">
+                    Records Locked Seconds
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Records_Locked_Seconds)
+                </dd>
+                <dt class="col-sm-4">
+                    User Timeout
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.User_Timeout)
+                </dd>
+            </dl>
+            <div class="mt-4 text-center">
+                <a asp-action="SysPrefGeneralBehaviour" class="btn btn-secondary ms-2">
+                    <i class="bi bi-arrow-left-circle"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+

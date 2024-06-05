@@ -7,8 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Admin_Role\**" />
+    <Content Remove="Models\Admin_Role\**" />
+    <EmbeddedResource Remove="Models\Admin_Role\**" />
+    <None Remove="Models\Admin_Role\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\CreateSysPrefGeneralBehaviour.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\CreateSysPrefGeneralBehaviour.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\CreateSysPrefGeneralBehaviour.js" />
+  </ItemGroup>
+
 </Project>
+
+

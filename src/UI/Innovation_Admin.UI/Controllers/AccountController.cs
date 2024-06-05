@@ -48,7 +48,7 @@ namespace Innovation_Admin.UI.Controllers
            
             HttpContext.Session.Clear();
            
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
     }

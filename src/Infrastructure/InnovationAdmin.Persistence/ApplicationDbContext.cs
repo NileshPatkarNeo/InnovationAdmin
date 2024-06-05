@@ -26,13 +26,23 @@ namespace InnovationAdmin.Persistence
         }
 
         public DbSet<SysPrefCompany> SysPrefCompanies { get; set; }
+        public DbSet<AccountManager> AccountManagers { get; set; }
 
         public DbSet<Message> Messages { get; set; }
         public DbSet<Admin_User> Admin_Users { get; set; }
         public DbSet<SysPref_GeneralBehaviours> SysPref_GeneralBehaviour { get; set; }
 
+        public DbSet<PharmacyGroup> PharmacyGroups { get; set; }
 
+        public DbSet<Quotes> Quotes { get; set; }
+
+
+
+
+        public DbSet<SysPrefSecurityEmail> SysPrefSecurityEmails { get; set; }
         public DbSet<Admin_Role> AdminRoles { get; set; }
+
+        public DbSet<SysPrefFinancial> SysPrefFinancials { get; set; }
 
         private IDbContextTransaction _transaction;
 

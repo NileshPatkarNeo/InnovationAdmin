@@ -14,17 +14,17 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminU
        
         public UpdateAdminUserCommandValidator()
         {
-           
+
 
             RuleFor(p => p.User_Name)
-                .NotEmpty().WithMessage("Error")
-                .NotNull()
-                .MaximumLength(50).WithMessage("Error");
+        .NotEmpty().WithMessage("Error")
+        .NotNull()
+        .MaximumLength(50).WithMessage("Error");
 
             RuleFor(p => p.Password)
                 .NotEmpty().WithMessage("Error")
                 .NotNull()
-                .MinimumLength(8).WithMessage("Error");
+                .MaximumLength(40).WithMessage("Error");
 
             RuleFor(p => p.Role)
                 .NotEmpty().WithMessage("Error")

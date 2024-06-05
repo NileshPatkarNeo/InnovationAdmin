@@ -16,5 +16,6 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdminU
         public int Role { get; set; }
 
         public bool Status { get; set; }
+      
     }
 }

@@ -14,14 +14,12 @@ namespace InnovationAdmin.Api.Controllers
     public class AdminUserController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger _logger;
-
+        private readonly ILogger<AdminUserController> _logger;
         public AdminUserController(IMediator mediator, ILogger<AdminUserController> logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
-
 
         //[Authorize]
         [HttpGet("all", Name = "GetAllAdminUsers")]
@@ -45,9 +43,15 @@ namespace InnovationAdmin.Api.Controllers
         public async Task<ActionResult> Create([FromBody] CreateAdminUserCommand createAdminUserCommand)
         {
             var response = await _mediator.Send(createAdminUserCommand);
-            return Ok(response);
-        }
+            if (!response.Succeeded)
+            {
+                return BadRequest(response.Message);
+            }
 
+            return Ok(response);
+
+
+        }
 
         [HttpDelete("{id}", Name = "DeleteAdminUser")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -55,20 +59,40 @@ namespace InnovationAdmin.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(string id)
         {
-            var deleteAdminUserCommand = new DeleteAdminUserCommand() { User_ID = id };
-            await _mediator.Send(deleteAdminUserCommand);
-            return NoContent();
-        }
+            if (!Guid.TryParse(id, out var guid))
+            {
+                return BadRequest("Invalid GUID format");
+            }
 
+            var deleteAdminUserCommand = new DeleteAdminUserCommand() { User_ID = id };
+            try
+            {
+                await _mediator.Send(deleteAdminUserCommand);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Resource not found");
+            }
+        }
 
         [HttpPut(Name = "UpdateAdminUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+     
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Update([FromBody] UpdateAdminUserCommand updateAdminUserCommand)
+        public async Task<ActionResult> Update(Guid id,[FromBody] UpdateAdminUserCommand updateAdminUserCommand)
         {
+            if (id != updateAdminUserCommand.User_ID)
+            {
+                return BadRequest("ID mismatch");
+            }
             var response = await _mediator.Send(updateAdminUserCommand);
+            if (response.Succeeded)
+            {
+                return Ok(response);
+            }
+            
             return Ok(response);
         }
     }

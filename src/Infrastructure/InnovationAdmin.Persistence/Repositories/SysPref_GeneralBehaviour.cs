@@ -34,16 +34,7 @@ namespace InnovationAdmin.Persistence.Repositories
 
         public async Task<SysPref_GeneralBehaviours> AddPreference(SysPref_GeneralBehaviours sysPref_generalBehaviour)
         {
-            //var categoryId = Guid.NewGuid();
-            //List<SqlParameter> parms = new List<SqlParameter>
-            //    {
-            //        // Create parameter(s)
-            //        new SqlParameter { ParameterName = "@CategoryId", Value = categoryId },
-            //        new SqlParameter { ParameterName = "@Name", Value = category.Name },
-            //    };
-            //await StoredProcedureCommandAsync("CreateCategory", parms.ToArray());
-            //category = await GetByIdAsync(categoryId);
-            return sysPref_generalBehaviour;
+             return sysPref_generalBehaviour;
         }
     }
 

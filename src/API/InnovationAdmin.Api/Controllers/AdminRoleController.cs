@@ -15,18 +15,28 @@ namespace InnovationAdmin.Api.Controllers
     public class AdminRoleController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<AdminRoleController> _logger;
 
-        public AdminRoleController(IMediator mediator)
+
+        public AdminRoleController(IMediator mediator, ILogger<AdminRoleController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
+
 
         [HttpPost]
         [Route("create")]
         public async Task<ActionResult<Admin_Role>> Create(CreateAdminRoleCommand command)
         {
-            var adminRole = await _mediator.Send(command);
-            Log.Information("AdminRole Info: {@adminRole}", adminRole);
+            var response = await _mediator.Send(command);
+            var adminRole = new Admin_Role
+            {
+                Role_ID = response.Data.Role_ID,
+                Role_Name = response.Data.Role_Name,
+                Description = response.Data.Description
+            };
+            _logger.LogInformation("AdminRole Info: {@adminRole}", adminRole);
             return Ok(adminRole);
         }
 
@@ -42,26 +52,42 @@ namespace InnovationAdmin.Api.Controllers
             return Ok(adminRole);
         }
 
+ 
+
         [HttpPut]
         public async Task<ActionResult<Admin_Role>> Update(UpdateAdminRoleCommand command)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-
-            var updatedAdminRole = await _mediator.Send(command);
-
-            if (updatedAdminRole == null)
+            var response = await _mediator.Send(command);
+            if (response == null)
             {
                 return NotFound();
             }
 
-            Log.Information("Updated AdminRole Info: {@updatedAdminRole}", updatedAdminRole);
+            var updatedAdminRole = new Admin_Role
+            {
+                Role_ID = response.Data.Role_ID,
+                Role_Name = response.Data.Role_Name,
+                Description = response.Data.Description
+            };
+
+            _logger.LogInformation("Updated AdminRole Info: {@updatedAdminRole}", updatedAdminRole);
             return Ok(updatedAdminRole);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(string id)
         {
-            var command = new DeleteAdminRoleCommand() { Role_ID= id};
+            if (!Guid.TryParse(id, out var guid))
+            {
+                return BadRequest("Invalid GUID format");
+            }
+
+            var command = new DeleteAdminRoleCommand() { Role_ID= guid};
             var result = await _mediator.Send(command);
 
     

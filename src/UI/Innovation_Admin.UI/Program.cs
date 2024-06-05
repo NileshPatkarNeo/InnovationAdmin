@@ -17,8 +17,25 @@ builder.Services.Configure<ApiBaseUrl>(Configuration.GetSection("ApiBaseUrl"));
 builder.Services.AddScoped<IAuthenticationService, Authentication>();
 
 builder.Services.AddScoped<ISysPrefCompanies, SysPrefCompanies>();
+builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
+
 builder.Services.AddScoped<IAdminUser, AdminUser>();
+builder.Services.AddScoped<IAdminRoles, AdminRoles>();
+builder.Services.AddScoped<IAccountManager, AccountManager>();
+
+builder.Services.AddScoped<IPharmacyGroup, PharmacyGroups>();
+builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
+
+builder.Services.AddScoped<ISysPrefFinancials, SysPrefFinancials>();
+
+
+
+builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();
+
 builder.Services.AddScoped<Common>();
+
+
+
 
 
 builder.Services.AddDistributedMemoryCache();
@@ -49,6 +66,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Common}/{action=AdminUser}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

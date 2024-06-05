@@ -77,6 +77,8 @@ namespace Innovation_Admin.UI.Services.Repositories
             return response;
         }
 
+
+
         public async Task<UpdateSysPrefCompanyResponseModel> UpdateSysPrefCompany(SysPrefCompanyDto updatedCompany)
         {
             var response = new UpdateSysPrefCompanyResponseModel();
