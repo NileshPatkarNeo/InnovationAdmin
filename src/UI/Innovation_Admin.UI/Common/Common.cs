@@ -20,6 +20,8 @@ using Innovation_Admin.UI.Models.PharmacyGroup;
 using Innovation_Admin.UI.Models.ResponsesModel.PharmacyGroup;
 using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.ResponsesModel.Quote;
+using Innovation_Admin.UI.Models.RemittanceType;
+using Innovation_Admin.UI.Models.ResponsesModel.RemittanceType;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -34,6 +36,7 @@ namespace Innovation_Admin.UI.Common
         private readonly ISysPrefFinancials sysPrefFinancial;
         private readonly IPharmacyGroup pharmacyGroups;
         private readonly IQuotes quotes;
+        private readonly IRemittanceType remittanceTypes;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
        
@@ -41,6 +44,7 @@ namespace Innovation_Admin.UI.Common
         
       
         public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IQuotes _quotes)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IRemittanceType _remittanceTypes)
 
         {
             adminUser = _adminUser;
@@ -54,6 +58,7 @@ namespace Innovation_Admin.UI.Common
             sysPrefFinancial = _sysPrefFinancial;
             pharmacyGroups = _pharmacyGroups;
             quotes = _quotes;
+            remittanceTypes = _remittanceTypes;
         }
 
         #region System_Preference
@@ -420,5 +425,47 @@ namespace Innovation_Admin.UI.Common
         }
 
  
+
+        #region RemittanceType
+
+        public async Task<IEnumerable<RemittanceTypeDto>> GetAllRemittanceType()
+        {
+            GetAllRemittanceTypeResponseModel getAllRemittanceTypeResponseModel = new GetAllRemittanceTypeResponseModel();
+
+            getAllRemittanceTypeResponseModel = await remittanceTypes.GetAllRemittanceTypes();
+
+            if (getAllRemittanceTypeResponseModel.IsSuccess)
+            {
+                if (getAllRemittanceTypeResponseModel != null && getAllRemittanceTypeResponseModel.Data.Count() > 0)
+                {
+                    return getAllRemittanceTypeResponseModel.Data;
+                }
+            }
+
+            return new List<RemittanceTypeDto>();
+        }
+
+        public async Task<CreateRemittanceTypeResponseModel> CreateRemittanceType(RemittanceTypeDto type)
+        {
+            return await remittanceTypes.CreateRemittanceType(type);
+        }
+
+        public async Task<UpdateRemittanceTypeResponseModel> UpdateRemittanceType(RemittanceTypeDto updatedType)
+        {
+            return await remittanceTypes.UpdateRemittanceType(updatedType);
+        }
+
+        public async Task<GetRemittanceTypeByIdResponseModel> GetRemittanceTypeById(Guid Id)
+        {
+            return await remittanceTypes.GetRemittanceTypeById(Id);
+        }
+
+        public async Task<bool> DeleteRemittanceType(Guid Id)
+        {
+            return await remittanceTypes.DeleteRemittanceType(Id);
+        }
+
+        #endregion
+
     }
 }

@@ -27,7 +27,7 @@ builder.Services.AddScoped<IPharmacyGroup, PharmacyGroups>();
 builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
 
 builder.Services.AddScoped<ISysPrefFinancials, SysPrefFinancials>();
-
+builder.Services.AddScoped<IRemittanceType, RemittanceTypes>();
 
 
 builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();

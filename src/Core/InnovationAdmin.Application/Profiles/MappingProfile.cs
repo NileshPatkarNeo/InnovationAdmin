@@ -42,6 +42,9 @@ using InnovationAdmin.Application.Features.Quote.Queries.GetQuotesList;
 using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.CraeateReceiptBatchSource;
 using InnovationAdmin.Application.Features.ReceiptBatchSource.Queries.GetReceiptBatchSourceQuery;
 using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.UpdateReceiptBatchSource;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.CreateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.UpdateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Queries.GetRemittanceTypeQuery;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -82,8 +85,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<PharmacyGroup, PharmacyGroupDto>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
-            
 
+            CreateMap<RemittanceType, CreateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, CreateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, RemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
 
 
             CreateMap<SysPref_GeneralBehaviours, Create_SysPref_GeneralBehaviour_Dto>();

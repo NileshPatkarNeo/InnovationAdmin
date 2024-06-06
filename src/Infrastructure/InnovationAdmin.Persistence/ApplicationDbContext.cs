@@ -35,6 +35,11 @@ namespace InnovationAdmin.Persistence
         public DbSet<PharmacyGroup> PharmacyGroups { get; set; }
 
         public DbSet<Quotes> Quotes { get; set; }
+
+        public DbSet<RemittanceType> RemittanceTypes { get; set; }
+
+
+
         public DbSet<SysPrefSecurityEmail> SysPrefSecurityEmails { get; set; }
         public DbSet<Admin_Role> AdminRoles { get; set; }
 
