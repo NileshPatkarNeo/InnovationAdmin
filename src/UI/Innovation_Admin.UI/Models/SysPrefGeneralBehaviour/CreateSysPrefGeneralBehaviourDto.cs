@@ -16,6 +16,11 @@ namespace Innovation_Admin.UI.Models.SysPrefGeneralBehaviour
         public int Records_Locked_Seconds { get; set; }
 
         [Range(1, 7200, ErrorMessage = "Enter Timeout between 1-7200")]
-        public int User_Timeout { get; set; }           
+        public int User_Timeout { get; set; }
+
+        [Required(ErrorMessage = "Message is Required")]
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }
