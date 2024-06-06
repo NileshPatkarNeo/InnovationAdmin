@@ -112,6 +112,16 @@ namespace Innovation_Admin.UI.Helper
         #endregion
 
 
+        public const string GetAllRemittanceType = "/api/RemittanceType/all?api-version=1";
+
+        public const string CreateRemittanceType = "/api/RemittanceType?api-version=1";
+
+        public const string UpdateRemittanceType = "/api/RemittanceType/{id}?api-version=1";
+
+        public const string GetRemittanceTypeById = "/api/RemittanceType/{id}?api-version=1";
+
+        public const string DeleteRemittanceType = "/api/RemittanceType/{id}?api-version=1";
+
 
     }
 }
