@@ -1,0 +1,93 @@
+﻿@model Innovation_Admin.UI.Models.Quote.QuoteDto
+
+@{
+    ViewData["Title"] = "EditQuote";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+<style>
+    h1.text-center {
+        margin-bottom: 20px;
+    }
+
+    hr {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        margin: 5px;
+    }
+
+    .form-group label .text-danger {
+        font-weight: bold;
+    }
+
+    .form-box {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+</style>
+
+<h1 class="text-center">Edit Quote</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="form-box">
+            <form id="editQuoteForm" asp-action="EditQuote" class="w-100" novalidate>
+                <div class="text-danger">
+                    @if (ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div class="alert alert-danger">
+                            <p>Please fix the errors below:</p>
+                            <ul>
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group mb-3" style="display:none">
+                    <label asp-for="ID" class="control-label"></label>
+                    <input asp-for="ID" class="form-control" />
+                    <span asp-validation-for="ID" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label">
+                        @Html.DisplayNameFor(model => model.Name) <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Name" class="form-control" maxlength="100" required id="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <span class="text-danger" id="Name_error"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="QuoteBy" class="control-label">
+                        @Html.DisplayNameFor(model => model.QuoteBy) <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="QuoteBy" class="form-control" maxlength="25" required id="QuoteBy" />
+                    <span asp-validation-for="QuoteBy" class="text-danger"></span>
+                    <span class="text-danger" id="QuoteBy_error"></span>
+                </div>
+                <div class="form-group mb-3 d-flex justify-content-center">
+                    <div>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                    <div>
+                        <a asp-action="Quotes" class="btn btn-secondary">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/EditQuote.js"></script>

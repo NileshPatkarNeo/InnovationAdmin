@@ -111,7 +111,15 @@ namespace Innovation_Admin.UI.Helper
 
         #endregion
 
+        public const string GetAllQuotes = "/api/Quote?api-version=1";
 
+        public const string CreateQuote = "/api/Quote/create?api-version=1";
+
+        public const string GetQuoteById = "/api/Quote/{id}?api-version=1";
+
+        public const string UpdateQuote = "/api/Quote?api-version=1";
+
+        public const string DeleteQuote = "/api/Quote/{id}?api-version=1";
 
     }
 }
