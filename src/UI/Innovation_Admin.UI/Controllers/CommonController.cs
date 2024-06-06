@@ -455,9 +455,6 @@ namespace Innovation_Admin.UI.Controllers
 
 
         
-
-
-
         #region Account_Manager
 
         [HttpGet]
@@ -675,6 +672,8 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
+
 
 
     }
