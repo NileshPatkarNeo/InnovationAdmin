@@ -4,12 +4,32 @@
     if (companyName === '') {
         document.getElementById('companyNameError').innerText = 'Company Name is required';
         return false;
+
     } else if (companyName.length > 40) {
         document.getElementById('companyNameError').innerText = 'Company Name should be max 40 characters';
         return false;
     }
     document.getElementById('companyNameError').innerText = '';
     return true;
+}
+
+function onlyAlphabets(e, t) {
+    try {
+        if (window.event) {
+            var charCode = window.event.keyCode;
+        }
+        else if (e) {
+            var charCode = e.which;
+        }
+        else { return true; }
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+            return true;
+        else
+            return false;
+    }
+    catch (err) {
+        alert(err.Description);
+    }
 }
 
 
