@@ -203,19 +203,15 @@ namespace Innovation_Admin.UI.Controllers
 
             var result = await _common.CreateAdminRole(adminRole);
 
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("AdminRole");
 
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the AdminRole.");
-                }
-
+            }
+            else if (result.Message == "Failed to add company.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("AdminRole");
             }
 
@@ -235,27 +231,38 @@ namespace Innovation_Admin.UI.Controllers
         {
             var result = await _common.UpdateAdminRole(updatedAdminRole);
 
-
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdminRole);  
+                TempData["Message"] = "Updated Successfully ";
+                return RedirectToAction("AdminRole");
+
+            }
+            else if (result.Message == "Failed to Update company.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("AdminRole");
             }
 
             return RedirectToAction("AdminRole");
         }
+
+       
 
         [HttpPost]
         public async Task<IActionResult> DeleteAdminRole(Guid adminRoleId)
         {
-            var isDeleted = await _common.DeleteAdminRole(adminRoleId);
-            if (!isDeleted)
-            {
+            bool isDeleted = await _common.DeleteAdminRole(adminRoleId);
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the adminRole.");
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("AdminRole");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the admin role." });
+            }
         }
+
 
         #endregion
 
