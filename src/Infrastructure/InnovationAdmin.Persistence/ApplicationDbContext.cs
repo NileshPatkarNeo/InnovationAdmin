@@ -45,6 +45,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<SysPrefFinancial> SysPrefFinancials { get; set; }
 
+        public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

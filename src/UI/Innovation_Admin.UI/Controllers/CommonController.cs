@@ -14,6 +14,7 @@ using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 
 namespace Innovation_Admin.UI.Controllers
@@ -674,6 +675,53 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+        public async Task<IActionResult> Quotes()
+        {
+            var getAllQuotes = await _common.GetAllQuotes();
+            return View(getAllQuotes);
+        }
+
+        [HttpGet]
+        public IActionResult CreateQuote()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateQuote(CreateQuoteDto quote)
+        {
+            var result = await _common.CreateQuote(quote);
+
+            if (result.Data is null)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the quote.");
+                }
+
+                return RedirectToAction("Quotes");
+            }
+
+            return RedirectToAction("Quotes");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditQuote([FromQuery] string quoteId)
+        {
+            var quote = await _common.GetQuoteById(Guid.Parse(quoteId));
+            return View(quote.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditQuote(QuoteDto updatedQuote)
+        {
+            var result = await _common.UpdateQuote(updatedQuote);
         #region RemittanceType
 
         [HttpGet]
@@ -764,6 +812,25 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedQuote);
+            }
+
+            return RedirectToAction("Quotes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteQuote(Guid quoteId)
+        {
+            var isDeleted = await _common.DeleteQuote(quoteId);
+            if (!isDeleted)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
+            }
+            return RedirectToAction("Quotes");
+        }
     }
 }
     

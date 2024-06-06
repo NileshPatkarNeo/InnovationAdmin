@@ -18,6 +18,8 @@ using Innovation_Admin.UI.Models.ResponsesModel.SysPrefFinancial;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Innovation_Admin.UI.Models.PharmacyGroup;
 using Innovation_Admin.UI.Models.ResponsesModel.PharmacyGroup;
+using Innovation_Admin.UI.Models.Quote;
+using Innovation_Admin.UI.Models.ResponsesModel.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ResponsesModel.RemittanceType;
 
@@ -33,6 +35,7 @@ namespace Innovation_Admin.UI.Common
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly ISysPrefFinancials sysPrefFinancial;
         private readonly IPharmacyGroup pharmacyGroups;
+        private readonly IQuotes quotes;
         private readonly IRemittanceType remittanceTypes;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
@@ -40,6 +43,7 @@ namespace Innovation_Admin.UI.Common
 
         
       
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IQuotes _quotes)
         public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IRemittanceType _remittanceTypes)
 
         {
@@ -53,6 +57,7 @@ namespace Innovation_Admin.UI.Common
             sysPrefSecurityEmails = _sysPrefSecurityEmails;
             sysPrefFinancial = _sysPrefFinancial;
             pharmacyGroups = _pharmacyGroups;
+            quotes = _quotes;
             remittanceTypes = _remittanceTypes;
         }
 
@@ -382,6 +387,44 @@ namespace Innovation_Admin.UI.Common
             return await sysPrefFinancial.DeleteSysPrefFinancial(financialId);
         }
 
+
+        public async Task<IEnumerable<QuoteDto>> GetAllQuotes()
+        {
+            GetAllQuotesResponseModel getAllQuotesResponseModel = new GetAllQuotesResponseModel();
+
+            getAllQuotesResponseModel = await quotes.GetAllQuotes();
+
+            if (getAllQuotesResponseModel.IsSuccess)
+            {
+                if (getAllQuotesResponseModel != null && getAllQuotesResponseModel.Data.Count() > 0)
+                {
+                    return getAllQuotesResponseModel.Data;
+                }
+            }
+
+            return new List<QuoteDto>();
+        }
+
+        public async Task<CreateQuoteResponseModel> CreateQuote(CreateQuoteDto newQuote)
+        {
+            return await quotes.CreateQuote(newQuote);
+        }
+
+        public async Task<UpdateQuoteResponseModel> UpdateQuote(QuoteDto updatedQuote)
+        {
+            return await quotes.UpdateQuote(updatedQuote);
+        }
+
+        public async Task<GetQuoteByIdResponseModel> GetQuoteById(Guid quoteId)
+        {
+            return await quotes.GetQuoteById(quoteId);
+        }
+        public async Task<bool> DeleteQuote(Guid quoteId)
+        {
+            return await quotes.DeleteQuote(quoteId);
+        }
+
+ 
 
         #region RemittanceType
 

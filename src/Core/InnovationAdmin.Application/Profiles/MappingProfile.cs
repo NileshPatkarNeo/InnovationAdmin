@@ -39,6 +39,9 @@ using InnovationAdmin.Application.Features.Quote.Commands.UpdateQuote;
 using InnovationAdmin.Application.Features.Quote.Commands.DeleteQuote;
 using InnovationAdmin.Application.Features.Quote.Queries.GetQuote;
 using InnovationAdmin.Application.Features.Quote.Queries.GetQuotesList;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.CraeateReceiptBatchSource;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Queries.GetReceiptBatchSourceQuery;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.UpdateReceiptBatchSource;
 using InnovationAdmin.Application.Features.RemittanceType.Commands.CreateRemittanceType;
 using InnovationAdmin.Application.Features.RemittanceType.Commands.UpdateRemittanceType;
 using InnovationAdmin.Application.Features.RemittanceType.Queries.GetRemittanceTypeQuery;
@@ -156,6 +159,12 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Quotes, QuoteListVM>();
             CreateMap<Quotes, QuoteVM>();
             CreateMap<Quotes, UpdateQuoteCommand>().ReverseMap();
+
+
+            CreateMap<ReceiptBatchSource, CreateReceiptBatchDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, ReceiptBatchSourceDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceDto>().ReverseMap();
+
 
 
 

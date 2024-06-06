@@ -23,11 +23,10 @@ namespace InnovationAdmin.Persistence
 
             services.AddScoped<IAdminUserRepository, AdminUserRepository>();
             services.AddScoped<ISysPrefSecurityEmailRepository,  SysPrefSecurityEmailRepository>();
-
             services.AddScoped<ISysPrefCompanyRepository, SysPrefCompanyRepository>();
             services.AddScoped<ISysPref_GeneralBehaviourRepository, SysPref_GeneralBehaviourRepository>();
             services.AddScoped<ISysPrefFinancialRepository, SysPrefFinancialRepository>();
-
+            services.AddScoped<IReceiptBatchSourceRepository, ReceiptBatchSourceRepository>();
             services.AddScoped<IQuotesRepository, QuotesRepository>();
 
             return services;

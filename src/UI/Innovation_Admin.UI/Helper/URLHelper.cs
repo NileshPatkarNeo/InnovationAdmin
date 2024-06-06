@@ -111,7 +111,29 @@ namespace Innovation_Admin.UI.Helper
 
         #endregion
 
+        #region ReceiptBatchSource
+        public const string GetAllReceiptBatchSource = "/api/ReceiptBatchSource?api-version=1";
 
+        public const string GetReceiptBatchSourceById = "/api/ReceiptBatchSource/{id}?api-version=1";
+
+        public const string CreateReceiptBatchSource = "/api/ReceiptBatchSource?api-version=1";
+
+        public const string UpdateReceiptBatchSource = "/api/ReceiptBatchSource/{id}?api-version=1";
+
+        public const string DeleteReceiptBatchSource = "/api/ReceiptBatchSource/{id}?api-version=1";
+
+
+        #endregion
+
+        public const string GetAllQuotes = "/api/Quote?api-version=1";
+
+        public const string CreateQuote = "/api/Quote/create?api-version=1";
+
+        public const string GetQuoteById = "/api/Quote/{id}?api-version=1";
+
+        public const string UpdateQuote = "/api/Quote?api-version=1";
+
+        public const string DeleteQuote = "/api/Quote/{id}?api-version=1";
         public const string GetAllRemittanceType = "/api/RemittanceType/all?api-version=1";
 
         public const string CreateRemittanceType = "/api/RemittanceType?api-version=1";
