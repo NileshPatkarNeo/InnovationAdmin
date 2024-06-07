@@ -4,37 +4,42 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1 class="mt-4">General Behaviour Details</h1>
+<h1 class="text-center">General Behaviour Details</h1>
+
 <style>
-    .mt-4 {
-        text-align: center;
+    h1.text-center, hr {
+        margin-bottom: 20px;
     }
 
-    .center-container {
-        display: flex;
-        justify-content: center;
+    .dl-horizontal dt {
+        text-align: left;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 0;
+    }
+
+    .btn {
+        display: inline-flex;
         align-items: center;
-        
     }
-    .card {
-        max-width: 800px; 
-        width: 100%; 
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-        border-radius: 10px; 
-        padding: 20px; 
-    }
-    .dl-row dt {
-        flex-basis: 50%; 
-    }
-    .dl-row dd {
-        margin-left: 30%; 
+
+        .btn i {
+            margin-right: 5px;
+        }
+
+    .card.shadow {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 </style>
 
-<div class="center-container">
-    <div class="card">
-        <div class="card-body">
-            <dl class="row dl-row">
+
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow">
+
+            <div class="card-body">
+                <dl class="row">
                 <dt class="col-sm-4">
                     Preference ID
                 </dt>
@@ -94,9 +99,11 @@
                 <a asp-action="SysPrefGeneralBehaviour" class="btn btn-secondary ms-2">
                     <i class="bi bi-arrow-left-circle"></i> Back
                 </a>
-            </div>
+             </div>
         </div>
     </div>
 </div>
+</div>
+
  
 

@@ -310,13 +310,20 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefGeneralBehaviour(CreateSysPrefGeneralBehaviourDto company)
         {
-            if (!ModelState.IsValid)
-            {
-                
-                return View(company);
-            }
+           
             var result = await _common.CreateSysPrefGeneralBehaviour(company);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
                 return RedirectToAction("SysPrefGeneralBehaviour");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("SysPrefGeneralBehaviour");
+            }
+            return RedirectToAction("SysPrefGeneralBehaviour");
         }
 
         [HttpGet]
@@ -336,7 +343,26 @@ namespace Innovation_Admin.UI.Controllers
             return View(sysPrefCompany.Data);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSysPrefGeneralBehaviour(SysPrefGeneralBehaviourDto updatedCompany)
+        {
+             var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
 
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("SysPrefGeneralBehaviour");
+
+            }
+            else if (result.Message == "Failed to update.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("SysPrefGeneralBehaviour");
+            }
+
+            return RedirectToAction("SysPrefGeneralBehaviour");
+        }
 
         [HttpGet]
         public async Task<IActionResult> SysPrefGeneralBehaviourDetails(Guid Preference_ID)
@@ -355,39 +381,24 @@ namespace Innovation_Admin.UI.Controllers
             return View(sysPrefGeneralBehaviour.Data);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSysPrefGeneralBehaviour(SysPrefGeneralBehaviourDto updatedCompany)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(updatedCompany);  
-            }
-
-            var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
-
-            if (!result.IsSuccess)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedCompany);  
-            }
-
-            return RedirectToAction("SysPrefGeneralBehaviour");
-        }
-
-
-
+       
         [HttpPost]
         public async Task<IActionResult> DeleteSysPrefGeneralBehaviour(Guid Preference_ID)
         {
-            var isDeleted = await _common.DeleteSysPrefGeneralBehaviour(Preference_ID);
-            if (!isDeleted)
-            {
+            bool isDeleted = await _common.DeleteSysPrefGeneralBehaviour(Preference_ID);
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the GeneralBehaviour.");
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("SysPrefGeneralBehaviour");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the admin role." });
+            }
+
         }
+
+      
 
         #endregion
 
@@ -485,9 +496,6 @@ namespace Innovation_Admin.UI.Controllers
 
 
         #endregion
-
-
-        
 
 
 
