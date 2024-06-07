@@ -548,6 +548,9 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefFinancial.");
                 }
+
+                TempData["Message"] = "Successfully Added";
+
                 return RedirectToAction("SysPrefFinancial");
             }
             return RedirectToAction("SysPrefFinancial");
@@ -572,6 +575,8 @@ namespace Innovation_Admin.UI.Controllers
                 ModelState.AddModelError(string.Empty, result.Message);
                 return View(updatedFinancial);
             }
+            TempData["Message"] = "Updated Successfully ";
+
             return RedirectToAction("SysPrefFinancial");
         }
 
@@ -597,11 +602,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteSysPrefFinancial(Guid financialId)
         {
             var isDeleted = await _common.DeleteSysPrefFinancial(financialId);
-            if (!isDeleted)
+            if (isDeleted)
             {
-                ModelState.AddModelError(string.Empty, "Failed to delete the financial record.");
+                return Json(new { success = true });
             }
-            return RedirectToAction("SysPrefFinancial");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the financial." });
+            }
         }
 
         #endregion

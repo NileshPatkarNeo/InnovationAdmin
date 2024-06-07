@@ -56,5 +56,12 @@ namespace Innovation_Admin.UI.Models.SysPrefFinancial
         [Range(0, int.MaxValue, ErrorMessage = "Days To Block must be a non-negative value.")]
         [JsonProperty("daysToBlock")]
         public int DaysToBlock { get; set; }
-    }
+
+
+        [Required(ErrorMessage = "Message is Required")]
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string Message { get; set; }
+    }       
 }
+
