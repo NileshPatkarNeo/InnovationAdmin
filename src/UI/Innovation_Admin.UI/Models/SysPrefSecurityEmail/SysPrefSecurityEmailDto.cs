@@ -35,5 +35,10 @@ namespace Innovation_Admin.UI.Models.SysPrefSecurityEmail
         [Required(ErrorMessage = "Status is required.")]
         [Range(0, int.MaxValue, ErrorMessage = "Status must be a valid number.")]
         public int Status { get; set; }
+
+        [Required(ErrorMessage = "Message is Required")]
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }

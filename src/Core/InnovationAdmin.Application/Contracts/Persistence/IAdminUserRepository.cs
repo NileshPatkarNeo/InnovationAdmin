@@ -1,4 +1,5 @@
-﻿using InnovationAdmin.Domain.Entities;
+﻿using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserList;
+using InnovationAdmin.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace InnovationAdmin.Application.Contracts.Persistence
         Task<List<Admin_User>> GetActiveAdminUsers();
 
         Task<Admin_User> AddAdminUser(Admin_User adminUser);
+        Task<List<AdminUserListVm>> GetAdminUsersList();
 
     }
 }

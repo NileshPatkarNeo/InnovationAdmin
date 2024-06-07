@@ -26,9 +26,7 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_
                 .NotNull()
                 .MaximumLength(40).WithMessage("Length should be less than 40 characters");
 
-            RuleFor(p => p.Role)
-                .NotEmpty().WithMessage("Role is an int value")
-                .GreaterThan(0).WithMessage("Number should be greater than 0");
+
 
             RuleFor(p => p.Email)
                 .NotEmpty().WithMessage("Email is not valid")

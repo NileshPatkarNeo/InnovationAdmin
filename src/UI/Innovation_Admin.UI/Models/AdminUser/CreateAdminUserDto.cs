@@ -13,8 +13,13 @@ namespace Innovation_Admin.UI.Models.AdminUser
 
         [JsonProperty("role")]
         [Required(ErrorMessage = "Role is required")]
-        [Range(1, int.MaxValue, ErrorMessage = "Role must be a valid number")]
-        public int Role { get; set; }
+        //[Range(1, int.MaxValue, ErrorMessage = "Role must be a valid number")]
+        public Guid Role { get; set; }
+
+        [JsonProperty("roleName")]
+        [Required(ErrorMessage = "Role is required")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Role must be a valid number")]
+        public string RoleName { get; set; }
 
         [JsonProperty("email")]
         [Required(ErrorMessage = "Email is required")]
@@ -28,6 +33,12 @@ namespace Innovation_Admin.UI.Models.AdminUser
 
         [JsonProperty("status")]
         public bool Status { get; set; }
+
+       
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
 
     }
 }
