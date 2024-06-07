@@ -12,6 +12,12 @@ namespace Innovation_Admin.UI.Models.PharmacyGroup
         [JsonProperty("pharmacyName")]
         [Required(ErrorMessage = "Pharmacy Name is required")]
         [StringLength(25, ErrorMessage = "Pharmacy Name cannot be longer than 100 characters")]
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Pharmacy Name can only contain alphabetic characters and spaces")]
         public string PharmacyName { get; set; }
+
+        
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string? Message { get; set; }
     }
 }
