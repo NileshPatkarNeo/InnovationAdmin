@@ -388,21 +388,21 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePharmacyGroup(PharmacyGroupDto group)
         {
+            
             if (!ModelState.IsValid)
+                {
+                   return View(group); 
+              }
+                var result = await _common.CreatePharmacyGroup(group);
+            if (result.Message == null)
             {
-                return View(group); 
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("PharmacyGroups");
+
             }
-            var result = await _common.CreatePharmacyGroup(group);
-            if (!result.IsSuccess)
+            else if (result.Message == "Failed to add group.")
             {
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the Pharmacy Group.");
-                }
+                TempData["Message"] = result.Message;
                 return RedirectToAction("PharmacyGroups");
             }
             return RedirectToAction("PharmacyGroups");
@@ -438,10 +438,16 @@ namespace Innovation_Admin.UI.Controllers
 
             var result = await _common.UpdatePharmacyGroup(updatedgroup);
 
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedgroup); 
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("PharmacyGroups");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("PharmacyGroups");
             }
 
             return RedirectToAction("PharmacyGroups");
@@ -452,13 +458,23 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeletePharmacyGroup(Guid Id)
         {
-            var isDeleted = await _common.DeletePharmacyGroup(Id);
-            if (!isDeleted)
-            {
+            //var isDeleted = await _common.DeletePharmacyGroup(Id);
+            //if (!isDeleted)
+            //{
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the group.");
+            //    ModelState.AddModelError(string.Empty, "Failed to delete the group.");
+            //}
+            //return RedirectToAction("PharmacyGroups");
+            bool isDeleted = await _common.DeletePharmacyGroup(Id);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("PharmacyGroups");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
         }
 
 
