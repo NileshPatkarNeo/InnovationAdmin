@@ -1,16 +1,10 @@
-﻿using InnovationAdmin.Application.Features.AdminRoles.Commands.CreateAdminRole;
-using InnovationAdmin.Application.Features.AdminRoles.Commands.DeleteAdminRole;
-using InnovationAdmin.Application.Features.AdminRoles.Commands.UpdateAdminRole;
-using InnovationAdmin.Application.Features.AdminRoles.Queries.GetAdminRole;
-using InnovationAdmin.Application.Features.AdminRoles.Queries.GetAdminRoleList;
-using InnovationAdmin.Application.Features.Quote.Commands.CreateQuote;
+﻿using InnovationAdmin.Application.Features.Quote.Commands.CreateQuote;
 using InnovationAdmin.Application.Features.Quote.Commands.DeleteQuote;
 using InnovationAdmin.Application.Features.Quote.Commands.UpdateQuote;
 using InnovationAdmin.Application.Features.Quote.Queries.GetQuote;
 using InnovationAdmin.Application.Features.Quote.Queries.GetQuotesList;
 using InnovationAdmin.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -21,10 +15,10 @@ namespace InnovationAdmin.Api.Controllers
     public class QuoteController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<AdminRoleController> _logger;
+        private readonly ILogger<QuoteController> _logger;
 
 
-        public QuoteController(IMediator mediator, ILogger<AdminRoleController> logger)
+        public QuoteController(IMediator mediator, ILogger<QuoteController> logger)
         {
             _mediator = mediator;
             _logger = logger;
