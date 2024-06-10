@@ -18,6 +18,10 @@ using Innovation_Admin.UI.Models.ResponsesModel.SysPrefFinancial;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Innovation_Admin.UI.Models.PharmacyGroup;
 using Innovation_Admin.UI.Models.ResponsesModel.PharmacyGroup;
+using Innovation_Admin.UI.Models.Quote;
+using Innovation_Admin.UI.Models.ResponsesModel.Quote;
+using Innovation_Admin.UI.Models.RemittanceType;
+using Innovation_Admin.UI.Models.ResponsesModel.RemittanceType;
 using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.ResponsesModel.DataSource;
 using Innovation_Admin.UI.Services.Repositories;
@@ -34,6 +38,8 @@ namespace Innovation_Admin.UI.Common
         private readonly ISysPrefGeneralBehaviouries sysPrefBehaviouries;
         private readonly ISysPrefFinancials sysPrefFinancial;
         private readonly IPharmacyGroup pharmacyGroups;
+        private readonly IQuotes quotes;
+        private readonly IRemittanceType remittanceTypes;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IDataSources dataSources;
@@ -41,6 +47,8 @@ namespace Innovation_Admin.UI.Common
 
         
       
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IQuotes _quotes)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IRemittanceType _remittanceTypes)
         public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources)
 
         {
@@ -54,6 +62,8 @@ namespace Innovation_Admin.UI.Common
             sysPrefSecurityEmails = _sysPrefSecurityEmails;
             sysPrefFinancial = _sysPrefFinancial;
             pharmacyGroups = _pharmacyGroups;
+            quotes = _quotes;
+            remittanceTypes = _remittanceTypes;
             dataSources = _dataSources;
         }
 
@@ -414,6 +424,85 @@ namespace Innovation_Admin.UI.Common
             return await dataSources.UpdateDataSource(updateddata);
         }
 
+
+        public async Task<IEnumerable<QuoteDto>> GetAllQuotes()
+        {
+            GetAllQuotesResponseModel getAllQuotesResponseModel = new GetAllQuotesResponseModel();
+
+            getAllQuotesResponseModel = await quotes.GetAllQuotes();
+
+            if (getAllQuotesResponseModel.IsSuccess)
+            {
+                if (getAllQuotesResponseModel != null && getAllQuotesResponseModel.Data.Count() > 0)
+                {
+                    return getAllQuotesResponseModel.Data;
+                }
+            }
+
+            return new List<QuoteDto>();
+        }
+
+        public async Task<CreateQuoteResponseModel> CreateQuote(CreateQuoteDto newQuote)
+        {
+            return await quotes.CreateQuote(newQuote);
+        }
+
+        public async Task<UpdateQuoteResponseModel> UpdateQuote(QuoteDto updatedQuote)
+        {
+            return await quotes.UpdateQuote(updatedQuote);
+        }
+
+        public async Task<GetQuoteByIdResponseModel> GetQuoteById(Guid quoteId)
+        {
+            return await quotes.GetQuoteById(quoteId);
+        }
+        public async Task<bool> DeleteQuote(Guid quoteId)
+        {
+            return await quotes.DeleteQuote(quoteId);
+        }
+
+ 
+
+        #region RemittanceType
+
+        public async Task<IEnumerable<RemittanceTypeDto>> GetAllRemittanceType()
+        {
+            GetAllRemittanceTypeResponseModel getAllRemittanceTypeResponseModel = new GetAllRemittanceTypeResponseModel();
+
+            getAllRemittanceTypeResponseModel = await remittanceTypes.GetAllRemittanceTypes();
+
+            if (getAllRemittanceTypeResponseModel.IsSuccess)
+            {
+                if (getAllRemittanceTypeResponseModel != null && getAllRemittanceTypeResponseModel.Data.Count() > 0)
+                {
+                    return getAllRemittanceTypeResponseModel.Data;
+                }
+            }
+
+            return new List<RemittanceTypeDto>();
+        }
+
+        public async Task<CreateRemittanceTypeResponseModel> CreateRemittanceType(RemittanceTypeDto type)
+        {
+            return await remittanceTypes.CreateRemittanceType(type);
+        }
+
+        public async Task<UpdateRemittanceTypeResponseModel> UpdateRemittanceType(RemittanceTypeDto updatedType)
+        {
+            return await remittanceTypes.UpdateRemittanceType(updatedType);
+        }
+
+        public async Task<GetRemittanceTypeByIdResponseModel> GetRemittanceTypeById(Guid Id)
+        {
+            return await remittanceTypes.GetRemittanceTypeById(Id);
+        }
+
+        public async Task<bool> DeleteRemittanceType(Guid Id)
+        {
+            return await remittanceTypes.DeleteRemittanceType(Id);
+        }
+
+        #endregion
         public async Task<GetDataSourceByIdResponseModel> GetDataSourceById(Guid dataId)
         {
             return await dataSources.GetDataSourceById(dataId);

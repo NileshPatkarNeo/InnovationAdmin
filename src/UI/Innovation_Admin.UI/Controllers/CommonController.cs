@@ -14,6 +14,8 @@ using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Models.Quote;
+using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.DataSource;
 
 namespace Innovation_Admin.UI.Controllers
@@ -456,9 +458,6 @@ namespace Innovation_Admin.UI.Controllers
 
 
         
-
-
-
         #region Account_Manager
 
         [HttpGet]
@@ -677,6 +676,143 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+        public async Task<IActionResult> Quotes()
+        {
+            var getAllQuotes = await _common.GetAllQuotes();
+            return View(getAllQuotes);
+        }
+
+        [HttpGet]
+        public IActionResult CreateQuote()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateQuote(CreateQuoteDto quote)
+        {
+            var result = await _common.CreateQuote(quote);
+
+            if (result.Data is null)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the quote.");
+                }
+
+                return RedirectToAction("Quotes");
+            }
+
+            return RedirectToAction("Quotes");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditQuote([FromQuery] string quoteId)
+        {
+            var quote = await _common.GetQuoteById(Guid.Parse(quoteId));
+            return View(quote.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditQuote(QuoteDto updatedQuote)
+        {
+            var result = await _common.UpdateQuote(updatedQuote);
+        #region RemittanceType
+
+        [HttpGet]
+        public async Task<IActionResult> RemittanceTypes()
+        {
+            var getAllType = await _common.GetAllRemittanceType();
+            return View(getAllType);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateRemittanceType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRemittanceType(RemittanceTypeDto type)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(type);
+            }
+            var result = await _common.CreateRemittanceType(type);
+            if (!result.IsSuccess)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the Remittance Type.");
+                }
+                return RedirectToAction("RemittanceTypes");
+            }
+            return RedirectToAction("RemittanceTypes");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditRemittanceType(string Id)
+        {
+            if (string.IsNullOrEmpty(Id) || !Guid.TryParse(Id, out Guid prefId))
+            {
+                return BadRequest("Invalid ID");
+            }
+
+            var type = await _common.GetRemittanceTypeById(prefId);
+            if (type == null || type.Data == null)
+            {
+                return NotFound("type not found");
+            }
+
+            return View(type.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditRemittanceType(RemittanceTypeDto updatedtype)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(updatedtype);
+            }
+
+            var result = await _common.UpdateRemittanceType(updatedtype);
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedtype);
+            }
+
+            return RedirectToAction("RemittanceTypes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRemittanceType(Guid Id)
+        {
+            var isDeleted = await _common.DeleteRemittanceType(Id);
+            if (!isDeleted)
+            {
+
+                ModelState.AddModelError(string.Empty, "Failed to delete the type.");
+            }
+            return RedirectToAction("RemittanceTypes");
+        }
+
+        #endregion
+
         #region DataSources
    
         public async Task<IActionResult> DataSource()
@@ -760,7 +896,25 @@ namespace Innovation_Admin.UI.Controllers
    
         #endregion
 
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedQuote);
+            }
 
+            return RedirectToAction("Quotes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteQuote(Guid quoteId)
+        {
+            var isDeleted = await _common.DeleteQuote(quoteId);
+            if (!isDeleted)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
+            }
+            return RedirectToAction("Quotes");
+        }
     }
 }
     

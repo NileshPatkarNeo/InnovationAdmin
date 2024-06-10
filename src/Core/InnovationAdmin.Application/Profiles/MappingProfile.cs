@@ -34,6 +34,17 @@ using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysP
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancialList;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancial;
+using InnovationAdmin.Application.Features.Quote.Commands.CreateQuote;
+using InnovationAdmin.Application.Features.Quote.Commands.UpdateQuote;
+using InnovationAdmin.Application.Features.Quote.Commands.DeleteQuote;
+using InnovationAdmin.Application.Features.Quote.Queries.GetQuote;
+using InnovationAdmin.Application.Features.Quote.Queries.GetQuotesList;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.CraeateReceiptBatchSource;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Queries.GetReceiptBatchSourceQuery;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.UpdateReceiptBatchSource;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.CreateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.UpdateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Queries.GetRemittanceTypeQuery;
 using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource;
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceById;
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceList;
@@ -78,8 +89,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<PharmacyGroup, PharmacyGroupDto>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
-            
 
+            CreateMap<RemittanceType, CreateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, CreateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, RemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
 
 
             CreateMap<SysPref_GeneralBehaviours, Create_SysPref_GeneralBehaviour_Dto>();
@@ -138,6 +155,20 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPrefFinancial, DeleteSysPrefFinancialCommand>();
             CreateMap<SysPrefFinancial, SysPrefFinancialListVM>();
             CreateMap<SysPrefFinancial, SysPrefFinancialVM>();
+
+
+            CreateMap<Quotes, CreateQuoteDto>().ReverseMap();
+            CreateMap<Quotes, UpdateQuoteDto>().ReverseMap();
+            CreateMap<Quotes, DeleteQuoteCommand>().ReverseMap();
+            CreateMap<Quotes, QuoteListVM>();
+            CreateMap<Quotes, QuoteVM>();
+            CreateMap<Quotes, UpdateQuoteCommand>().ReverseMap();
+
+
+            CreateMap<ReceiptBatchSource, CreateReceiptBatchDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, ReceiptBatchSourceDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceDto>().ReverseMap();
+
 
 
             CreateMap<DataSource, CreateDataSourceDto>().ReverseMap();
