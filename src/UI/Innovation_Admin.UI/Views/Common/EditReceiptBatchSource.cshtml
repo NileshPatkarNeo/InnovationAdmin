@@ -1,0 +1,145 @@
+﻿@model Innovation_Admin.UI.Models.ReceiptBatchSource.ReceiptBatchSourceDto
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group input {
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+    }
+
+        a:hover {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+    .text-danger {
+        color: red;
+    }
+</style>
+
+<body>
+    <h1>Edit Receipt Batch</h1>
+
+    <div class="form-container">
+        <form id="receiptBatchForm" asp-action="EditReceiptBatchSource">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" style="display:none;">
+                <label asp-for="Id" class="control-label"></label>
+                <input id="Id" asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input id="Name" asp-for="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this); " />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input id="Type" asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group button-container">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="ReceiptBatchSource" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  
+    <script>
+        $(document).ready(function () {
+            $('#receiptBatchForm').on('submit', function (e) {
+                var isValid = true;
+                $('.text-danger').text('');
+                var name = $('#Name').val();
+                if (!name) {
+                    isValid = false;
+                    $('#Name').next('.text-danger').text('Name is required.');
+                } else if (name.length > 50) {
+                    isValid = false;
+                    $('#Name').next('.text-danger').text('Name cannot exceed 50 characters.');
+                }
+
+                var type = $('#Type').val();
+                if (!type) {
+                    isValid = false;
+                    $('#Type').next('.text-danger').text('Type is required.');
+                }
+
+                if (!isValid) {
+                    e.preventDefault(); 
+                }
+            });
+        });
+
+
+        function onlyAlphabets(e, t) {
+            try {
+                if (window.event) {
+                    var charCode = window.event.keyCode;
+                }
+                else if (e) {
+                    var charCode = e.which;
+                }
+                else { return true; }
+                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                    return true;
+                else
+                    return false;
+            }
+            catch (err) {
+                alert(err.Description);
+            }
+        }
+    </script>
+</body>
