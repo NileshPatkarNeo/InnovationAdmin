@@ -1,4 +1,5 @@
 ﻿using InnovationAdmin.Application.Contracts.Persistence;
+using InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserList;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -35,5 +36,25 @@ namespace InnovationAdmin.Persistence.Repositories
             _logger.LogInformation("AddAdminUser Completed");
             return adminUser;
         }
+
+        public async Task<List<AdminUserListVm>> GetAdminUsersList()
+        {
+            _logger.LogInformation("GetActiveAdminUsers Initiated");
+            var activeAdminUsers = await (from user in _dbContext.Admin_Users
+                                          join role in _dbContext.AdminRoles
+                                          on user.Role equals role.Role_ID
+                                          select new AdminUserListVm
+                                          {
+                                              User_ID = user.User_ID,
+                                              User_Name = user.User_Name,
+                                              Status = user.Status,
+                                              RoleId = user.Role,
+                                              RoleName = role.Role_Name,
+                                              Email = user.Email,
+                                          }).ToListAsync();
+            _logger.LogInformation("GetActiveAdminUsers Completed");
+            return activeAdminUsers;
+        }
+
     }
 }

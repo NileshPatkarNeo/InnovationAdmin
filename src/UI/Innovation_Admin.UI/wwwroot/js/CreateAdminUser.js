@@ -1,5 +1,3 @@
-// wwwroot/js/CreateAdminUser.js
-
 document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("createAdminUserForm");
 
@@ -7,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
         var isValid = true;
 
         // Validate User Name
-        var userName = document.querySelector("#User_Name").value;
-        var userNameError = document.querySelector("#userNameError");
+        var userName = document.getElementById("User_Name").value;
+        var userNameError = document.getElementById("userNameError");
         if (userName.trim() === "") {
             userNameError.textContent = "User Name is required.";
             isValid = false;
@@ -20,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validate Role
-        var role = document.querySelector("#Role").value;
-        var roleError = document.querySelector("#roleError");
+        var role = document.getElementById("RoleId").value;
+        var roleError = document.getElementById("roleError");
         if (role.trim() === "") {
             roleError.textContent = "Role is required.";
             isValid = false;
@@ -33,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validate Email
-        var email = document.querySelector("#Email").value;
-        var emailError = document.querySelector("#emailError");
+        var email = document.getElementById("Email").value;
+        var emailError = document.getElementById("emailError");
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (email.trim() === "") {
             emailError.textContent = "Email is required.";
@@ -42,16 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (!emailRegex.test(email)) {
             emailError.textContent = "Invalid email format.";
             isValid = false;
-        } else if (!defaultFromAddress.includes(".com")) {
-            defaultFromAddressError.textContent = "Email address must contain .com";
+        } else if (!email.includes(".com")) {
+            emailError.textContent = "Email address must contain .com";
             isValid = false;
         } else {
             emailError.textContent = "";
         }
 
         // Validate Password
-        var password = document.querySelector("#Password").value;
-        var passwordError = document.querySelector("#passwordError");
+        var password = document.getElementById("Password").value;
+        var passwordError = document.getElementById("passwordError");
         if (password.trim() === "") {
             passwordError.textContent = "Password is required.";
             isValid = false;
@@ -63,8 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validate Status
-        var status = document.querySelector("#Status").checked;
-        var statusError = document.querySelector("#statusError");
+        var statusError = document.getElementById("statusError");
         // Assuming Status is a boolean and no additional validation needed
         statusError.textContent = "";
 

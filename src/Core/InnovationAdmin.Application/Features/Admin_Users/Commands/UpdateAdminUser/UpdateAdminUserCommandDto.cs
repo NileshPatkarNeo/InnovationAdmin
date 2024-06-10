@@ -13,7 +13,7 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminU
 
         public string Password { get; set; }
         public string Email { get; set; }
-        public int Role { get; set; }
+        public Guid Role { get; set; }
         public bool Status { get; set; }
     }
 }
