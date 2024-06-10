@@ -676,6 +676,8 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+
+        #region Quotes
         public async Task<IActionResult> Quotes()
         {
             var getAllQuotes = await _common.GetAllQuotes();
@@ -723,6 +725,27 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditQuote(QuoteDto updatedQuote)
         {
             var result = await _common.UpdateQuote(updatedQuote);
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedQuote);
+            }
+
+            return RedirectToAction("Quotes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteQuote(Guid quoteId)
+        {
+            var isDeleted = await _common.DeleteQuote(quoteId);
+            if (!isDeleted)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
+            }
+            return RedirectToAction("Quotes");
+        }
+        #endregion
+
         #region RemittanceType
 
         [HttpGet]
@@ -896,25 +919,9 @@ namespace Innovation_Admin.UI.Controllers
    
         #endregion
 
-            if (!result.IsSuccess)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedQuote);
-            }
+      
 
-            return RedirectToAction("Quotes");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteQuote(Guid quoteId)
-        {
-            var isDeleted = await _common.DeleteQuote(quoteId);
-            if (!isDeleted)
-            {
-                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
-            }
-            return RedirectToAction("Quotes");
-        }
+       
     }
 }
     
