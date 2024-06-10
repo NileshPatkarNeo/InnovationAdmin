@@ -766,19 +766,19 @@ namespace Innovation_Admin.UI.Controllers
                 return View(type);
             }
             var result = await _common.CreateRemittanceType(type);
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the Remittance Type.");
-                }
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("RemittanceTypes");
+
+            }
+            else if (result.Message == "Failed to add type.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("RemittanceTypes");
             }
             return RedirectToAction("RemittanceTypes");
+
         }
 
         [HttpGet]
@@ -809,25 +809,36 @@ namespace Innovation_Admin.UI.Controllers
 
             var result = await _common.UpdateRemittanceType(updatedtype);
 
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedtype);
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("RemittanceTypes");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("RemittanceTypes");
             }
 
             return RedirectToAction("RemittanceTypes");
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteRemittanceType(Guid Id)
         {
-            var isDeleted = await _common.DeleteRemittanceType(Id);
-            if (!isDeleted)
-            {
+            bool isDeleted = await _common.DeleteRemittanceType(Id);
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the type.");
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("RemittanceTypes");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+            
         }
 
         #endregion
