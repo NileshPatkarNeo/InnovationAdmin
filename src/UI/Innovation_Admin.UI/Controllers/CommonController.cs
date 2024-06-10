@@ -694,33 +694,30 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> CreateDataSource(CreateDataSourceDto data)
         {
 
-            var result = await _common.CreateDataSource(data);
-
-            if (!result.IsSuccess)
+            if (!ModelState.IsValid)
             {
+                return View(data);
+            }
+            var result = await _common.CreateDataSource(data);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("DataSource");
 
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the DataSource.");
-                }
-
-
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("DataSource");
             }
-
-
             return RedirectToAction("DataSource");
+
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditDataSource([FromQuery] string dataId)
+        public async Task<IActionResult> EditDataSource(string id)
         {
-            var dataSource = await _common.GetDataSourceById(Guid.Parse(dataId));
+            var dataSource = await _common.GetDataSourceById(Guid.Parse(id));
             return View(dataSource.Data);
         }
 
@@ -729,15 +726,20 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditDataSource(DataSourceDto updatedData)
         {
             var result = await _common.UpdateDataSource(updatedData);
-
-
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedData);
-            }
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("DataSource");
 
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DataSource");
+            }
             return RedirectToAction("DataSource");
+
+
         }
 
 
@@ -745,14 +747,16 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteDataSource(Guid dataId)
         {
             var isDeleted = await _common.DeleteDataSource(dataId);
-            if (!isDeleted)
+
+            if (isDeleted)
             {
-
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+                return Json(new { success = true });
             }
-            return RedirectToAction("DataSource");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
         }
-
    
         #endregion
 

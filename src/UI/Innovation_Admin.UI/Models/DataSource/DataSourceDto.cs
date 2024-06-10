@@ -15,5 +15,9 @@ namespace Innovation_Admin.UI.Models.DataSource
         [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Name can only contain alphanumeric characters and spaces.")]
       
         public string Name { get; set; }
+
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string? Message { get; set; }
     }
 }
