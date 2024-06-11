@@ -706,6 +706,7 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the quote.");
                 }
+                TempData["Message"] = "Successfully Added";
 
                 return RedirectToAction("Quotes");
             }
@@ -725,11 +726,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditQuote(QuoteDto updatedQuote)
         {
             var result = await _common.UpdateQuote(updatedQuote);
+       
+
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
                 return View(updatedQuote);
             }
+            TempData["Message"] = "Updated Successfully";
 
             return RedirectToAction("Quotes");
         }
@@ -738,14 +742,15 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteQuote(Guid quoteId)
         {
             var isDeleted = await _common.DeleteQuote(quoteId);
-            if (!isDeleted)
+            if (isDeleted)
             {
-                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
+                return Json(new { success = true });
             }
-            return RedirectToAction("Quotes");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the admin role." });
+            }
         }
-        #endregion
-
         #region RemittanceType
 
         [HttpGet]
