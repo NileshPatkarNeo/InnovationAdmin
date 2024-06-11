@@ -26,11 +26,62 @@
         font-weight: bold;
     }
 
-    .form-group input {
-        border-radius: 4px;
+    .form-group {
+        position: relative;
     }
 
+        .form-group input {
+        /*     width: calc(100% - 35px);  */
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        
+        }
+
+        .form-group .dropdown-button {
+            width: 30px;
+            height: 30px;
+            margin: 5px 0;
+            margin-left: 5px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        z-index: 1000;
+        top: 100%;
+        left: 0;
+        width: 100%;
+    }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+    
+
+            .dropdown-menu a:hover {
+                background-color: #007bff;
+                color: white;
+            }
+            .btn-secondary
+            {
+            width:100px;
+            height:39px;}
     .btn-primary {
+        width:100px;
+        height : 39px;
         background-color: #007bff;
         border: none;
         border-radius: 4px;
@@ -44,6 +95,7 @@
     .button-container {
         text-align: center;
         margin-top: 20px;
+        justify-content:space-around;
     }
 
     a {
@@ -61,6 +113,11 @@
     .text-danger {
         color: red;
     }
+
+    .readonly {
+        background-color: #e9ecef;
+        cursor: not-allowed;
+    }
 </style>
 
 <body>
@@ -75,32 +132,59 @@
                 <input id="Id" asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input id="Name" asp-for="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this); " />
+                <input id="Name" asp-for="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this);" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" style="position: relative;">
                 <label asp-for="Type" class="control-label"></label>
-                <input id="Type" asp-for="Type" class="form-control" />
+                <div style="display: flex; align-items: center;">
+                    <input id="Type" asp-for="Type" class="form-control readonly" readonly />
+                    <button type="button" class="dropdown-button" onclick="toggleDropdown()">▼</button>
+                </div>
+                <div id="dropdownMenu" class="dropdown-menu">
+                    <a href="#" onclick="selectType('Banking')">Bank</a>
+                    <a href="#" onclick="selectType('CreditCard')">Cedit Card</a>
+                    <a href="#" onclick="selectType('UPI')">UPI</a>
+                    <a href="#" onclick="selectType('EDI')">EDI</a>
+                  
+                    
+                </div>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
-            <div class="form-group button-container">
+
+            <div class="@* form-group *@ button-container">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="ReceiptBatchSource" class="btn btn-secondary">Back</a>
             </div>
         </form>
     </div>
 
-   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  
     <script>
+        function toggleDropdown() {
+            var dropdownMenu = document.getElementById('dropdownMenu');
+            if (dropdownMenu.style.display === 'block') {
+                dropdownMenu.style.display = 'none';
+            } else {
+                dropdownMenu.style.display = 'block';
+            }
+        }
+
+        function selectType(type) {
+            document.getElementById('Type').value = type;
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+
         $(document).ready(function () {
             $('#receiptBatchForm').on('submit', function (e) {
                 var isValid = true;
                 $('.text-danger').text('');
+
                 var name = $('#Name').val();
                 if (!name) {
                     isValid = false;
@@ -117,29 +201,31 @@
                 }
 
                 if (!isValid) {
-                    e.preventDefault(); 
+                    e.preventDefault();
                 }
             });
         });
 
-
         function onlyAlphabets(e, t) {
             try {
-                if (window.event) {
-                    var charCode = window.event.keyCode;
-                }
-                else if (e) {
-                    var charCode = e.which;
-                }
-                else { return true; }
-                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                var charCode = e ? (e.which ? e.which : e.keyCode) : window.event.keyCode;
+                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)) {
                     return true;
-                else
+                } else {
                     return false;
-            }
-            catch (err) {
+                }
+            } catch (err) {
                 alert(err.Description);
             }
         }
+
+        document.addEventListener('click', function (event) {
+            var dropdownButton = document.querySelector('.dropdown-button');
+            var dropdownMenu = document.getElementById('dropdownMenu');
+
+            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
     </script>
 </body>
