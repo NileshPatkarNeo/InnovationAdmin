@@ -2,7 +2,7 @@
 using InnovationAdmin.Application.Contracts.Persistence;
 using InnovationAdmin.Application.Exceptions;
 using InnovationAdmin.Application.Responses;
-using InnovationAdmin.Domain.Entities;
+using ReceiptBatchSourceEntity = InnovationAdmin.Domain.Entities.ReceiptBatchSource;
 using MediatR;
 
 namespace InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.UpdateReceiptBatchSource
@@ -35,9 +35,11 @@ namespace InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.Updat
             {
                 throw new ValidationException(validationResult);
             }
+
+             _mapper.Map(request,batchToUpdate);
             await _receiptBatchSourceRepository.UpdateAsync(batchToUpdate);
             var dto = _mapper.Map<UpdateReceiptBAtchSourceDto>(batchToUpdate);
-            return new Response<UpdateReceiptBAtchSourceDto>(dto, "Receipt batch source updated successfully");
+            return new Response<UpdateReceiptBAtchSourceDto>(dto, "Receipt batch updated successfully");
         }
 
     }

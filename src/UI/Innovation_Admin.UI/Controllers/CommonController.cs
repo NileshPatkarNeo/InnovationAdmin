@@ -16,11 +16,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
 using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
+using Innovation_Admin.UI.Models.ReceiptBatchSource;
 
 namespace Innovation_Admin.UI.Controllers
 {
 
-     [AuthFilter]
+   //  [AuthFilter]
     public class CommonController : Controller
     {
         private readonly CommonCall.Common _common;
@@ -675,6 +676,8 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+        #region Quotes
+
         public async Task<IActionResult> Quotes()
         {
             var getAllQuotes = await _common.GetAllQuotes();
@@ -723,14 +726,15 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditQuote(QuoteDto updatedQuote)
         {
             var result = await _common.UpdateQuote(updatedQuote);
-       
 
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
                 return View(updatedQuote);
             }
+
             TempData["Message"] = "Updated Successfully";
+
 
             return RedirectToAction("Quotes");
         }
@@ -739,15 +743,18 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteQuote(Guid quoteId)
         {
             var isDeleted = await _common.DeleteQuote(quoteId);
-            if (isDeleted)
+
+            if (!isDeleted)
             {
-                return Json(new { success = true });
+                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
             }
-            else
-            {
-                return Json(new { success = false, message = "Failed to delete the admin role." });
-            }
+            return RedirectToAction("Quotes");
         }
+
+
+        #endregion
+
+
         #region RemittanceType
 
         [HttpGet]
@@ -844,6 +851,78 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
+
+        #region ReceiptBatchSource
+        [HttpGet]
+        public async Task<IActionResult> ReceiptBatchSource()
+        {
+            var getAllReceiptBatch = await _common.GetAllReceiptBatchSource();
+            return View(getAllReceiptBatch);
+        }
+
+        [HttpGet]
+        public IActionResult CreateReceiptBatchSource()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateReceiptBatchSource(ReceiptBatchSourceDto batch)
+        {
+            var result = await _common.CreateReceiptBatchSource(batch);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("ReceiptBatchSource");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ReceiptBatchSource");
+            }
+            return RedirectToAction("ReceiptBatchSource");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditReceiptBatchSource( string Id)
+        {
+            var receiptBatchSource = await _common.GetReceiptBatchSourceById(Guid.Parse(Id));
+            return View(receiptBatchSource.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditReceiptBatchSource(ReceiptBatchSourceDto updatedBatch)
+        {
+            var result = await _common.UpdateReceiptBatchSource(updatedBatch);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Receipt batch updated successfully";
+                return RedirectToAction("ReceiptBatchSource");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ReceiptBatchSource");
+            }
+            return RedirectToAction("ReceiptBatchSource");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteReceiptBatch(Guid Id)
+        {
+            var isDeleted = await _common.DeleteReceiptBatchSource(Id);
+            return RedirectToAction("ReceiptBatchSource");
+        }
+
+
+
+
+        #endregion
+
     }
 }
     

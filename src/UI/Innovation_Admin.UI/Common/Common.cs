@@ -22,6 +22,8 @@ using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.ResponsesModel.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ResponsesModel.RemittanceType;
+using Innovation_Admin.UI.Models.ReceiptBatchSource;
+using Innovation_Admin.UI.Models.ResponsesModel.ReceiptBatchSource;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -39,12 +41,12 @@ namespace Innovation_Admin.UI.Common
         private readonly IRemittanceType remittanceTypes;
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
+        private readonly IReceiptBatchSource receiptBatchSource;
        
 
         
-      
-        //public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IQuotes _quotes)
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IQuotes _quotes, IRemittanceType _remittanceTypes)
+     
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IQuotes _quotes, IRemittanceType _remittanceTypes,IReceiptBatchSource _receiptBatchSource)
 
         {
             adminUser = _adminUser;
@@ -59,6 +61,7 @@ namespace Innovation_Admin.UI.Common
             pharmacyGroups = _pharmacyGroups;
             quotes = _quotes;
             remittanceTypes = _remittanceTypes;
+            receiptBatchSource = _receiptBatchSource;
         }
 
         #region System_Preference
@@ -104,7 +107,6 @@ namespace Innovation_Admin.UI.Common
             return await sysPrefCompanies.DeleteSysPrefCompany(companyId);
         }
         #endregion
-
 
         #region Admin_User
 
@@ -183,7 +185,6 @@ namespace Innovation_Admin.UI.Common
         }
         #endregion
 
-
         #region GeneralBehaviour
 
         public async Task<IEnumerable<SysPrefGeneralBehaviourDto>> GetAllSysPrefBehaviouries()
@@ -246,6 +247,32 @@ namespace Innovation_Admin.UI.Common
             return new List<AccountManagerDto>();
         }
 
+        public async Task<CreateAccountManagerResponseModel> CreateAccountManager(AccountManagerDto manager)
+        {
+            return await accountManager.CreateAccountManager(manager);
+        }
+
+        public async Task<UpdateAccountManagerResponseModel> UpdateAccountManager(AccountManagerDto manager)
+        {
+            return await accountManager.UpdateAccountManager(manager);
+        }
+        public async Task<GetAccountManagerByIdResponseModel> GetAccountManagerById(Guid Id)
+        {
+            return await accountManager.GetAccountManagerById(Id);
+        }
+
+
+        public async Task<bool> DeleteAccountManager(Guid Id)
+        {
+            return await accountManager.DeleteAccountManager(Id);
+        }
+
+
+
+
+        #endregion
+
+        #region SysPrefFinancials
         public async Task<IEnumerable<SysPrefFinancialDto>> GetAllSysPrefFinancials()
         {
             GetAllSysPrefFinancialResponseModel getAllSysPrefFinancialResponseModel = new GetAllSysPrefFinancialResponseModel();
@@ -262,10 +289,26 @@ namespace Innovation_Admin.UI.Common
 
             return new List<SysPrefFinancialDto>();
         }
+        public async Task<CreateSysPrefFinancialResponseModel> CreateSysPrefFinancial(SysPrefFinancialDto sysPrefFinancialDto)
+        {
+            return await sysPrefFinancial.CreateSysPrefFinancial(sysPrefFinancialDto);
+        }
 
+        public async Task<UpdateSysPrefFinancialResponseModel> UpdateSysPrefFinancial(SysPrefFinancialDto updatedSysPrefFinancial)
+        {
+            return await sysPrefFinancial.UpdateSysPrefFinancial(updatedSysPrefFinancial);
+        }
 
+        public async Task<GetSysPrefFinancialByIdResponseModel> GetSysPrefFinancialById(Guid financialId)
+        {
+            return await sysPrefFinancial.GetSysPrefFinancialById(financialId);
+        }
+
+        public async Task<bool> DeleteSysPrefFinancial(Guid financialId)
+        {
+            return await sysPrefFinancial.DeleteSysPrefFinancial(financialId);
+        }
         #endregion
-
 
         #region Pharmacy Group
 
@@ -308,27 +351,8 @@ namespace Innovation_Admin.UI.Common
         }
         #endregion
 
-        public async Task<CreateAccountManagerResponseModel> CreateAccountManager(AccountManagerDto manager)
-        {
-            return await accountManager.CreateAccountManager(manager);
-        }
+        #region SysPrefSecurityEmail
 
-        public async Task<UpdateAccountManagerResponseModel> UpdateAccountManager(AccountManagerDto manager)
-        {
-            return await accountManager.UpdateAccountManager(manager);
-        }
-        public async Task<GetAccountManagerByIdResponseModel> GetAccountManagerById(Guid Id)
-        {
-            return await accountManager.GetAccountManagerById(Id);
-        }
-
-
-        public async Task<bool> DeleteAccountManager(Guid Id)
-        {
-            return await accountManager.DeleteAccountManager(Id);
-        }
-
-        
         public async Task<IEnumerable<SysPrefSecurityEmailDto>> GetAllSysPrefSecurityEmail()
         {
             GetAllSysPrefSecurityEmailResponseModel getAllSysPrefSecurityEmailResponseModel = new GetAllSysPrefSecurityEmailResponseModel();
@@ -367,25 +391,10 @@ namespace Innovation_Admin.UI.Common
             return await sysPrefSecurityEmails.DeleteSysPrefSecurityEmail(emailId);
         }
 
-        public async Task<CreateSysPrefFinancialResponseModel> CreateSysPrefFinancial(SysPrefFinancialDto sysPrefFinancialDto)
-        {
-            return await sysPrefFinancial.CreateSysPrefFinancial(sysPrefFinancialDto);
-        }
 
-        public async Task<UpdateSysPrefFinancialResponseModel> UpdateSysPrefFinancial(SysPrefFinancialDto updatedSysPrefFinancial)
-        {
-            return await sysPrefFinancial.UpdateSysPrefFinancial(updatedSysPrefFinancial);
-        }
+        #endregion
 
-        public async Task<GetSysPrefFinancialByIdResponseModel> GetSysPrefFinancialById(Guid financialId)
-        {
-            return await sysPrefFinancial.GetSysPrefFinancialById(financialId);
-        }
-
-        public async Task<bool> DeleteSysPrefFinancial(Guid financialId)
-        {
-            return await sysPrefFinancial.DeleteSysPrefFinancial(financialId);
-        }
+        #region Quote
 
 
         public async Task<IEnumerable<QuoteDto>> GetAllQuotes()
@@ -423,8 +432,7 @@ namespace Innovation_Admin.UI.Common
         {
             return await quotes.DeleteQuote(quoteId);
         }
-
- 
+        #endregion
 
         #region RemittanceType
 
@@ -465,6 +473,48 @@ namespace Innovation_Admin.UI.Common
             return await remittanceTypes.DeleteRemittanceType(Id);
         }
 
+        #endregion
+
+        #region ReceiptBatchSource
+
+        public async Task<IEnumerable<ReceiptBatchSourceDto>> GetAllReceiptBatchSource()
+        {
+            GetAllReceiptBatchSourceResponseModel getAllReceiptBatchSourceResponseModel = new GetAllReceiptBatchSourceResponseModel();
+
+            getAllReceiptBatchSourceResponseModel = await receiptBatchSource.GetAllReceiptBatchSource();
+
+            if (getAllReceiptBatchSourceResponseModel.IsSuccess)
+            {
+                if (getAllReceiptBatchSourceResponseModel != null && getAllReceiptBatchSourceResponseModel.Data.Count() > 0)
+                {
+                    return getAllReceiptBatchSourceResponseModel.Data;
+                }
+            }
+
+            return new List<ReceiptBatchSourceDto>();
+        }
+
+
+
+        public async Task<CreateReceiptBatchSourceResponseModel> CreateReceiptBatchSource(ReceiptBatchSourceDto batch)
+        {
+            return await receiptBatchSource.CreateReceiptBatchSource(batch);
+        }
+
+
+        public async Task<UpdateReceiptBatchSourceResponseModel> UpdateReceiptBatchSource(ReceiptBatchSourceDto updatedBatch)
+        {
+            return await receiptBatchSource.UpdateReceiptBatchSource(updatedBatch);
+        }
+        public async Task<GetReceiptBatchSourceByIdResponseModel> GetReceiptBatchSourceById(Guid Id)
+        {
+            return await receiptBatchSource.GetReceiptBatchSourceById(Id);
+        }
+
+        public async Task<bool> DeleteReceiptBatchSource(Guid Id)
+        {
+            return await receiptBatchSource.DeleteReceiptBatchSource(Id);
+        }
         #endregion
 
     }
