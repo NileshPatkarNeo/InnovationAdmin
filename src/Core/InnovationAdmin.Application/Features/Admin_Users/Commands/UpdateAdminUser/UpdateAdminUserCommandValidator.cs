@@ -26,10 +26,6 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.UpdateAdminU
                 .NotNull()
                 .MaximumLength(40).WithMessage("Error");
 
-            RuleFor(p => p.Role)
-                .NotEmpty().WithMessage("Error")
-                .GreaterThan(0).WithMessage("Error");
-
             RuleFor(p => p.Email)
                 .NotEmpty().WithMessage("Error")
                 .EmailAddress().WithMessage("Error");

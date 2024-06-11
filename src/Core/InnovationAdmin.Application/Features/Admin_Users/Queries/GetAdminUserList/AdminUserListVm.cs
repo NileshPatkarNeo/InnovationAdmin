@@ -13,7 +13,9 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserL
 
         public string Password { get; set; }
         public string Email { get; set; }          
-        public int Role { get; set; }              
+        public Guid RoleId { get; set; }
+        public string RoleName { get; set; }
+
         public bool Status { get; set; }
     }
 }

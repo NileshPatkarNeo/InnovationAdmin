@@ -26,7 +26,7 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Queries.GetAdminUserL
         public async Task<Response<IEnumerable<AdminUserListVm>>> Handle(AdminUserListQuery request, CancellationToken cancellationToken)
          {
             _logger.LogInformation("Handle Initiated");
-            var allAdminuser = (await _adminuserRepository.ListAllAsync()).OrderBy(x => x.User_Name).ToList();
+            var allAdminuser = (await _adminuserRepository.GetAdminUsersList()).OrderBy(x => x.User_Name).ToList();
             var adminuser = _mapper.Map<IEnumerable<AdminUserListVm>>(allAdminuser);
             _logger.LogInformation("Hanlde Completed");
             return new Response<IEnumerable<AdminUserListVm>>(adminuser, "success");

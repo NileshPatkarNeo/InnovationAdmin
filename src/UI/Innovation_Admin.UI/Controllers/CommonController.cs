@@ -14,6 +14,8 @@ using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
+using System.ComponentModel.Design;
+using Innovation_Admin.UI.Services.Repositories;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -139,41 +141,39 @@ namespace Innovation_Admin.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult CreateAdminUser()
+        public async Task<IActionResult>  CreateAdminUser()
         {
+            var getAllAdminRoles = await _common.GetAllAdminRoles();
+            ViewBag.RoleList = new SelectList(getAllAdminRoles, "Role_ID", "Role_Name");
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateAdminUser(CreateAdminUserDto company)
         {
-
+          
             var result = await _common.CreateAdminUser(company);
-
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("AdminUser");
 
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
-
-
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("AdminUser");
             }
-
-
             return RedirectToAction("AdminUser");
+
         }
 
         [HttpGet]
         public async Task<IActionResult> EditAdminUser([FromQuery] string adminId)
         {
             var sysPrefCompany = await _common.GetAdminUserById(Guid.Parse(adminId));
+            var getAllAdminRoles = await _common.GetAllAdminRoles();
+            ViewBag.RoleList = new SelectList(getAllAdminRoles, "Role_ID", "Role_Name");
             return View(sysPrefCompany.Data);
         }
 
@@ -181,28 +181,38 @@ namespace Innovation_Admin.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditAdminUser(AdminUserDto updatedAdmin)
         {
+
             var result = await _common.UpdateAdminUser(updatedAdmin);
-
-
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin);  
-            }
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("AdminUser");
 
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("AdminUser");
+            }
             return RedirectToAction("AdminUser");
+  
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteAdminUser(Guid companyId)
         {
-            var isDeleted = await _common.DeleteAdminUser(companyId);
-            if (!isDeleted)
-            {
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            bool isDeleted = await _common.DeleteAdminUser(companyId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("AdminUser");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+  
         }
 
 
@@ -598,6 +608,9 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefFinancial.");
                 }
+
+                TempData["Message"] = "Successfully Added";
+
                 return RedirectToAction("SysPrefFinancial");
             }
             return RedirectToAction("SysPrefFinancial");
@@ -622,6 +635,8 @@ namespace Innovation_Admin.UI.Controllers
                 ModelState.AddModelError(string.Empty, result.Message);
                 return View(updatedFinancial);
             }
+            TempData["Message"] = "Updated Successfully ";
+
             return RedirectToAction("SysPrefFinancial");
         }
 
@@ -647,11 +662,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteSysPrefFinancial(Guid financialId)
         {
             var isDeleted = await _common.DeleteSysPrefFinancial(financialId);
-            if (!isDeleted)
+            if (isDeleted)
             {
-                ModelState.AddModelError(string.Empty, "Failed to delete the financial record.");
+                return Json(new { success = true });
             }
-            return RedirectToAction("SysPrefFinancial");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the financial." });
+            }
         }
 
         #endregion
@@ -671,28 +689,20 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
         {
-
             var result = await _common.CreateSysPrefSecurityEmail(email);
-
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("SysPrefSecurityEmail");
 
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
-
-
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("SysPrefSecurityEmail");
             }
-
-
             return RedirectToAction("SysPrefSecurityEmail");
+
         }
 
         [HttpGet]
@@ -707,28 +717,35 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedAdmin)
         {
             var result = await _common.UpdateSysPrefSecurityEmail(updatedAdmin);
-
-
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); 
-            }
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("SysPrefSecurityEmail");
 
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("SysPrefSecurityEmail");
+            }
             return RedirectToAction("SysPrefSecurityEmail");
+
         }
 
 
         [HttpPost]
         public async Task<IActionResult> DeleteSysPrefSecurityEmail(Guid emailId)
         {
-            var isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
-            if (!isDeleted)
-            {
+            bool isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("SysPrefSecurityEmail");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
         }
 
         #endregion

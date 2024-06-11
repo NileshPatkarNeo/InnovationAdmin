@@ -6,8 +6,7 @@
 }
 
 <head>
-    <link href="path/to/toastr.css" rel="stylesheet" />
-    <script src="path/to/toastr.js"></script>
+    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
  
@@ -15,12 +14,11 @@
         h1.text-center {
             margin-bottom: 20px;
         }
-
         body
         {
         margin:0px;
         padding:0px;}
-
+        
       .table {
             margin-top: 20px;
             border: 1px solid #dee2e6;
@@ -124,13 +122,13 @@
    
     function confirmDelete(roleId) {
         Swal.fire({
-            title: 'Are you sure?',
+            title: 'Are you sure to delete?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
