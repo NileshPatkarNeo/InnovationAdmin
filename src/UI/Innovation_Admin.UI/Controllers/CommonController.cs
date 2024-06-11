@@ -706,6 +706,7 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the quote.");
                 }
+                TempData["Message"] = "Successfully Added";
 
                 return RedirectToAction("Quotes");
             }
@@ -726,12 +727,14 @@ namespace Innovation_Admin.UI.Controllers
         {
             var result = await _common.UpdateQuote(updatedQuote);
 
-
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
                 return View(updatedQuote);
             }
+
+            TempData["Message"] = "Updated Successfully";
+
 
             return RedirectToAction("Quotes");
         }
@@ -740,6 +743,7 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteQuote(Guid quoteId)
         {
             var isDeleted = await _common.DeleteQuote(quoteId);
+
             if (!isDeleted)
             {
                 ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
@@ -749,6 +753,7 @@ namespace Innovation_Admin.UI.Controllers
 
 
         #endregion
+
 
         #region RemittanceType
 
@@ -840,6 +845,7 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+
         #region ReceiptBatchSource
         [HttpGet]
         public async Task<IActionResult> ReceiptBatchSource()
@@ -909,6 +915,7 @@ namespace Innovation_Admin.UI.Controllers
 
 
         #endregion
+
     }
 }
     
