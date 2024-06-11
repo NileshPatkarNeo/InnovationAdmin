@@ -33,13 +33,10 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task CreateWhenNameIsNull()
         {
-            // Arrange
             var command = new CreateRemittanceTypeCommand { Name = null };
 
-            // Act
             var result = await _controller.Create(command);
 
-            // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal("Remittance Type cannot be null or empty", badRequestResult.Value);
         }
@@ -47,7 +44,6 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task CreateWhenNameIsEmpty()
         {
-
             var command = new CreateRemittanceTypeCommand { Name = string.Empty };
 
             var result = await _controller.Create(command);
@@ -77,7 +73,6 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         [Fact]
         public async Task DeleteRemittanceTypeReturnsOk()
         {
-            
             var id = Guid.NewGuid();
             _mediatorMock.Setup(m => m.Send(It.IsAny<DeleteRemittanceTypeCommand>(), default))
                          .ReturnsAsync(new Response<bool> { Data = true, Succeeded = true });
@@ -103,9 +98,8 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task Delete_RemittanceType_NotFound_ReturnsNotFound()
+        public async Task DeleteRemittanceTypeNotFoundReturnsNotFound()
         {
-
             var id = Guid.NewGuid();
             _mediatorMock.Setup(m => m.Send(It.IsAny<DeleteRemittanceTypeCommand>(), default))
                          .ReturnsAsync(new Response<bool> { Data = false, Succeeded = true });
@@ -118,34 +112,28 @@ namespace InnovationAdmin.API.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task Update_RemittanceType_IdMismatch_ReturnsBadRequest()
+        public async Task UpdateRemittanceTypeIdMismatchReturnsBadRequest()
         {
-            // Arrange
             var id = Guid.NewGuid();
             var command = new UpdateRemittanceTypeCommand { Id = Guid.NewGuid(), Name = "New Name" };
 
-            // Act
             var result = await _controller.Update(id, command);
 
-            // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal("ID mismatch", badRequestResult.Value);
         }
 
         [Fact]
-        public async Task Update_RemittanceType_Success_ReturnsOk()
+        public async Task UpdateRemittanceTypeSuccessReturnsOk()
         {
-            // Arrange
             var id = Guid.NewGuid();
             var command = new UpdateRemittanceTypeCommand { Id = id, Name = "Updated Name" };
             var response = new Response<UpdateRemittanceTypeDto> { Succeeded = true, Data = new UpdateRemittanceTypeDto { Id = id, Name = "Updated Name" } };
             _mediatorMock.Setup(m => m.Send(It.IsAny<UpdateRemittanceTypeCommand>(), default))
                          .ReturnsAsync(response);
 
-            // Act
             var result = await _controller.Update(id, command);
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var responseObject = Assert.IsType<Response<UpdateRemittanceTypeDto>>(okResult.Value);
             Assert.True(responseObject.Succeeded);
