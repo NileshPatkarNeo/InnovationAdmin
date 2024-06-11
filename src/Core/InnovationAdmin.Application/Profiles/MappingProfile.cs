@@ -168,6 +168,8 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<ReceiptBatchSource, CreateReceiptBatchDto>().ReverseMap();
             CreateMap<ReceiptBatchSource, ReceiptBatchSourceDto>().ReverseMap();
             CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceCommand>().ReverseMap();
+
 
 
 

@@ -1,0 +1,190 @@
+﻿@model Innovation_Admin.UI.Models.ReceiptBatchSource.ReceiptBatchSourceDto
+
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<style>
+    body{
+    margn:0px;
+    padding:0px;
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    #receiptBatchForm
+    {
+    margin-top:40px;}
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group input, .form-group select {
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px; 
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+  
+
+    .button-container {
+        display: flex;
+        justify-content: space-around;
+        gap: 50px; 
+        margin-top: 20px;
+    }
+
+        .button-container a,
+        .button-container input[type="submit"] {
+            flex: 1;
+            text-align: center;
+        }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+
+    }
+
+        a:hover {
+            color: #0056b3;
+            text-decoration: none;
+       
+        }
+</style>
+<body>
+<h1>Create Receipt Batch</h1>
+
+<div class="form-container">
+    <form id="receiptBatchForm" asp-action="CreateReceiptBatchSource">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" id="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this); " />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type" class="control-label"></label>
+            <select asp-for="Type" id="Type" class="form-control">
+                <option value="">-- Select Type --</option>
+                <option value="Bank">Bank</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="UPI">UPI</option>
+                <option value="EDI">EDI</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+
+        <div class="button-container">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="ReceiptBatchSource" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+</div>
+</body>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var nameField = document.getElementById('Name');
+        var typeField = document.getElementById('Type');
+        var form = document.getElementById('receiptBatchForm');
+
+        function removeValidationMessage(element) {
+            var messageSpan = element.parentNode.querySelector('.custom-validation-message');
+            if (messageSpan) {
+                messageSpan.remove();
+            }
+        }
+
+        nameField.addEventListener('input', function () {
+            if (nameField.value.trim() !== '' && nameField.value.trim().length <= 50) {
+                removeValidationMessage(nameField);
+            }
+        });
+
+        typeField.addEventListener('change', function () {
+            if (typeField.value.trim() !== '') {
+                removeValidationMessage(typeField);
+            }
+        });
+
+        form.addEventListener('submit', function (event) {
+            var nameValue = nameField.value.trim();
+            var typeValue = typeField.value.trim();
+
+            var isValid = true;
+
+            removeValidationMessage(nameField);
+            removeValidationMessage(typeField);
+
+            if (!nameValue) {
+                displayValidationMessage(nameField, 'Name is required.');
+                isValid = false;
+            } else if (nameValue.length > 50) {
+                displayValidationMessage(nameField, 'Name should not exceed 50 characters.');
+                isValid = false;
+            }
+
+            if (!typeValue) {
+                displayValidationMessage(typeField, 'Type is required.');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        function displayValidationMessage(element, message) {
+            var messageSpan = document.createElement('span');
+            messageSpan.className = 'text-danger custom-validation-message';
+            messageSpan.innerText = message;
+            element.parentNode.appendChild(messageSpan);
+        }
+    });
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>

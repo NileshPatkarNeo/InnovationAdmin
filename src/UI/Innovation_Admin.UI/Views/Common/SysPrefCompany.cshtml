@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 <head>
-    <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
         <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
@@ -13,7 +12,7 @@
         <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
 
         <link href="~/css/SysPrefCompany.css" rel="stylesheet" />
-    </head>
+  
 </head>
 <body>
 <h1>System Preference Company</h1>
@@ -47,6 +46,8 @@
                         <a href="@Url.Action("EditSysPrefCompany", new { companyId = item.CompanyID })" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-fill"></i> 
                         </a>
+
+
                         <a href="#" onclick="confirmDelete('@item.CompanyID')" class="btn btn-danger">
                             <i class="bi bi-trash"></i> 
                         </a>

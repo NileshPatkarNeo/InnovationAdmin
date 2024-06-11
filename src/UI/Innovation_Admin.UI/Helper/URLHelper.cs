@@ -125,6 +125,8 @@ namespace Innovation_Admin.UI.Helper
 
         #endregion
 
+        #region Quote
+
         public const string GetAllQuotes = "/api/Quote?api-version=1";
 
         public const string CreateQuote = "/api/Quote/create?api-version=1";
@@ -134,6 +136,11 @@ namespace Innovation_Admin.UI.Helper
         public const string UpdateQuote = "/api/Quote?api-version=1";
 
         public const string DeleteQuote = "/api/Quote/{id}?api-version=1";
+
+        #endregion
+
+
+        #region RemittanceType
         public const string GetAllRemittanceType = "/api/RemittanceType/all?api-version=1";
 
         public const string CreateRemittanceType = "/api/RemittanceType?api-version=1";
@@ -143,6 +150,8 @@ namespace Innovation_Admin.UI.Helper
         public const string GetRemittanceTypeById = "/api/RemittanceType/{id}?api-version=1";
 
         public const string DeleteRemittanceType = "/api/RemittanceType/{id}?api-version=1";
+
+        #endregion
         #region DataSource
         public const string GetAllDataSource = "/api/DataSource/all?api-version=1";
 
