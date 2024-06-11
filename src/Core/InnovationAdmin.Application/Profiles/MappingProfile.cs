@@ -45,6 +45,10 @@ using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.UpdateRec
 using InnovationAdmin.Application.Features.RemittanceType.Commands.CreateRemittanceType;
 using InnovationAdmin.Application.Features.RemittanceType.Commands.UpdateRemittanceType;
 using InnovationAdmin.Application.Features.RemittanceType.Queries.GetRemittanceTypeQuery;
+using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource;
+using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceById;
+using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceList;
+using InnovationAdmin.Application.Features.DataSources.Commands.UpdateDataSource;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -166,6 +170,15 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceDto>().ReverseMap();
             CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceCommand>().ReverseMap();
 
+
+
+
+            CreateMap<DataSource, CreateDataSourceDto>().ReverseMap();
+            CreateMap<DataSource, GetDataSourceByIdVm>().ReverseMap();
+            CreateMap<DataSource, GetDataSourceListVm>().ReverseMap();
+            CreateMap<DataSource, UpdateDataSourceCommand>().ReverseMap();
+            CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
+            CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
 
 
 

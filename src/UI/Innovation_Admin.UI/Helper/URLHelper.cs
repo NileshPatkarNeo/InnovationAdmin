@@ -150,6 +150,19 @@ namespace Innovation_Admin.UI.Helper
         public const string GetRemittanceTypeById = "/api/RemittanceType/{id}?api-version=1";
 
         public const string DeleteRemittanceType = "/api/RemittanceType/{id}?api-version=1";
+
+        #endregion
+        #region DataSource
+        public const string GetAllDataSource = "/api/DataSource/all?api-version=1";
+
+        public const string CreateDataSource = "/api/DataSource?api-version=1";
+
+        public const string GetDataSourceById = "/api/DataSource/{id}?api-version=1";
+        public const string UpdateDataSource = "/api/DataSource?api-version=1   ";
+
+        public const string DeleteDataSource = "/api/DataSource/{id}?api-version=1";
+
+
         #endregion
 
 

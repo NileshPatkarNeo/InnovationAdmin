@@ -31,6 +31,7 @@ builder.Services.AddScoped<IRemittanceType, RemittanceTypes>();
 
 
 builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();
+builder.Services.AddScoped<IDataSources, DataSources>();
 
 builder.Services.AddScoped<IQuotes, Quotes>();
 builder.Services.AddScoped<IReceiptBatchSource, ReceiptBatchSource>();

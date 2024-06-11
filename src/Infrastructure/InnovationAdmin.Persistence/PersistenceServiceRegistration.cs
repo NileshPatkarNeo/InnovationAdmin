@@ -29,6 +29,8 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IReceiptBatchSourceRepository, ReceiptBatchSourceRepository>();
             services.AddScoped<IQuotesRepository, QuotesRepository>();
 
+            services.AddScoped<IDataSourceRepository, DataSourceRepository>();
+
             return services;
         }
     }

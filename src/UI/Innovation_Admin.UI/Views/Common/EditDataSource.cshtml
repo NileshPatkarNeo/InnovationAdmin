@@ -1,0 +1,116 @@
+﻿@model Innovation_Admin.UI.Models.DataSource.DataSourceDto
+
+@{
+    ViewData["Title"] = "EditDataSource";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+ 
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-check {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            width: auto;
+        }
+
+        .form-group .btn {
+            display: inline-block;
+        }
+
+            .form-group .btn + .btn {
+                margin-left: 10px;
+            }
+    </style>
+
+    <h1>Edit Data Source</h1>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="EditDataSource" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="ID" class="control-label">ID</label>
+                            <input asp-for="ID" class="form-control" readonly />
+                            <span asp-validation-for="ID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
+                            <input asp-for="Name" class="form-control" id="Name" />
+                            <span id="nameError" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                            <a asp-action="DataSource" class="btn btn-secondary btn-lg">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var form = document.querySelector("form");
+
+            form.addEventListener("submit", function (event) {
+                var isValid = true;
+
+                // Validate Name
+                var name = document.querySelector("#Name").value;
+                var nameError = document.querySelector("#nameError");
+                if (name.trim() === "") {
+                    nameError.textContent = "Name is required.";
+                    isValid = false;
+                } else if (name.length < 2) {
+                    nameError.textContent = "Name should be at least 4 characters.";
+                    isValid = false;
+                } else if (name.length > 30) {
+                    nameError.textContent = "Name should be at most 30 characters.";
+                    isValid = false;
+                } else if (!/^[a-zA-Z\s]*$/.test(name)) {
+                    nameError.textContent = "Name can only contain alphabets characters and spaces.";
+                    isValid = false;
+                } else {
+                    nameError.textContent = "";
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+
+
+@* @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@

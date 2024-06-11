@@ -44,6 +44,7 @@ namespace InnovationAdmin.Persistence
         public DbSet<Admin_Role> AdminRoles { get; set; }
 
         public DbSet<SysPrefFinancial> SysPrefFinancials { get; set; }
+        public DbSet<DataSource> DataSources { get; set; }
 
         public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
 

@@ -17,6 +17,7 @@ using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
 using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
+using Innovation_Admin.UI.Models.DataSource;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -748,13 +749,14 @@ namespace Innovation_Admin.UI.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
             }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the admin role." });
+            }
             return RedirectToAction("Quotes");
         }
 
-
         #endregion
-
-
         #region RemittanceType
 
         [HttpGet]
@@ -918,11 +920,94 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("ReceiptBatchSource");
         }
 
-
-
-
         #endregion
 
+        #region DataSources
+   
+        public async Task<IActionResult> DataSource()
+        {
+            var getAllDataSource = await _common.GetAllDataSource();
+            return View(getAllDataSource);
+        }
+
+        [HttpGet]
+        public IActionResult CreateDataSource()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateDataSource(CreateDataSourceDto data)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+            var result = await _common.CreateDataSource(data);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("DataSource");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DataSource");
+            }
+            return RedirectToAction("DataSource");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditDataSource(string id)
+        {
+            var dataSource = await _common.GetDataSourceById(Guid.Parse(id));
+            return View(dataSource.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditDataSource(DataSourceDto updatedData)
+        {
+            var result = await _common.UpdateDataSource(updatedData);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("DataSource");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DataSource");
+            }
+            return RedirectToAction("DataSource");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDataSource(Guid dataId)
+        {
+            var isDeleted = await _common.DeleteDataSource(dataId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+   
+        #endregion
+
+      
+
+       
     }
 }
     

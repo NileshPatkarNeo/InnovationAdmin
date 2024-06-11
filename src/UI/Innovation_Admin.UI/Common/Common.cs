@@ -24,6 +24,9 @@ using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ResponsesModel.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.ResponsesModel.ReceiptBatchSource;
+using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.ResponsesModel.DataSource;
+using Innovation_Admin.UI.Services.Repositories;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -42,11 +45,11 @@ namespace Innovation_Admin.UI.Common
         private readonly IConfiguration _configuration;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IReceiptBatchSource receiptBatchSource;
+        private readonly IDataSources dataSources;
        
 
         
-     
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IQuotes _quotes, IRemittanceType _remittanceTypes,IReceiptBatchSource _receiptBatchSource)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource)
 
         {
             adminUser = _adminUser;
@@ -62,6 +65,7 @@ namespace Innovation_Admin.UI.Common
             quotes = _quotes;
             remittanceTypes = _remittanceTypes;
             receiptBatchSource = _receiptBatchSource;
+            dataSources = _dataSources;
         }
 
         #region System_Preference
@@ -397,6 +401,37 @@ namespace Innovation_Admin.UI.Common
         #region Quote
 
 
+        #region DataSource
+
+        public async Task<IEnumerable<DataSourceDto>> GetAllDataSource()
+        {
+            GetAllDataSourceResponseModel getAllDataSourceResponseModel = new GetAllDataSourceResponseModel();
+
+            getAllDataSourceResponseModel = await dataSources.GetAllDataSource();
+
+            if (getAllDataSourceResponseModel.IsSuccess)
+            {
+                if (getAllDataSourceResponseModel != null && getAllDataSourceResponseModel.Data.Count() > 0)
+                {
+                    return getAllDataSourceResponseModel.Data;
+                }
+            }
+
+            return new List<DataSourceDto>();
+        }
+
+
+        public async Task<CreateDataSourceResponseModel> CreateDataSource(CreateDataSourceDto data)
+        {
+            return await dataSources.CreateDataSource(data);
+        }
+
+        public async Task<UpdateDataSourceResponseModel> UpdateDataSource(DataSourceDto updateddata)
+        {
+            return await dataSources.UpdateDataSource(updateddata);
+        }
+
+
         public async Task<IEnumerable<QuoteDto>> GetAllQuotes()
         {
             GetAllQuotesResponseModel getAllQuotesResponseModel = new GetAllQuotesResponseModel();
@@ -516,6 +551,19 @@ namespace Innovation_Admin.UI.Common
             return await receiptBatchSource.DeleteReceiptBatchSource(Id);
         }
         #endregion
+        public async Task<GetDataSourceByIdResponseModel> GetDataSourceById(Guid dataId)
+        {
+            return await dataSources.GetDataSourceById(dataId);
+        }
+
+        public async Task<bool> DeleteDataSource(Guid dataId)
+        {
+            return await dataSources.DeleteDataSource(dataId);
+        }
+
+        #endregion        
+
+
 
     }
 }
