@@ -398,9 +398,6 @@ namespace Innovation_Admin.UI.Common
 
         #endregion
 
-        #region Quote
-
-
         #region DataSource
 
         public async Task<IEnumerable<DataSourceDto>> GetAllDataSource()
@@ -430,7 +427,19 @@ namespace Innovation_Admin.UI.Common
         {
             return await dataSources.UpdateDataSource(updateddata);
         }
+        public async Task<GetDataSourceByIdResponseModel> GetDataSourceById(Guid dataId)
+        {
+            return await dataSources.GetDataSourceById(dataId);
+        }
 
+        public async Task<bool> DeleteDataSource(Guid dataId)
+        {
+            return await dataSources.DeleteDataSource(dataId);
+        }
+
+        #endregion
+
+        #region Quote
 
         public async Task<IEnumerable<QuoteDto>> GetAllQuotes()
         {
@@ -551,17 +560,7 @@ namespace Innovation_Admin.UI.Common
             return await receiptBatchSource.DeleteReceiptBatchSource(Id);
         }
         #endregion
-        public async Task<GetDataSourceByIdResponseModel> GetDataSourceById(Guid dataId)
-        {
-            return await dataSources.GetDataSourceById(dataId);
-        }
-
-        public async Task<bool> DeleteDataSource(Guid dataId)
-        {
-            return await dataSources.DeleteDataSource(dataId);
-        }
-
-        #endregion        
+             
 
 
 

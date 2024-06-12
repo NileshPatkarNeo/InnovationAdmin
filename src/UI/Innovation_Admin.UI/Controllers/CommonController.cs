@@ -64,23 +64,28 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefCompany(SysPrefCompanyDto company)
         {
-            var result = await _common.CreateSysPrefCompany(company);
-            if (!result.IsSuccess)
+            string UserId = HttpContext.Session.GetString("UserId");
+
+            if (string.IsNullOrEmpty(UserId))
             {
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
+                ModelState.AddModelError(string.Empty, "User ID is not found in session.");
                 return RedirectToAction("SysPrefCompany");
             }
-           return RedirectToAction("SysPrefCompany");
+
+
+            var result = await _common.CreateSysPrefCompany(company);
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message ?? "An error occurred while creating the SysPrefCompany.");
+                return RedirectToAction("SysPrefCompany");
+            }
+
+            return RedirectToAction("SysPrefCompany");
         }
 
-          
+
+
         [HttpGet]
         public async Task<IActionResult> EditSysPrefCompany([FromQuery] string companyId)
         {
@@ -101,7 +106,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             var isDeleted = await _common.DeleteSysPrefCompany(companyId);
          return RedirectToAction("SysPrefCompany");
-        }
+        }    
 
         #endregion
 
@@ -757,6 +762,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
         #region RemittanceType
 
         [HttpGet]

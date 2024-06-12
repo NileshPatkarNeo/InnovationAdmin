@@ -9,6 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
+// Configure the static helper
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 var Configuration = builder.Configuration;
 

@@ -8,7 +8,7 @@ namespace InnovationAdmin.Api.Services
     {
         public LoggedInUserService(IHttpContextAccessor httpContextAccessor)
         {
-            UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue("uid");
         }
 
         public string UserId { get; }

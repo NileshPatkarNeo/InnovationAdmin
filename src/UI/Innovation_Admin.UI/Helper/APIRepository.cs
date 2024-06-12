@@ -10,6 +10,7 @@ namespace Innovation_Admin.UI.Helper
     public class APIRepository
     {
         private readonly IConfiguration _configuration;
+
         public IOptions<ApiBaseUrl> _apiBaseUrl { get; private set; }
 
         public APIRepository(IConfiguration configuration)
