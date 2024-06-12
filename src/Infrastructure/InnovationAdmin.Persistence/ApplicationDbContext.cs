@@ -48,6 +48,9 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
 
+        public DbSet<CorrespondenceNotes> CorrespondenceNotes { get; set; }
+
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
