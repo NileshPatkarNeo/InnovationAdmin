@@ -165,6 +165,17 @@ namespace Innovation_Admin.UI.Helper
 
         #endregion
 
+        #region BillingMethodType
+        public const string GetAllBillingMethodType = "/api/BillingMethodType/all?api-version=1";
+
+        public const string CreateBillingMethodType = "/api/BillingMethodType?api-version=1";
+
+        public const string GetBillingMethodTypeById = "/api/BillingMethodType/{id}?api-version=1";
+        public const string UpdateBillingMethodType = "/api/BillingMethodType?api-version=1";
+
+        public const string DeleteBillingMethodType = "/api/BillingMethodType/{id}?api-version=1";
+        #endregion
+
 
 
     }

@@ -49,6 +49,10 @@ using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceById;
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceList;
 using InnovationAdmin.Application.Features.DataSources.Commands.UpdateDataSource;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Commands.CreateBillingMethodType;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeById;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeList;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Commands.UpdateBillingMethodType;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -180,6 +184,12 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
             CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
 
+            CreateMap<BillingMethodType,CreateBillingMethodTypeDto>().ReverseMap();
+            CreateMap<BillingMethodType, GetBillingMethodTypeByIdVm>().ReverseMap();
+            CreateMap<BillingMethodType, GetBillingMethodTypeListVm>().ReverseMap();
+            CreateMap<BillingMethodType, UpdateBillingMethodTypeCommand>().ReverseMap();
+            CreateMap<BillingMethodType, CreateBillingMethodTypeCommand>().ReverseMap();
+            CreateMap<BillingMethodType, UpdateBillingMethodTypeCommandDto>().ReverseMap();
 
 
 

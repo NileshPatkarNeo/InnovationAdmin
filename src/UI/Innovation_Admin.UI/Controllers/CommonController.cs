@@ -18,6 +18,7 @@ using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.BillingMethodType;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -1002,12 +1003,95 @@ namespace Innovation_Admin.UI.Controllers
                 return Json(new { success = false, message = "Failed to delete." });
             }
         }
-   
+
         #endregion
 
-      
+        #region BillingMethodType
 
-       
+        public async Task<IActionResult> BillingMethodType()
+        {
+            var getAllBillingMethodType = await _common.GetAllBillingMethodType();
+            return View(getAllBillingMethodType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateBillingMethodType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateBillingMethodType(CreateBillingMethodTypeDto billing)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(billing);
+            }
+            var result = await _common.CreateBillingMethodType(billing);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditBillingMethodType(string id)
+        {
+            var billingMethodType = await _common.GetBillingMethodTypeById(Guid.Parse(id));
+            return View(billingMethodType.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBillingMethodType(BillingMethodTypeDto updatedBillingMethodType)
+        {
+            var result = await _common.UpdateBillingMethodType(updatedBillingMethodType);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBillingMethodType(Guid billingMethodTypeId)
+        {
+            var isDeleted = await _common.DeleteBillingMethodType(billingMethodTypeId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+
+
+
+
     }
 }
     
