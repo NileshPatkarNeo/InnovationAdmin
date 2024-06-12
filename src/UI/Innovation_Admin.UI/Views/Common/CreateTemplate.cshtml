@@ -1,0 +1,191 @@
+﻿@model Innovation_Admin.UI.Models.Template.CreateTemplateDto
+
+@{
+    ViewData["Title"] = "Create Template";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<style>
+    h1.text-center,
+    hr {
+        margin-bottom: 20px;
+    }
+
+    .form-box {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+        .btn-group .btn {
+            margin: 0 5px;
+        }
+</style>
+
+<h1 class="text-center">Create Template</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="form-box">
+            <form id="createTemplateForm" asp-action="CreateTemplate" novalidate>
+                <div class="text-danger">
+                    @if (ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div class="alert alert-danger">
+                            <p>Please fix the errors below:</p>
+                            <ul>
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label">
+                        Name <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Name" class="form-control" maxlength="51" required id="Name" onkeypress="return onlyAlphabets(event,this);" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <span class="text-danger" id="Name_error"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="PdfTemplateFile" class="control-label">
+                        PDF Template File <span class="text-danger">*</span>
+                    </label>
+                    <input type="file" asp-for="PdfTemplateFile" class="form-control" required id="PdfTemplateFile" />
+                    <span asp-validation-for="PdfTemplateFile" class="text-danger"></span>
+                    <span class="text-danger" id="PdfTemplateFile_error"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Domain" class="control-label">
+                        Domain <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Domain" class="form-control" maxlength="51" required id="Domain" onkeypress="return onlyAlphabets(event,this);" />
+                    <span asp-validation-for="Domain" class="text-danger"></span>
+                    <span class="text-danger" id="Domain_error"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Size" class="control-label">
+                        Size <span class="text-danger">*</span>
+                    </label>
+                    <input asp-for="Size" class="form-control" maxlength="51" required id="Size" onkeypress="return onlyAlphabets(event,this);" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                    <span class="text-danger" id="Size_error"></span>
+                </div>
+                <div class="btn-group">
+                    <div>
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                    <div>
+                        <a asp-action="Templates" class="btn btn-secondary">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* <script src="~/js/CreateTemplate.js"></script>
+ *@<script>
+       function onlyAlphabets(e, t) {
+           try {
+               var charCode = (e.which) ? e.which : window.event.keyCode;
+               if ((charCode > 64 && charCode < 91) ||
+                   (charCode > 96 && charCode < 123) ||
+                   charCode === 32) {
+                   return true;
+               } else {
+                   return false;
+               }
+           } catch (err) {
+               alert(err.Description);
+           }
+       }
+
+       document.getElementById("createTemplateForm").addEventListener("submit", function (event) {
+           let isValid = true;
+
+           // Name Validation
+           const nameInput = document.getElementById("Name");
+           const nameError = document.getElementById("Name_error");
+           nameError.textContent = "";
+           if (nameInput.value.trim() === "") {
+               nameError.textContent = "Name is required.";
+               isValid = false;
+           } else if (nameInput.value.length > 50) {
+               nameError.textContent = "Name cannot exceed 50 characters.";
+               isValid = false;
+           }
+
+           // PDF Template File Validation
+           const pdfTemplateFileInput = document.getElementById("PdfTemplateFile");
+           const pdfTemplateFileError = document.getElementById("PdfTemplateFile_error");
+           pdfTemplateFileError.textContent = "";
+           if (pdfTemplateFileInput.value.trim() === "") {
+               pdfTemplateFileError.textContent = "PDF Template File is required.";
+               isValid = false;
+           }
+
+           // Domain Validation
+           const domainInput = document.getElementById("Domain");
+           const domainError = document.getElementById("Domain_error");
+           domainError.textContent = "";
+           if (domainInput.value.trim() === "") {
+               domainError.textContent = "Domain is required.";
+               isValid = false;
+           } else if (domainInput.value.length > 50) {
+               domainError.textContent = "Domain cannot exceed 50 characters.";
+               isValid = false;
+           }
+
+           // Size Validation
+           const sizeInput = document.getElementById("Size");
+           const sizeError = document.getElementById("Size_error");
+           sizeError.textContent = "";
+           if (sizeInput.value.trim() === "") {
+               sizeError.textContent = "Size is required.";
+               isValid = false;
+           } else if (sizeInput.value.length > 50) {
+               sizeError.textContent = "Size cannot exceed 50 characters.";
+               isValid = false;
+           }
+
+           if (!isValid) {
+               event.preventDefault();
+           }
+       });
+
+       // Clear error messages on input
+       document.getElementById("Name").addEventListener("input", function () {
+           document.getElementById("Name_error").textContent = "";
+       });
+
+       document.getElementById("PdfTemplateFile").addEventListener("input", function () {
+           document.getElementById("PdfTemplateFile_error").textContent = "";
+       });
+
+       document.getElementById("Domain").addEventListener("input", function () {
+           document.getElementById("Domain_error").textContent = "";
+       });
+
+       document.getElementById("Size").addEventListener("input", function () {
+           document.getElementById("Size_error").textContent = "";
+       });
+
+</script>
+
+

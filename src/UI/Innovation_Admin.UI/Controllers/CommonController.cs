@@ -18,6 +18,7 @@ using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.Template;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -745,15 +746,14 @@ namespace Innovation_Admin.UI.Controllers
         {
             var isDeleted = await _common.DeleteQuote(quoteId);
 
-            if (!isDeleted)
+            if (isDeleted)
             {
-                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
+                return Json (new {Success = true});
             }
             else
             {
                 return Json(new { success = false, message = "Failed to delete the admin role." });
             }
-            return RedirectToAction("Quotes");
         }
 
         #endregion
@@ -1002,12 +1002,92 @@ namespace Innovation_Admin.UI.Controllers
                 return Json(new { success = false, message = "Failed to delete." });
             }
         }
-   
+
         #endregion
 
-      
+        #region Templates
 
-       
+        public async Task<IActionResult> Templates()
+        {
+            var getAllTemplates = await _common.GetAllTemplates();
+            return View(getAllTemplates);
+        }
+
+        [HttpGet]
+        public IActionResult CreateTemplate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateTemplate(CreateTemplateDto template)
+        {
+            var result = await _common.CreateTemplate(template);
+
+            if (!result.IsSuccess)
+            {
+                if (result.Message != null)
+                {
+                    TempData["Message"] = "Failed to create template.";
+
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the template.");
+                }
+                TempData["Message"] = "Successfully created template.";
+
+                return RedirectToAction("Templates");
+            }
+
+            TempData["Message"] = "Successfully created template.";
+            return RedirectToAction("Templates");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditTemplate(Guid templateId)
+        {
+            var template = await _common.GetTemplateById(templateId);
+            return View(template.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditTemplate(TemplateDto updatedTemplate)
+        {
+            var result = await _common.UpdateTemplate(updatedTemplate);
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedTemplate);
+            }
+
+            TempData["Message"] = "Updated Successfully";
+            return RedirectToAction("Templates");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTemplate(Guid templateId)
+        {
+            var isDeleted = await _common.DeleteTemplate(templateId);
+
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+
+
+        #endregion
+
+
     }
 }
     

@@ -1,21 +1,20 @@
-﻿@model IEnumerable<Innovation_Admin.UI.Models.Quote.QuoteDto>
+﻿@model IEnumerable<Innovation_Admin.UI.Models.Template.TemplateDto>
 
 @{
-    ViewData["Title"] = "Quotes";
+    ViewData["Title"] = "Templates";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
     <style>
         h1.text-center {
             margin-bottom: 20px;
         }
-        body{
-            margin:0px;
-            padding:0px;
+
+        body {
+            margin: 0px;
+            padding: 0px;
         }
 
         .table {
@@ -54,24 +53,23 @@
 </head>
 
 <div class="container">
-    <h1 class="text-center">Quotes</h1>
+    <h1 class="text-center">Templates</h1>
 
     <div class="add-button-container">
-        <a asp-action="CreateQuote" class="btn btn-primary">
+        <a asp-action="CreateTemplate" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Add
         </a>
     </div>
 
-    <table class="table table-bordered table-hover" id="quoteTable">
+    <table class="table table-bordered table-hover" id="templateTable">
         <thead class="table-light">
             <tr>
                 <th>Sr.No</th>
-@*                 <th style="display:none">@Html.DisplayNameFor(model => model.ID)</th>
- *@                <th>Quote Name</th>
-@*                 <th style="display:none">@Html.DisplayNameFor(model => model.QuoteBy)</th>  
- *@
-                    <th>Quote By</th>
-                 <th>Action</th>
+                <th>Template Name</th>
+                <th>Pdf File Template</th>
+                <th>Domain</th>
+                <th>Size</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="tableBody">
@@ -82,11 +80,12 @@
             {
                 <tr>
                     <td>@serialNumber</td>
-@*                     <td style="display:none">@Html.DisplayFor(modelItem => item.ID)</td>
- *@                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.QuoteBy)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PdfTemplateFile)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Domain)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Size)</td>
                     <td>
-                        <a href="@Url.Action("EditQuote", new { quoteId = item.ID })" class="btn btn-warning btn-sm">
+                        <a href="@Url.Action("EditTemplate", new { templateId = item.ID })" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.ID')">
@@ -99,16 +98,15 @@
         </tbody>
     </table>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
 <script type="text/javascript">
-
-    $("#quoteTable").dataTable({
+    $("#templateTable").dataTable({
         pageLength: 5,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
         paging: true,
@@ -116,13 +114,15 @@
         serverSide: false,
         columns: [
             { name: "Sr.No", orderable: true },
-            { name: "Quote Name", orderable: true },
-            { name: "Quote By", orderable: true },
+            { name: "Template Name", orderable: true },
+            { name: "Pdf File Template ", orderable: true },
+            { name: "Domain", orderable: true },
+            { name: "Size", orderable: true },
             { name: "Action", orderable: false }
         ]
     });
 
-    function confirmDelete(quoteId) {
+    function confirmDelete(templateId) {
         Swal.fire({
             title: 'Are you sure to Delete?',
             text: "You won't be able to revert this!",
@@ -134,9 +134,9 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: '/Common/DeleteQuote',
+                    url: '/Common/DeleteTemplate',
                     type: 'POST',
-                    data: { quoteId: quoteId },
+                    data: { templateId: templateId },
                     success: function (response) {
                         if (response.success) {
                             Swal.fire(
@@ -165,7 +165,7 @@
             }
         });
     }
- </script>
+</script>
 
 @if (TempData["Message"] != null)
 {
@@ -176,5 +176,3 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-

@@ -27,6 +27,8 @@ using Innovation_Admin.UI.Models.ResponsesModel.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.ResponsesModel.DataSource;
 using Innovation_Admin.UI.Services.Repositories;
+using Innovation_Admin.UI.Models.ResponsesModel.Template;
+using Innovation_Admin.UI.Models.Template;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -46,10 +48,11 @@ namespace Innovation_Admin.UI.Common
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IReceiptBatchSource receiptBatchSource;
         private readonly IDataSources dataSources;
+        private readonly ITemplates templates;
        
 
         
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource, ITemplates _templates)
 
         {
             adminUser = _adminUser;
@@ -66,6 +69,7 @@ namespace Innovation_Admin.UI.Common
             remittanceTypes = _remittanceTypes;
             receiptBatchSource = _receiptBatchSource;
             dataSources = _dataSources;
+            templates = _templates;
         }
 
         #region System_Preference
@@ -561,8 +565,46 @@ namespace Innovation_Admin.UI.Common
             return await dataSources.DeleteDataSource(dataId);
         }
 
-        #endregion        
+        #endregion
 
+
+        #region Template
+
+        public async Task<IEnumerable<TemplateDto>> GetAllTemplates()
+        {
+            GetAllTemplatesResponseModel getAllTemplatesResponseModel = new GetAllTemplatesResponseModel();
+
+            getAllTemplatesResponseModel = await templates.GetAllTemplates();
+
+            if (getAllTemplatesResponseModel.IsSuccess)
+            {
+                if (getAllTemplatesResponseModel != null && getAllTemplatesResponseModel.Data.Count() > 0)
+                {
+                    return getAllTemplatesResponseModel.Data;
+                }
+            }
+
+            return new List<TemplateDto>();
+        }
+
+        public async Task<CreateTemplateResponseModel> CreateTemplate(CreateTemplateDto newTemplate )
+        {
+            return await templates.CreateTemplate(newTemplate);
+        }
+        public async Task<UpdateTemplateResponseModel> UpdateTemplate(TemplateDto updatedTemplate)
+        {
+            return await templates.UpdateTemplate(updatedTemplate);
+        }
+        public async Task<GetTemplateByIdResponseModel> GetTemplateById(Guid templateId)
+        {
+            return await templates.GetTemplateById(templateId);
+        }
+        public async Task<bool> DeleteTemplate(Guid templateId)
+        {
+            return await templates.DeleteTemplate(templateId);
+        }
+
+        #endregion
 
 
     }
