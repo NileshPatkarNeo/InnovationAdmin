@@ -570,10 +570,7 @@ namespace Innovation_Admin.UI.Common
         #endregion
 
 
-
-
-
-
+        #region CorrespondenceNote
         public async Task<IEnumerable<CorrespondenceNoteDto>> GetAllCorrespondenceNotes()
         {
             GetAllCorrespondenceNoteResponseModel getAllCorrespondenceNoteResponseModel = new GetAllCorrespondenceNoteResponseModel();
@@ -609,5 +606,7 @@ namespace Innovation_Admin.UI.Common
         {
             return await correspondenceNote.DeleteCorrespondenceNote(noteId);
         }
+
+        #endregion
     }
 }
