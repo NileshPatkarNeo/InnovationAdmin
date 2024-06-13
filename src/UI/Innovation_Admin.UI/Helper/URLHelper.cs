@@ -180,7 +180,53 @@ namespace Innovation_Admin.UI.Helper
 
         #endregion
 
+        #region BillingMethodType
+        public const string GetAllBillingMethodType = "/api/BillingMethodType/all?api-version=1";
+
+        public const string CreateBillingMethodType = "/api/BillingMethodType?api-version=1";
+
+        public const string GetBillingMethodTypeById = "/api/BillingMethodType/{id}?api-version=1";
+        public const string UpdateBillingMethodType = "/api/BillingMethodType?api-version=1";
+
+        public const string DeleteBillingMethodType = "/api/BillingMethodType/{id}?api-version=1";
+        #endregion
+
+        #region APAccountType
+
+        public const string GetAllAPAccountType = "/api/APAccountType/all?api-version=1";
+
+        public const string CreateAPAccountType = "/api/APAccountType?api-version=1";
+
+        public const string GetAPAccountTypeById = "/api/APAccountType/{id}?api-version=1";
+        public const string UpdateAPAccountType = "/api/APAccountType?api-version=1";
+
+        public const string DeleteAPAccountType = "/api/APAccountType/{id}?api-version=1";
+
+        #endregion
+        #region Template 
+
+            public static string GetAllTemplates = "/api/Template?api-version=1";
+            public static string CreateTemplate = "/api/Template/create?api-version=1";
+            public static string UpdateTemplate = "/api/Template?api-version=1";
+            public static string GetTemplateById = "/api/Template/{id}?api-version=1";
+            public static string DeleteTemplate = "/api/Template/{id}?api-version=1";
+       
+
+        #region CorrespondenceNotes
+
+        public const string GetAllCorrespondenceNote = "/api/CorrespondenceNotes/all?api-version=1";
+
+        public const string CreateCorrespondenceNote = "/api/CorrespondenceNotes?api-version=1";
+
+        public const string UpdateCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string GetCorrespondenceNoteById = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string DeleteCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        #endregion
 
 
+        #endregion
     }
 }

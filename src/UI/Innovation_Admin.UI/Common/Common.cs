@@ -27,6 +27,14 @@ using Innovation_Admin.UI.Models.ResponsesModel.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.ResponsesModel.DataSource;
 using Innovation_Admin.UI.Services.Repositories;
+using Innovation_Admin.UI.Models.ResponsesModel.Template;
+using Innovation_Admin.UI.Models.Template;
+using Innovation_Admin.UI.Models.ResponsesModel.BillingMethodType;
+using Innovation_Admin.UI.Models.BillingMethodType;
+using Innovation_Admin.UI.Models.APAccountType;
+using Innovation_Admin.UI.Models.ResponsesModel.APAccountType;
+using Innovation_Admin.UI.Models.CorrespondenceNote;
+using Innovation_Admin.UI.Models.ResponsesModel.CorrespondenceNote;
 using Innovation_Admin.UI.Models.DoNotTakeGroup;
 using Innovation_Admin.UI.Models.ResponsesModel.DoNotTakeGroup;
 
@@ -48,11 +56,18 @@ namespace Innovation_Admin.UI.Common
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IReceiptBatchSource receiptBatchSource;
         private readonly IDataSources dataSources;
+        private readonly ITemplates templates;
+        private readonly IBillingMethodTypes billingMethodTypes;
+        private readonly IAPAccountTypes aPAccountTypes;
         private readonly IDoNotTakeGroup doNotTakeGroup;
        
+        private readonly ICorrespondenceNote correspondenceNote;
+
 
         
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IDoNotTakeGroup _doNotTakeGroup)
+      
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote,IDoNotTakeGroup _doNotTakeGroup)
+
 
         {
             adminUser = _adminUser;
@@ -69,6 +84,10 @@ namespace Innovation_Admin.UI.Common
             remittanceTypes = _remittanceTypes;
             receiptBatchSource = _receiptBatchSource;
             dataSources = _dataSources;
+            templates = _templates;
+            billingMethodTypes = _billingMethodTypes;
+            aPAccountTypes = _aPAccountTypes; ;
+            correspondenceNote = _correspondenceNote;
             doNotTakeGroup = _doNotTakeGroup;
         }
 
@@ -608,8 +627,171 @@ namespace Innovation_Admin.UI.Common
 
         #endregion
 
+        #region BillingMethodType
 
 
+        public async Task<IEnumerable<BillingMethodTypeDto>> GetAllBillingMethodType()
+        {
+            GetAllBillingMethodTypeResponseModel getAllBillingMethodTypeResponseModel = new GetAllBillingMethodTypeResponseModel();
+
+            getAllBillingMethodTypeResponseModel = await billingMethodTypes.GetAllBillingMethodType();
+
+            if (getAllBillingMethodTypeResponseModel.IsSuccess)
+            {
+                if (getAllBillingMethodTypeResponseModel != null && getAllBillingMethodTypeResponseModel.Data.Count() > 0)
+                {
+                    return getAllBillingMethodTypeResponseModel.Data;
+                }
+            }
+
+            return new List<BillingMethodTypeDto>();
+        }
+
+
+        public async Task<CreateBillingMethodTypeResponseModel> CreateBillingMethodType(CreateBillingMethodTypeDto billing)
+        {
+            return await billingMethodTypes.CreateBillingMethodType(billing);
+        }
+
+        public async Task<UpdateBillingMethodTypeResponseModel> UpdateBillingMethodType(BillingMethodTypeDto updatedbilling)
+        {
+            return await billingMethodTypes.UpdateBillingMethodType(updatedbilling);
+        }
+
+        public async Task<GetBillingMethodTypeByIdResponseModel> GetBillingMethodTypeById(Guid billingId)
+        {
+            return await billingMethodTypes.GetBillingMethodTypeById(billingId);
+        }
+
+        public async Task<bool> DeleteBillingMethodType(Guid billingId)
+        {
+            return await billingMethodTypes.DeleteBillingMethodType(billingId);
+        }
+
+
+
+        #endregion
+
+        #region APAccountType
+
+        public async Task<IEnumerable<APAccountTypeDto>> GetAllAPAccountType()
+        {
+            GetAllAPAccountTypeResponseModel getAllAPAccountTypeResponseModel = new GetAllAPAccountTypeResponseModel();
+
+            getAllAPAccountTypeResponseModel = await aPAccountTypes.GetAllAPAccountType();
+
+            if (getAllAPAccountTypeResponseModel.IsSuccess)
+            {
+                if (getAllAPAccountTypeResponseModel != null && getAllAPAccountTypeResponseModel.Data.Count() > 0)
+                {
+                    return getAllAPAccountTypeResponseModel.Data;
+                }
+            }
+
+            return new List<APAccountTypeDto>();
+        }
+
+
+        public async Task<CreateAPAccountTypeResponseModel> CreateAPAccountType(CreateAPAccountTypeDto billing)
+        {
+            return await aPAccountTypes.CreateAPAccountType(billing);
+        }
+
+        public async Task<UpdateAPAccountTypeResponseModel> UpdateAPAccountType(APAccountTypeDto updatedbilling)
+        {
+            return await aPAccountTypes.UpdateAPAccountType(updatedbilling);
+        }
+
+        public async Task<GetAPAccountTypeByIdResponseModel> GetAPAccountTypeById(Guid billingId)
+        {
+            return await aPAccountTypes.GetAPAccountTypeById(billingId);
+        }
+
+        public async Task<bool> DeleteAPAccountType(Guid billingId)
+        {
+            return await aPAccountTypes.DeleteAPAccountType(billingId);
+        }
+
+        #endregion
+
+
+        #region Template
+
+        public async Task<IEnumerable<TemplateDto>> GetAllTemplates()
+        {
+            GetAllTemplatesResponseModel getAllTemplatesResponseModel = new GetAllTemplatesResponseModel();
+
+            getAllTemplatesResponseModel = await templates.GetAllTemplates();
+
+            if (getAllTemplatesResponseModel.IsSuccess)
+            {
+                if (getAllTemplatesResponseModel != null && getAllTemplatesResponseModel.Data.Count() > 0)
+                {
+                    return getAllTemplatesResponseModel.Data;
+                }
+            }
+
+            return new List<TemplateDto>();
+        }
+
+        public async Task<CreateTemplateResponseModel> CreateTemplate(CreateTemplateDto newTemplate )
+        {
+            return await templates.CreateTemplate(newTemplate);
+        }
+        public async Task<UpdateTemplateResponseModel> UpdateTemplate(TemplateDto updatedTemplate)
+        {
+            return await templates.UpdateTemplate(updatedTemplate);
+        }
+        public async Task<GetTemplateByIdResponseModel> GetTemplateById(Guid templateId)
+        {
+            return await templates.GetTemplateById(templateId);
+        }
+        public async Task<bool> DeleteTemplate(Guid templateId)
+        {
+            return await templates.DeleteTemplate(templateId);
+        }
+
+       
+        #endregion
+
+        #region CorrespondenceNote
+        public async Task<IEnumerable<CorrespondenceNoteDto>> GetAllCorrespondenceNotes()
+        {
+            GetAllCorrespondenceNoteResponseModel getAllCorrespondenceNoteResponseModel = new GetAllCorrespondenceNoteResponseModel();
+
+            getAllCorrespondenceNoteResponseModel = await correspondenceNote.GetAllCorrespondenceNotes();
+
+            if (getAllCorrespondenceNoteResponseModel.IsSuccess)
+            {
+                if (getAllCorrespondenceNoteResponseModel != null && getAllCorrespondenceNoteResponseModel.Data.Count() > 0)
+                {
+                    return getAllCorrespondenceNoteResponseModel.Data;
+                }
+            }
+
+            return new List<CorrespondenceNoteDto>();
+        }
+
+        public async Task<CreateCorrespondenceNoteResponseModel> CreateCorrespondenceNote(CreateCorrespondenceNoteDto note)
+        {
+            return await correspondenceNote.CreateCorrespondenceNote(note);
+        }
+
+        public async Task<UpdateCorrespondenceNoteResponseModel> UpdateCorrespondenceNote(CorrespondenceNoteDto updatedNote)
+        {
+            return await correspondenceNote.UpdateCorrespondenceNote(updatedNote);
+        }
+        public async Task<GetAllCorrespondenceNoteByIdResponseModel> GetCorrespondenceNoteById(Guid Id)
+        {
+            return await correspondenceNote.GetCorrespondenceNoteById(Id);
+        }
+
+        public async Task<bool> DeleteCorrespondenceNote(Guid noteId)
+        {
+            return await correspondenceNote.DeleteCorrespondenceNote(noteId);
+        }
+
+        #endregion
 
     }
 }

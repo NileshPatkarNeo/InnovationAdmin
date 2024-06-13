@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿    using Newtonsoft.Json;
 
 namespace Innovation_Admin.UI.Models.ResponsesModel.RemittanceType
 {
