@@ -188,7 +188,16 @@ namespace Innovation_Admin.UI.Helper
         public const string DeleteAPAccountType = "/api/APAccountType/{id}?api-version=1";
 
         #endregion
+        #region Template 
+
+            public static string GetAllTemplates = "/api/Template?api-version=1";
+            public static string CreateTemplate = "/api/Template/create?api-version=1";
+            public static string UpdateTemplate = "/api/Template?api-version=1";
+            public static string GetTemplateById = "/api/Template/{id}?api-version=1";
+            public static string DeleteTemplate = "/api/Template/{id}?api-version=1";
+       
 
 
+        #endregion
     }
 }

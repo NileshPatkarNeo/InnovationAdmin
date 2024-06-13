@@ -33,6 +33,11 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IBillingMethodTypeRepository, BillingMethodTypeRepository>();
             services.AddScoped<IAPAccountTypeRepository, APAccountTypeRepository>();
 
+            services.AddScoped<ITemplateRepository, TemplateRepository>();
+
+
+
+
             return services;
         }
     }

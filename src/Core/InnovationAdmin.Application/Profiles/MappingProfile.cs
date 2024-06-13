@@ -49,6 +49,11 @@ using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceById;
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceList;
 using InnovationAdmin.Application.Features.DataSources.Commands.UpdateDataSource;
+using InnovationAdmin.Application.Features.Template.Commands.CreateTemplate;
+using InnovationAdmin.Application.Features.Template.Commands.UpdateTemplate;
+using InnovationAdmin.Application.Features.Template.Commands.DeleteTemplate;
+using InnovationAdmin.Application.Features.Template.Queries.GetTemplatesList;
+using InnovationAdmin.Application.Features.Template.Queries.GetTemplate;
 using InnovationAdmin.Application.Features.BillingMethodTypes.Commands.CreateBillingMethodType;
 using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeById;
 using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeList;
@@ -202,7 +207,12 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<APAccountType, CreateAPAccountTypeCommand>().ReverseMap();
             CreateMap<APAccountType, UpdateAPAccountTypeCommandDto>().ReverseMap();
 
-
+            CreateMap<Templates, CreateTemplateDto>().ReverseMap();
+            CreateMap<Templates, UpdateTemplateDto>().ReverseMap();
+            CreateMap<Templates, DeleteTemplateCommand>().ReverseMap();
+            CreateMap<Templates, TemplateListVM>().ReverseMap();
+            CreateMap<Templates, TemplateVM>().ReverseMap();
+            CreateMap<Templates, UpdateTemplateCommand>().ReverseMap();
 
 
         }
