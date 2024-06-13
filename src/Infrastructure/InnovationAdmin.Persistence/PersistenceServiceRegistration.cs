@@ -31,6 +31,11 @@ namespace InnovationAdmin.Persistence
 
             services.AddScoped<IDataSourceRepository, DataSourceRepository>();
 
+            services.AddScoped<ITemplateRepository, TemplateRepository>();
+
+
+
+
             return services;
         }
     }
