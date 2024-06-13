@@ -604,6 +604,7 @@ namespace Innovation_Admin.UI.Common
             return await templates.DeleteTemplate(templateId);
         }
 
+       
         #endregion
 
 

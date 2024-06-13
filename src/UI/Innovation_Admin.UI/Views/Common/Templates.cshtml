@@ -56,7 +56,7 @@
     <h1 class="text-center">Templates</h1>
 
     <div class="add-button-container">
-        <a asp-action="CreateTemplate" class="btn btn-primary">
+        <a asp-action="CreateTemplate" class="btn btn-primary" id="addBannerForm" enctype="multipart/form-data">
             <i class="bi bi-plus-circle"></i> Add
         </a>
     </div>
@@ -173,6 +173,11 @@
         toastr.success('@TempData["Message"]');
     </script>
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#addBannerForm").validate();
+    });
+</script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
