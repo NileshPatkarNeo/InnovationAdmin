@@ -66,6 +66,9 @@ using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.CreateCo
 using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.UpdateCorrespondenceNote;
 using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetCorrespondenceNoteQuery;
 using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllListCorrespondenceNoteQuery;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.CreateDoNotTakeGroup;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Queries.GetDoNotTakeGroupQuery;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTakeGroup;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -186,6 +189,11 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<ReceiptBatchSource, ReceiptBatchSourceDto>().ReverseMap();
             CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceDto>().ReverseMap();
             CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceCommand>().ReverseMap();
+
+            CreateMap<DoNotTakeGroup, CreateDoNoTakeGroupDto>().ReverseMap();
+            CreateMap<DoNotTakeGroup, DoNotTakeGroupDto>().ReverseMap();
+            CreateMap<DoNotTakeGroup, UpdateDoNotTakeGroupDto>().ReverseMap();  
+            CreateMap<DoNotTakeGroup, UpdateDoNotTakeGroupCommand>().ReverseMap();    
 
 
 

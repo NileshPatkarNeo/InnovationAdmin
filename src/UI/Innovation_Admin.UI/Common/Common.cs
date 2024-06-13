@@ -35,6 +35,8 @@ using Innovation_Admin.UI.Models.APAccountType;
 using Innovation_Admin.UI.Models.ResponsesModel.APAccountType;
 using Innovation_Admin.UI.Models.CorrespondenceNote;
 using Innovation_Admin.UI.Models.ResponsesModel.CorrespondenceNote;
+using Innovation_Admin.UI.Models.DoNotTakeGroup;
+using Innovation_Admin.UI.Models.ResponsesModel.DoNotTakeGroup;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -57,13 +59,14 @@ namespace Innovation_Admin.UI.Common
         private readonly ITemplates templates;
         private readonly IBillingMethodTypes billingMethodTypes;
         private readonly IAPAccountTypes aPAccountTypes;
+        private readonly IDoNotTakeGroup doNotTakeGroup;
        
         private readonly ICorrespondenceNote correspondenceNote;
 
 
         
       
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote,IDoNotTakeGroup _doNotTakeGroup)
 
 
         {
@@ -85,6 +88,7 @@ namespace Innovation_Admin.UI.Common
             billingMethodTypes = _billingMethodTypes;
             aPAccountTypes = _aPAccountTypes; ;
             correspondenceNote = _correspondenceNote;
+            doNotTakeGroup = _doNotTakeGroup;
         }
 
         #region System_Preference
@@ -417,9 +421,6 @@ namespace Innovation_Admin.UI.Common
 
         #endregion
 
-        #region Quote
-
-
         #region DataSource
 
         public async Task<IEnumerable<DataSourceDto>> GetAllDataSource()
@@ -449,7 +450,19 @@ namespace Innovation_Admin.UI.Common
         {
             return await dataSources.UpdateDataSource(updateddata);
         }
+        public async Task<GetDataSourceByIdResponseModel> GetDataSourceById(Guid dataId)
+        {
+            return await dataSources.GetDataSourceById(dataId);
+        }
 
+        public async Task<bool> DeleteDataSource(Guid dataId)
+        {
+            return await dataSources.DeleteDataSource(dataId);
+        }
+
+        #endregion
+
+        #region Quote
 
         public async Task<IEnumerable<QuoteDto>> GetAllQuotes()
         {
@@ -570,14 +583,46 @@ namespace Innovation_Admin.UI.Common
             return await receiptBatchSource.DeleteReceiptBatchSource(Id);
         }
         #endregion
-        public async Task<GetDataSourceByIdResponseModel> GetDataSourceById(Guid dataId)
+
+        #region DoNotTakeGroup
+
+        public async Task<IEnumerable<DoNotTakeGroupDto>> GetAllDoNotTakeGroups()
         {
-            return await dataSources.GetDataSourceById(dataId);
+            GetAllDoNotTakeGroupResponseModel getAllDoNotTakeGroupResponseModel = new GetAllDoNotTakeGroupResponseModel();
+
+            getAllDoNotTakeGroupResponseModel = await doNotTakeGroup.GetAllDoNotTakeGroup();
+
+            if (getAllDoNotTakeGroupResponseModel.IsSuccess)
+            {
+                if (getAllDoNotTakeGroupResponseModel != null && getAllDoNotTakeGroupResponseModel.Data.Count() > 0)
+                {
+                    return getAllDoNotTakeGroupResponseModel.Data;
+                }
+            }
+
+            return new List<DoNotTakeGroupDto>();
         }
 
-        public async Task<bool> DeleteDataSource(Guid dataId)
+
+
+        public async Task<CreateDoNotTakeGroupResponseModel> CreateDoNotTakeGroup(DoNotTakeGroupDto group)
         {
-            return await dataSources.DeleteDataSource(dataId);
+            return await doNotTakeGroup.CreateDoNotTakeGroup(group);
+        }
+
+
+        public async Task<UpdateDoNotTakeGroupResponseModel> UpdateDoNotTakeGroup(DoNotTakeGroupDto updatedGroup)
+        {
+            return await doNotTakeGroup.UpdateDoNotTakeGroup(updatedGroup);
+        }
+        public async Task<GetDoNotTakeGroupByIdResponseModel> GetDoNoTakeGroupById(Guid Id)
+        {
+            return await doNotTakeGroup.GetDoNotTakeGroupById(Id);
+        }
+
+        public async Task<bool> DeleteDoNotTakeGroup(Guid Id)
+        {
+            return await doNotTakeGroup.DeleteDoNotTakeGroup(Id);
         }
 
         #endregion
@@ -747,5 +792,6 @@ namespace Innovation_Admin.UI.Common
         }
 
         #endregion
+
     }
 }

@@ -10,6 +10,6 @@ namespace InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateS
     {
         public Guid CompanyID { get; set; }
         public string CompanyName { get; set; }
-        public string TermForPharmacy { get; set; }
+        public string TermForPharmacy { get; set; }     
     }
 }
