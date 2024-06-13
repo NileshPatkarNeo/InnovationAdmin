@@ -30,6 +30,7 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IQuotesRepository, QuotesRepository>();
 
             services.AddScoped<IDataSourceRepository, DataSourceRepository>();
+            services.AddScoped<IDoNotTakeGroup, DoNotTakeGroupRepopsitory>();
 
             return services;
         }

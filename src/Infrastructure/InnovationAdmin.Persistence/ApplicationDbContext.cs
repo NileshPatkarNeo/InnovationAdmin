@@ -43,6 +43,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
 
+        public DbSet<DoNotTakeGroup> doNotTakeGroups { get; set; }
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

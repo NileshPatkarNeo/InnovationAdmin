@@ -8,7 +8,6 @@ using CommonCall = Innovation_Admin.UI.Common;
 using Innovation_Admin.UI.Services.IRepositories;
 using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.PharmacyGroup;
-using System.Reflection;
 
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
@@ -18,6 +17,7 @@ using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.DoNotTakeGroup;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -1008,12 +1008,77 @@ namespace Innovation_Admin.UI.Controllers
                 return Json(new { success = false, message = "Failed to delete." });
             }
         }
-   
+
         #endregion
 
-      
 
-       
+        #region DoNotTakeGroup
+        [HttpGet]
+        public async Task<IActionResult> DoNotTakeGroup()
+        {
+            var getAllDoNotTakeGroup = await _common.GetAllDoNotTakeGroups();
+            return View(DoNotTakeGroup);
+        }
+
+        [HttpGet]
+        public IActionResult CreateDoNotTakeGroup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDoNotTakeGroup(DoNotTakeGroupDto group)
+        {
+            var result = await _common.CreateDoNotTakeGroup(group);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("ReceiptBatchSource");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DoNotTakeGroup");
+            }
+            return RedirectToAction("DoNotTakeGroup");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditDoNotTakeGroup(string Id)
+        {
+            var doNotTakeGroup = await _common.GetDoNoTakeGroupById(Guid.Parse(Id));
+            return View(doNotTakeGroup.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditDoNotTakeGroup(DoNotTakeGroupDto updatedgroup)
+        {
+            var result = await _common.UpdateDoNotTakeGroup(updatedgroup);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Group updated successfully";
+                return RedirectToAction("DoNotTakeGroup");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DoNotTakeGroup");
+            }
+            return RedirectToAction("DoNotTakeGroup");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDoNotTakeGroup(Guid Id)
+        {
+            var isDeleted = await _common.DeleteDoNotTakeGroup(Id);
+            return RedirectToAction("DoNotTakeGroup");
+        }
+        #endregion
+
+
     }
 }
     

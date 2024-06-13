@@ -152,6 +152,7 @@ namespace Innovation_Admin.UI.Helper
         public const string DeleteRemittanceType = "/api/RemittanceType/{id}?api-version=1";
 
         #endregion
+
         #region DataSource
         public const string GetAllDataSource = "/api/DataSource/all?api-version=1";
 
@@ -162,6 +163,20 @@ namespace Innovation_Admin.UI.Helper
 
         public const string DeleteDataSource = "/api/DataSource/{id}?api-version=1";
 
+
+        #endregion
+
+        #region DoNotTakeGroup
+
+        public const string GetAllDoNotTakeGroup = "/api/DoNotTakeGroup?api-version=1";
+
+        public const string GetDoNotTakeGroupByID = "/api/DoNotTakeGroup/{id}?api-version=1";
+
+        public const string CreateDoNotTakeGroup = "/api/DoNotTakeGroup?api-version=1";
+
+        public const string UpdateDoNotTakeGroup = "/api/DoNotTakeGroup/{id}?api-version=1";
+
+        public const string DeleteDoNotTakeGroup = "/api/DoNotTakeGroup/{id}?api-version=1";
 
         #endregion
 

@@ -27,6 +27,8 @@ using Innovation_Admin.UI.Models.ResponsesModel.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.ResponsesModel.DataSource;
 using Innovation_Admin.UI.Services.Repositories;
+using Innovation_Admin.UI.Models.DoNotTakeGroup;
+using Innovation_Admin.UI.Models.ResponsesModel.DoNotTakeGroup;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -46,10 +48,11 @@ namespace Innovation_Admin.UI.Common
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IReceiptBatchSource receiptBatchSource;
         private readonly IDataSources dataSources;
+        private readonly IDoNotTakeGroup doNotTakeGroup;
        
 
         
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IDoNotTakeGroup _doNotTakeGroup)
 
         {
             adminUser = _adminUser;
@@ -66,6 +69,7 @@ namespace Innovation_Admin.UI.Common
             remittanceTypes = _remittanceTypes;
             receiptBatchSource = _receiptBatchSource;
             dataSources = _dataSources;
+            doNotTakeGroup = _doNotTakeGroup;
         }
 
         #region System_Preference
@@ -560,7 +564,50 @@ namespace Innovation_Admin.UI.Common
             return await receiptBatchSource.DeleteReceiptBatchSource(Id);
         }
         #endregion
-             
+
+        #region DoNotTakeGroup
+
+        public async Task<IEnumerable<DoNotTakeGroupDto>> GetAllDoNotTakeGroups()
+        {
+            GetAllDoNotTakeGroupResponseModel getAllDoNotTakeGroupResponseModel = new GetAllDoNotTakeGroupResponseModel();
+
+            getAllDoNotTakeGroupResponseModel = await doNotTakeGroup.GetAllDoNotTakeGroup();
+
+            if (getAllDoNotTakeGroupResponseModel.IsSuccess)
+            {
+                if (getAllDoNotTakeGroupResponseModel != null && getAllDoNotTakeGroupResponseModel.Data.Count() > 0)
+                {
+                    return getAllDoNotTakeGroupResponseModel.Data;
+                }
+            }
+
+            return new List<DoNotTakeGroupDto>();
+        }
+
+
+
+        public async Task<CreateDoNotTakeGroupResponseModel> CreateDoNotTakeGroup(DoNotTakeGroupDto group)
+        {
+            return await doNotTakeGroup.CreateDoNotTakeGroup(group);
+        }
+
+
+        public async Task<UpdateDoNotTakeGroupResponseModel> UpdateDoNotTakeGroup(DoNotTakeGroupDto updatedGroup)
+        {
+            return await doNotTakeGroup.UpdateDoNotTakeGroup(updatedGroup);
+        }
+        public async Task<GetDoNotTakeGroupByIdResponseModel> GetDoNoTakeGroupById(Guid Id)
+        {
+            return await doNotTakeGroup.GetDoNotTakeGroupById(Id);
+        }
+
+        public async Task<bool> DeleteDoNotTakeGroup(Guid Id)
+        {
+            return await doNotTakeGroup.DeleteDoNotTakeGroup(Id);
+        }
+
+        #endregion
+
 
 
 
