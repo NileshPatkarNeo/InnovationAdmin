@@ -54,6 +54,9 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<Templates> Templates { get; set; }
 
+        public DbSet<CorrespondenceNotes> CorrespondenceNotes { get; set; }
+
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

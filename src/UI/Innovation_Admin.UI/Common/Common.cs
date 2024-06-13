@@ -33,6 +33,8 @@ using Innovation_Admin.UI.Models.ResponsesModel.BillingMethodType;
 using Innovation_Admin.UI.Models.BillingMethodType;
 using Innovation_Admin.UI.Models.APAccountType;
 using Innovation_Admin.UI.Models.ResponsesModel.APAccountType;
+using Innovation_Admin.UI.Models.CorrespondenceNote;
+using Innovation_Admin.UI.Models.ResponsesModel.CorrespondenceNote;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -56,10 +58,13 @@ namespace Innovation_Admin.UI.Common
         private readonly IBillingMethodTypes billingMethodTypes;
         private readonly IAPAccountTypes aPAccountTypes;
        
+        private readonly ICorrespondenceNote correspondenceNote;
+
 
         
       
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote)
+
 
         {
             adminUser = _adminUser;
@@ -79,6 +84,7 @@ namespace Innovation_Admin.UI.Common
             templates = _templates;
             billingMethodTypes = _billingMethodTypes;
             aPAccountTypes = _aPAccountTypes; ;
+            correspondenceNote = _correspondenceNote;
         }
 
         #region System_Preference
@@ -703,6 +709,43 @@ namespace Innovation_Admin.UI.Common
        
         #endregion
 
+        #region CorrespondenceNote
+        public async Task<IEnumerable<CorrespondenceNoteDto>> GetAllCorrespondenceNotes()
+        {
+            GetAllCorrespondenceNoteResponseModel getAllCorrespondenceNoteResponseModel = new GetAllCorrespondenceNoteResponseModel();
 
+            getAllCorrespondenceNoteResponseModel = await correspondenceNote.GetAllCorrespondenceNotes();
+
+            if (getAllCorrespondenceNoteResponseModel.IsSuccess)
+            {
+                if (getAllCorrespondenceNoteResponseModel != null && getAllCorrespondenceNoteResponseModel.Data.Count() > 0)
+                {
+                    return getAllCorrespondenceNoteResponseModel.Data;
+                }
+            }
+
+            return new List<CorrespondenceNoteDto>();
+        }
+
+        public async Task<CreateCorrespondenceNoteResponseModel> CreateCorrespondenceNote(CreateCorrespondenceNoteDto note)
+        {
+            return await correspondenceNote.CreateCorrespondenceNote(note);
+        }
+
+        public async Task<UpdateCorrespondenceNoteResponseModel> UpdateCorrespondenceNote(CorrespondenceNoteDto updatedNote)
+        {
+            return await correspondenceNote.UpdateCorrespondenceNote(updatedNote);
+        }
+        public async Task<GetAllCorrespondenceNoteByIdResponseModel> GetCorrespondenceNoteById(Guid Id)
+        {
+            return await correspondenceNote.GetCorrespondenceNoteById(Id);
+        }
+
+        public async Task<bool> DeleteCorrespondenceNote(Guid noteId)
+        {
+            return await correspondenceNote.DeleteCorrespondenceNote(noteId);
+        }
+
+        #endregion
     }
 }
