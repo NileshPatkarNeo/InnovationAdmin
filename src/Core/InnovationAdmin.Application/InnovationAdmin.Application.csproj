@@ -26,10 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\InnovationAdmin.Domain\InnovationAdmin.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\APAccountTypes\Queries\" />
-  </ItemGroup>
 	<Target Name="CleanBinObjFolders" AfterTargets="Clean">
 		<RemoveDir Directories="$(BaseOutputPath)\bin" />
 		<RemoveDir Directories="$(BaseIntermediateOutputPath)\obj" />

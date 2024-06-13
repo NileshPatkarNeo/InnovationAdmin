@@ -1,8 +1,8 @@
-﻿@model Innovation_Admin.UI.Models.BillingMethodType.CreateBillingMethodTypeDto
+﻿@model Innovation_Admin.UI.Models.APAccountType.APAccountTypeDto
 
 @{
-    ViewData["Title"] = "CreateBillingMethodType";
-    Layout = "_AdminHomePage";
+    ViewData["Title"] = "EditAPAccountType";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
 <style>
@@ -39,36 +39,29 @@
         .form-group .btn + .btn {
             margin-left: 10px;
         }
-
-    .flex-fill {
-        flex: 1;
-    }
-
-    .min-vh-100 {
-        min-height: 100vh;
-    }
-
-    .align-items-start {
-        align-items: flex-start !important;
-        margin-top: 10vh; /* Adjust this value to move the form slightly above the middle */
-    }
 </style>
 
-<h1>Create Billing Method Type</h1>
-
-<div class="d-flex justify-content-center align-items-start min-vh-100">
+<h1>Edit AP Account Type</h1>
+<hr />
+<div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <form id="createBillingMethodTypeForm" asp-action="CreateBillingMethodType" novalidate>
+                <form asp-action="EditAPAccountType" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ID" class="control-label">ID</label>
+                        <input asp-for="ID" class="form-control" readonly />
+                        <span asp-validation-for="ID" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
                         <input asp-for="Name" class="form-control" id="Name" />
                         <span id="nameError" class="text-danger"></span>
                     </div>
                     <div class="form-group d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
-                        <a asp-action="BillingMethodType" class="btn btn-secondary btn-lg flex-fill">Back</a>
+                        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                        <a asp-action="APAccountType" class="btn btn-secondary btn-lg">Back</a>
                     </div>
                 </form>
             </div>
@@ -82,14 +75,14 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var form = document.getElementById("createBillingMethodTypeForm");
+        var form = document.querySelector("form");
 
         form.addEventListener("submit", function (event) {
             var isValid = true;
 
             // Validate Name
-            var name = document.getElementById("Name").value;
-            var nameError = document.getElementById("nameError");
+            var name = document.querySelector("#Name").value;
+            var nameError = document.querySelector("#nameError");
             if (name.trim() === "") {
                 nameError.textContent = "Name is required.";
                 isValid = false;

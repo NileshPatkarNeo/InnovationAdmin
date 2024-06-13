@@ -176,6 +176,18 @@ namespace Innovation_Admin.UI.Helper
         public const string DeleteBillingMethodType = "/api/BillingMethodType/{id}?api-version=1";
         #endregion
 
+        #region APAccountType
+
+        public const string GetAllAPAccountType = "/api/APAccountType/all?api-version=1";
+
+        public const string CreateAPAccountType = "/api/APAccountType?api-version=1";
+
+        public const string GetAPAccountTypeById = "/api/APAccountType/{id}?api-version=1";
+        public const string UpdateAPAccountType = "/api/APAccountType?api-version=1";
+
+        public const string DeleteAPAccountType = "/api/APAccountType/{id}?api-version=1";
+
+        #endregion
 
 
     }

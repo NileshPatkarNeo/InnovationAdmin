@@ -1,7 +1,7 @@
-﻿@model Innovation_Admin.UI.Models.BillingMethodType.CreateBillingMethodTypeDto
+﻿@model Innovation_Admin.UI.Models.APAccountType.CreateAPAccountTypeDto
 
 @{
-    ViewData["Title"] = "CreateBillingMethodType";
+    ViewData["Title"] = "CreateAPAccountType";
     Layout = "_AdminHomePage";
 }
 
@@ -54,13 +54,13 @@
     }
 </style>
 
-<h1>Create Billing Method Type</h1>
+<h1>Create AP Account Type</h1>
 
 <div class="d-flex justify-content-center align-items-start min-vh-100">
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <form id="createBillingMethodTypeForm" asp-action="CreateBillingMethodType" novalidate>
+                <form id="createAPAccountTypeForm" asp-action="CreateAPAccountType" novalidate>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
                         <input asp-for="Name" class="form-control" id="Name" />
@@ -68,7 +68,7 @@
                     </div>
                     <div class="form-group d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
-                        <a asp-action="BillingMethodType" class="btn btn-secondary btn-lg flex-fill">Back</a>
+                        <a asp-action="APAccountType" class="btn btn-secondary btn-lg flex-fill">Back</a>
                     </div>
                 </form>
             </div>
@@ -82,7 +82,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var form = document.getElementById("createBillingMethodTypeForm");
+        var form = document.getElementById("createAPAccountTypeForm");
 
         form.addEventListener("submit", function (event) {
             var isValid = true;
@@ -100,7 +100,7 @@
                 nameError.textContent = "Name should be at most 30 characters.";
                 isValid = false;
             } else if (!/^[a-zA-Z\s]*$/.test(name)) {
-                nameError.textContent = "Name can only contain characters";
+                nameError.textContent = "Name can only contain characters.";
                 isValid = false;
             } else {
                 nameError.textContent = "";

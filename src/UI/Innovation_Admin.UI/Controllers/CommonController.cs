@@ -19,6 +19,7 @@ using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.BillingMethodType;
+using Innovation_Admin.UI.Models.APAccountType;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -1089,7 +1090,88 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+        #region APAccountType
 
+        public async Task<IActionResult> APAccountType()
+        {
+            var getAllAPAccountType = await _common.GetAllAPAccountType();
+            return View(getAllAPAccountType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateAPAccountType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateAPAccountType(CreateAPAccountTypeDto apaccount)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(apaccount);
+            }
+            var result = await _common.CreateAPAccountType(apaccount);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAPAccountType(string id)
+        {
+            var dataSource = await _common.GetAPAccountTypeById(Guid.Parse(id));
+            return View(dataSource.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAPAccountType(APAccountTypeDto updatedaccount)
+        {
+            var result = await _common.UpdateAPAccountType(updatedaccount);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAPAccountType(Guid accountId)
+        {
+            var isDeleted = await _common.DeleteAPAccountType(accountId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
 
 
     }

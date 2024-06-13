@@ -29,6 +29,8 @@ using Innovation_Admin.UI.Models.ResponsesModel.DataSource;
 using Innovation_Admin.UI.Services.Repositories;
 using Innovation_Admin.UI.Models.ResponsesModel.BillingMethodType;
 using Innovation_Admin.UI.Models.BillingMethodType;
+using Innovation_Admin.UI.Models.APAccountType;
+using Innovation_Admin.UI.Models.ResponsesModel.APAccountType;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -49,10 +51,11 @@ namespace Innovation_Admin.UI.Common
         private readonly IReceiptBatchSource receiptBatchSource;
         private readonly IDataSources dataSources;
         private readonly IBillingMethodTypes billingMethodTypes;
+        private readonly IAPAccountTypes aPAccountTypes;
        
 
         
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes)
 
         {
             adminUser = _adminUser;
@@ -70,6 +73,7 @@ namespace Innovation_Admin.UI.Common
             receiptBatchSource = _receiptBatchSource;
             dataSources = _dataSources;
             billingMethodTypes = _billingMethodTypes;
+            aPAccountTypes = _aPAccountTypes; ;
         }
 
         #region System_Preference
@@ -609,6 +613,48 @@ namespace Innovation_Admin.UI.Common
         }
 
 
+
+        #endregion
+
+        #region APAccountType
+
+        public async Task<IEnumerable<APAccountTypeDto>> GetAllAPAccountType()
+        {
+            GetAllAPAccountTypeResponseModel getAllAPAccountTypeResponseModel = new GetAllAPAccountTypeResponseModel();
+
+            getAllAPAccountTypeResponseModel = await aPAccountTypes.GetAllAPAccountType();
+
+            if (getAllAPAccountTypeResponseModel.IsSuccess)
+            {
+                if (getAllAPAccountTypeResponseModel != null && getAllAPAccountTypeResponseModel.Data.Count() > 0)
+                {
+                    return getAllAPAccountTypeResponseModel.Data;
+                }
+            }
+
+            return new List<APAccountTypeDto>();
+        }
+
+
+        public async Task<CreateAPAccountTypeResponseModel> CreateAPAccountType(CreateAPAccountTypeDto billing)
+        {
+            return await aPAccountTypes.CreateAPAccountType(billing);
+        }
+
+        public async Task<UpdateAPAccountTypeResponseModel> UpdateAPAccountType(APAccountTypeDto updatedbilling)
+        {
+            return await aPAccountTypes.UpdateAPAccountType(updatedbilling);
+        }
+
+        public async Task<GetAPAccountTypeByIdResponseModel> GetAPAccountTypeById(Guid billingId)
+        {
+            return await aPAccountTypes.GetAPAccountTypeById(billingId);
+        }
+
+        public async Task<bool> DeleteAPAccountType(Guid billingId)
+        {
+            return await aPAccountTypes.DeleteAPAccountType(billingId);
+        }
 
         #endregion
 
