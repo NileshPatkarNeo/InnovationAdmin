@@ -49,6 +49,10 @@ using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceById;
 using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceList;
 using InnovationAdmin.Application.Features.DataSources.Commands.UpdateDataSource;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.CreateCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.UpdateCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetCorrespondenceNoteQuery;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllListCorrespondenceNoteQuery;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -180,7 +184,13 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
             CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
 
-
+            CreateMap<CorrespondenceNotes, CreateCorrespondenceNoteCommand>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CreateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, UpdateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, UpdateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, GetCorrespondenceNoteByIdQuery>().ReverseMap();
+            CreateMap<CorrespondenceNotes, GetAllCorrespondenceNoteQuery>().ReverseMap();
 
 
 

@@ -166,6 +166,20 @@ namespace Innovation_Admin.UI.Helper
         #endregion
 
 
+        #region CorrespondenceNotes
+
+        public const string GetAllCorrespondenceNote = "/api/CorrespondenceNotes/all?api-version=1";
+
+        public const string CreateCorrespondenceNote = "/api/CorrespondenceNotes?api-version=1";
+
+        public const string UpdateCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string GetCorrespondenceNoteById = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string DeleteCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        #endregion
+
 
     }
 }

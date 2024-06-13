@@ -1,7 +1,13 @@
 ﻿using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.CreateCorrespondenceNote;
 using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.DeleteCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.UpdateCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllListCorrespondenceNoteQuery;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetCorrespondenceNoteQuery;
 using InnovationAdmin.Application.Features.RemittanceType.Commands.CreateRemittanceType;
 using InnovationAdmin.Application.Features.RemittanceType.Commands.DeleteRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.UpdateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Queries.GetAllListRemittanceTypeQuery;
+using InnovationAdmin.Application.Features.RemittanceType.Queries.GetRemittanceTypeQuery;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +57,51 @@ namespace InnovationAdmin.Api.Controllers
                 return StatusCode(500, result);
             }
             return NotFound(result);
+        }
+
+        [HttpPut("{id}", Name = "UpdateCorrespondenceNote")]
+        public async Task<ActionResult> Update(Guid id, [FromBody] UpdateCorrespondenceNoteCommand updateCorrespondenceNoteCommand)
+        {
+            if (id != updateCorrespondenceNoteCommand.Id)
+            {
+                return BadRequest("ID mismatch");
+            }
+
+            var response = await _mediator.Send(updateCorrespondenceNoteCommand);
+            if (response.Succeeded)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet("{id}", Name = "GetCorrespondenceNoteById")]
+        public async Task<ActionResult> GetCorrespondenceNoteById(string id)
+        {
+            if (!Guid.TryParse(id, out var guidId))
+            {
+                return BadRequest("Invalid ID format.");
+            }
+
+            var getcorrespondenceNote = new GetCorrespondenceNoteByIdQuery { Id = guidId };
+            var response = await _mediator.Send(getcorrespondenceNote);
+
+            if (response == null)
+            {
+                return NotFound("Correspondence Note not found.");
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("all", Name = "GetCorrespondenceNotes")]
+        public async Task<ActionResult> GetCorrespondenceNote()
+        {
+            _logger.LogInformation("CorrespondenceNote Initiated");
+            var dtos = await _mediator.Send(new GetAllCorrespondenceNoteQuery());
+            _logger.LogInformation("CorrespondenceNote Completed");
+            return Ok(dtos);
+
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿    using Newtonsoft.Json;
+﻿using Innovation_Admin.UI.Models.CorrespondenceNote;
+using Innovation_Admin.UI.Models.RemittanceType;
+using Newtonsoft.Json;
 
-namespace Innovation_Admin.UI.Models.ResponsesModel.RemittanceType
+namespace Innovation_Admin.UI.Models.ResponsesModel.CorrespondenceNote
 {
-    public class GetAllRemittanceTypeResponseModel
+    public class UpdateCorrespondenceNoteResponseModel
     {
         [JsonProperty("isSuccess")]
         public bool IsSuccess { get; set; }
@@ -17,6 +19,6 @@ namespace Innovation_Admin.UI.Models.ResponsesModel.RemittanceType
         public string StatusCode { get; set; }
 
         [JsonProperty("data")]
-        public IEnumerable<Models.RemittanceType.RemittanceTypeDto> Data { get; set; }
+        public CorrespondenceNoteDto UpdatedCorrespondenceNote { get; set; }
     }
 }

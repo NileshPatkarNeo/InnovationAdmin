@@ -36,6 +36,8 @@ builder.Services.AddScoped<IDataSources, DataSources>();
 builder.Services.AddScoped<IQuotes, Quotes>();
 builder.Services.AddScoped<IReceiptBatchSource, ReceiptBatchSource>();
 
+builder.Services.AddScoped<ICorrespondenceNote, CorrespondenceNotes>();
+
 builder.Services.AddScoped<Common>();
 
 

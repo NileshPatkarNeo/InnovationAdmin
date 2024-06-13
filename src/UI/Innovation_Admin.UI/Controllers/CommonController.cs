@@ -18,6 +18,7 @@ using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.CorrespondenceNote;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -757,6 +758,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
         #region RemittanceType
 
         [HttpGet]
@@ -1002,12 +1004,91 @@ namespace Innovation_Admin.UI.Controllers
                 return Json(new { success = false, message = "Failed to delete." });
             }
         }
-   
+
         #endregion
 
-      
 
-       
+
+
+        [HttpGet]
+        public async Task<IActionResult> CorrespondenceNotes()
+        {
+            var getAllNote = await _common.GetAllCorrespondenceNotes();
+            return View(getAllNote);
+        }
+
+        [HttpGet]
+        public IActionResult CreateCorrespondenceNote()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCorrespondenceNote(CreateCorrespondenceNoteDto noteModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(noteModel);
+            }
+            var result = await _common.CreateCorrespondenceNote(noteModel);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("CorrespondenceNotes");
+
+            }
+            else if (result.Message == "Failed to add type.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CorrespondenceNotes");
+            }
+            return RedirectToAction("CorrespondenceNotes");
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCorrespondenceNote( string Id)
+        {
+            var sysPrefCompany = await _common.GetCorrespondenceNoteById(Guid.Parse(Id));
+            return View(sysPrefCompany.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCorrespondenceNote(CorrespondenceNoteDto updatedNote)
+        {
+           var result = await _common.UpdateCorrespondenceNote(updatedNote);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("CorrespondenceNotes");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CorrespondenceNotes");
+            }
+            return RedirectToAction("CorrespondenceNotes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCorrespondenceNote(Guid noteId)
+        {
+            var isDeleted = await _common.DeleteCorrespondenceNote(noteId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
     }
 }
     

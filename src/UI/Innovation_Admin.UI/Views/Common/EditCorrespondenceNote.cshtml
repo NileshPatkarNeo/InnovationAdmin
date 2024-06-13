@@ -1,0 +1,116 @@
+﻿@model Innovation_Admin.UI.Models.CorrespondenceNote.CorrespondenceNoteDto
+
+@{
+    ViewData["Title"] = "Edit Correspondence Note";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<style>
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        width: auto;
+    }
+
+    .form-group .btn {
+        display: inline-block;
+    }
+
+        .form-group .btn + .btn {
+            margin-left: 10px;
+        }
+
+    .flex-fill {
+        flex: 1;
+    }
+
+    .min-vh-100 {
+        min-height: 100vh;
+    }
+
+    .align-items-start {
+        align-items: flex-start !important;
+        margin-top: 10vh; 
+    }
+</style>
+
+<h1>Edit Correspondence Note</h1>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="EditCorrespondenceNote" method="post" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Id" class="control-label">ID</label>
+                        <input asp-for="Id" class="form-control" readonly />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Note" class="control-label">Note<span class="text-danger">*</span></label>
+                        <input asp-for="Note" class="form-control" id="Note" />
+                        <span id="noteError" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary btn-lg flex-fill">Save</button>
+                        <a asp-action="CorrespondenceNotes" class="btn btn-secondary btn-lg flex-fill">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+            var isValid = true;
+
+            // Validate Note
+            var note = document.querySelector("#Note").value;
+            var noteError = document.querySelector("#noteError");
+            if (note.trim() === "") {
+                noteError.textContent = "Note is required.";
+                isValid = false;
+            } else if (note.length < 2) {
+                noteError.textContent = "Note should be at least 2 characters.";
+                isValid = false;
+            } else if (note.length > 100) {
+                noteError.textContent = "Note should be at most 100 characters.";
+                isValid = false;
+            } else if (!/^[a-zA-Z\s]*$/.test(note)) {
+                noteError.textContent = "Note can only contain alphabet characters and spaces.";
+                isValid = false;
+            } else {
+                noteError.textContent = "";
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
