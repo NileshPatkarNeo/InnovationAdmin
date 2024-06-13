@@ -54,6 +54,14 @@ using InnovationAdmin.Application.Features.Template.Commands.UpdateTemplate;
 using InnovationAdmin.Application.Features.Template.Commands.DeleteTemplate;
 using InnovationAdmin.Application.Features.Template.Queries.GetTemplatesList;
 using InnovationAdmin.Application.Features.Template.Queries.GetTemplate;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Commands.CreateBillingMethodType;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeById;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeList;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Commands.UpdateBillingMethodType;
+using InnovationAdmin.Application.Features.APAccountTypes.Commands.CreateAPAccountType;
+using InnovationAdmin.Application.Features.APAccountTypes.Queries.GetAPAccountTypebyId;
+using InnovationAdmin.Application.Features.APAccountTypes.Queries.GetAPAccountTypeList;
+using InnovationAdmin.Application.Features.APAccountTypes.Commands.UpdateAPAccountType;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -185,8 +193,19 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
             CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
 
+            CreateMap<BillingMethodType,CreateBillingMethodTypeDto>().ReverseMap();
+            CreateMap<BillingMethodType, GetBillingMethodTypeByIdVm>().ReverseMap();
+            CreateMap<BillingMethodType, GetBillingMethodTypeListVm>().ReverseMap();
+            CreateMap<BillingMethodType, UpdateBillingMethodTypeCommand>().ReverseMap();
+            CreateMap<BillingMethodType, CreateBillingMethodTypeCommand>().ReverseMap();
+            CreateMap<BillingMethodType, UpdateBillingMethodTypeCommandDto>().ReverseMap();
 
-
+            CreateMap<APAccountType, CreateAPAccountTypeDto>().ReverseMap();
+            CreateMap<APAccountType, GetAPAccountTypebyIdVm>().ReverseMap();
+            CreateMap<APAccountType, GetAPAccountTypeListVm>().ReverseMap();
+            CreateMap<APAccountType, UpdateAPAccountTypeCommand>().ReverseMap();
+            CreateMap<APAccountType, CreateAPAccountTypeCommand>().ReverseMap();
+            CreateMap<APAccountType, UpdateAPAccountTypeCommandDto>().ReverseMap();
 
             CreateMap<Templates, CreateTemplateDto>().ReverseMap();
             CreateMap<Templates, UpdateTemplateDto>().ReverseMap();

@@ -46,6 +46,10 @@ namespace InnovationAdmin.Persistence
         public DbSet<SysPrefFinancial> SysPrefFinancials { get; set; }
         public DbSet<DataSource> DataSources { get; set; }
 
+        public DbSet<BillingMethodType> BillingMethodTypes { get; set; }
+
+        public DbSet<APAccountType> APAccountTypes { get; set; }
+
         public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
 
         public DbSet<Templates> Templates { get; set; }

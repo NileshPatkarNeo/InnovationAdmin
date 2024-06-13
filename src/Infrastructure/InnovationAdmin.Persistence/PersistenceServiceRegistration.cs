@@ -30,6 +30,8 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IQuotesRepository, QuotesRepository>();
 
             services.AddScoped<IDataSourceRepository, DataSourceRepository>();
+            services.AddScoped<IBillingMethodTypeRepository, BillingMethodTypeRepository>();
+            services.AddScoped<IAPAccountTypeRepository, APAccountTypeRepository>();
 
             services.AddScoped<ITemplateRepository, TemplateRepository>();
 

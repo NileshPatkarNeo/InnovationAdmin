@@ -21,6 +21,8 @@ using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.Template;
 using Microsoft.AspNetCore.Hosting;
 using Innovation_Admin.UI.Services.Repositories;
+using Innovation_Admin.UI.Models.BillingMethodType;
+using Innovation_Admin.UI.Models.APAccountType;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -1010,6 +1012,171 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+        #region BillingMethodType
+
+        public async Task<IActionResult> BillingMethodType()
+        {
+            var getAllBillingMethodType = await _common.GetAllBillingMethodType();
+            return View(getAllBillingMethodType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateBillingMethodType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateBillingMethodType(CreateBillingMethodTypeDto billing)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(billing);
+            }
+            var result = await _common.CreateBillingMethodType(billing);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditBillingMethodType(string id)
+        {
+            var billingMethodType = await _common.GetBillingMethodTypeById(Guid.Parse(id));
+            return View(billingMethodType.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBillingMethodType(BillingMethodTypeDto updatedBillingMethodType)
+        {
+            var result = await _common.UpdateBillingMethodType(updatedBillingMethodType);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBillingMethodType(Guid billingMethodTypeId)
+        {
+            var isDeleted = await _common.DeleteBillingMethodType(billingMethodTypeId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+
+        #region APAccountType
+
+        public async Task<IActionResult> APAccountType()
+        {
+            var getAllAPAccountType = await _common.GetAllAPAccountType();
+            return View(getAllAPAccountType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateAPAccountType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateAPAccountType(CreateAPAccountTypeDto apaccount)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(apaccount);
+            }
+            var result = await _common.CreateAPAccountType(apaccount);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAPAccountType(string id)
+        {
+            var dataSource = await _common.GetAPAccountTypeById(Guid.Parse(id));
+            return View(dataSource.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAPAccountType(APAccountTypeDto updatedaccount)
+        {
+            var result = await _common.UpdateAPAccountType(updatedaccount);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAPAccountType(Guid accountId)
+        {
+            var isDeleted = await _common.DeleteAPAccountType(accountId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
         #region Templates
 
         public async Task<IActionResult> Templates()
