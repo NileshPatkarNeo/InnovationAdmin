@@ -122,7 +122,7 @@
         ]
     });
 
-    function confirmDelete(roleId) {
+    function confirmDelete(quoteId) {
         Swal.fire({
             title: 'Are you sure to Delete?',
             text: "You won't be able to revert this!",
@@ -136,7 +136,7 @@
                 $.ajax({
                     url: '/Common/DeleteQuote',
                     type: 'POST',
-                    data: { quoteId: roleId },
+                    data: { quoteId: quoteId },
                     success: function (response) {
                         if (response.success) {
                             Swal.fire(

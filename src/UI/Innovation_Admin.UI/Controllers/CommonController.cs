@@ -18,22 +18,30 @@ using Innovation_Admin.UI.Models.Quote;
 using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.Template;
+using Microsoft.AspNetCore.Hosting;
+using Innovation_Admin.UI.Services.Repositories;
+using Innovation_Admin.UI.Models.BillingMethodType;
+using Innovation_Admin.UI.Models.APAccountType;
 using Innovation_Admin.UI.Models.CorrespondenceNote;
 
 namespace Innovation_Admin.UI.Controllers
 {
 
-   //  [AuthFilter]
+    //  [AuthFilter]
     public class CommonController : Controller
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         private readonly CommonCall.Common _common;
         private readonly IAuthenticationService _authenticationService;
 
 
-        public CommonController(CommonCall.Common common, IAuthenticationService authenticationService) {
+        public CommonController(CommonCall.Common common, IAuthenticationService authenticationService, IWebHostEnvironment webHostEnvironment) {
 
             _common = common;
             _authenticationService = authenticationService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
@@ -78,10 +86,10 @@ namespace Innovation_Admin.UI.Controllers
                 }
                 return RedirectToAction("SysPrefCompany");
             }
-           return RedirectToAction("SysPrefCompany");
+            return RedirectToAction("SysPrefCompany");
         }
 
-          
+
         [HttpGet]
         public async Task<IActionResult> EditSysPrefCompany([FromQuery] string companyId)
         {
@@ -101,7 +109,7 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteSysPrefCompany(Guid companyId)
         {
             var isDeleted = await _common.DeleteSysPrefCompany(companyId);
-         return RedirectToAction("SysPrefCompany");
+            return RedirectToAction("SysPrefCompany");
         }
 
         #endregion
@@ -166,7 +174,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin);  
+                return View(updatedAdmin);
             }
 
             return RedirectToAction("AdminUser");
@@ -244,7 +252,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdminRole);  
+                return View(updatedAdminRole);
             }
 
             return RedirectToAction("AdminRole");
@@ -271,7 +279,7 @@ namespace Innovation_Admin.UI.Controllers
             var getAllSysPrefCompanies = await _common.GetAllSysPrefBehaviouries();
             return View(getAllSysPrefCompanies);
         }
-                
+
 
         [HttpGet]
         public IActionResult CreateSysPrefGeneralBehaviour()
@@ -284,11 +292,11 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                
+
                 return View(company);
             }
             var result = await _common.CreateSysPrefGeneralBehaviour(company);
-                return RedirectToAction("SysPrefGeneralBehaviour");
+            return RedirectToAction("SysPrefGeneralBehaviour");
         }
 
         [HttpGet]
@@ -333,7 +341,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedCompany);  
+                return View(updatedCompany);
             }
 
             var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
@@ -341,7 +349,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedCompany);  
+                return View(updatedCompany);
             }
 
             return RedirectToAction("SysPrefGeneralBehaviour");
@@ -384,7 +392,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(group); 
+                return View(group);
             }
             var result = await _common.CreatePharmacyGroup(group);
             if (!result.IsSuccess)
@@ -402,10 +410,10 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("PharmacyGroups");
         }
 
-        
+
 
         [HttpGet]
-        public async Task<IActionResult> EditPharmacyGroup( string Id)
+        public async Task<IActionResult> EditPharmacyGroup(string Id)
         {
             if (string.IsNullOrEmpty(Id) || !Guid.TryParse(Id, out Guid prefId))
             {
@@ -427,7 +435,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedgroup); 
+                return View(updatedgroup);
             }
 
             var result = await _common.UpdatePharmacyGroup(updatedgroup);
@@ -435,7 +443,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedgroup); 
+                return View(updatedgroup);
             }
 
             return RedirectToAction("PharmacyGroups");
@@ -459,7 +467,7 @@ namespace Innovation_Admin.UI.Controllers
         #endregion
 
 
-        
+
         #region Account_Manager
 
         [HttpGet]
@@ -478,14 +486,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> CreateAccountManager(AccountManagerDto manager)
         {
             var result = await _common.CreateAccountManager(manager);
-           
+
             return RedirectToAction("GetAllAccountManagers");
         }
 
 
 
         [HttpGet]
-        public async Task<IActionResult> EditAccountManager( string Id)
+        public async Task<IActionResult> EditAccountManager(string Id)
         {
             var accountManager = await _common.GetAccountManagerById(Guid.Parse(Id));
             return View(accountManager.Data);
@@ -570,7 +578,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefFinancial");
         }
 
-         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> DetailsSysPrefFinancial(Guid financialID)
         {
             if (financialID == Guid.Empty)
@@ -657,7 +665,7 @@ namespace Innovation_Admin.UI.Controllers
             if (!result.IsSuccess)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin); 
+                return View(updatedAdmin);
             }
 
             return RedirectToAction("SysPrefSecurityEmail");
@@ -746,15 +754,14 @@ namespace Innovation_Admin.UI.Controllers
         {
             var isDeleted = await _common.DeleteQuote(quoteId);
 
-            if (!isDeleted)
+            if (isDeleted)
             {
-                ModelState.AddModelError(string.Empty, "Failed to delete the quote.");
+                return Json(new { Success = true });
             }
             else
             {
                 return Json(new { success = false, message = "Failed to delete the admin role." });
             }
-            return RedirectToAction("Quotes");
         }
 
         #endregion
@@ -839,7 +846,7 @@ namespace Innovation_Admin.UI.Controllers
             }
 
             return RedirectToAction("RemittanceTypes");
-            
+
         }
 
         [HttpPost]
@@ -891,7 +898,7 @@ namespace Innovation_Admin.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> EditReceiptBatchSource( string Id)
+        public async Task<IActionResult> EditReceiptBatchSource(string Id)
         {
             var receiptBatchSource = await _common.GetReceiptBatchSourceById(Guid.Parse(Id));
             return View(receiptBatchSource.Data);
@@ -925,7 +932,7 @@ namespace Innovation_Admin.UI.Controllers
         #endregion
 
         #region DataSources
-   
+
         public async Task<IActionResult> DataSource()
         {
             var getAllDataSource = await _common.GetAllDataSource();
@@ -1007,6 +1014,286 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+        #region BillingMethodType
+
+        public async Task<IActionResult> BillingMethodType()
+        {
+            var getAllBillingMethodType = await _common.GetAllBillingMethodType();
+            return View(getAllBillingMethodType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateBillingMethodType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateBillingMethodType(CreateBillingMethodTypeDto billing)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(billing);
+            }
+            var result = await _common.CreateBillingMethodType(billing);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditBillingMethodType(string id)
+        {
+            var billingMethodType = await _common.GetBillingMethodTypeById(Guid.Parse(id));
+            return View(billingMethodType.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBillingMethodType(BillingMethodTypeDto updatedBillingMethodType)
+        {
+            var result = await _common.UpdateBillingMethodType(updatedBillingMethodType);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBillingMethodType(Guid billingMethodTypeId)
+        {
+            var isDeleted = await _common.DeleteBillingMethodType(billingMethodTypeId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+
+        #region APAccountType
+
+        public async Task<IActionResult> APAccountType()
+        {
+            var getAllAPAccountType = await _common.GetAllAPAccountType();
+            return View(getAllAPAccountType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateAPAccountType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateAPAccountType(CreateAPAccountTypeDto apaccount)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(apaccount);
+            }
+            var result = await _common.CreateAPAccountType(apaccount);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAPAccountType(string id)
+        {
+            var dataSource = await _common.GetAPAccountTypeById(Guid.Parse(id));
+            return View(dataSource.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAPAccountType(APAccountTypeDto updatedaccount)
+        {
+            var result = await _common.UpdateAPAccountType(updatedaccount);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAPAccountType(Guid accountId)
+        {
+            var isDeleted = await _common.DeleteAPAccountType(accountId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+        #region Templates
+
+        public async Task<IActionResult> Templates()
+        {
+            var getAllTemplates = await _common.GetAllTemplates();
+            return View(getAllTemplates);
+        }
+
+        [HttpGet]
+        public IActionResult CreateTemplate()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateTemplate(CreateTemplateDto template)
+        {
+            if (ModelState.IsValid)
+            {
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(template.PdfFile.FileName)}";
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", fileName);
+                long fileSizeInBytes = template.PdfFile.Length;
+                double fileSizeInKB = (double)fileSizeInBytes / 1024;
+                template.Size = fileSizeInKB.ToString("0.00") + " KB";
+
+
+                template.PdfTemplateFile = "Files/" + fileName;
+
+                var response = await _common.CreateTemplate(template);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await template.PdfFile.CopyToAsync(fileStream);
+                }
+                TempData["Message"] = "Successfully Added";
+
+                return RedirectToAction("Templates");
+            }
+            else
+                ModelState.AddModelError("", "Oops! Some error occured.");
+
+            return View(template);
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditTemplate(Guid templateId)
+        {
+            var template = await _common.GetTemplateById(templateId);
+            return View(template.Data);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditTemplate(TemplateDto updatedTemplate)
+        {
+            if (ModelState.IsValid)
+            {
+                if (updatedTemplate.PdfFile != null && updatedTemplate.PdfFile.Length > 0)
+                {
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(updatedTemplate.PdfFile.FileName)}";
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", fileName);
+                    long fileSizeInBytes = updatedTemplate.PdfFile.Length;
+                    double fileSizeInKB = (double)fileSizeInBytes / 1024;
+                    updatedTemplate.Size = fileSizeInKB.ToString("0.00") + " KB";
+
+                    updatedTemplate.PdfTemplateFile = "Files/" + fileName;
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await updatedTemplate.PdfFile.CopyToAsync(fileStream);
+                    }
+                }
+                else
+                {
+                    updatedTemplate.PdfTemplateFile = GetExistingPdfFilePath(updatedTemplate.ID);
+                }
+
+                
+                var response = await _common.UpdateTemplate(updatedTemplate);
+                TempData["Message"] = " Updated Successfully";
+
+                return RedirectToAction("Templates");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Oops! Some error occured.");
+            }
+
+            return View(updatedTemplate);
+        }
+
+        private string GetExistingPdfFilePath(Guid templateId)
+        {
+            var template = _common.GetTemplateById(templateId).Result.Data;
+            return template?.PdfTemplateFile ?? string.Empty;
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTemplate(Guid templateId)
+        {
+            var isDeleted = await _common.DeleteTemplate(templateId);
+
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+
+
+        #endregion
 
         #region CorrespondenceNote
 
