@@ -46,6 +46,7 @@ builder.Services.AddScoped<IReceiptBatchSource, ReceiptBatchSource>();
 builder.Services.AddScoped<ITemplates, Templates>();
 
 
+
 builder.Services.AddScoped<ICorrespondenceNote, CorrespondenceNotes>();
 
 
