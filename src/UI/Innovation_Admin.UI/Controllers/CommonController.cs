@@ -1388,13 +1388,17 @@ namespace Innovation_Admin.UI.Controllers
             }
         }
 
+        #endregion
+
+
         #region DoNotTakeGroup
         [HttpGet]
         public async Task<IActionResult> DoNotTakeGroup()
         {
             var getAllDoNotTakeGroup = await _common.GetAllDoNotTakeGroups();
-            return View(DoNotTakeGroup);
+            return View(getAllDoNotTakeGroup);
         }
+
 
         [HttpGet]
         public IActionResult CreateDoNotTakeGroup()
@@ -1409,7 +1413,7 @@ namespace Innovation_Admin.UI.Controllers
             if (result.Message == null)
             {
                 TempData["Message"] = "Successfully Added";
-                return RedirectToAction("ReceiptBatchSource");
+                return RedirectToAction("DoNotTakeGroup");
 
             }
             else if (result.Message != "Failed to add Receipt BAtch.")
@@ -1427,6 +1431,8 @@ namespace Innovation_Admin.UI.Controllers
             var doNotTakeGroup = await _common.GetDoNoTakeGroupById(Guid.Parse(Id));
             return View(doNotTakeGroup.Data);
         }
+
+       
 
         [HttpPost]
         public async Task<IActionResult> EditDoNotTakeGroup(DoNotTakeGroupDto updatedgroup)
@@ -1454,7 +1460,7 @@ namespace Innovation_Admin.UI.Controllers
         }
         #endregion
 
-        #endregion
+    
 
     }
 }

@@ -1,10 +1,11 @@
 ﻿
 
+using InnovationAdmin.Domain.Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace InnovationAdmin.Domain.Entities
 {
-    public class DoNotTakeGroup
+    public class DoNotTakeGroup : AuditableEntity
     {
         [Key]
         public Guid Id { get; set; }

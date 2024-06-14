@@ -1,0 +1,173 @@
+﻿@model Innovation_Admin.UI.Models.DoNotTakeGroup.DoNotTakeGroupDto
+
+@{
+    ViewData["Title"] = "CreateDoNotTakeGroup";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    .container {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        height: auto;
+    }
+
+    .form-container {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin-top: 50px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        font-weight: 700;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .test {
+        width: 48%;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+</style>
+
+<body>
+    <h1>Create Group</h1>
+    <div class="container">
+        <div class="form-container col-md-6">
+            <form id="createGroupForm" asp-action="CreateDoNotTakeGroup">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="display:none">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GroupCode" class="control-label"></label>
+                    <input id="groupCode" asp-for="GroupCode" class="form-control" maxlength="10" />
+                    <span asp-validation-for="GroupCode" class="text-danger"></span>
+                    <div id="groupCodeError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GroupName" class="control-label"></label>
+                    <input id="groupName" asp-for="GroupName" class="form-control"  maxlength="10"/>
+                    <span asp-validation-for="GroupName" class="text-danger"></span>
+                    <div id="groupNameError" class="error-message"></div>
+                </div>
+
+                <div class="btn-container">
+                    <input type="submit" value="Create" class="btn btn-primary test" />
+                    <a asp-action="DoNotTakeGroup" class="btn btn-secondary test">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('createGroupForm');
+            const groupCodeInput = document.getElementById('groupCode');
+            const groupNameInput = document.getElementById('groupName');
+            const groupCodeError = document.getElementById('groupCodeError');
+            const groupNameError = document.getElementById('groupNameError');
+
+            form.addEventListener('submit', function (event) {
+                let isValid = true;
+
+                // Clear previous error messages
+                groupCodeError.innerText = '';
+                groupNameError.innerText = '';
+
+                // Validate Group Code
+                const groupCodeValue = groupCodeInput.value.trim();
+                if (groupCodeValue === '') {
+                    groupCodeError.innerText = 'Group Code is required.';
+                    isValid = false;
+                } else if (isNaN(groupCodeValue) || parseFloat(groupCodeValue) <= 0) {
+                    groupCodeError.innerText = 'Group Code must be a positive number.';
+                    isValid = false;
+                } else if (groupCodeValue.length > 9) {
+                    groupCodeError.innerText = 'Group Code cannot exceed 9 characters.';
+                    isValid = false;
+                }
+
+                // Validate Group Name
+                const groupNameValue = groupNameInput.value.trim();
+                if (groupNameValue === '') {
+                    groupNameError.innerText = 'Group Name is required.';
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+
+            // Event listener for Group Code input
+            groupCodeInput.addEventListener('focusout', function () {
+                validateGroupCode();
+            });
+
+            groupCodeInput.addEventListener('input', function () {
+                const groupCodeValue = groupCodeInput.value.trim();
+                if (groupCodeValue !== '' && !isNaN(groupCodeValue) && parseFloat(groupCodeValue) > 0 && groupCodeValue.length <= 9) {
+                    groupCodeError.innerText = '';
+                } else if (groupCodeValue.length > 9) {
+                    groupCodeError.innerText = 'Group Code cannot exceed 9 characters.';
+                }
+            });
+
+            // Event listener for Group Name input
+            groupNameInput.addEventListener('focusout', function () {
+                validateGroupName();
+            });
+
+            groupNameInput.addEventListener('input', function () {
+                const groupNameValue = groupNameInput.value.trim();
+                if (groupNameValue !== '') {
+                    groupNameError.innerText = '';
+                }
+            });
+
+            function validateGroupCode() {
+                const groupCodeValue = groupCodeInput.value.trim();
+                if (groupCodeValue === '') {
+                    groupCodeError.innerText = 'Group Code is required.';
+                } else if (isNaN(groupCodeValue) || parseFloat(groupCodeValue) <= 0) {
+                    groupCodeError.innerText = 'Group Code must be a positive number.';
+                } else if (groupCodeValue.length > 9) {
+                    groupCodeError.innerText = 'Group Code cannot exceed 9 characters.';
+                } else {
+                    groupCodeError.innerText = '';
+                }
+            }
+
+            function validateGroupName() {
+                const groupNameValue = groupNameInput.value.trim();
+                if (groupNameValue === '') {
+                    groupNameError.innerText = 'Group Name is required.';
+                } else {
+                    groupNameError.innerText = '';
+                }
+            }
+        });
+    </script>

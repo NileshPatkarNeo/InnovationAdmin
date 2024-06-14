@@ -18,12 +18,14 @@ namespace Innovation_Admin.UI.Services.Repositories
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-        public DoNotTakeGroup(IOptions<ApiBaseUrl> apiBaseUrl)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public DoNotTakeGroup(IOptions<ApiBaseUrl> apiBaseUrl, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
-
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
         public async Task<GetAllDoNotTakeGroupResponseModel> GetAllDoNotTakeGroup()
         {
             GetAllDoNotTakeGroupResponseModel response = new GetAllDoNotTakeGroupResponseModel();
@@ -52,13 +54,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(Group);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateDoNotTakeGroup,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+              _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -86,13 +89,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedgroup);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.UpdateDoNotTakeGroup.Replace("{id}", updatedgroup.Id.ToString()),
+                    URLHelper.UpdateDoNotTakeGroup,
                     HttpMethod.Put,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
