@@ -174,8 +174,8 @@ namespace Innovation_Admin.UI.Helper
 
         public const string CreateDoNotTakeGroup = "/api/DoNotTakeGroup?api-version=1";
 
-        public const string UpdateDoNotTakeGroup = "/api/DoNotTakeGroup/{id}?api-version=1";
-
+        public const string UpdateDoNotTakeGroup = "/api/DoNotTakeGroup/?api-version=1";
+        
         public const string DeleteDoNotTakeGroup = "/api/DoNotTakeGroup/{id}?api-version=1";
 
         #endregion

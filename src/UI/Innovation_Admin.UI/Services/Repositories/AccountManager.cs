@@ -17,14 +17,15 @@ namespace Innovation_Admin.UI.Services.Repositories
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-
-        public AccountManager(IOptions<ApiBaseUrl> apiBaseUrl, IConfiguration configuration)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AccountManager(IOptions<ApiBaseUrl> apiBaseUrl, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _configuration = configuration;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
-
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
         public async Task<GetAllAccountManagerResponseModel> GetAllAccountManagers()
         {
             GetAllAccountManagerResponseModel response = new GetAllAccountManagerResponseModel();
@@ -33,7 +34,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 _oApiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.GetAllAccountManagers, // Define the correct URL in URLHelper
+                    URLHelper.GetAllAccountManagers,  
                     HttpMethod.Get,
                     null,
                     _sToken);
@@ -66,13 +67,15 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(manager);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
+
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateAccountManager,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -84,7 +87,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = ex.Message; // Ideally, log this exception
+                response.Message = ex.Message;  
             }
 
             return response;
@@ -101,13 +104,15 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(manager);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
+
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
-                    URLHelper.UpdateAccountManager.Replace("{id}", manager.Id.ToString()), // Define the 
-                    HttpMethod.Put, // Use PUT method for updates
+                    URLHelper.UpdateAccountManager.Replace("{id}", manager.Id.ToString()), 
+                    HttpMethod.Put, 
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -118,7 +123,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = ex.Message; // Ideally, log this exception
+                response.Message = ex.Message;  
             }
 
             return response;
@@ -131,7 +136,7 @@ namespace Innovation_Admin.UI.Services.Repositories
             try
             {
 
-                // Make the API call to fetch the SysPrefCompany by its ID
+                
                 _oApiResponse = await _apiRepository.APICommunication(_apiBaseUrl.Value.InnvoationAdminApiBaseUrl, URLHelper.GetAccountManagerById.Replace("{id}", Id.ToString()), HttpMethod.Get, null, _sToken);
 
                 if (_oApiResponse != null && !string.IsNullOrEmpty(_oApiResponse.data))
@@ -150,9 +155,9 @@ namespace Innovation_Admin.UI.Services.Repositories
             }
             catch (Exception ex)
             {
-                // Handle exception
+                
                 response.IsSuccess = false;
-                response.Message = ex.Message; // Log this exception
+                response.Message = ex.Message; 
             }
 
             return response;

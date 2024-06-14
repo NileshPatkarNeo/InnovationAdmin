@@ -18,13 +18,17 @@ namespace Innovation_Admin.UI.Services.Repositories
     private string _sToken = string.Empty;
     private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
     private readonly IConfiguration _configuration;
-    public ReceiptBatchSource(IOptions<ApiBaseUrl> apiBaseUrl)
-    {
-        _apiBaseUrl = apiBaseUrl;
-        _apiRepository = new APIRepository(_configuration);
-    }
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ReceiptBatchSource(IOptions<ApiBaseUrl> apiBaseUrl, IHttpContextAccessor httpContextAccessor)
+        {
+            _apiBaseUrl = apiBaseUrl;
+            _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
+        }
 
-    public async Task<GetAllReceiptBatchSourceResponseModel> GetAllReceiptBatchSource()
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
+
+        public async Task<GetAllReceiptBatchSourceResponseModel> GetAllReceiptBatchSource()
     {
             GetAllReceiptBatchSourceResponseModel response = new GetAllReceiptBatchSourceResponseModel();
 
@@ -52,13 +56,14 @@ namespace Innovation_Admin.UI.Services.Repositories
         {
             var jsonContent = JsonConvert.SerializeObject(batch);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
-            var apiResponse = await _apiRepository.APICommunication(
+                var apiResponse = await _apiRepository.APICommunication(
                 _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                 URLHelper.CreateReceiptBatchSource,
                 HttpMethod.Post,
                 content,
-                string.Empty);
+                _sToken);
 
             if (!string.IsNullOrEmpty(apiResponse.data))
             {
@@ -86,13 +91,14 @@ namespace Innovation_Admin.UI.Services.Repositories
         {
             var jsonContent = JsonConvert.SerializeObject(updatedBatch);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
-            var apiResponse = await _apiRepository.APICommunication(
+                var apiResponse = await _apiRepository.APICommunication(
                 _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                 URLHelper.UpdateReceiptBatchSource.Replace("{id}", updatedBatch.Id.ToString()), 
                 HttpMethod.Put, 
                 content,
-                string.Empty);
+                _sToken);
 
             if (!string.IsNullOrEmpty(apiResponse.data))
             {

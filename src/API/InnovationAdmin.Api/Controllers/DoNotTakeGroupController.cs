@@ -35,7 +35,7 @@ namespace InnovationAdmin.Api.Controllers
         }
 
 
-        [HttpGet("{groupId}")]
+        [HttpGet("{Id}")]
         public async Task<IActionResult> GetDoNotTakeGroupById(Guid Id)
         {
             var query = new GetDoNotTakeGroupByIdQuery(Id);
