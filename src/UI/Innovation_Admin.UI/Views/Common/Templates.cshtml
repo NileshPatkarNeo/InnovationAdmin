@@ -7,6 +7,7 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         h1.text-center {
             margin-bottom: 20px;
@@ -49,6 +50,23 @@
             .add-button-container a {
                 margin-right: 10px;
             }
+
+        .pdf-icon {
+            margin-right: 5px;
+            color: red;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            color: #d9534f;
+            text-decoration: none;
+        }
+
+            .pdf-link:hover {
+                text-decoration: underline;
+                color: #c9302c;
+            }
     </style>
 </head>
 
@@ -81,7 +99,18 @@
                 <tr>
                     <td>@serialNumber</td>
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.PdfTemplateFile)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.PdfTemplateFile))
+                        {
+                            <a href="@Url.Content("~/" + item.PdfTemplateFile)" target="_blank" class="pdf-link">
+                                <i class="fa fa-file-pdf pdf-icon"></i> View PDF
+                            </a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.PdfTemplateFile)
+                        }
+                    </td>
                     <td>@Html.DisplayFor(modelItem => item.Domain)</td>
                     <td>@Html.DisplayFor(modelItem => item.Size)</td>
                     <td>

@@ -48,6 +48,7 @@ builder.Services.AddScoped<ITemplates, Templates>();
 
 builder.Services.AddScoped<ICorrespondenceNote, CorrespondenceNotes>();
 
+
 builder.Services.AddScoped<Common>();
 
 

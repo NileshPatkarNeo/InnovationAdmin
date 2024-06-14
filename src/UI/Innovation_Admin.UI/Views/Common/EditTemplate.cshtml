@@ -78,7 +78,7 @@
                     <div>
                         @if (!string.IsNullOrEmpty(Model.PdfTemplateFile))
                         {
-                            <p>Current File: @Model.PdfTemplateFile</p>
+                            <p>Current File:<br /> @Model.PdfTemplateFile</p>
                             <input type="checkbox" id="keepCurrentPdf" name="keepCurrentPdf" value="true" checked>
                             <label for="keepCurrentPdf">Keep current PDF</label>
                         }

@@ -19,14 +19,17 @@ namespace Innovation_Admin.UI.Services.Repositories
     public class Templates : ITemplates
     {
         private readonly APIRepository _apiRepository;
-        private readonly string _sToken = string.Empty;
+        private  string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public Templates(IOptions<ApiBaseUrl> apiBaseUrl, IConfiguration configuration)
+        public Templates(IOptions<ApiBaseUrl> apiBaseUrl, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
 
         public async Task<GetAllTemplatesResponseModel> GetAllTemplates()
         {
@@ -51,13 +54,13 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(newTemplate);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
+                _sToken = Session?.GetString("Token")?.ToString();
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateTemplate,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -83,13 +86,15 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedTemplate);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
+
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.UpdateTemplate.Replace("{id}", updatedTemplate.ID.ToString()), // Define the correct URL with ID
                     HttpMethod.Put, // Use PUT method for updates
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
