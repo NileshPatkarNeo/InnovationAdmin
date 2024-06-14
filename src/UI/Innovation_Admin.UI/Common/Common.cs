@@ -55,10 +55,7 @@ namespace Innovation_Admin.UI.Common
         private readonly ITemplates templates;
         private readonly IBillingMethodTypes billingMethodTypes;
         private readonly IAPAccountTypes aPAccountTypes;
-       
 
-        
-      
         public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates)
 
         {
