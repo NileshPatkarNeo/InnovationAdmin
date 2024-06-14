@@ -14,16 +14,22 @@ namespace Innovation_Admin.UI.Services.Repositories
     {
         private readonly APIRepository _apiRepository;
         private Response<string> _oApiResponse;
-        private readonly string _sToken = string.Empty;
+        private  string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SysPrefFinancials(IOptions<ApiBaseUrl> apiBaseUrl, IConfiguration configuration)
+
+
+
+        public SysPrefFinancials(IOptions<ApiBaseUrl> apiBaseUrl, IConfiguration configuration , IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _configuration = configuration;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
 
         public async Task<GetAllSysPrefFinancialResponseModel> GetAllSysPrefFinancials()
         {
@@ -50,13 +56,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(newSysPrefFinancial);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateSysPrefFinancial,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -82,13 +89,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedSysPrefFinancial);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.UpdateSysPrefFinancial.Replace("{id}", updatedSysPrefFinancial.FinancialID.ToString()), 
                     HttpMethod.Put,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
