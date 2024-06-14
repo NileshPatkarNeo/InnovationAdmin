@@ -4,11 +4,6 @@ using InnovationAdmin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace InnovationAdmin.Persistence
 {
     
@@ -53,6 +48,11 @@ namespace InnovationAdmin.Persistence
         public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
 
         public DbSet<Templates> Templates { get; set; }
+
+        public DbSet<CorrespondenceNotes> CorrespondenceNotes { get; set; }
+
+
+        public DbSet<DoNotTakeGroup> doNotTakeGroups { get; set; }
 
         private IDbContextTransaction _transaction;
 

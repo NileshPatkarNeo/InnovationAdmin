@@ -38,6 +38,8 @@ namespace Innovation_Admin.UI.Controllers
                 return View(request);
             }
             HttpContext.Session.SetString("Token", response.Token);
+            HttpContext.Session.SetString("UserId", response.ID);
+
 
             return RedirectToAction("HomePage", "Common");
         }

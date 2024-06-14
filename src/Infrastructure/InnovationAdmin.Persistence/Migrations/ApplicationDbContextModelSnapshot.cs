@@ -182,6 +182,34 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.ToTable("BillingMethodTypes");
                 });
 
+            modelBuilder.Entity("InnovationAdmin.Domain.Entities.CorrespondenceNotes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CorrespondenceNotes");
+                });
+
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.DataSource", b =>
                 {
                     b.Property<Guid>("ID")
@@ -208,6 +236,26 @@ namespace InnovationAdmin.Persistence.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("DataSources");
+                });
+
+            modelBuilder.Entity("InnovationAdmin.Domain.Entities.DoNotTakeGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("GroupCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("int");
+
+                    b.Property<string>("GroupName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("doNotTakeGroups");
                 });
 
             modelBuilder.Entity("InnovationAdmin.Domain.Entities.Message", b =>

@@ -152,6 +152,7 @@ namespace Innovation_Admin.UI.Helper
         public const string DeleteRemittanceType = "/api/RemittanceType/{id}?api-version=1";
 
         #endregion
+
         #region DataSource
         public const string GetAllDataSource = "/api/DataSource/all?api-version=1";
 
@@ -162,6 +163,20 @@ namespace Innovation_Admin.UI.Helper
 
         public const string DeleteDataSource = "/api/DataSource/{id}?api-version=1";
 
+
+        #endregion
+
+        #region DoNotTakeGroup
+
+        public const string GetAllDoNotTakeGroup = "/api/DoNotTakeGroup?api-version=1";
+
+        public const string GetDoNotTakeGroupByID = "/api/DoNotTakeGroup/{id}?api-version=1";
+
+        public const string CreateDoNotTakeGroup = "/api/DoNotTakeGroup?api-version=1";
+
+        public const string UpdateDoNotTakeGroup = "/api/DoNotTakeGroup/{id}?api-version=1";
+
+        public const string DeleteDoNotTakeGroup = "/api/DoNotTakeGroup/{id}?api-version=1";
 
         #endregion
 
@@ -196,6 +211,20 @@ namespace Innovation_Admin.UI.Helper
             public static string GetTemplateById = "/api/Template/{id}?api-version=1";
             public static string DeleteTemplate = "/api/Template/{id}?api-version=1";
        
+
+        #region CorrespondenceNotes
+
+        public const string GetAllCorrespondenceNote = "/api/CorrespondenceNotes/all?api-version=1";
+
+        public const string CreateCorrespondenceNote = "/api/CorrespondenceNotes?api-version=1";
+
+        public const string UpdateCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string GetCorrespondenceNoteById = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string DeleteCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        #endregion
 
 
         #endregion

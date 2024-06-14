@@ -8,7 +8,6 @@ using CommonCall = Innovation_Admin.UI.Common;
 using Innovation_Admin.UI.Services.IRepositories;
 using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.PharmacyGroup;
-using System.Reflection;
 
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
@@ -23,6 +22,8 @@ using Microsoft.AspNetCore.Hosting;
 using Innovation_Admin.UI.Services.Repositories;
 using Innovation_Admin.UI.Models.BillingMethodType;
 using Innovation_Admin.UI.Models.APAccountType;
+using Innovation_Admin.UI.Models.CorrespondenceNote;
+using Innovation_Admin.UI.Models.DoNotTakeGroup;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -72,17 +73,20 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefCompany(SysPrefCompanyDto company)
         {
+            string UserId = HttpContext.Session.GetString("UserId");
+
+            if (string.IsNullOrEmpty(UserId))
+            {
+                ModelState.AddModelError(string.Empty, "User ID is not found in session.");
+                return RedirectToAction("SysPrefCompany");
+            }
+
+
             var result = await _common.CreateSysPrefCompany(company);
+
             if (!result.IsSuccess)
             {
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
+                ModelState.AddModelError(string.Empty, result.Message ?? "An error occurred while creating the SysPrefCompany.");
                 return RedirectToAction("SysPrefCompany");
             }
             return RedirectToAction("SysPrefCompany");
@@ -608,6 +612,8 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+
+
         #region SysPrefSecurityEmail
         public async Task<IActionResult> SysPrefSecurityEmail()
         {
@@ -684,6 +690,8 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
+
 
         #region Quotes
 
@@ -764,6 +772,8 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
+
         #region RemittanceType
 
         [HttpGet]
@@ -928,6 +938,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
 
         #region DataSources
 
@@ -1095,6 +1106,7 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+
         #region APAccountType
 
         public async Task<IActionResult> APAccountType()
@@ -1177,6 +1189,8 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
+
         #region Templates
 
         public async Task<IActionResult> Templates()
@@ -1293,11 +1307,159 @@ namespace Innovation_Admin.UI.Controllers
 
         #endregion
 
+        #region CorrespondenceNote
+
+        [HttpGet]
+        public async Task<IActionResult> CorrespondenceNotes()
+        {
+            var getAllNote = await _common.GetAllCorrespondenceNotes();
+            return View(getAllNote);
+        }
+
+        [HttpGet]
+        public IActionResult CreateCorrespondenceNote()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCorrespondenceNote(CreateCorrespondenceNoteDto noteModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(noteModel);
+            }
+            var result = await _common.CreateCorrespondenceNote(noteModel);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("CorrespondenceNotes");
+
+            }
+            else if (result.Message == "Failed to add type.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CorrespondenceNotes");
+            }
+            return RedirectToAction("CorrespondenceNotes");
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCorrespondenceNote( string Id)
+        {
+            var sysPrefCompany = await _common.GetCorrespondenceNoteById(Guid.Parse(Id));
+            return View(sysPrefCompany.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCorrespondenceNote(CorrespondenceNoteDto updatedNote)
+        {
+           var result = await _common.UpdateCorrespondenceNote(updatedNote);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("CorrespondenceNotes");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CorrespondenceNotes");
+            }
+            return RedirectToAction("CorrespondenceNotes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCorrespondenceNote(Guid noteId)
+        {
+            var isDeleted = await _common.DeleteCorrespondenceNote(noteId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #region DoNotTakeGroup
+        [HttpGet]
+        public async Task<IActionResult> DoNotTakeGroup()
+        {
+            var getAllDoNotTakeGroup = await _common.GetAllDoNotTakeGroups();
+            return View(DoNotTakeGroup);
+        }
+
+        [HttpGet]
+        public IActionResult CreateDoNotTakeGroup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDoNotTakeGroup(DoNotTakeGroupDto group)
+        {
+            var result = await _common.CreateDoNotTakeGroup(group);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("ReceiptBatchSource");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DoNotTakeGroup");
+            }
+            return RedirectToAction("DoNotTakeGroup");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditDoNotTakeGroup(string Id)
+        {
+            var doNotTakeGroup = await _common.GetDoNoTakeGroupById(Guid.Parse(Id));
+            return View(doNotTakeGroup.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditDoNotTakeGroup(DoNotTakeGroupDto updatedgroup)
+        {
+            var result = await _common.UpdateDoNotTakeGroup(updatedgroup);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Group updated successfully";
+                return RedirectToAction("DoNotTakeGroup");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DoNotTakeGroup");
+            }
+            return RedirectToAction("DoNotTakeGroup");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDoNotTakeGroup(Guid Id)
+        {
+            var isDeleted = await _common.DeleteDoNotTakeGroup(Id);
+            return RedirectToAction("DoNotTakeGroup");
+        }
+        #endregion
+
+        #endregion
 
     }
 }
     
-
+  
 
  
 

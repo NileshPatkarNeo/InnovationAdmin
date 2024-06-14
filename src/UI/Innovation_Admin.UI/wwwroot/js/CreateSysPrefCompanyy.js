@@ -9,7 +9,7 @@
         return false;
     }
     document.getElementById('companyNameError').innerText = '';
-    return true;
+    return true; 
 }
 
 

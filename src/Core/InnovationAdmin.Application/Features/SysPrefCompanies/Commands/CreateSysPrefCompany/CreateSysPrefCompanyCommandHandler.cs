@@ -38,7 +38,11 @@ namespace InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateS
                 TermForPharmacy = request.TermForPharmacy
             };
 
+            
+            Console.WriteLine($"CreatedBy: {company.CreatedBy}");
+
             company = await _sysPrefCompanyRepository.AddAsync(company);
+
 
             var companyDto = _mapper.Map<CreateSysPrefCompanyDto>(company);
 

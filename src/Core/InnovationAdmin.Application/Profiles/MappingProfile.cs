@@ -62,6 +62,13 @@ using InnovationAdmin.Application.Features.APAccountTypes.Commands.CreateAPAccou
 using InnovationAdmin.Application.Features.APAccountTypes.Queries.GetAPAccountTypebyId;
 using InnovationAdmin.Application.Features.APAccountTypes.Queries.GetAPAccountTypeList;
 using InnovationAdmin.Application.Features.APAccountTypes.Commands.UpdateAPAccountType;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.CreateCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.UpdateCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetCorrespondenceNoteQuery;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllListCorrespondenceNoteQuery;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.CreateDoNotTakeGroup;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Queries.GetDoNotTakeGroupQuery;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTakeGroup;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -183,6 +190,11 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceDto>().ReverseMap();
             CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceCommand>().ReverseMap();
 
+            CreateMap<DoNotTakeGroup, CreateDoNoTakeGroupDto>().ReverseMap();
+            CreateMap<DoNotTakeGroup, DoNotTakeGroupDto>().ReverseMap();
+            CreateMap<DoNotTakeGroup, UpdateDoNotTakeGroupDto>().ReverseMap();  
+            CreateMap<DoNotTakeGroup, UpdateDoNotTakeGroupCommand>().ReverseMap();    
+
 
 
 
@@ -199,6 +211,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<BillingMethodType, UpdateBillingMethodTypeCommand>().ReverseMap();
             CreateMap<BillingMethodType, CreateBillingMethodTypeCommand>().ReverseMap();
             CreateMap<BillingMethodType, UpdateBillingMethodTypeCommandDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CreateCorrespondenceNoteCommand>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CreateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, UpdateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, UpdateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, GetCorrespondenceNoteByIdQuery>().ReverseMap();
+            CreateMap<CorrespondenceNotes, GetAllCorrespondenceNoteQuery>().ReverseMap();
+
 
             CreateMap<APAccountType, CreateAPAccountTypeDto>().ReverseMap();
             CreateMap<APAccountType, GetAPAccountTypebyIdVm>().ReverseMap();
