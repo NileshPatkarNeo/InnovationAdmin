@@ -41,6 +41,8 @@ namespace InnovationAdmin.Persistence
 
             services.AddScoped<IDoNotTakeGroup, DoNotTakeGroupRepopsitory>();
 
+            services.AddScoped<IContractTermsRepository, ContractTermsRepository>();
+
             return services;
         }
     }

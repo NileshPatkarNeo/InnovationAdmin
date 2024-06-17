@@ -54,6 +54,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<DoNotTakeGroup> doNotTakeGroups { get; set; }
 
+        public DbSet<ContractTerms> ContractTerms { get; set; }
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
