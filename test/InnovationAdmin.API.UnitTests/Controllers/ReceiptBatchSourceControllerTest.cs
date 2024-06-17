@@ -3,19 +3,12 @@ using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.CraeateRe
 using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.DeleteReceiptBatchSource;
 using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.UpdateReceiptBatchSource;
 using InnovationAdmin.Application.Features.ReceiptBatchSource.Queries.GetReceiptBatchSourceQuery;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.CreateSysPrefCompany;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.DeleteSysPrefCommand;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Commands.UpdateSysPrefCompany;
-using InnovationAdmin.Application.Features.SysPrefCompanies.Queries.GetSysPrefCompanyQuery;
 using InnovationAdmin.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
