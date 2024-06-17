@@ -45,6 +45,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<APAccountType> APAccountTypes { get; set; }
 
+        public DbSet<CategoryType> CategoryTypes { get; set; }
+
         public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
 
         public DbSet<Templates> Templates { get; set; }
