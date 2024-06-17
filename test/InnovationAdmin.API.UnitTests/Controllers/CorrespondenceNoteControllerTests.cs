@@ -41,7 +41,7 @@ namespace InnovationAdmin.API.UnitTests.Controllers
             Assert.Equal("Correspondence Note cannot be null or empty", badRequestResult.Value);
         }
 
-       [Fact]
+        [Fact]
         public async Task CreateSucceededReturnsOk()
         {
             var command = new CreateCorrespondenceNoteCommand { Note = "Test Note" };
