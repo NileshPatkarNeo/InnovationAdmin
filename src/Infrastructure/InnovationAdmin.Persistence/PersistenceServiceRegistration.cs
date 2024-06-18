@@ -19,8 +19,6 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IAccountManagerRepository, AccountManagerRepository>();
             services.AddScoped<IPharmacyGroupRepository, PharmacyGroupRepository>();
             services.AddScoped<IRemittanceTypeRepository, RemittanceTypeRepository>();
-
-
             services.AddScoped<IAdminUserRepository, AdminUserRepository>();
             services.AddScoped<ISysPrefSecurityEmailRepository,  SysPrefSecurityEmailRepository>();
             services.AddScoped<ISysPrefCompanyRepository, SysPrefCompanyRepository>();
@@ -28,16 +26,21 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<ISysPrefFinancialRepository, SysPrefFinancialRepository>();
             services.AddScoped<IReceiptBatchSourceRepository, ReceiptBatchSourceRepository>();
             services.AddScoped<IQuotesRepository, QuotesRepository>();
-
             services.AddScoped<IDataSourceRepository, DataSourceRepository>();
             services.AddScoped<IBillingMethodTypeRepository, BillingMethodTypeRepository>();
             services.AddScoped<IAPAccountTypeRepository, APAccountTypeRepository>();
+            services.AddScoped<ICategoryTypeRepository, CategoryTypeRepository>();  
 
             services.AddScoped<ITemplateRepository, TemplateRepository>();
             services.AddScoped<ICorrespondenceNotesRepository, CorrespondenceNotesRepository>();
             services.AddScoped<IDoNotTakeGroup, DoNotTakeGroupRepopsitory>();
             services.AddScoped<IPharmacyTypeRepository, PharmacyTypeRepository>();
 
+
+            services.AddScoped<IContractTermsRepository, ContractTermsRepository>();
+            services.AddScoped<ICorrespondenceNotesRepository, CorrespondenceNotesRepository>();
+            services.AddScoped<IDoNotTakeGroup, DoNotTakeGroupRepopsitory>();
+            services.AddScoped<IClaimStatusRepository, ClaimStatusRepository>();
 
             return services;
         }

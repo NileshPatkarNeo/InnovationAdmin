@@ -74,7 +74,12 @@
                     <label asp-for="Domain" class="control-label">
                         Domain <span class="text-danger">*</span>
                     </label>
-                    <input asp-for="Domain" class="form-control" maxlength="51" required id="Domain" onkeypress="return onlyAlphabets(event,this);" />
+                    <select asp-for="Domain" class="form-control" required>
+                        <option value="">-- Select Domain --</option>
+                        <option value="Default">Default</option>
+                        <option value="PAYABLES">PAYABLES</option>
+                        <option value="CLAIMLOADBATCH">CLAIMLOADBATCH</option>
+                    </select>
                     <span asp-validation-for="Domain" class="text-danger"></span>
                     <span class="text-danger" id="Domain_error"></span>
                 </div>

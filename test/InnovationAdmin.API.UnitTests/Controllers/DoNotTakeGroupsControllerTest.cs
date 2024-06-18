@@ -85,7 +85,7 @@ namespace InnovationAdmin.API.UnitTests.Controllers
                 .ReturnsAsync(expectedResult);
             var loggerMock = new Mock<ILogger<DoNotTakeGroupController>>();
             var controller = new DoNotTakeGroupController(mediatorMock.Object, loggerMock.Object);
-            var result = await controller.Update( updateDoNotTakeGroupCommand  ) as OkObjectResult;
+            var result = await controller.Update(id,  updateDoNotTakeGroupCommand  ) as OkObjectResult;
             Assert.NotNull(result);
             Assert.Equal(200, result.StatusCode);
             Assert.Equal(expectedResult, result.Value);

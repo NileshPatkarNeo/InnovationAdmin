@@ -45,6 +45,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<APAccountType> APAccountTypes { get; set; }
 
+        public DbSet<CategoryType> CategoryTypes { get; set; }
+
         public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
 
         public DbSet<Templates> Templates { get; set; }
@@ -56,6 +58,10 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<PharmacyType> PharmacyTypes { get; set; }
 
+
+        public DbSet<ContractTerms> ContractTerms { get; set; }
+
+        public DbSet<ClaimStatus> claimStatuses { get; set; }   
 
         private IDbContextTransaction _transaction;
 

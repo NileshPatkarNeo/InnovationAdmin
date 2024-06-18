@@ -69,6 +69,9 @@ using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllLis
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.CreateDoNotTakeGroup;
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Queries.GetDoNotTakeGroupQuery;
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTakeGroup;
+using InnovationAdmin.Application.Features.ClaimStatus.Commands.CreateClaimStatus;
+using InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatusQuery;
+using InnovationAdmin.Application.Features.ClaimStatus.Commands.UpdateClaimStatus;
 using InnovationAdmin.Application.Features.PharmacyType.Commands.CreatePharmacyType;
 using InnovationAdmin.Application.Features.PharmacyType.Commands.UpdatePharmacyType;
 using InnovationAdmin.Application.Features.PharmacyType.Queries.GetPharmacyTypeQuery;
@@ -244,6 +247,12 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<PharmacyType, PharmacyTypeDto>().ReverseMap();
             CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
             CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
+
+            CreateMap<ClaimStatus, CreateClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, ClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, UpdateClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, UpdateClaimStatusCommand>().ReverseMap();
+
 
         }
     }

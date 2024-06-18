@@ -66,15 +66,26 @@ namespace InnovationAdmin.Api.Controllers
         }
 
 
-        [HttpPut]
-        public async Task<ActionResult> Update([FromBody] UpdateDoNotTakeGroupCommand updateDoNotTakeGroupCommand)
+        //[HttpPut]
+        //public async Task<ActionResult> Update([FromBody] UpdateDoNotTakeGroupCommand updateDoNotTakeGroupCommand)
+        //{
+        //    var response = await _mediator.Send(updateDoNotTakeGroupCommand);
+        //    if (response.Succeeded)
+        //    {
+        //        return Ok(response);
+        //    }
+        //    return BadRequest(response);
+        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateDoNotTakeGroupCommand command)
         {
-            var response = await _mediator.Send(updateDoNotTakeGroupCommand);
-            if (response.Succeeded)
+            // Your update logic here
+            var result = await _mediator.Send(command);
+            if (result.Succeeded)
             {
-                return Ok(response);
+                return Ok(result);
             }
-            return BadRequest(response);
+            return BadRequest(result);
         }
 
         [HttpDelete("{id}", Name = "DeleteDoNotTakeGroup")]
