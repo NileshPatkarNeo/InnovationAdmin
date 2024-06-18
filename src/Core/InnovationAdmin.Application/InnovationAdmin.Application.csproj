@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\PharmacyType\Commands\CreatePharmacyType\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Features\ContractTerm\Commands\CreateContractTerm\" />
     <Folder Include="Features\ContractTerm\Commands\DeleteContractTerm\" />
     <Folder Include="Features\ContractTerm\Commands\UpdateContractTerm\" />

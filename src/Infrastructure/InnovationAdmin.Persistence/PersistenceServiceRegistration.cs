@@ -32,14 +32,13 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IDataSourceRepository, DataSourceRepository>();
             services.AddScoped<IBillingMethodTypeRepository, BillingMethodTypeRepository>();
             services.AddScoped<IAPAccountTypeRepository, APAccountTypeRepository>();
+            services.AddScoped<ICategoryTypeRepository, CategoryTypeRepository>();  
 
             services.AddScoped<ITemplateRepository, TemplateRepository>();
-
-
-
             services.AddScoped<ICorrespondenceNotesRepository, CorrespondenceNotesRepository>();
-
             services.AddScoped<IDoNotTakeGroup, DoNotTakeGroupRepopsitory>();
+            services.AddScoped<IPharmacyTypeRepository, PharmacyTypeRepository>();
+
 
             services.AddScoped<IContractTermsRepository, ContractTermsRepository>();
 

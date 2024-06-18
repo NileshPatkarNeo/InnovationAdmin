@@ -29,6 +29,7 @@ namespace InnovationAdmin.API.UnitTests.Controllers
             _controller = new APAccountTypeController(_mediatorMock.Object, _loggerMock.Object);
         }
 
+
         [Fact]
         public async Task Create_ReturnsOk_WhenRequestIsValid()
         {

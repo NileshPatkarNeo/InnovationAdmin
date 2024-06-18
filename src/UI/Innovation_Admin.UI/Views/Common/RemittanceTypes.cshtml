@@ -45,6 +45,12 @@
         .btn-sort {
             margin-left: 10px;
         }
+
+        body{
+            margin: 0px;
+        }
+
+        
     </style>
 </head>
 <div class="add-div">
@@ -52,6 +58,7 @@
         <a asp-action="CreateRemittanceType" class="btn btn-primary float-end"><i class="bi bi-plus-circle"></i> Add</a>
     </p>
 </div>
+<body>
 <table class="table table-striped" id="remittanceType">
     <thead>
         <tr>
@@ -83,7 +90,8 @@
             serialNumber++;
         }
     </tbody>
-</table>
+</table>'
+</body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
