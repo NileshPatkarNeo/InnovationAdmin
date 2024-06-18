@@ -6,7 +6,7 @@ namespace InnovationAdmin.Domain.Entities
     public class ContractTerms : AuditableEntity
     {
         [Key]
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
         [MaxLength(100)]
