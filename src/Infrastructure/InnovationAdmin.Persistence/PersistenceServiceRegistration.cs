@@ -35,12 +35,10 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<ICategoryTypeRepository, CategoryTypeRepository>();  
 
             services.AddScoped<ITemplateRepository, TemplateRepository>();
-
-
-
             services.AddScoped<ICorrespondenceNotesRepository, CorrespondenceNotesRepository>();
-
             services.AddScoped<IDoNotTakeGroup, DoNotTakeGroupRepopsitory>();
+            services.AddScoped<IPharmacyTypeRepository, PharmacyTypeRepository>();
+
 
             return services;
         }
