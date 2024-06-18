@@ -26,18 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\InnovationAdmin.Domain\InnovationAdmin.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\PharmacyType\Commands\CreatePharmacyType\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\ContractTerm\Commands\CreateContractTerm\" />
-    <Folder Include="Features\ContractTerm\Commands\DeleteContractTerm\" />
-    <Folder Include="Features\ContractTerm\Commands\UpdateContractTerm\" />
-    <Folder Include="Features\ContractTerm\Queries\GetContractTerm\" />
-    <Folder Include="Features\ContractTerm\Queries\GetContractTermList\" />
-  </ItemGroup>
 	<Target Name="CleanBinObjFolders" AfterTargets="Clean">
 		<RemoveDir Directories="$(BaseOutputPath)\bin" />
 		<RemoveDir Directories="$(BaseIntermediateOutputPath)\obj" />
