@@ -72,6 +72,10 @@ using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTa
 using InnovationAdmin.Application.Features.ClaimStatus.Commands.CreateClaimStatus;
 using InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatusQuery;
 using InnovationAdmin.Application.Features.ClaimStatus.Commands.UpdateClaimStatus;
+using InnovationAdmin.Application.Features.CategoryTypes.Commands.CreateCategoryType;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeById;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeList;
+using InnovationAdmin.Application.Features.CategoryTypes.Commands.UpdateCategoryType;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -207,6 +211,15 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<DataSource, UpdateDataSourceCommand>().ReverseMap();
             CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
             CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
+
+            CreateMap<CategoryType, CreateCategoryTypeDto>().ReverseMap();
+            CreateMap<CategoryType,GetCategoryTypeByIdVm>().ReverseMap();
+            CreateMap<CategoryType, GetCategoryTypeListVm>().ReverseMap();
+            CreateMap<CategoryType, UpdateCategoryTypeCommand>().ReverseMap();
+            CreateMap<CategoryType, CreateCategoryTypeCommand>().ReverseMap();
+            CreateMap<CategoryType, UpdateCategoryTypeCommandDto>().ReverseMap();
+
+
 
             CreateMap<BillingMethodType,CreateBillingMethodTypeDto>().ReverseMap();
             CreateMap<BillingMethodType, GetBillingMethodTypeByIdVm>().ReverseMap();
