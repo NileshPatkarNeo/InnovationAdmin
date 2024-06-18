@@ -1,0 +1,35 @@
+1.Dont use scapfolding add proper JQuery Grid
+2.Change database add Limitations in database
+3.Add ID as only ID
+4.Add Created By in As Guid ...and in created by add Id of person who is created that list
+5.Chage label grammer in delete Msg Pop UP ...add proper msg 
+6.Add Jquery validations
+7.Dont show Id in Pages instead of it  add serial numbers.
+8.Add serial Numbers to display list.
+9.Change Label Colors not properly Visible
+10.Add searching And sorting
+11.Add Aestric(*) Mark
+12.Use JQuery Grid
+
+
+Nupur
+1.Change all Edit Section
+2. Check create and Edit Section
+3. Avoid Id in list and Setrail Numbers 
+4.Add List in Details ..Display only required Columns
+
+
+Dhanshree
+1.Change Label...keep it same
+2.Add proper Validations and Exceptions for Ids
+3.Check the Links In views
+4. Remove Role
+
+
+
+
+
+
+
+
+
