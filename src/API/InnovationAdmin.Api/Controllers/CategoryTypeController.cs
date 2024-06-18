@@ -2,11 +2,9 @@
 using InnovationAdmin.Application.Features.CategoryTypes.Commands.CreateCategoryType;
 using InnovationAdmin.Application.Features.CategoryTypes.Commands.DeleteCategoryType;
 using InnovationAdmin.Application.Features.CategoryTypes.Commands.UpdateCategoryType;
-using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource;
-using InnovationAdmin.Application.Features.DataSources.Commands.DeleteDataSource;
-using InnovationAdmin.Application.Features.DataSources.Commands.UpdateDataSource;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeById;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeList;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnovationAdmin.Api.Controllers
@@ -35,6 +33,38 @@ namespace InnovationAdmin.Api.Controllers
 
             return Ok(response);
 
+        }
+
+        [HttpGet("{id}", Name = "GetCategoryTypeById")]
+        public async Task<ActionResult> GetCategoryTypeById(string id)
+        {
+            var getCategoryTypeQuery = new GetCategoryTypeByIdQuery { ID = id };
+            var response = await _mediator.Send(getCategoryTypeQuery);
+
+            if (!response.Succeeded)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
+        }
+
+
+        [HttpGet("all", Name = "GetAllCategoryType")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> GetAllCategoryType()
+        {
+            _logger.LogInformation("GetAllCategoryType Initiated");
+            var response = await _mediator.Send(new GetCategoryTypeListQuery());
+            _logger.LogInformation("GetAllCategoryType Completed");
+
+            if (!response.Succeeded)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
         }
 
         [HttpPut(Name = "UpdateCategoryType")]
