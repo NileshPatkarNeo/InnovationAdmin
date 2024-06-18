@@ -1264,22 +1264,25 @@ namespace Innovation_Admin.UI.Controllers
                 }
                 else
                 {
-                    updatedTemplate.PdfTemplateFile = GetExistingPdfFilePath(updatedTemplate.ID);
+                    var existingTemplate = await _common.GetTemplateById(updatedTemplate.ID);
+                    updatedTemplate.PdfTemplateFile = existingTemplate.Data.PdfTemplateFile;
+                    updatedTemplate.Size = existingTemplate.Data.Size;
                 }
 
-                
                 var response = await _common.UpdateTemplate(updatedTemplate);
-                TempData["Message"] = " Updated Successfully";
+                TempData["Message"] = "Updated Successfully";
 
                 return RedirectToAction("Templates");
             }
             else
             {
-                ModelState.AddModelError("", "Oops! Some error occured.");
+                ModelState.AddModelError("", "Oops! Some error occurred.");
             }
 
             return View(updatedTemplate);
         }
+
+
 
         private string GetExistingPdfFilePath(Guid templateId)
         {

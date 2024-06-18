@@ -8,9 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8E30F6E5-1497-43DF-A8FB-DAD5595B6003}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A09B22D1-C913-4517-AA6A-AF121E988F34}"
-	ProjectSection(SolutionItems) = preProject
-		src\Core\InnovationAdmin.Domain\CreateSysPrefFinancialCommandHandler.cs = src\Core\InnovationAdmin.Domain\CreateSysPrefFinancialCommandHandler.cs
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InnovationAdmin.Application", "src\Core\InnovationAdmin.Application\InnovationAdmin.Application.csproj", "{62ABD5F0-6E18-418A-A150-6879C6E0F080}"
 EndProject

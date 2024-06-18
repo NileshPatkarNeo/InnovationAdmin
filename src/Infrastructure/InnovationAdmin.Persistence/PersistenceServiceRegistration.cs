@@ -40,6 +40,8 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<IPharmacyTypeRepository, PharmacyTypeRepository>();
 
 
+            services.AddScoped<IContractTermsRepository, ContractTermsRepository>();
+
             return services;
         }
     }
