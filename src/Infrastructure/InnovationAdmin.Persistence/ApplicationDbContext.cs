@@ -61,6 +61,8 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<ContractTerms> ContractTerms { get; set; }
 
+        public DbSet<ClaimStatus> claimStatuses { get; set; }   
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

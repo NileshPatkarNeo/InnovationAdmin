@@ -69,6 +69,9 @@ using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllLis
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.CreateDoNotTakeGroup;
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Queries.GetDoNotTakeGroupQuery;
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTakeGroup;
+using InnovationAdmin.Application.Features.ClaimStatus.Commands.CreateClaimStatus;
+using InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatusQuery;
+using InnovationAdmin.Application.Features.ClaimStatus.Commands.UpdateClaimStatus;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -233,6 +236,12 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Templates, TemplateListVM>().ReverseMap();
             CreateMap<Templates, TemplateVM>().ReverseMap();
             CreateMap<Templates, UpdateTemplateCommand>().ReverseMap();
+
+
+            CreateMap<ClaimStatus, CreateClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, ClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, UpdateClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, UpdateClaimStatusCommand>().ReverseMap();
 
 
         }
