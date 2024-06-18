@@ -69,6 +69,9 @@ using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllLis
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.CreateDoNotTakeGroup;
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Queries.GetDoNotTakeGroupQuery;
 using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTakeGroup;
+using InnovationAdmin.Application.Features.PharmacyType.Commands.CreatePharmacyType;
+using InnovationAdmin.Application.Features.PharmacyType.Commands.UpdatePharmacyType;
+using InnovationAdmin.Application.Features.PharmacyType.Queries.GetPharmacyTypeQuery;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -234,6 +237,13 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Templates, TemplateVM>().ReverseMap();
             CreateMap<Templates, UpdateTemplateCommand>().ReverseMap();
 
+
+            CreateMap<PharmacyType, CreatePharmacyTypeCommand>().ReverseMap();
+            CreateMap<PharmacyType, CreatePharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, UpdatePharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, PharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
+            CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
 
         }
     }
