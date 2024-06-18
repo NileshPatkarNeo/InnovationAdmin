@@ -77,6 +77,10 @@ using InnovationAdmin.Application.Features.ContractTerms.Commands.UpdateContract
 using InnovationAdmin.Application.Features.ContractTerms.Commands.DeleteContractTerm;
 using InnovationAdmin.Application.Features.ContractTerms.Queries.GetContractTermsList;
 using InnovationAdmin.Application.Features.ContractTerms.Queries.GetContractTerm;
+using InnovationAdmin.Application.Features.CategoryTypes.Commands.CreateCategoryType;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeById;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeList;
+using InnovationAdmin.Application.Features.CategoryTypes.Commands.UpdateCategoryType;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -212,6 +216,15 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<DataSource, UpdateDataSourceCommand>().ReverseMap();
             CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
             CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
+
+            CreateMap<CategoryType, CreateCategoryTypeDto>().ReverseMap();
+            CreateMap<CategoryType,GetCategoryTypeByIdVm>().ReverseMap();
+            CreateMap<CategoryType, GetCategoryTypeListVm>().ReverseMap();
+            CreateMap<CategoryType, UpdateCategoryTypeCommand>().ReverseMap();
+            CreateMap<CategoryType, CreateCategoryTypeCommand>().ReverseMap();
+            CreateMap<CategoryType, UpdateCategoryTypeCommandDto>().ReverseMap();
+
+
 
             CreateMap<BillingMethodType,CreateBillingMethodTypeDto>().ReverseMap();
             CreateMap<BillingMethodType, GetBillingMethodTypeByIdVm>().ReverseMap();
