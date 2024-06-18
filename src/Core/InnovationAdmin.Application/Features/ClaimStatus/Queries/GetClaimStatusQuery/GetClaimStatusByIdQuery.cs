@@ -10,6 +10,11 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatu
 {
     public class GetClaimStatusByIdQuery : IRequest<Response<ClaimStatusDto>>
     {
+        public GetClaimStatusByIdQuery(Guid id)
+        {
+            Id = id;
+        }
+
         public Guid Id { get; set; }
     }
 }

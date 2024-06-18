@@ -72,6 +72,11 @@ using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTa
 using InnovationAdmin.Application.Features.ClaimStatus.Commands.CreateClaimStatus;
 using InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatusQuery;
 using InnovationAdmin.Application.Features.ClaimStatus.Commands.UpdateClaimStatus;
+using InnovationAdmin.Application.Features.ContractTerms.Commands.CreateContractTerm;
+using InnovationAdmin.Application.Features.ContractTerms.Commands.UpdateContractTerm;
+using InnovationAdmin.Application.Features.ContractTerms.Commands.DeleteContractTerm;
+using InnovationAdmin.Application.Features.ContractTerms.Queries.GetContractTermsList;
+using InnovationAdmin.Application.Features.ContractTerms.Queries.GetContractTerm;
 using InnovationAdmin.Application.Features.CategoryTypes.Commands.CreateCategoryType;
 using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeById;
 using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeList;
@@ -256,6 +261,12 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<ClaimStatus, UpdateClaimStatusDto>().ReverseMap();
             CreateMap<ClaimStatus, UpdateClaimStatusCommand>().ReverseMap();
 
+            CreateMap<ContractTerms, CreateContractTermDto>().ReverseMap();
+            CreateMap<ContractTerms, UpdateContractTermDto>().ReverseMap();
+            CreateMap<ContractTerms, DeleteContractTermCommand>().ReverseMap();
+            CreateMap<ContractTerms, ContractTermListVM>().ReverseMap();
+            CreateMap<ContractTerms, ContractTermVM>().ReverseMap();
+            CreateMap<ContractTerms, UpdateContractTermCommand>().ReverseMap();
 
         }
     }

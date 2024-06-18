@@ -3,10 +3,8 @@ using InnovationAdmin.Application.Features.AccountManager.Commands.DeleteAccount
 using InnovationAdmin.Application.Features.AccountManager.Commands.UpdateAccountManager;
 using InnovationAdmin.Application.Features.AccountManager.Queries.GetAccountManagerById;
 using InnovationAdmin.Application.Features.AccountManager.Queries.GetAllAccountManager;
-using InnovationAdmin.Application.Features.PharmacyGroup.Commands.CreatePharmacyGroup;
 using InnovationAdmin.Application.Responses;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InnovationAdmin.Api.Controllers
