@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.CraeateReceiptBatchSource
 {
-    internal class CreateReceiptBatchSourceCommandValidator : AbstractValidator<CreateReceiptBatchSourceCommand>
+    public class CreateReceiptBatchSourceCommandValidator : AbstractValidator<CreateReceiptBatchSourceCommand>
     {
         private readonly IMessageRepository _messageRepository;
         public CreateReceiptBatchSourceCommandValidator(IMessageRepository messageRepository)
