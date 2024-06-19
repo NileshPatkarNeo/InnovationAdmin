@@ -1466,7 +1466,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteDoNotTakeGroup(Guid Id)
         {
             var isDeleted = await _common.DeleteDoNotTakeGroup(Id);
-            return RedirectToAction("DoNotTakeGroup");
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
         }
         #endregion
 

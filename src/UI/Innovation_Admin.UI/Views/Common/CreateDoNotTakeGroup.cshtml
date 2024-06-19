@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="GroupName" class="control-label"></label>
-                    <input id="groupName" asp-for="GroupName" class="form-control"  maxlength="10"/>
+                    <input id="groupName" asp-for="GroupName" class="form-control" maxlength="50" onkeypress="return onlyAlphabets(event,this); " />
                     <span asp-validation-for="GroupName" class="text-danger"></span>
                     <div id="groupNameError" class="error-message"></div>
                 </div>
@@ -83,6 +83,25 @@
     </div>
     </body>
     <script>
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('createGroupForm');
             const groupCodeInput = document.getElementById('groupCode');
