@@ -796,6 +796,7 @@ namespace Innovation_Admin.UI.Common
 
         #endregion
 
+        #region PharmacyType
 
         public async Task<IEnumerable<PharmacyTypeDto>> GetAllPharmcayType()
         {
@@ -813,6 +814,6 @@ namespace Innovation_Admin.UI.Common
 
             return new List<PharmacyTypeDto>();
         }
-
+        #endregion
     }
 }

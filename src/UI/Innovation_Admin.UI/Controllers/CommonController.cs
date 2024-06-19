@@ -1463,6 +1463,7 @@ namespace Innovation_Admin.UI.Controllers
         }
         #endregion
 
+        #region PharmacyType
 
         [HttpGet]
         public async Task<IActionResult> PharmacyTypes()
@@ -1471,6 +1472,7 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAlltype);
         }
 
+        #endregion
     }
 }
     
