@@ -4,52 +4,9 @@
     ViewData["Title"] = "EditDoNotTakeGroup";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
-
-<style>
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-        padding: 20px;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    .form-container {
-        font-weight: 700;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-    .test {
-        width: 48%;
-    }
-
-    body {
-        margin: 0px;
-        padding: 0px;
-        width: 100%;
-    }
-
-    .error-message {
-        color: red;
-        font-size: 0.875rem;
-        margin-top: 5px;
-    }
-</style>
-
+<head>
+ <link href="~/css/DoNotTakeGroup/EditDoNotTakeGroup.css" rel="stylesheet" />
+</head>
 <body>
     <h1>Edit</h1>
 
@@ -82,65 +39,5 @@
             </form>
         </div>
     </div>
-
     </body>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('editGroupForm');
-            const groupCodeInput = document.getElementById('groupCode');
-            const groupNameInput = document.getElementById('groupName');
-            const groupCodeError = document.getElementById('groupCodeError');
-            const groupNameError = document.getElementById('groupNameError');
-
-            form.addEventListener('submit', function (event) {
-                let isValid = true;
-
-                // Clear previous error messages
-                groupCodeError.innerText = '';
-                groupNameError.innerText = '';
-
-                // Validate Group Code
-                const groupCodeValue = groupCodeInput.value.trim();
-                if (groupCodeValue === '') {
-                    groupCodeError.innerText = 'Group Code is required.';
-                    isValid = false;
-                } else if (isNaN(groupCodeValue) || parseFloat(groupCodeValue) <= 0) {
-                    groupCodeError.innerText = 'Group Code must be a positive number.';
-                    isValid = false;
-                } else if (groupCodeValue.length > 9) {
-                    groupCodeError.innerText = 'Group Code cannot exceed 9 characters.';
-                    isValid = false;
-                }
-
-                // Validate Group Name
-                const groupNameValue = groupNameInput.value.trim();
-                if (groupNameValue === '') {
-                    groupNameError.innerText = 'Group Name is required.';
-                    isValid = false;
-                }
-
-                if (!isValid) {
-                    event.preventDefault();
-                }
-            });
-
-            // Event listener for Group Code input
-            groupCodeInput.addEventListener('input', function () {
-                const groupCodeValue = groupCodeInput.value.trim();
-                if (groupCodeValue !== '' && !isNaN(groupCodeValue) && parseFloat(groupCodeValue) > 0 && groupCodeValue.length <= 9) {
-                    groupCodeError.innerText = '';
-                } else if (groupCodeValue.length > 9) {
-                    groupCodeError.innerText = 'Group Code cannot exceed 9 characters.';
-                }
-            });
-
-            // Event listener for Group Name input
-            groupNameInput.addEventListener('input', function () {
-                const groupNameValue = groupNameInput.value.trim();
-                if (groupNameValue !== '') {
-                    groupNameError.innerText = '';
-                }
-            });
-        });
-    </script>
+    <script src="~/js/DoNotTakeGroups/EditDoNotTakeGroups.js"> </script>

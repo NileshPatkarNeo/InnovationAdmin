@@ -1,0 +1,42 @@
+﻿h1 {
+    text-align: center;
+}
+
+.container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+
+.form-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.test {
+    width: 48%;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}

@@ -71,47 +71,6 @@
 
 <script type="text/javascript">
 
-    function sortTable(n) {
-        var table = document.getElementById("AccountManager");
-        var rows = table.rows;
-        var switching = true;
-        var shouldSwitch;
-        var dir = "asc";
-        var switchcount = 0;
-
-        while (switching) {
-            switching = false;
-            var rowsArray = Array.from(rows).slice(1);
-
-            for (var i = 0; i < rowsArray.length - 1; i++) {
-                shouldSwitch = false;
-                var x = rowsArray[i].getElementsByTagName("TD")[n];
-                var y = rowsArray[i + 1].getElementsByTagName("TD")[n];
-
-                if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldSwitch) {
-                rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
-                switching = true;
-                switchcount++;
-            } else {
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
-        }
-    }
     $('#AccountManager').dataTable({
         pageLength: 5,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
