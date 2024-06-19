@@ -934,7 +934,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteReceiptBatch(Guid Id)
         {
             var isDeleted = await _common.DeleteReceiptBatchSource(Id);
-            return RedirectToAction("ReceiptBatchSource");
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
         }
 
         #endregion
