@@ -1,0 +1,42 @@
+﻿h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn {
+    width: auto;
+}
+
+.form-group .btn {
+    display: inline-block;
+}
+
+    .form-group .btn + .btn {
+        margin-left: 10px;
+    }
+
+.flex-fill {
+    flex: 1;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.align-items-start {
+    align-items: flex-start !important;
+    margin-top: 10vh;
+}

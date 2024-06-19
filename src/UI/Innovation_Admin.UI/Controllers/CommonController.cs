@@ -1463,7 +1463,13 @@ namespace Innovation_Admin.UI.Controllers
         }
         #endregion
 
-    
+
+        [HttpGet]
+        public async Task<IActionResult> PharmacyTypes()
+        {
+            var getAlltype = await _common.GetAllPharmcayType();
+            return View(getAlltype);
+        }
 
     }
 }

@@ -50,6 +50,7 @@ builder.Services.AddScoped<ITemplates, Templates>();
 
 builder.Services.AddScoped<ICorrespondenceNote, CorrespondenceNotes>();
 builder.Services.AddScoped<IDoNotTakeGroup, DoNotTakeGroup>();
+builder.Services.AddScoped<IPharmacyType, PharmacyTypes>();
 builder.Services.AddScoped<Common>();
 
 

@@ -37,6 +37,8 @@ using Innovation_Admin.UI.Models.CorrespondenceNote;
 using Innovation_Admin.UI.Models.ResponsesModel.CorrespondenceNote;
 using Innovation_Admin.UI.Models.DoNotTakeGroup;
 using Innovation_Admin.UI.Models.ResponsesModel.DoNotTakeGroup;
+using Innovation_Admin.UI.Models.PharmacyType;
+using Innovation_Admin.UI.Models.ResponsesModel.PharmacyType;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -60,13 +62,13 @@ namespace Innovation_Admin.UI.Common
         private readonly IBillingMethodTypes billingMethodTypes;
         private readonly IAPAccountTypes aPAccountTypes;
         private readonly IDoNotTakeGroup doNotTakeGroup;
-       
         private readonly ICorrespondenceNote correspondenceNote;
+        private readonly IPharmacyType pharmacyTypes;
 
 
         
       
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote,IDoNotTakeGroup _doNotTakeGroup)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote,IDoNotTakeGroup _doNotTakeGroup, IPharmacyType _pharmacyTypes)
 
 
         {
@@ -89,6 +91,7 @@ namespace Innovation_Admin.UI.Common
             aPAccountTypes = _aPAccountTypes; ;
             correspondenceNote = _correspondenceNote;
             doNotTakeGroup = _doNotTakeGroup;
+            pharmacyTypes = _pharmacyTypes;
         }
 
         #region System_Preference
@@ -792,6 +795,24 @@ namespace Innovation_Admin.UI.Common
         }
 
         #endregion
+
+
+        public async Task<IEnumerable<PharmacyTypeDto>> GetAllPharmcayType()
+        {
+            GetAllPharmacyTypeResponseModel getAllPharmacyTypeResponseModel = new GetAllPharmacyTypeResponseModel();
+
+            getAllPharmacyTypeResponseModel = await pharmacyTypes.GetAllPharmacyTypes();
+
+            if (getAllPharmacyTypeResponseModel.IsSuccess)
+            {
+                if (getAllPharmacyTypeResponseModel != null && getAllPharmacyTypeResponseModel.Data.Count() > 0)
+                {
+                    return getAllPharmacyTypeResponseModel.Data;
+                }
+            }
+
+            return new List<PharmacyTypeDto>();
+        }
 
     }
 }
