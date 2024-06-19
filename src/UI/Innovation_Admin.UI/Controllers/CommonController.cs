@@ -934,7 +934,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteReceiptBatch(Guid Id)
         {
             var isDeleted = await _common.DeleteReceiptBatchSource(Id);
-            return RedirectToAction("ReceiptBatchSource");
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
         }
 
         #endregion
@@ -1459,7 +1466,22 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteDoNotTakeGroup(Guid Id)
         {
             var isDeleted = await _common.DeleteDoNotTakeGroup(Id);
-            return RedirectToAction("DoNotTakeGroup");
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+        #endregion
+
+        #region CategoryType
+        public async Task<IActionResult> CategoryType()
+        {
+            var getAllCategoryType = await _common.GetAllCategoryType();
+            return View(getAllCategoryType);
         }
         #endregion
 

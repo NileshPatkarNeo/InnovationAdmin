@@ -15,6 +15,7 @@ namespace Innovation_Admin.UI.Models.Template
         public string Name { get; set; }
 
         [JsonProperty("pdfTemplateFile")]
+        [Display(Name = "Pdf Template File")]
         public string? PdfTemplateFile { get; set; }
 
         [JsonProperty("domain")]
@@ -25,6 +26,8 @@ namespace Innovation_Admin.UI.Models.Template
 
 
         public string? Size { get; set; }
+
+        [Display(Name = "Pdf File")]
 
         public IFormFile? PdfFile { get; set; }
 

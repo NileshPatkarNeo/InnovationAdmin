@@ -13,6 +13,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Files\" />
+    <Folder Include="wwwroot\js\Templates\" />
+    <Folder Include="wwwroot\js\BillingMethodType\" />
+    <Folder Include="wwwroot\js\APAccountType\" />
+    <Folder Include="wwwroot\js\DataSource\" />
     <Folder Include="wwwroot\js\PharmacyType\" />
   </ItemGroup>
 
