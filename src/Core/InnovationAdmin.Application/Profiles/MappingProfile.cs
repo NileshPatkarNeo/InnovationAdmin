@@ -81,6 +81,9 @@ using InnovationAdmin.Application.Features.CategoryTypes.Commands.CreateCategory
 using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeById;
 using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeList;
 using InnovationAdmin.Application.Features.CategoryTypes.Commands.UpdateCategoryType;
+using InnovationAdmin.Application.Features.PharmacyType.Commands.CreatePharmacyType;
+using InnovationAdmin.Application.Features.PharmacyType.Commands.UpdatePharmacyType;
+using InnovationAdmin.Application.Features.PharmacyType.Queries.GetPharmacyTypeQuery;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -255,6 +258,13 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<Templates, TemplateVM>().ReverseMap();
             CreateMap<Templates, UpdateTemplateCommand>().ReverseMap();
 
+
+            CreateMap<PharmacyType, CreatePharmacyTypeCommand>().ReverseMap();
+            CreateMap<PharmacyType, CreatePharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, UpdatePharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, PharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
+            CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
 
             CreateMap<ClaimStatus, CreateClaimStatusDto>().ReverseMap();
             CreateMap<ClaimStatus, ClaimStatusDto>().ReverseMap();
