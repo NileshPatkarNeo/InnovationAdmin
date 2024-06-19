@@ -39,6 +39,7 @@ builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();
 builder.Services.AddScoped<IDataSources, DataSources>();
 builder.Services.AddScoped<IBillingMethodTypes, BillingMethodTypes>();
 builder.Services.AddScoped<IAPAccountTypes, APAccountTypes>();
+builder.Services.AddScoped<ICategoryTypes, CategoryTypes>();
 
 builder.Services.AddScoped<IQuotes, Quotes>();
 builder.Services.AddScoped<IReceiptBatchSource, ReceiptBatchSource>();

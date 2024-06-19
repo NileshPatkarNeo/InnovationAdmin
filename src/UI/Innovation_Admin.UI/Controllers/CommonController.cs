@@ -1463,7 +1463,15 @@ namespace Innovation_Admin.UI.Controllers
         }
         #endregion
 
-    
+        #region CategoryType
+        public async Task<IActionResult> CategoryType()
+        {
+            var getAllCategoryType = await _common.GetAllCategoryType();
+            return View(getAllCategoryType);
+        }
+        #endregion
+
+
 
     }
 }

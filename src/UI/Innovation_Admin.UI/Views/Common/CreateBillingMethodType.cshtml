@@ -5,55 +5,8 @@
     Layout = "_AdminHomePage";
 }
 
-<style>
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
 
-    .card {
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-check {
-        margin-bottom: 15px;
-    }
-
-    .btn {
-        width: auto;
-    }
-
-    .form-group .btn {
-        display: inline-block;
-    }
-
-        .form-group .btn + .btn {
-            margin-left: 10px;
-        }
-
-    .flex-fill {
-        flex: 1;
-    }
-
-    .min-vh-100 {
-        min-height: 100vh;
-    }
-
-    .align-items-start {
-        align-items: flex-start !important;
-        margin-top: 10vh; /* Adjust this value to move the form slightly above the middle */
-    }
-</style>
-
+<link rel="stylesheet" href="~/css/BillingMethodType/CreateBillingMethodTypee.css" />
 <h1>Create Billing Method Type</h1>
 
 <div class="d-flex justify-content-center align-items-start min-vh-100">
@@ -79,36 +32,8 @@
 @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+<script type="text/javascript" src="~/js/BillingMethodType/CreateBillingMethodType.js">
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var form = document.getElementById("createBillingMethodTypeForm");
-
-        form.addEventListener("submit", function (event) {
-            var isValid = true;
-
-            // Validate Name
-            var name = document.getElementById("Name").value;
-            var nameError = document.getElementById("nameError");
-            if (name.trim() === "") {
-                nameError.textContent = "Name is required.";
-                isValid = false;
-            } else if (name.length < 2) {
-                nameError.textContent = "Name should be at least 2 characters.";
-                isValid = false;
-            } else if (name.length > 30) {
-                nameError.textContent = "Name should be at most 30 characters.";
-                isValid = false;
-            } else if (!/^[a-zA-Z\s]*$/.test(name)) {
-                nameError.textContent = "Name can only contain characters";
-                isValid = false;
-            } else {
-                nameError.textContent = "";
-            }
-
-            if (!isValid) {
-                event.preventDefault();
-            }
-        });
-    });
 </script>
+
+
