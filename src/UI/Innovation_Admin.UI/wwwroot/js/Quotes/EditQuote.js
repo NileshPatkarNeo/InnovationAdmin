@@ -13,7 +13,7 @@ function onlyAlphabets(e, t) {
     }
 }
 
-document.getElementById("createQuoteForm").addEventListener("submit", function (event) {
+document.getElementById("editQuoteForm").addEventListener("submit", function (event) {
     let isValid = true;
 
     // Name Validation
@@ -23,8 +23,8 @@ document.getElementById("createQuoteForm").addEventListener("submit", function (
     if (nameInput.value.trim() === "") {
         nameError.textContent = "Name is required.";
         isValid = false;
-    } else if (nameInput.value.length > 25) {
-        nameError.textContent = "Name cannot exceed 25 characters.";
+    } else if (nameInput.value.length > 100) {
+        nameError.textContent = "Name cannot exceed 100 characters.";
         isValid = false;
     }
 
@@ -35,8 +35,8 @@ document.getElementById("createQuoteForm").addEventListener("submit", function (
     if (quoteByInput.value.trim() === "") {
         quoteByError.textContent = "Quote By is required.";
         isValid = false;
-    } else if (quoteByInput.value.length > 100) {
-        quoteByError.textContent = "Quote By cannot exceed 100 characters.";
+    } else if (quoteByInput.value.length > 25) {
+        quoteByError.textContent = "Quote By cannot exceed 25 characters.";
         isValid = false;
     }
 

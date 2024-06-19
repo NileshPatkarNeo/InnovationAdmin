@@ -17,7 +17,7 @@ namespace Innovation_Admin.UI.Models.Quote
         [JsonProperty("quoteBy")]
         [Required(ErrorMessage = "Quote By is required.")]
         [StringLength(100, ErrorMessage = "Quote By must be 100 characters or less.")]
-
+        [Display(Name="Quote By")]
         public string QuoteBy { get; set; }
 
         [Required(ErrorMessage = "Message is Required")]
