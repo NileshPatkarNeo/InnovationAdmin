@@ -1,0 +1,25 @@
+﻿h1.text-center,
+hr {
+    margin-bottom: 20px;
+}
+
+.form-box {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;    
+    margin-top: 1rem;
+}
+
+    .btn-group .btn {
+        margin: 0 5px;
+    }
