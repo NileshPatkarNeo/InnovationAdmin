@@ -1,0 +1,13 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.test-add {
+    height: 40px;
+    margin: 0 20px;
+}
