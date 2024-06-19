@@ -4,11 +4,8 @@ using Innovation_Admin.UI.Models.AdminUser;
 using Innovation_Admin.UI.Models.AdminRole;
 using Microsoft.AspNetCore.Mvc;
 using CommonCall = Innovation_Admin.UI.Common;
-
 using Innovation_Admin.UI.Services.IRepositories;
-using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.PharmacyGroup;
-
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,8 +15,6 @@ using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.Template;
-using Microsoft.AspNetCore.Hosting;
-using Innovation_Admin.UI.Services.Repositories;
 using Innovation_Admin.UI.Models.BillingMethodType;
 using Innovation_Admin.UI.Models.APAccountType;
 using Innovation_Admin.UI.Models.CorrespondenceNote;
