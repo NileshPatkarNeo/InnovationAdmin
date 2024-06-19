@@ -1,58 +1,8 @@
 ﻿@model Innovation_Admin.UI.Models.CorrespondenceNote.CreateCorrespondenceNoteDto
 
 @{
-    ViewData["Title"] = "Create Correspondence Note";
-    Layout = "_AdminHomePage";
+   Layout = "_AdminHomePage";
 }
-
-<style>
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .card {
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-check {
-        margin-bottom: 15px;
-    }
-
-    .btn {
-        width: auto;
-    }
-
-    .form-group .btn {
-        display: inline-block;
-    }
-
-        .form-group .btn + .btn {
-            margin-left: 10px;
-        }
-
-    .flex-fill {
-        flex: 1;
-    }
-
-    .min-vh-100 {
-        min-height: 100vh;
-    }
-
-    .align-items-start {
-        align-items: flex-start !important;
-        margin-top: 10vh; 
-    }
-</style>
 
 <h1>Create Correspondence Note</h1>
 
@@ -80,34 +30,5 @@
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var form = document.getElementById("createCorrespondenceNoteForm");
-
-        form.addEventListener("submit", function (event) {
-            var isValid = true;
-
-            var note = document.getElementById("Note").value;
-            var noteError = document.getElementById("noteError");
-            if (note.trim() === "") {
-                noteError.textContent = "Note is required.";
-                isValid = false;
-            } else if (note.length < 2) {
-                noteError.textContent = "Note should be at least 2 characters.";
-                isValid = false;
-            } else if (note.length > 100) { 
-                noteError.textContent = "Note should be at most 100 characters.";
-                isValid = false;
-            } else if (!/^[a-zA-Z\s]*$/.test(note)) {
-                noteError.textContent = "Note can only contain alphabet characters and spaces.";
-                isValid = false;
-            } else {
-                noteError.textContent = "";
-            }
-
-            if (!isValid) {
-                event.preventDefault();
-            }
-        });
-    });
-</script>
+<link href="~/css/correspondencenote/createcorrespondencenote.css" rel="stylesheet" />
+<script src="~/js/createCorrespondenceNote.js"></script>
