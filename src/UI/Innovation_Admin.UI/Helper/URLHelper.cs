@@ -228,5 +228,10 @@ namespace Innovation_Admin.UI.Helper
 
 
         #endregion
+
+        #region CategoryType
+        public const string GetAllCategoryType = "/api/CategoryType/all?api-version=1";
+
+        #endregion
     }
 }
