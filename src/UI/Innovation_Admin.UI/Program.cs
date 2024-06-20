@@ -9,6 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
+// Configure the static helper
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 var Configuration = builder.Configuration;
 
@@ -27,11 +32,26 @@ builder.Services.AddScoped<IPharmacyGroup, PharmacyGroups>();
 builder.Services.AddScoped<ISysPrefGeneralBehaviouries, SysPrefGeneralBehaviouries>();
 
 builder.Services.AddScoped<ISysPrefFinancials, SysPrefFinancials>();
-
+builder.Services.AddScoped<IRemittanceType, RemittanceTypes>();
 
 
 builder.Services.AddScoped<ISysPrefSecurityEmails, SysPrefSecurityEmails>();
+builder.Services.AddScoped<IDataSources, DataSources>();
+builder.Services.AddScoped<IBillingMethodTypes, BillingMethodTypes>();
+builder.Services.AddScoped<IAPAccountTypes, APAccountTypes>();
+builder.Services.AddScoped<ICategoryTypes, CategoryTypes>();
 
+builder.Services.AddScoped<IQuotes, Quotes>();
+builder.Services.AddScoped<IReceiptBatchSource, ReceiptBatchSource>();
+
+
+builder.Services.AddScoped<ITemplates, Templates>();
+
+
+
+builder.Services.AddScoped<ICorrespondenceNote, CorrespondenceNotes>();
+builder.Services.AddScoped<IDoNotTakeGroup, DoNotTakeGroup>();
+builder.Services.AddScoped<IPharmacyType, PharmacyTypes>();
 builder.Services.AddScoped<Common>();
 
 

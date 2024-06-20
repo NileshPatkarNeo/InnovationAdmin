@@ -1,0 +1,38 @@
+﻿@model Innovation_Admin.UI.Models.APAccountType.CreateAPAccountTypeDto
+
+@{
+    ViewData["Title"] = "CreateAPAccountType";
+    Layout = "_AdminHomePage";
+}
+
+<link rel="stylesheet" href="~/css/APAccountType/CreateAPAccountType.css" />
+
+<h1>Create AP Account Type</h1>
+
+<div class="d-flex justify-content-center align-items-start min-vh-100">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form id="createAPAccountTypeForm" asp-action="CreateAPAccountType" novalidate>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
+                        <input asp-for="Name" class="form-control" id="Name" />
+                        <span id="nameError" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
+                        <a asp-action="APAccountType" class="btn btn-secondary btn-lg flex-fill">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script type="text/javascript" src="~/js/APAccountType/CreateAPAccountType.js">
+
+</script>
+

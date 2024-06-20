@@ -111,7 +111,142 @@ namespace Innovation_Admin.UI.Helper
 
         #endregion
 
+        #region ReceiptBatchSource
+        public const string GetAllReceiptBatchSource = "/api/ReceiptBatchSource?api-version=1";
+
+        public const string GetReceiptBatchSourceById = "/api/ReceiptBatchSource/{id}?api-version=1";
+
+        public const string CreateReceiptBatchSource = "/api/ReceiptBatchSource?api-version=1";
+
+        public const string UpdateReceiptBatchSource = "/api/ReceiptBatchSource/{id}?api-version=1";
+
+        public const string DeleteReceiptBatchSource = "/api/ReceiptBatchSource/{id}?api-version=1";
 
 
+        #endregion
+
+        #region Quote
+
+        public const string GetAllQuotes = "/api/Quote?api-version=1";
+
+        public const string CreateQuote = "/api/Quote/create?api-version=1";
+
+        public const string GetQuoteById = "/api/Quote/{id}?api-version=1";
+
+        public const string UpdateQuote = "/api/Quote?api-version=1";
+
+        public const string DeleteQuote = "/api/Quote/{id}?api-version=1";
+
+        #endregion
+
+
+        #region RemittanceType
+        public const string GetAllRemittanceType = "/api/RemittanceType/all?api-version=1";
+
+        public const string CreateRemittanceType = "/api/RemittanceType?api-version=1";
+
+        public const string UpdateRemittanceType = "/api/RemittanceType/{id}?api-version=1";
+
+        public const string GetRemittanceTypeById = "/api/RemittanceType/{id}?api-version=1";
+
+        public const string DeleteRemittanceType = "/api/RemittanceType/{id}?api-version=1";
+
+        #endregion
+
+        #region DataSource
+        public const string GetAllDataSource = "/api/DataSource/all?api-version=1";
+
+        public const string CreateDataSource = "/api/DataSource?api-version=1";
+
+        public const string GetDataSourceById = "/api/DataSource/{id}?api-version=1";
+        public const string UpdateDataSource = "/api/DataSource?api-version=1   ";
+
+        public const string DeleteDataSource = "/api/DataSource/{id}?api-version=1";
+
+
+        #endregion
+
+        #region DoNotTakeGroup
+
+        public const string GetAllDoNotTakeGroup = "/api/DoNotTakeGroup?api-version=1";
+
+        public const string GetDoNotTakeGroupByID = "/api/DoNotTakeGroup/{id}?api-version=1";
+
+        public const string CreateDoNotTakeGroup = "/api/DoNotTakeGroup?api-version=1";
+
+        public const string UpdateDoNotTakeGroup = "/api/DoNotTakeGroup/?api-version=1";
+        
+        public const string DeleteDoNotTakeGroup = "/api/DoNotTakeGroup/{id}?api-version=1";
+
+        #endregion
+
+        #region BillingMethodType
+        public const string GetAllBillingMethodType = "/api/BillingMethodType/all?api-version=1";
+
+        public const string CreateBillingMethodType = "/api/BillingMethodType?api-version=1";
+
+        public const string GetBillingMethodTypeById = "/api/BillingMethodType/{id}?api-version=1";
+        public const string UpdateBillingMethodType = "/api/BillingMethodType?api-version=1";
+
+        public const string DeleteBillingMethodType = "/api/BillingMethodType/{id}?api-version=1";
+        #endregion
+
+        #region APAccountType
+
+        public const string GetAllAPAccountType = "/api/APAccountType/all?api-version=1";
+
+        public const string CreateAPAccountType = "/api/APAccountType?api-version=1";
+
+        public const string GetAPAccountTypeById = "/api/APAccountType/{id}?api-version=1";
+        public const string UpdateAPAccountType = "/api/APAccountType?api-version=1";
+
+        public const string DeleteAPAccountType = "/api/APAccountType/{id}?api-version=1";
+
+        #endregion
+        #region Template 
+
+            public static string GetAllTemplates = "/api/Template?api-version=1";
+            public static string CreateTemplate = "/api/Template/create?api-version=1";
+            public static string UpdateTemplate = "/api/Template?api-version=1";
+            public static string GetTemplateById = "/api/Template/{id}?api-version=1";
+            public static string DeleteTemplate = "/api/Template/{id}?api-version=1";
+       
+
+        #region CorrespondenceNotes
+
+        public const string GetAllCorrespondenceNote = "/api/CorrespondenceNotes/all?api-version=1";
+
+        public const string CreateCorrespondenceNote = "/api/CorrespondenceNotes?api-version=1";
+
+        public const string UpdateCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string GetCorrespondenceNoteById = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        public const string DeleteCorrespondenceNote = "/api/CorrespondenceNotes/{id}?api-version=1";
+
+        #endregion
+
+
+        #endregion
+
+        #region PharmacyType
+
+        public const string GetAllPharmacyType = "/api/PharmacyType?api-version=1";
+
+        public const string CreatePharmacyType = "/api/Category?api-version=1";
+
+        public const string UpdatePharmacyType = "/api/Category/{id}?api-version=1";
+
+        public const string GetPharmacyTypeById = "/api/Category/{id}?api-version=1";
+
+        public const string DeletePharmacyType = "/api/Category/{id}?api-version=1";
+
+        #endregion
+
+
+        #region CategoryType
+        public const string GetAllCategoryType = "/api/CategoryType/all?api-version=1";
+
+        #endregion
     }
 }

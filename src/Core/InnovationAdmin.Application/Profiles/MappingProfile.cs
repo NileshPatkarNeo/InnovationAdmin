@@ -34,6 +34,56 @@ using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.UpdateSysP
 using InnovationAdmin.Application.Features.SysPrefFinancials.Commands.DeleteSysPrefFinancial;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancialList;
 using InnovationAdmin.Application.Features.SysPrefFinancials.Queries.GetSysPrefFinancial;
+using InnovationAdmin.Application.Features.Quote.Commands.CreateQuote;
+using InnovationAdmin.Application.Features.Quote.Commands.UpdateQuote;
+using InnovationAdmin.Application.Features.Quote.Commands.DeleteQuote;
+using InnovationAdmin.Application.Features.Quote.Queries.GetQuote;
+using InnovationAdmin.Application.Features.Quote.Queries.GetQuotesList;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.CraeateReceiptBatchSource;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Queries.GetReceiptBatchSourceQuery;
+using InnovationAdmin.Application.Features.ReceiptBatchSource.Commands.UpdateReceiptBatchSource;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.CreateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Commands.UpdateRemittanceType;
+using InnovationAdmin.Application.Features.RemittanceType.Queries.GetRemittanceTypeQuery;
+using InnovationAdmin.Application.Features.DataSources.Commands.CreateDataSource;
+using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceById;
+using InnovationAdmin.Application.Features.DataSources.Queries.GetDataSourceList;
+using InnovationAdmin.Application.Features.DataSources.Commands.UpdateDataSource;
+using InnovationAdmin.Application.Features.Template.Commands.CreateTemplate;
+using InnovationAdmin.Application.Features.Template.Commands.UpdateTemplate;
+using InnovationAdmin.Application.Features.Template.Commands.DeleteTemplate;
+using InnovationAdmin.Application.Features.Template.Queries.GetTemplatesList;
+using InnovationAdmin.Application.Features.Template.Queries.GetTemplate;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Commands.CreateBillingMethodType;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeById;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Queries.GetBillingMethodTypeList;
+using InnovationAdmin.Application.Features.BillingMethodTypes.Commands.UpdateBillingMethodType;
+using InnovationAdmin.Application.Features.APAccountTypes.Commands.CreateAPAccountType;
+using InnovationAdmin.Application.Features.APAccountTypes.Queries.GetAPAccountTypebyId;
+using InnovationAdmin.Application.Features.APAccountTypes.Queries.GetAPAccountTypeList;
+using InnovationAdmin.Application.Features.APAccountTypes.Commands.UpdateAPAccountType;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.CreateCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Commands.UpdateCorrespondenceNote;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetCorrespondenceNoteQuery;
+using InnovationAdmin.Application.Features.CorrespondenceNotes.Queries.GetAllListCorrespondenceNoteQuery;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.CreateDoNotTakeGroup;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Queries.GetDoNotTakeGroupQuery;
+using InnovationAdmin.Application.Features.DoNotTakeGroup.Commands.UpdateDoNotTakeGroup;
+using InnovationAdmin.Application.Features.ClaimStatus.Commands.CreateClaimStatus;
+using InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatusQuery;
+using InnovationAdmin.Application.Features.ClaimStatus.Commands.UpdateClaimStatus;
+using InnovationAdmin.Application.Features.ContractTerms.Commands.CreateContractTerm;
+using InnovationAdmin.Application.Features.ContractTerms.Commands.UpdateContractTerm;
+using InnovationAdmin.Application.Features.ContractTerms.Commands.DeleteContractTerm;
+using InnovationAdmin.Application.Features.ContractTerms.Queries.GetContractTermsList;
+using InnovationAdmin.Application.Features.ContractTerms.Queries.GetContractTerm;
+using InnovationAdmin.Application.Features.CategoryTypes.Commands.CreateCategoryType;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeById;
+using InnovationAdmin.Application.Features.CategoryTypes.Queries.GetCategoryTypeList;
+using InnovationAdmin.Application.Features.CategoryTypes.Commands.UpdateCategoryType;
+using InnovationAdmin.Application.Features.PharmacyType.Commands.CreatePharmacyType;
+using InnovationAdmin.Application.Features.PharmacyType.Commands.UpdatePharmacyType;
+using InnovationAdmin.Application.Features.PharmacyType.Queries.GetPharmacyTypeQuery;
 
 namespace InnovationAdmin.Application.Profiles
 {
@@ -74,8 +124,14 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<PharmacyGroup, PharmacyGroupDto>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
             CreateMap<PharmacyGroup, GetPharmacyGroupByIdQuery>().ReverseMap();
-            
 
+            CreateMap<RemittanceType, CreateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, CreateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeCommand>().ReverseMap();
+            CreateMap<RemittanceType, UpdateRemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, RemittanceTypeDto>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
+            CreateMap<RemittanceType, GetRemittanceTypeByIdQuery>().ReverseMap();
 
 
             CreateMap<SysPref_GeneralBehaviours, Create_SysPref_GeneralBehaviour_Dto>();
@@ -136,9 +192,91 @@ namespace InnovationAdmin.Application.Profiles
             CreateMap<SysPrefFinancial, SysPrefFinancialVM>();
 
 
+            CreateMap<Quotes, CreateQuoteDto>().ReverseMap();
+            CreateMap<Quotes, UpdateQuoteDto>().ReverseMap();
+            CreateMap<Quotes, DeleteQuoteCommand>().ReverseMap();
+            CreateMap<Quotes, QuoteListVM>();
+            CreateMap<Quotes, QuoteVM>();
+            CreateMap<Quotes, UpdateQuoteCommand>().ReverseMap();
+
+
+            CreateMap<ReceiptBatchSource, CreateReceiptBatchDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, ReceiptBatchSourceDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceDto>().ReverseMap();
+            CreateMap<ReceiptBatchSource, UpdateReceiptBAtchSourceCommand>().ReverseMap();
+
+            CreateMap<DoNotTakeGroup, CreateDoNoTakeGroupDto>().ReverseMap();
+            CreateMap<DoNotTakeGroup, DoNotTakeGroupDto>().ReverseMap();
+            CreateMap<DoNotTakeGroup, UpdateDoNotTakeGroupDto>().ReverseMap();  
+            CreateMap<DoNotTakeGroup, UpdateDoNotTakeGroupCommand>().ReverseMap();    
 
 
 
+
+            CreateMap<DataSource, CreateDataSourceDto>().ReverseMap();
+            CreateMap<DataSource, GetDataSourceByIdVm>().ReverseMap();
+            CreateMap<DataSource, GetDataSourceListVm>().ReverseMap();
+            CreateMap<DataSource, UpdateDataSourceCommand>().ReverseMap();
+            CreateMap<DataSource, CreateDataSourceCommand>().ReverseMap();
+            CreateMap<DataSource, UpdateDataSourceCommandDto>().ReverseMap();
+
+            CreateMap<CategoryType, CreateCategoryTypeDto>().ReverseMap();
+            CreateMap<CategoryType,GetCategoryTypeByIdVm>().ReverseMap();
+            CreateMap<CategoryType, GetCategoryTypeListVm>().ReverseMap();
+            CreateMap<CategoryType, UpdateCategoryTypeCommand>().ReverseMap();
+            CreateMap<CategoryType, CreateCategoryTypeCommand>().ReverseMap();
+            CreateMap<CategoryType, UpdateCategoryTypeCommandDto>().ReverseMap();
+
+
+
+            CreateMap<BillingMethodType,CreateBillingMethodTypeDto>().ReverseMap();
+            CreateMap<BillingMethodType, GetBillingMethodTypeByIdVm>().ReverseMap();
+            CreateMap<BillingMethodType, GetBillingMethodTypeListVm>().ReverseMap();
+            CreateMap<BillingMethodType, UpdateBillingMethodTypeCommand>().ReverseMap();
+            CreateMap<BillingMethodType, CreateBillingMethodTypeCommand>().ReverseMap();
+            CreateMap<BillingMethodType, UpdateBillingMethodTypeCommandDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CreateCorrespondenceNoteCommand>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CreateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, UpdateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, UpdateCorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, CorrespondenceNoteDto>().ReverseMap();
+            CreateMap<CorrespondenceNotes, GetCorrespondenceNoteByIdQuery>().ReverseMap();
+            CreateMap<CorrespondenceNotes, GetAllCorrespondenceNoteQuery>().ReverseMap();
+
+
+            CreateMap<APAccountType, CreateAPAccountTypeDto>().ReverseMap();
+            CreateMap<APAccountType, GetAPAccountTypebyIdVm>().ReverseMap();
+            CreateMap<APAccountType, GetAPAccountTypeListVm>().ReverseMap();
+            CreateMap<APAccountType, UpdateAPAccountTypeCommand>().ReverseMap();
+            CreateMap<APAccountType, CreateAPAccountTypeCommand>().ReverseMap();
+            CreateMap<APAccountType, UpdateAPAccountTypeCommandDto>().ReverseMap();
+
+            CreateMap<Templates, CreateTemplateDto>().ReverseMap();
+            CreateMap<Templates, UpdateTemplateDto>().ReverseMap();
+            CreateMap<Templates, DeleteTemplateCommand>().ReverseMap();
+            CreateMap<Templates, TemplateListVM>().ReverseMap();
+            CreateMap<Templates, TemplateVM>().ReverseMap();
+            CreateMap<Templates, UpdateTemplateCommand>().ReverseMap();
+
+
+            CreateMap<PharmacyType, CreatePharmacyTypeCommand>().ReverseMap();
+            CreateMap<PharmacyType, CreatePharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, UpdatePharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, PharmacyTypeDto>().ReverseMap();
+            CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
+            CreateMap<PharmacyType, GetPharmacyTypeByIdQuery>().ReverseMap();
+
+            CreateMap<ClaimStatus, CreateClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, ClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, UpdateClaimStatusDto>().ReverseMap();
+            CreateMap<ClaimStatus, UpdateClaimStatusCommand>().ReverseMap();
+
+            CreateMap<ContractTerms, CreateContractTermDto>().ReverseMap();
+            CreateMap<ContractTerms, UpdateContractTermDto>().ReverseMap();
+            CreateMap<ContractTerms, DeleteContractTermCommand>().ReverseMap();
+            CreateMap<ContractTerms, ContractTermListVM>().ReverseMap();
+            CreateMap<ContractTerms, ContractTermVM>().ReverseMap();
+            CreateMap<ContractTerms, UpdateContractTermCommand>().ReverseMap();
 
         }
     }

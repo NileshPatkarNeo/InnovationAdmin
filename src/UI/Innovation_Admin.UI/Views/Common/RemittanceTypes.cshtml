@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Innovation_Admin.UI.Models.RemittanceType.RemittanceTypeDto>
+
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<h1>Remittance Types</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <link href="~/css/remittancetype/remittancetype.css" rel="stylesheet" />
+</head>
+<div class="add-div">
+    <p>
+        <a asp-action="CreateRemittanceType" class="btn btn-primary float-end"><i class="bi bi-plus-circle"></i> Add</a>
+    </p>
+</div>
+<body>
+<table class="table table-striped" id="remittanceType">
+    <thead>
+        <tr>
+            <th>Sr.No</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int serialNumber = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@serialNumber</td>
+                <td class="pharmacy-name"> @Html.DisplayFor(modelItem => item.Name)</td>
+                
+                <td>
+                    <a href="@Url.Action("EditRemittanceType", new { Id = item.Id })" class="btn btn-warning">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a> |
+                    <a href="#" onclick="confirmDelete('@item.Id')" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+                
+            </tr>
+            serialNumber++;
+        }
+    </tbody>
+</table>'
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+        toastr.success('@TempData["Message"]');
+    </script>
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/remittancetype.js"></script>

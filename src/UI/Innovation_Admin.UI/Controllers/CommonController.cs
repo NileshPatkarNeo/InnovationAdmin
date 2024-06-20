@@ -8,29 +8,42 @@ using CommonCall = Innovation_Admin.UI.Common;
 using Innovation_Admin.UI.Services.IRepositories;
 using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.PharmacyGroup;
-using System.Reflection;
 
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Innovation_Admin.UI.Models.SysPrefSecurityEmail;
+using Innovation_Admin.UI.Models.Quote;
+using Innovation_Admin.UI.Models.RemittanceType;
+using Innovation_Admin.UI.Models.ReceiptBatchSource;
+using Innovation_Admin.UI.Models.DataSource;
+using Innovation_Admin.UI.Models.Template;
+using Microsoft.AspNetCore.Hosting;
+using Innovation_Admin.UI.Services.Repositories;
+using Innovation_Admin.UI.Models.BillingMethodType;
+using Innovation_Admin.UI.Models.APAccountType;
+using Innovation_Admin.UI.Models.CorrespondenceNote;
+using Innovation_Admin.UI.Models.DoNotTakeGroup;
 using System.ComponentModel.Design;
 using Innovation_Admin.UI.Services.Repositories;
 
 namespace Innovation_Admin.UI.Controllers
 {
 
-     [AuthFilter]
+    //  [AuthFilter]
     public class CommonController : Controller
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         private readonly CommonCall.Common _common;
         private readonly IAuthenticationService _authenticationService;
 
 
-        public CommonController(CommonCall.Common common, IAuthenticationService authenticationService) {
+        public CommonController(CommonCall.Common common, IAuthenticationService authenticationService, IWebHostEnvironment webHostEnvironment) {
 
             _common = common;
             _authenticationService = authenticationService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
@@ -63,6 +76,15 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefCompany(SysPrefCompanyDto company)
         {
+            string UserId = HttpContext.Session.GetString("UserId");
+
+            if (string.IsNullOrEmpty(UserId))
+            {
+                ModelState.AddModelError(string.Empty, "User ID is not found in session.");
+                return RedirectToAction("SysPrefCompany");
+            }
+
+
             var result = await _common.CreateSysPrefCompany(company);
             if (result.Message == null)
             {
@@ -78,7 +100,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefCompany");
         }
 
-          
+
         [HttpGet]
         public async Task<IActionResult> EditSysPrefCompany([FromQuery] string companyId)
         {
@@ -309,7 +331,7 @@ namespace Innovation_Admin.UI.Controllers
             var getAllSysPrefCompanies = await _common.GetAllSysPrefBehaviouries();
             return View(getAllSysPrefCompanies);
         }
-                
+
 
         [HttpGet]
         public IActionResult CreateSysPrefGeneralBehaviour()
@@ -451,10 +473,10 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("PharmacyGroups");
         }
 
-        
+
 
         [HttpGet]
-        public async Task<IActionResult> EditPharmacyGroup( string Id)
+        public async Task<IActionResult> EditPharmacyGroup(string Id)
         {
             if (string.IsNullOrEmpty(Id) || !Guid.TryParse(Id, out Guid prefId))
             {
@@ -476,7 +498,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedgroup); 
+                return View(updatedgroup);
             }
 
             var result = await _common.UpdatePharmacyGroup(updatedgroup);
@@ -543,14 +565,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> CreateAccountManager(AccountManagerDto manager)
         {
             var result = await _common.CreateAccountManager(manager);
-           
+
             return RedirectToAction("GetAllAccountManagers");
         }
 
 
 
         [HttpGet]
-        public async Task<IActionResult> EditAccountManager( string Id)
+        public async Task<IActionResult> EditAccountManager(string Id)
         {
             var accountManager = await _common.GetAccountManagerById(Guid.Parse(Id));
             return View(accountManager.Data);
@@ -640,7 +662,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("SysPrefFinancial");
         }
 
-         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> DetailsSysPrefFinancial(Guid financialID)
         {
             if (financialID == Guid.Empty)
@@ -673,6 +695,8 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
+
 
         #region SysPrefSecurityEmail
         public async Task<IActionResult> SysPrefSecurityEmail()
@@ -751,10 +775,813 @@ namespace Innovation_Admin.UI.Controllers
         #endregion
 
 
+
+        #region Quotes
+
+        public async Task<IActionResult> Quotes()
+        {
+            var getAllQuotes = await _common.GetAllQuotes();
+            return View(getAllQuotes);
+        }
+
+        [HttpGet]
+        public IActionResult CreateQuote()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateQuote(CreateQuoteDto quote)
+        {
+            var result = await _common.CreateQuote(quote);
+
+            if (result.Data is null)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the quote.");
+                }
+                TempData["Message"] = "Successfully Added";
+
+                return RedirectToAction("Quotes");
+            }
+
+            return RedirectToAction("Quotes");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditQuote([FromQuery] string quoteId)
+        {
+            var quote = await _common.GetQuoteById(Guid.Parse(quoteId));
+            return View(quote.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditQuote(QuoteDto updatedQuote)
+        {
+            var result = await _common.UpdateQuote(updatedQuote);
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedQuote);
+            }
+
+            TempData["Message"] = "Updated Successfully";
+
+
+            return RedirectToAction("Quotes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteQuote(Guid quoteId)
+        {
+            var isDeleted = await _common.DeleteQuote(quoteId);
+
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the admin role." });
+            }
+        }
+
+        #endregion
+
+
+        #region RemittanceType
+
+        [HttpGet]
+        public async Task<IActionResult> RemittanceTypes()
+        {
+            var getAllType = await _common.GetAllRemittanceType();
+            return View(getAllType);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateRemittanceType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRemittanceType(RemittanceTypeDto type)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(type);
+            }
+            var result = await _common.CreateRemittanceType(type);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("RemittanceTypes");
+
+            }
+            else if (result.Message == "Failed to add type.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("RemittanceTypes");
+            }
+            return RedirectToAction("RemittanceTypes");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditRemittanceType(string Id)
+        {
+            if (string.IsNullOrEmpty(Id) || !Guid.TryParse(Id, out Guid prefId))
+            {
+                return BadRequest("Invalid ID");
+            }
+
+            var type = await _common.GetRemittanceTypeById(prefId);
+            if (type == null || type.Data == null)
+            {
+                return NotFound("type not found");
+            }
+
+            return View(type.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditRemittanceType(RemittanceTypeDto updatedtype)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(updatedtype);
+            }
+
+            var result = await _common.UpdateRemittanceType(updatedtype);
+
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("RemittanceTypes");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("RemittanceTypes");
+            }
+
+            return RedirectToAction("RemittanceTypes");
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRemittanceType(Guid Id)
+        {
+            bool isDeleted = await _common.DeleteRemittanceType(Id);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            return RedirectToAction("RemittanceTypes");
+        }
+
+        #endregion
+
+
+        #region ReceiptBatchSource
+        [HttpGet]
+        public async Task<IActionResult> ReceiptBatchSource()
+        {
+            var getAllReceiptBatch = await _common.GetAllReceiptBatchSource();
+            return View(getAllReceiptBatch);
+        }
+
+        [HttpGet]
+        public IActionResult CreateReceiptBatchSource()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateReceiptBatchSource(ReceiptBatchSourceDto batch)
+        {
+            var result = await _common.CreateReceiptBatchSource(batch);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("ReceiptBatchSource");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ReceiptBatchSource");
+            }
+            return RedirectToAction("ReceiptBatchSource");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditReceiptBatchSource(string Id)
+        {
+            var receiptBatchSource = await _common.GetReceiptBatchSourceById(Guid.Parse(Id));
+            return View(receiptBatchSource.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditReceiptBatchSource(ReceiptBatchSourceDto updatedBatch)
+        {
+            var result = await _common.UpdateReceiptBatchSource(updatedBatch);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Receipt batch updated successfully";
+                return RedirectToAction("ReceiptBatchSource");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ReceiptBatchSource");
+            }
+            return RedirectToAction("ReceiptBatchSource");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteReceiptBatch(Guid Id)
+        {
+            var isDeleted = await _common.DeleteReceiptBatchSource(Id);
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+
+        #endregion
+
+
+        #region DataSources
+
+        public async Task<IActionResult> DataSource()
+        {
+            var getAllDataSource = await _common.GetAllDataSource();
+            return View(getAllDataSource);
+        }
+
+        [HttpGet]
+        public IActionResult CreateDataSource()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateDataSource(CreateDataSourceDto data)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+            var result = await _common.CreateDataSource(data);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("DataSource");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DataSource");
+            }
+            return RedirectToAction("DataSource");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditDataSource(string id)
+        {
+            var dataSource = await _common.GetDataSourceById(Guid.Parse(id));
+            return View(dataSource.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditDataSource(DataSourceDto updatedData)
+        {
+            var result = await _common.UpdateDataSource(updatedData);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("DataSource");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DataSource");
+            }
+            return RedirectToAction("DataSource");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDataSource(Guid dataId)
+        {
+            var isDeleted = await _common.DeleteDataSource(dataId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+
+        #region BillingMethodType
+
+        public async Task<IActionResult> BillingMethodType()
+        {
+            var getAllBillingMethodType = await _common.GetAllBillingMethodType();
+            return View(getAllBillingMethodType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateBillingMethodType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateBillingMethodType(CreateBillingMethodTypeDto billing)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(billing);
+            }
+            var result = await _common.CreateBillingMethodType(billing);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditBillingMethodType(string id)
+        {
+            var billingMethodType = await _common.GetBillingMethodTypeById(Guid.Parse(id));
+            return View(billingMethodType.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBillingMethodType(BillingMethodTypeDto updatedBillingMethodType)
+        {
+            var result = await _common.UpdateBillingMethodType(updatedBillingMethodType);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("BillingMethodType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("BillingMethodType");
+            }
+            return RedirectToAction("BillingMethodType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBillingMethodType(Guid billingMethodTypeId)
+        {
+            var isDeleted = await _common.DeleteBillingMethodType(billingMethodTypeId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+
+
+        #region APAccountType
+
+        public async Task<IActionResult> APAccountType()
+        {
+            var getAllAPAccountType = await _common.GetAllAPAccountType();
+            return View(getAllAPAccountType);
+        }
+
+        [HttpGet]
+        public IActionResult CreateAPAccountType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateAPAccountType(CreateAPAccountTypeDto apaccount)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(apaccount);
+            }
+            var result = await _common.CreateAPAccountType(apaccount);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAPAccountType(string id)
+        {
+            var dataSource = await _common.GetAPAccountTypeById(Guid.Parse(id));
+            return View(dataSource.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAPAccountType(APAccountTypeDto updatedaccount)
+        {
+            var result = await _common.UpdateAPAccountType(updatedaccount);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("APAccountType");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("APAccountType");
+            }
+            return RedirectToAction("APAccountType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAPAccountType(Guid accountId)
+        {
+            var isDeleted = await _common.DeleteAPAccountType(accountId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+
+
+        #region Templates
+
+        public async Task<IActionResult> Templates()
+        {
+            var getAllTemplates = await _common.GetAllTemplates();
+            return View(getAllTemplates);
+        }
+
+        [HttpGet]
+        public IActionResult CreateTemplate()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateTemplate(CreateTemplateDto template)
+        {
+            if (ModelState.IsValid)
+            {
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(template.PdfFile.FileName)}";
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", fileName);
+                long fileSizeInBytes = template.PdfFile.Length;
+                double fileSizeInKB = (double)fileSizeInBytes / 1024;
+                template.Size = fileSizeInKB.ToString("0.00") + " KB";
+
+
+                template.PdfTemplateFile = "Files/" + fileName;
+
+                var response = await _common.CreateTemplate(template);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await template.PdfFile.CopyToAsync(fileStream);
+                }
+                TempData["Message"] = "Successfully Added";
+
+                return RedirectToAction("Templates");
+            }
+            else
+                ModelState.AddModelError("", "Oops! Some error occured.");
+
+            return View(template);
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditTemplate(Guid templateId)
+        {
+            var template = await _common.GetTemplateById(templateId);
+            return View(template.Data);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditTemplate(TemplateDto updatedTemplate)
+        {
+            if (ModelState.IsValid)
+            {
+                if (updatedTemplate.PdfFile != null && updatedTemplate.PdfFile.Length > 0)
+                {
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(updatedTemplate.PdfFile.FileName)}";
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files", fileName);
+                    long fileSizeInBytes = updatedTemplate.PdfFile.Length;
+                    double fileSizeInKB = (double)fileSizeInBytes / 1024;
+                    updatedTemplate.Size = fileSizeInKB.ToString("0.00") + " KB";
+
+                    updatedTemplate.PdfTemplateFile = "Files/" + fileName;
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await updatedTemplate.PdfFile.CopyToAsync(fileStream);
+                    }
+                }
+                else
+                {
+                    var existingTemplate = await _common.GetTemplateById(updatedTemplate.ID);
+                    updatedTemplate.PdfTemplateFile = existingTemplate.Data.PdfTemplateFile;
+                    updatedTemplate.Size = existingTemplate.Data.Size;
+                }
+
+                var response = await _common.UpdateTemplate(updatedTemplate);
+                TempData["Message"] = "Updated Successfully";
+
+                return RedirectToAction("Templates");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Oops! Some error occurred.");
+            }
+
+            return View(updatedTemplate);
+        }
+
+
+
+        private string GetExistingPdfFilePath(Guid templateId)
+        {
+            var template = _common.GetTemplateById(templateId).Result.Data;
+            return template?.PdfTemplateFile ?? string.Empty;
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTemplate(Guid templateId)
+        {
+            var isDeleted = await _common.DeleteTemplate(templateId);
+
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+
+
+        #endregion
+
+        #region CorrespondenceNote
+
+        [HttpGet]
+        public async Task<IActionResult> CorrespondenceNotes()
+        {
+            var getAllNote = await _common.GetAllCorrespondenceNotes();
+            return View(getAllNote);
+        }
+
+        [HttpGet]
+        public IActionResult CreateCorrespondenceNote()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCorrespondenceNote(CreateCorrespondenceNoteDto noteModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(noteModel);
+            }
+            var result = await _common.CreateCorrespondenceNote(noteModel);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("CorrespondenceNotes");
+
+            }
+            else if (result.Message == "Failed to add type.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CorrespondenceNotes");
+            }
+            return RedirectToAction("CorrespondenceNotes");
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCorrespondenceNote( string Id)
+        {
+            var sysPrefCompany = await _common.GetCorrespondenceNoteById(Guid.Parse(Id));
+            return View(sysPrefCompany.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCorrespondenceNote(CorrespondenceNoteDto updatedNote)
+        {
+           var result = await _common.UpdateCorrespondenceNote(updatedNote);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("CorrespondenceNotes");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CorrespondenceNotes");
+            }
+            return RedirectToAction("CorrespondenceNotes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCorrespondenceNote(Guid noteId)
+        {
+            var isDeleted = await _common.DeleteCorrespondenceNote(noteId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        #endregion
+
+
+        #region DoNotTakeGroup
+        [HttpGet]
+        public async Task<IActionResult> DoNotTakeGroup()
+        {
+            var getAllDoNotTakeGroup = await _common.GetAllDoNotTakeGroups();
+            return View(getAllDoNotTakeGroup);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateDoNotTakeGroup()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDoNotTakeGroup(DoNotTakeGroupDto group)
+        {
+            var result = await _common.CreateDoNotTakeGroup(group);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("DoNotTakeGroup");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DoNotTakeGroup");
+            }
+            return RedirectToAction("DoNotTakeGroup");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditDoNotTakeGroup(string Id)
+        {
+            var doNotTakeGroup = await _common.GetDoNoTakeGroupById(Guid.Parse(Id));
+            return View(doNotTakeGroup.Data);
+        }
+
+       
+
+        [HttpPost]
+        public async Task<IActionResult> EditDoNotTakeGroup(DoNotTakeGroupDto updatedgroup)
+        {
+            var result = await _common.UpdateDoNotTakeGroup(updatedgroup);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Group updated successfully";
+                return RedirectToAction("DoNotTakeGroup");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("DoNotTakeGroup");
+            }
+            return RedirectToAction("DoNotTakeGroup");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDoNotTakeGroup(Guid Id)
+        {
+            var isDeleted = await _common.DeleteDoNotTakeGroup(Id);
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+        #endregion
+
+        #region CategoryType
+        public async Task<IActionResult> CategoryType()
+        {
+            var getAllCategoryType = await _common.GetAllCategoryType();
+            return View(getAllCategoryType);
+        }
+        #endregion
+
+        #region PharmacyType
+
+        [HttpGet]
+        public async Task<IActionResult> PharmacyTypes()
+        {
+            var getAlltype = await _common.GetAllPharmcayType();
+            return View(getAlltype);
+        }
+
+        #endregion
     }
 }
     
-
+  
 
  
 

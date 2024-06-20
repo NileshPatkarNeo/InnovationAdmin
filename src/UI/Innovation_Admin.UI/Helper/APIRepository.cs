@@ -10,6 +10,7 @@ namespace Innovation_Admin.UI.Helper
     public class APIRepository
     {
         private readonly IConfiguration _configuration;
+
         public IOptions<ApiBaseUrl> _apiBaseUrl { get; private set; }
 
         public APIRepository(IConfiguration configuration)
@@ -19,7 +20,7 @@ namespace Innovation_Admin.UI.Helper
 
         #region APICommunication - Common Method for API calling
 
-        public async Task<Response<string>> APICommunication(string baseurl, string URL, HttpMethod invokeType, ByteArrayContent body, string token)
+        public async Task<Response<string>> APICommunication(string baseurl, string URL, HttpMethod invokeType, ByteArrayContent body,  string token)
         {
             Response<string> response = new Response<string>();
             response.statusCode = HttpStatusCode.BadRequest;

@@ -1,0 +1,93 @@
+﻿@model Innovation_Admin.UI.Models.Template.TemplateDto
+
+@{
+    ViewData["Title"] = "EditTemplate";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<head>
+    <link href="~/css/Templates/EditTemplate.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <h1 class="text-center">Edit Template</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-box">
+                <form id="editTemplateForm" asp-action="EditTemplate" class="w-100" enctype="multipart/form-data" novalidate>
+                    <div class="text-danger">
+                        @if (ViewData.ModelState.ErrorCount > 0)
+                        {
+                            <div class="alert alert-danger">
+                                <p>Please fix the errors below:</p>
+                                <ul>
+                                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                    {
+                                        <li>@error.ErrorMessage</li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group mb-3" style="display:none">
+                        <label asp-for="ID" class="control-label"></label>
+                        <input asp-for="ID" class="form-control" />
+                        <span asp-validation-for="ID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Name" class="control-label">
+                            @Html.DisplayNameFor(model => model.Name) <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Name" class="form-control" maxlength="51" required id="Name" onkeypress="return onlyAlphabets(event,this);" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <span class="text-danger" id="Name_error"></span>
+                    </div>
+
+                    @Html.HiddenFor(x => x.PdfTemplateFile)
+                    <div class="form-group mb-3">
+                        <label asp-for="PdfFile" class="control-label">
+                            @Html.DisplayNameFor(model => model.PdfFile) <span class="text-danger">*</span>
+                        </label>
+                        <div>
+                            @if (!string.IsNullOrEmpty(Model.PdfTemplateFile))
+                            {
+                                <p>Current File:<br /> @Model.PdfTemplateFile</p>
+                                <input type="checkbox" id="keepCurrentPdf" name="keepCurrentPdf" value="true" checked>
+                                <label for="keepCurrentPdf">Keep current PDF</label>
+                            }
+                            <input type="file" asp-for="PdfFile" class="form-control" maxlength="201" id="PdfFile" accept="application/pdf" />
+                            <span class="text-danger" id="PdfFile_error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Domain" class="control-label"></label>
+                        <select asp-for="Domain" class="form-control">
+                            <option value="Default">Default</option>
+                            <option value="PAYABLES">PAYABLES</option>
+                            <option value="CLAIMLOADBATCH">CLAIMLOADBATCH</option>
+                        </select>
+                        <span asp-validation-for="Domain" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3 d-flex justify-content-center">
+                        <div>
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                        <div>
+                            <a asp-action="Templates" class="btn btn-secondary">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+ <script src="~/js/Templates/EditTemplate.js"></script>

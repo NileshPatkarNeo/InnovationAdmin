@@ -4,11 +4,6 @@ using InnovationAdmin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace InnovationAdmin.Persistence
 {
     
@@ -34,6 +29,9 @@ namespace InnovationAdmin.Persistence
 
         public DbSet<PharmacyGroup> PharmacyGroups { get; set; }
 
+        public DbSet<Quotes> Quotes { get; set; }
+
+        public DbSet<RemittanceType> RemittanceTypes { get; set; }
 
 
 
@@ -41,6 +39,29 @@ namespace InnovationAdmin.Persistence
         public DbSet<Admin_Role> AdminRoles { get; set; }
 
         public DbSet<SysPrefFinancial> SysPrefFinancials { get; set; }
+        public DbSet<DataSource> DataSources { get; set; }
+
+        public DbSet<BillingMethodType> BillingMethodTypes { get; set; }
+
+        public DbSet<APAccountType> APAccountTypes { get; set; }
+
+        public DbSet<CategoryType> CategoryTypes { get; set; }
+
+        public DbSet<ReceiptBatchSource> ReceiptBatchSources { get; set; }
+
+        public DbSet<Templates> Templates { get; set; }
+
+        public DbSet<CorrespondenceNotes> CorrespondenceNotes { get; set; }
+
+
+        public DbSet<DoNotTakeGroup> doNotTakeGroups { get; set; }
+
+        public DbSet<PharmacyType> PharmacyTypes { get; set; }
+
+
+        public DbSet<ContractTerms> ContractTerms { get; set; }
+
+        public DbSet<ClaimStatus> claimStatuses { get; set; }   
 
         private IDbContextTransaction _transaction;
 
