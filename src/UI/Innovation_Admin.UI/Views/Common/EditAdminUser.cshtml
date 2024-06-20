@@ -5,90 +5,157 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>Edit Admin User</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <form asp-action="EditAdminUser">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="User_ID" class="control-label">User ID</label>
-                        <input asp-for="User_ID" class="form-control" readonly />
-                        <span asp-validation-for="User_ID" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="User_Name" class="control-label">User Name<span class="text-danger">*</span></label>
-                        <input asp-for="User_Name" class="form-control" />
-                        <span id="userNameError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Role" class="control-label">Role<span class="text-danger">*</span></label>
-                        <input asp-for="Role" class="form-control" type="number" />
-                        <span id="roleError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label">Email<span class="text-danger">*</span></label>
-                        <input asp-for="Email" class="form-control" type="email" />
-                        <span id="emailError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label">Password<span class="text-danger">*</span></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span id="passwordError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
-                        </label>
-                        <span id="statusError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary btn-lg">Save</button>
-                        <a asp-action="AdminUser" class="btn btn-secondary btn-lg">Back to List</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+        .card {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
 
- 
-<style>
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+        .card-body {
+            padding: 20px;
+        }
 
-    .card {
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    .card-body {
-        padding: 20px;
-    }
+        .form-check {
+            margin-bottom: 15px;
+        }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+        .btn {
+            width: auto;
+        }
 
-    .form-check {
-        margin-bottom: 15px;
-    }
-
-    .btn {
-        width: auto;
-    }
-
-    .form-group .btn {
-        display: inline-block;
-    }
+        .form-group .btn {
+            display: inline-block;
+        }
 
         .form-group .btn + .btn {
             margin-left: 10px;
         }
-</style>
-<script src="~/js/EditAdminUser.js"></script>
+    </style>
+</head>
+<body>
+    <h1>Edit Admin User</h1>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="EditAdminUser" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="User_ID" class="control-label">User ID</label>
+                            <input asp-for="User_ID" class="form-control" readonly />
+                            <span asp-validation-for="User_ID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="User_Name" class="control-label">User Name<span class="text-danger">*</span></label>
+                            <input asp-for="User_Name" class="form-control" id="User_Name" />
+                            <span id="userNameError" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Role" class="control-label">Role<span class="text-danger">*</span></label>
+                            <select asp-for="Role" class="form-control" asp-items="@ViewBag.RoleList" id="Role"></select>
+                            <span id="roleError" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label">Email<span class="text-danger">*</span></label>
+                            <input asp-for="Email" class="form-control" type="email" id="Email" />
+                            <span id="emailError" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label">Password<span class="text-danger">*</span></label>
+                            <input asp-for="Password" class="form-control" id="Password" />
+                            <span id="passwordError" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Status" id="Status" /> @Html.DisplayNameFor(model => model.Status)
+                            </label>
+                            <span id="statusError" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                            <a asp-action="AdminUser" class="btn btn-secondary btn-lg">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("EditAdminUser.js loaded");
+            var form = document.querySelector("form");
+
+            form.addEventListener("submit", function (event) {
+                var isValid = true;
+
+                // Validate User Name
+                var userName = document.querySelector("#User_Name").value;
+                var userNameError = document.querySelector("#userNameError");
+                if (userName.trim() === "") {
+                    userNameError.textContent = "User Name is required.";
+                    isValid = false;
+                } else if (userName.length > 20) {
+                    userNameError.textContent = "User Name should be 20 characters or less.";
+                    isValid = false;
+                } else {
+                    userNameError.textContent = "";
+                }
+
+                // Validate Email
+                var email = document.querySelector("#Email").value;
+                var emailError = document.querySelector("#emailError");
+                var emailRegex = /^[^\s]+[^\s]+\.[^\s]+$/;
+                if (email.trim() === "") {
+                    emailError.textContent = "Email is required.";
+                    isValid = false;
+                } else if (!emailRegex.test(email)) {
+                    emailError.textContent = "Invalid email format.";
+                    isValid = false;
+                } else {
+                    emailError.textContent = "";
+                }
+
+                // Validate Password
+                var password = document.querySelector("#Password").value;
+                var passwordError = document.querySelector("#passwordError");
+                if (password.trim() === "") {
+                    passwordError.textContent = "Password is required.";
+                    isValid = false;
+                } else if (password.length < 6 || password.length > 40) {
+                    passwordError.textContent = "Password should be between 6 and 40 characters.";
+                    isValid = false;
+                } else {
+                    passwordError.textContent = "";
+                }
+
+                // Validate Status
+                var status = document.querySelector("#Status").checked;
+                var statusError = document.querySelector("#statusError");
+                // Assuming Status is a boolean and no additional validation needed
+                statusError.textContent = "";
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
