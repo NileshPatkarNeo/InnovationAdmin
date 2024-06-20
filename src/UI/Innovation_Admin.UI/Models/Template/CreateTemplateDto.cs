@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,16 +10,17 @@ namespace Innovation_Admin.UI.Models.Template
     {
         [JsonProperty("name")]
         [Required(ErrorMessage = "Name is required.")]
-        [StringLength(50, ErrorMessage = "Name must be 50 characters or less.")]
+        [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
+        [Remote(action: "IsTemplateNameUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
+        [StringLength(50, ErrorMessage = "Name cannot exceed 50 characters..")]
         public string Name { get; set; }
 
-        //[JsonProperty("pdfTemplateFile")]
         [Display(Name = "Pdf Template File")]
         public string? PdfTemplateFile { get; set; }
 
         [JsonProperty("domain")]
         [Required(ErrorMessage = "Domain is required.")]
-        [StringLength(50, ErrorMessage = "Domain must be 50 characters or less.")]
+        [StringLength(50, ErrorMessage = "Domain cannot exceed 50 characters..")]
         public string Domain { get; set; }
 
         [JsonProperty("size")]

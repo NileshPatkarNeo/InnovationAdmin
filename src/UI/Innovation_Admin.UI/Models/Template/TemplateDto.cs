@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Innovation_Admin.UI.Models.Template
@@ -11,11 +13,13 @@ namespace Innovation_Admin.UI.Models.Template
 
         [JsonProperty("name")]
         [Required(ErrorMessage = "Name is required.")]
+        [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
+        [Remote(action: "IsTemplateNameUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
         [StringLength(50, ErrorMessage = "Name must be 50 characters or less.")]
         public string Name { get; set; }
 
         [JsonProperty("pdfTemplateFile")]
-        [Display(Name = "Pdf Template File")]
+        [DisplayName("pdf Template File")]
         public string? PdfTemplateFile { get; set; }
 
         [JsonProperty("domain")]
@@ -27,8 +31,7 @@ namespace Innovation_Admin.UI.Models.Template
 
         public string? Size { get; set; }
 
-        [Display(Name = "Pdf File")]
-
+        [DisplayName("Pdf File")]
         public IFormFile? PdfFile { get; set; }
 
 

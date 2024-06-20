@@ -707,6 +707,15 @@ namespace Innovation_Admin.UI.Controllers
             return View();
         }
 
+        public async Task<IActionResult> IsNameUnique(string name, Guid id)
+        {
+            var allQuotes = await _common.GetAllQuotes();
+            var isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && quote.ID != id);
+
+            return Json(isUnique);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateQuote(CreateQuoteDto quote)
@@ -723,7 +732,7 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the quote.");
                 }
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Quotes Successfully Added";
 
                 return RedirectToAction("Quotes");
             }
@@ -750,7 +759,7 @@ namespace Innovation_Admin.UI.Controllers
                 return View(updatedQuote);
             }
 
-            TempData["Message"] = "Updated Successfully";
+            TempData["Message"] = "Quotes Successfully Updated";
 
 
             return RedirectToAction("Quotes");
@@ -1206,6 +1215,14 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllTemplates);
         }
 
+        public async Task<IActionResult> IsTemplateNameUnique(string name, Guid id)
+        {
+            var allTemplates = await _common.GetAllTemplates();
+            var isUnique = !allTemplates.Any(template => template.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && template.ID != id);
+
+            return Json(isUnique);
+        }
+
         [HttpGet]
         public IActionResult CreateTemplate()
         {
@@ -1231,7 +1248,7 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     await template.PdfFile.CopyToAsync(fileStream);
                 }
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Template Successfully Added";
 
                 return RedirectToAction("Templates");
             }
@@ -1277,7 +1294,7 @@ namespace Innovation_Admin.UI.Controllers
                 }
 
                 var response = await _common.UpdateTemplate(updatedTemplate);
-                TempData["Message"] = "Updated Successfully";
+                TempData["Message"] = "Template Successfully Updated";
 
                 return RedirectToAction("Templates");
             }

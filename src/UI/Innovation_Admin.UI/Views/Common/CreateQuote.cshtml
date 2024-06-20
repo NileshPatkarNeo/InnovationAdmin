@@ -4,7 +4,12 @@
     ViewData["Title"] = "CreateQuote";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
+<head>
 <link rel="stylesheet" href="~/css/Quotes/CreateQuote.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</head>
 <body>
 <h1 class="text-center">Create Quote</h1>
 
@@ -29,7 +34,7 @@
 
                 <div class="form-group mb-3">
                     <label asp-for="Name" class="control-label">
-                        Name <span class="text-danger">*</span>
+                        Quote <span class="text-danger">*</span>
                     </label>
                     <input asp-for="Name" class="form-control" maxlength="101" required id="Name" onkeypress="return onlyAlphabets(event,this);" />
                     <span asp-validation-for="Name" class="text-danger"></span>
