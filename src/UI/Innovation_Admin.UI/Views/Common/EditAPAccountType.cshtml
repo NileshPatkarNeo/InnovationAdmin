@@ -16,7 +16,7 @@
             <div class="card-body">
                 <form asp-action="EditAPAccountType" novalidate>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
+                    <div class="form-group" style="display:none">
                         <label asp-for="ID" class="control-label">ID</label>
                         <input asp-for="ID" class="form-control" readonly />
                         <span asp-validation-for="ID" class="text-danger"></span>

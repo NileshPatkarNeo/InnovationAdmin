@@ -966,11 +966,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateDataSource(data);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "DataSource Successfully Added";
                 return RedirectToAction("DataSource");
 
             }
-            else if (result.Message == "Failed to add group.")
+            else if (result.Message == "Failed to add DataSource")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("DataSource");
@@ -993,11 +993,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateDataSource(updatedData);
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "DataSource Successfully Updated";
                 return RedirectToAction("DataSource");
 
             }
-            else if (result.Message == "Failed to add.")
+            else if (result.Message == "Failed to add DataSource.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("DataSource");
@@ -1049,11 +1049,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateBillingMethodType(billing);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "BillingMethodType Successfully Added";
                 return RedirectToAction("BillingMethodType");
 
             }
-            else if (result.Message == "Failed to add group.")
+            else if (result.Message == "Failed to add BillingMethodType.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("BillingMethodType");
@@ -1076,11 +1076,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateBillingMethodType(updatedBillingMethodType);
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "BillingMethodType Successfully Updated";
                 return RedirectToAction("BillingMethodType");
 
             }
-            else if (result.Message == "Failed to add.")
+            else if (result.Message == "Failed to add BillingMethodType.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("BillingMethodType");
@@ -1133,11 +1133,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateAPAccountType(apaccount);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "APAccountType Successfully Added";
                 return RedirectToAction("APAccountType");
 
             }
-            else if (result.Message == "Failed to add group.")
+            else if (result.Message == "Failed to add APAccountType.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("APAccountType");
@@ -1160,11 +1160,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateAPAccountType(updatedaccount);
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "APAccountType Successfully Updated";
                 return RedirectToAction("APAccountType");
 
             }
-            else if (result.Message == "Failed to add.")
+            else if (result.Message == "Failed to add APAccountType.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("APAccountType");
