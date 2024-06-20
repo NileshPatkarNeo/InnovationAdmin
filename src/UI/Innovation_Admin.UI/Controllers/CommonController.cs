@@ -1411,6 +1411,15 @@ namespace Innovation_Admin.UI.Controllers
 
 
         [HttpGet]
+        public async Task<IActionResult> IsGroupCodeUnique(int groupCode, Guid id)
+        {
+            var allGroups = await _common.GetAllDoNotTakeGroups(); 
+            var isUnique = !allGroups.Any(group => group.GroupCode == groupCode && group.Id != id);
+
+            return Json(isUnique);
+        }
+
+        [HttpGet]
         public IActionResult CreateDoNotTakeGroup()
         {
             return View();
@@ -1454,7 +1463,7 @@ namespace Innovation_Admin.UI.Controllers
                 return RedirectToAction("DoNotTakeGroup");
 
             }
-            else if (result.Message != "Failed to add Receipt BAtch.")
+            else if (result.Message != "Failed to update Group.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("DoNotTakeGroup");
