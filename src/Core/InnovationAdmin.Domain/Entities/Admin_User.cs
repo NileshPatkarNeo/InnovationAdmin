@@ -20,7 +20,7 @@ namespace InnovationAdmin.Domain.Entities
         public string Password { get; set; }
 
         [Required]
-        public int Role { get; set; }
+        public Guid Role { get; set; }
 
         [Required]
         [EmailAddress]

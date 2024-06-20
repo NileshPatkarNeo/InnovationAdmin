@@ -18,7 +18,7 @@ namespace InnovationAdmin.Application.Features.Admin_Users.Commands.CreateAdmin_
         public string Password { get; set; }
 
       
-        public int Role { get; set; }
+        public Guid Role { get; set; }
 
        
         public string Email { get; set; }

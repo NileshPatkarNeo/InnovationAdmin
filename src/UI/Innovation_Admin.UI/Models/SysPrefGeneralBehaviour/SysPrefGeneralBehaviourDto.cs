@@ -36,5 +36,10 @@ namespace Innovation_Admin.UI.Models.SysPrefGeneralBehaviour
         [Required(ErrorMessage = "User Timeout is required")]
         [Range(1, 7200, ErrorMessage = "user_Timeout must be between 1-7200")]
         public int User_Timeout { get; set; }
+
+        [Required(ErrorMessage = "Message is Required")]
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }

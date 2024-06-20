@@ -1,3 +1,5 @@
+
+
 document.getElementById("createAdminRoleForm").addEventListener("submit", function (event) {
     let isValid = true;
 
@@ -12,6 +14,24 @@ document.getElementById("createAdminRoleForm").addEventListener("submit", functi
         roleNameError.textContent = "Role Name cannot exceed 20 characters.";
         isValid = false;
     }
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    } 
 
     // Description Validation
     const descriptionInput = document.getElementById("Description");
@@ -38,3 +58,4 @@ document.getElementById("Role_Name").addEventListener("input", function () {
 document.getElementById("Description").addEventListener("input", function () {
     document.getElementById("Description_error").textContent = "";
 });
+
