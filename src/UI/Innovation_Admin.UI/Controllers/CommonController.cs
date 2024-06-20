@@ -26,6 +26,7 @@ using Innovation_Admin.UI.Models.CorrespondenceNote;
 using Innovation_Admin.UI.Models.DoNotTakeGroup;
 using System.ComponentModel.Design;
 using Innovation_Admin.UI.Services.Repositories;
+using System.Xml.Linq;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -160,7 +161,14 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllAdminUser);
         }
 
-
+        [HttpGet]
+        public async Task<JsonResult> IsAdminUserUnique(string user_Name, Guid id)
+        {
+            var alladmin = await _common.GetAllAdminUser();
+            var isUnique = !alladmin.Any(admin => admin.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && admin.User_ID != id);
+        
+            return Json(isUnique);
+        }
 
         [HttpGet]
         public async Task<IActionResult>  CreateAdminUser()

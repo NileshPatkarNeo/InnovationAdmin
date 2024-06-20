@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Files\" />
+    <Folder Include="wwwroot\js\AdminUser\" />
     <Folder Include="wwwroot\js\PharmacyType\" />
   </ItemGroup>
 

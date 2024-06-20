@@ -7,37 +7,37 @@
 
 <h1>Create Admin User</h1>
 
+
 <hr />
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <form id="createAdminUserForm" asp-action="CreateAdminUser" novalidate>
+                <form id="createAdminUserForm" asp-action="CreateAdminUser" autocomplete="off">
                     <div class="form-group">
                         <label asp-for="User_Name" class="control-label">User Name<span class="text-danger">*</span></label>
                         <input asp-for="User_Name" class="form-control" id="User_Name" />
-                        <span id="userNameError" class="text-danger"></span>
+                        <span asp-validation-for="User_Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Role" class="control-label">Role<span class="text-danger">*</span></label>
-                        <select asp-for="Role" class="form-control" asp-items="@ViewBag.RoleList" id="RoleId"></select>
-                        <span id="roleError" class="text-danger"></span>
+                        <select asp-for="Role" class="form-control" asp-items="@ViewBag.RoleList" id="Role"></select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label">Email<span class="text-danger">*</span></label>
                         <input asp-for="Email" class="form-control" id="Email" />
-                        <span id="emailError" class="text-danger"></span>
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password" class="control-label">Password<span class="text-danger">*</span></label>
                         <input asp-for="Password" class="form-control" id="Password" type="password" />
-                        <span id="passwordError" class="text-danger"></span>
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Status" id="Status" /> @Html.DisplayNameFor(model => model.Status)
-                        </label>
-                        <span id="statusError" class="text-danger"></span>
+                        <input class="form-check-input" asp-for="Status" id="Status" />
+                        <label class="form-check-label" for="Status">@Html.DisplayNameFor(model => model.Status)</label>
+                        <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
                     <div class="form-group d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
@@ -90,71 +90,8 @@
     }
 </style>
 
-@{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-@* <script src="~/js/CreateAdminUser.js">
-    
-</script> *@
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    var form = document.getElementById("createAdminUserForm");
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
-    form.addEventListener("submit", function (event) {
-        var isValid = true;
-
-        // Validate User Name
-        var userName = document.getElementById("User_Name").value;
-        var userNameError = document.getElementById("userNameError");
-        if (userName.trim() === "") {
-            userNameError.textContent = "User Name is required.";
-            isValid = false;
-        } else if (userName.length > 20) {
-            userNameError.textContent = "User Name should be 20 characters or less.";
-            isValid = false;
-        } else {
-            userNameError.textContent = "";
-        }
-
-        // Validate Email
-        var email = document.getElementById("Email").value;
-        var emailError = document.getElementById("emailError");
-          var emailRegex = /^[^\s]+[^\s]+\.[^\s]+$/;
-        if (email.trim() === "") {
-            emailError.textContent = "Email is required.";
-            isValid = false;
-        } else if (!emailRegex.test(email)) {
-            emailError.textContent = "Invalid email format.";
-            isValid = false;
-        } else if (!email.includes(".com")) {
-            emailError.textContent = "Email address must contain .com";
-            isValid = false;
-        } else {
-            emailError.textContent = "";
-        }
-
-        // Validate Password
-        var password = document.getElementById("Password").value;
-        var passwordError = document.getElementById("passwordError");
-        if (password.trim() === "") {
-            passwordError.textContent = "Password is required.";
-            isValid = false;
-        } else if (password.length < 6 || password.length > 40) {
-            passwordError.textContent = "Password should be between 6 and 40 characters.";
-            isValid = false;
-        } else {
-            passwordError.textContent = "";
-        }
-
-        // Validate Status
-        var statusError = document.getElementById("statusError");
-        // Assuming Status is a boolean and no additional validation needed
-        statusError.textContent = "";
-
-        if (!isValid) {
-            event.preventDefault();
-        }
-    });
-});
-
-</script>
+<script type="text/javascript" src="~/js/AdminUser/CreateAdminUser.js"></script>
