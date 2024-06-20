@@ -26,5 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!isValid) {
             event.preventDefault();
         }
+
+
+    });
+    document.getElementById("Name").addEventListener("input", function () {
+        document.getElementById("nameError").textContent = "";
     });
 });

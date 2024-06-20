@@ -27,4 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
         }
     });
+    document.getElementById("Name").addEventListener("input", function () {
+        document.getElementById("nameError").textContent = "";
+    });
 });
