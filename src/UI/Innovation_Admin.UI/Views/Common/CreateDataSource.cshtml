@@ -1,39 +1,49 @@
 ﻿@model Innovation_Admin.UI.Models.DataSource.CreateDataSourceDto
 
 @{
-    ViewData["Title"] = "CreateDataSource";
+    ViewData["Title"] = "Create DataSource";
     Layout = "_AdminHomePage";
 }
 
-<link rel="stylesheet" href="~/css/DataSource/CreateDataSource.css" />
+<head>
 
-<h1>Create Data Source</h1>
+    <link rel="stylesheet" href="~/css/DataSource/CreateDataSource.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <h1>Create Data Source</h1>
 
-<div class="d-flex justify-content-center align-items-start min-vh-100">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <form id="createDataSourceForm" asp-action="CreateDataSource" novalidate>
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
-                        <input asp-for="Name" class="form-control" maxlength="31" id="Name" />
-                        <span id="nameError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
-                        <a asp-action="DataSource" class="btn btn-secondary btn-lg flex-fill">Back</a>
-                    </div>
-                </form>
+    <div class="d-flex justify-content-center align-items-start min-vh-100">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                 
+                    <form id="createDataSourceForm" asp-action="CreateDataSource">
+                        <div class="form-group">
+                            
+                            <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
+
+                           
+                            <input asp-for="Name" class="form-control" maxlength="31" id="Name" />
+
+                         
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-between">
+                            
+                            <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
+
+                    
+                            <a asp-action="DataSource" class="btn btn-secondary btn-lg flex-fill">Back</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-
-<script type="text/javascript" src="~/js/DataSource/CreateDataSource.js">
-
-</script>
-
+    <script type="text/javascript" src="~/js/DataSource/CreateDataSource.js"></script>
+</body>

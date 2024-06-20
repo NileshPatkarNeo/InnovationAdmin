@@ -11,15 +11,14 @@
     if (name.trim() === "") {
         nameError.textContent = "Name is required.";
     isValid = false;
-    }
-    else if (!/^[a-zA-Z\s]*$/.test(name)) {
+    } else if (!/^[a-zA-Z\s]*$/.test(name)) {
         nameError.textContent = "Name can only contain characters.";
         isValid = false;
     } else if (name.length < 2) {
         nameError.textContent = "Name should be at least 2 characters.";
     isValid = false;
     } else if (name.length > 30) {
-        nameError.textContent = "Name should be at most 30 characters.";
+        nameError.textContent = "Name cannot exceed 30 characters.";
     isValid = false;
     }  else {
      nameError.textContent = "";

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace Innovation_Admin.UI.Models.BillingMethodType
@@ -11,10 +12,10 @@ namespace Innovation_Admin.UI.Models.BillingMethodType
 
         [JsonProperty("Name")]
         [Required(ErrorMessage = "Name is required.")]
-        [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters.")]
-        [MinLength(2, ErrorMessage = "Name should have at least 2 characters.")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Name can only contain alphanumeric characters and spaces.")]
-
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name can only contain characters")]
+        [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
+        [MaxLength(30, ErrorMessage = "Name cannot exceed 30 characters")]
+        [Remote(action: "IsBillingMethodTypeUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
         public string Name { get; set; }
 
         [StringLength(1000)]

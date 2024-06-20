@@ -1,46 +1,49 @@
 ﻿@model Innovation_Admin.UI.Models.APAccountType.APAccountTypeDto
 
 @{
-    ViewData["Title"] = "EditAPAccountType";
+    ViewData["Title"] = "Edit AP Account Type";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/APAccountType/EditAPAccountType.css" />
+<head>
+    <link rel="stylesheet" href="~/css/APAccountType/EditAPAccountType.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</head>
 
+<body>
+    <h1>Edit AP Account Type</h1>
+    <hr />
 
-<h1>Edit AP Account Type</h1>
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <form asp-action="EditAPAccountType" novalidate>
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group" style="display:none">
-                        <label asp-for="ID" class="control-label">ID</label>
-                        <input asp-for="ID" class="form-control" readonly />
-                        <span asp-validation-for="ID" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
-                        <input asp-for="Name" class="form-control" id="Name" />
-                        <span id="nameError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary btn-lg">Save</button>
-                        <a asp-action="APAccountType" class="btn btn-secondary btn-lg">Back</a>
-                    </div>
-                </form>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="EditAPAccountType" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>              
+                        <div class="form-group" style="display:none">
+                            <label asp-for="ID" class="control-label">ID</label>
+                            <input asp-for="ID" class="form-control" readonly />
+                            <span asp-validation-for="ID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
+                            <input asp-for="Name" class="form-control" id="Name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                            <a asp-action="APAccountType" class="btn btn-secondary btn-lg">Back</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+ 
 
-<script type="text/javascript" src="~/js/APAccountType/EditAPAccountType.js">
 
-</script>
-
+    <script type="text/javascript" src="~/js/APAccountType/EditAPAccountType.js"></script>
+</body>

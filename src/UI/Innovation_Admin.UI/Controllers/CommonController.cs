@@ -956,6 +956,15 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> IsNameUnique(string name, Guid id)
+        {
+            var allsource = await _common.GetAllDataSource();
+            var isUnique = !allsource.Any(group => group.Name ==name && group.ID != id);
+
+            return Json(isUnique);
+        }
+
+        [HttpGet]
         public IActionResult CreateDataSource()
         {
             return View();
@@ -1036,6 +1045,15 @@ namespace Innovation_Admin.UI.Controllers
         {
             var getAllBillingMethodType = await _common.GetAllBillingMethodType();
             return View(getAllBillingMethodType);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> IsBillingMethodTypeUnique(string name, Guid id)
+        {
+            var allBilling = await _common.GetAllBillingMethodType();
+            var isUnique = !allBilling.Any(billing => billing.Name == name && billing.ID != id);
+
+            return Json(isUnique);
         }
 
         [HttpGet]
@@ -1120,6 +1138,15 @@ namespace Innovation_Admin.UI.Controllers
         {
             var getAllAPAccountType = await _common.GetAllAPAccountType();
             return View(getAllAPAccountType);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> IsAPAccountNameUnique(string name, Guid id)
+        {
+            var allaacount = await _common.GetAllAPAccountType();
+            var isUnique = !allaacount.Any(account => account.Name == name && account.ID != id);
+
+            return Json(isUnique);
         }
 
         [HttpGet]
