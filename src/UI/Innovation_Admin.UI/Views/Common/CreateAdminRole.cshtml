@@ -4,7 +4,7 @@
     ViewData["Title"] = "CreateAdminRole";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
-
+<head>
 <style>
     h1.text-center,
     hr {
@@ -33,6 +33,11 @@
         }
 </style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
 <h1 class="text-center">Create Admin Role</h1>
 
 
@@ -83,24 +88,6 @@
         </div>
     </div>
 </div>
-    <script src="~/js/CreateAdminRole.js"></script>
-    <script>
-    function onlyAlphabets(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            }
-            else if (e) {
-                var charCode = e.which;
-            }
-            else { return true; }
-            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
-                return true;
-            else
-                return false;
-        }
-        catch (err) {
-            alert(err.Description);
-        }
-    }
-</script>
+</body>
+   <script src="~/js/CreateAdminRole.js"></script>
+   

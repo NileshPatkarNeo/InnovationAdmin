@@ -250,6 +250,14 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
+        public async Task<JsonResult> IsRoleNameUnique(string role_Name, Guid id)
+        {
+            var allRoles = await _common.GetAllAdminRoles();
+            var isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase) && role.Role_ID != id);
+
+            return Json(isUnique);
+        }
+
         [HttpGet]
         public IActionResult CreateAdminRole()
         {
