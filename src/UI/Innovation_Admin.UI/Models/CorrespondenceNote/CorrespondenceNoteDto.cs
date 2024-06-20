@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace Innovation_Admin.UI.Models.CorrespondenceNote
@@ -12,7 +13,10 @@ namespace Innovation_Admin.UI.Models.CorrespondenceNote
 
         [JsonProperty("note")]
         [Required(ErrorMessage = "Note is required")]
-        [StringLength(100, ErrorMessage = "Note cannot be longer than 100 characters")]
+        [MinLength(2, ErrorMessage = "Note should have at least 2 characters.")]
+        [StringLength(50, ErrorMessage = "Note cannot be longer than 50 characters")]
+        [RegularExpression(@"^[a-zA-Z0-9\s]*$", ErrorMessage = "Name can only contain alphanumeric characters and spaces.")]
+        [Remote(action: "IsNoteUnique", controller: "Common", ErrorMessage = "Note is already in use.")]
         public string Note { get; set; }
 
         [StringLength(1000)]

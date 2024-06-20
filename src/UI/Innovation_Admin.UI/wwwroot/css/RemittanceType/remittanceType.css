@@ -34,3 +34,56 @@ th {
 body {
     margin: 0px;
 }
+
+
+h1 {
+    text-align: center;
+}
+
+.table {
+    border: 1px solid #ddd;
+    align-content: center;
+}
+
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .table th {
+        cursor: pointer;
+    }
+
+.btn-warning .bi-pencil {
+    margin-right: 5px;
+}
+
+.btn-primary .bi-plus-lg {
+    margin-right: 5px;
+}
+
+.btn-warning, .btn-danger {
+    margin-right: 5px;
+}
+
+.btn-link {
+    padding: 0;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+}
+
+    .input-group-text .bi-search {
+        color: #000;
+    }
+
+body {
+    margin: 0px;
+}
