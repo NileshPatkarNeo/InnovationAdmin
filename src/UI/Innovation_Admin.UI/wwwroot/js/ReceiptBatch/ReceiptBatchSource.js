@@ -4,7 +4,6 @@ $("#ReceiptBatchSource").dataTable({
     pageLength: 5,
     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     paging: true,
-    sorting: true,
     serverSide: false,
     columns: [
         { name: "Id", orderable: true },
@@ -13,6 +12,7 @@ $("#ReceiptBatchSource").dataTable({
         { name: "Action", orderable: false }
     ]
 });
+
 
 function confirmDelete(receiptId) {
     Swal.fire({

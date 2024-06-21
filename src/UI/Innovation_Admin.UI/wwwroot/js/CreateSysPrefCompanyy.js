@@ -1,54 +1,55 @@
-﻿function validateCompanyName() {
-    var companyNameInput = document.getElementById('CompanyName');
-    var companyName = companyNameInput.value.trim();
-    if (companyName === '') {
-        document.getElementById('companyNameError').innerText = 'Company Name is required';
-        return false;
-
-    } else if (companyName.length > 40) {
-        document.getElementById('companyNameError').innerText = 'Company Name should be max 40 characters';
-        return false;
-    }
-    document.getElementById('companyNameError').innerText = '';
-    return true; 
-}
-
-function onlyAlphabets(e, t) {
+﻿// Function to ensure that only alphabets and spaces are entered
+function onlyAlphabets(event) {
     try {
-        if (window.event) {
-            var charCode = window.event.keyCode;
-        }
-        else if (e) {
-            var charCode = e.which;
-        }
-        else { return true; }
-        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+        var charCode = (event.which) ? event.which : event.keyCode;
+
+        // Allow space (charCode 32) and alphabet characters
+        if ((charCode >= 65 && charCode <= 90) || // A-Z
+            (charCode >= 97 && charCode <= 122) || // a-z
+            charCode === 32) { // Space
             return true;
-        else
-            return false;
-    }
-    catch (err) {
+        }
+        return false;
+    } catch (err) {
         alert(err.Description);
     }
 }
 
+// Function to validate Company Name
+function validateCompanyName() {
+    var companyName = document.getElementById('CompanyName').value.trim();
+    var errorElement = document.getElementById('companyNameError');
 
-function validateTermForPharmacy() {
-    var termForPharmacyInput = document.getElementById('TermForPharmacy');
-    var termForPharmacy = termForPharmacyInput.value.trim();
-    if (termForPharmacy === '') {
-        document.getElementById('termForPharmacyError').innerText = 'Term For Pharmacy is required';
+    if (companyName === '') {
+        errorElement.innerText = 'Company Name is required';
+        return false;
+    } else if (companyName.length > 40) {
+        errorElement.innerText = 'Company Name should be a maximum of 40 characters';
         return false;
     }
-    else if (termForPharmacy.length > 50) {
-        document.getElementById('termForPharmacyError').innerText = 'Term For Pharmacy should be max 50 characters';
-        return false;
-    }
-    document.getElementById('termForPharmacyError').innerText = '';
+
+    errorElement.innerText = '';
     return true;
 }
 
+// Function to validate Term For Pharmacy
+function validateTermForPharmacy() {
+    var termForPharmacy = document.getElementById('TermForPharmacy').value.trim();
+    var errorElement = document.getElementById('termForPharmacyError');
 
+    if (termForPharmacy === '') {
+        errorElement.innerText = 'Term For Pharmacy is required';
+        return false;
+    } else if (termForPharmacy.length > 50) {
+        errorElement.innerText = 'Term For Pharmacy should be a maximum of 50 characters';
+        return false;
+    }
+
+    errorElement.innerText = '';
+    return true;
+}
+
+// Function to validate the entire form
 function validateForm() {
     var isValid = true;
     isValid = validateCompanyName() && isValid;
@@ -56,11 +57,25 @@ function validateForm() {
     return isValid;
 }
 
+// Adding event listeners for real-time validation feedback
+document.getElementById('CompanyName').addEventListener('blur', validateCompanyName);
+document.getElementById('TermForPharmacy').addEventListener('blur', validateTermForPharmacy);
 
-document.getElementById('CompanyName').addEventListener('blur', function () {
-    validateCompanyName();
+// Ensure only alphabets and spaces are typed in the inputs
+document.getElementById('CompanyName').addEventListener('input', function (event) {
+    var input = event.target.value;
+    var regex = /^[a-zA-Z\s]*$/;
+
+    if (!regex.test(input)) {
+        event.target.value = input.replace(/[^a-zA-Z\s]/g, ''); // Remove invalid characters
+    }
 });
 
-document.getElementById('TermForPharmacy').addEventListener('blur', function () {
-    validateTermForPharmacy();
+document.getElementById('TermForPharmacy').addEventListener('input', function (event) {
+    var input = event.target.value;
+    var regex = /^[a-zA-Z\s]*$/;
+
+    if (!regex.test(input)) {
+        event.target.value = input.replace(/[^a-zA-Z\s]/g, ''); // Remove invalid characters
+    }
 });
