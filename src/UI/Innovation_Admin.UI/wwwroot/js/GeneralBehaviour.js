@@ -1,19 +1,21 @@
-$("#correspondenceNoteTable").dataTable({
+$("#generalBehaviour").dataTable({
     pageLength: 5,
     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     paging: true,
-    //sorting: true,
+    sorting: true,
     serverSide: false,
     columns: [
         { name: "Sr.No", orderable: true },
-        { name: "Note", orderable: true },
+        { name: "Records Locked Seconds", orderable: true },
+        { name: "User Timeout", orderable: true },
         { name: "Action", orderable: false }
     ]
 });
 
-function confirmDelete(noteId) {
+
+function confirmDelete(Preference_ID) {
     Swal.fire({
-        title: 'Are you sure to Delete ?',
+        title: 'Are you sure to Delete?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -23,9 +25,9 @@ function confirmDelete(noteId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/Common/DeleteCorrespondenceNote',
+                url: '/Common/DeleteSysPrefGeneralBehaviour',
                 type: 'POST',
-                data: { noteId: noteId },
+                data: { Preference_ID: Preference_ID },
                 success: function (response) {
                     if (response.success) {
                         Swal.fire(

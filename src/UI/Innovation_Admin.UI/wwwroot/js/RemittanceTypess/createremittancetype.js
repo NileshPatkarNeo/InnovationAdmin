@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             nameError.textContent = "Name should be at least 2 characters.";
             isValid = false;
         } else if (name.length > 30) {
-            nameError.textContent = "Note cannot exceed 30 characters.";
+            nameError.textContent = "Name cannot exceed 30 characters.";
             isValid = false;
         } else if (!/^[a-zA-Z\s]*$/.test(name)) {
             nameError.textContent = "Name can only contain letters and spaces.";

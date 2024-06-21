@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
         }
     });
-    //document.getElementById("Note").addEventListener("input", function () {
-    //    document.getElementById("nameError").textContent = "";
-    //});
+    document.getElementById("Note").addEventListener("input", function () {
+        document.getElementById("nameError").textContent = "";
+    });
 });
