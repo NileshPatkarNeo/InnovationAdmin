@@ -29,6 +29,7 @@ namespace Innovation_Admin.UI.Models.Template
         [NotMapped]
 
         [DisplayName("Pdf File")]
+        [Required(ErrorMessage = "Pdf File is required.")]
         public IFormFile PdfFile { get; set; }
 
        

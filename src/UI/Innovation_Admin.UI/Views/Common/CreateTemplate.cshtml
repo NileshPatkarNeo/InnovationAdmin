@@ -6,6 +6,8 @@
 }
 <head>
 <link href="~/css/Templates/CreateTemplate.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
@@ -43,7 +45,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="PdfFile" class="control-label">
-                        PdfFile <span class="text-danger">*</span>
+                        Pdf File <span class="text-danger">*</span>
                     </label>
                         <input type="file" asp-for="PdfFile" class="form-control" required id="PdfFile" accept="application/pdf" />
                     <span asp-validation-for="PdfFile" class="text-danger"></span>
@@ -53,12 +55,13 @@
                     <label asp-for="Domain" class="control-label">
                         Domain <span class="text-danger">*</span>
                     </label>
-                    <select asp-for="Domain" class="form-control" required>
+                        <select asp-for="Domain" class="form-control  form-select-md form-select" required>
                         <option value="">-- Select Domain --</option>
                         <option value="Default">Default</option>
                         <option value="PAYABLES">PAYABLES</option>
                         <option value="CLAIMLOADBATCH">CLAIMLOADBATCH</option>
                     </select>
+
                     <span asp-validation-for="Domain" class="text-danger"></span>
                     <span class="text-danger" id="Domain_error"></span>
                 </div>

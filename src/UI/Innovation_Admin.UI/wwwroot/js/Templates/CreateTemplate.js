@@ -9,11 +9,11 @@ $(function () {
 
         if (!file.type.match('application/pdf')) {
             alert("only PDF file");
-            $("#createTemplateForm").get(0).reset(); 
+            $("#createTemplateForm").get(0).reset();
             return;
         }
 
-      
+
     });
 });
 
@@ -39,10 +39,7 @@ document.getElementById("createTemplateForm").addEventListener("submit", functio
     const nameInput = document.getElementById("Name");
     const nameError = document.getElementById("Name_error");
     nameError.textContent = "";
-    if (nameInput.value.trim() === "") {
-        nameError.textContent = "Name is required.";
-        isValid = false;
-    } else if (nameInput.value.length > 50) {
+    if (nameInput.value.length > 50) {
         nameError.textContent = "Name cannot exceed 50 characters.";
         isValid = false;
     } else if (nameInput.length < 2) {

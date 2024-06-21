@@ -613,6 +613,13 @@ namespace Innovation_Admin.UI.Controllers
             var getAllSysPrefFinancials = await _common.GetAllSysPrefFinancials();
             return View(getAllSysPrefFinancials);
         }
+        public async Task<JsonResult> IsCompanyNameUnique(string companyName, Guid id)
+        {
+            var allFinancials = await _common.GetAllSysPrefFinancials();
+            var isUnique = !allFinancials.Any(financial => financial.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase) && financial.CompanyID != id);
+
+            return Json(isUnique);
+        }
 
         [HttpGet]
         public async Task<IActionResult> CreateSysPrefFinancial()

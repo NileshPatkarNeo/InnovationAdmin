@@ -50,6 +50,10 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </head>
 
 <h1 class="text-center">Create System Preference Financial</h1>
@@ -72,13 +76,12 @@
 
                             <div class="form-group mb-3">
                                 <label asp-for="DefaultPaymentMethod" class="control-label">Default Payment Method <span class="text-danger">*</span></label>
-                                <select asp-for="DefaultPaymentMethod" class="form-control" id="DefaultPaymentMethod">
+                                <select asp-for="DefaultPaymentMethod" class="form-control  form-select-md form-select" id="DefaultPaymentMethod">
                                     <option value="">-- Select Payment Method --</option>
                                     <option value="Net Banking">Net Banking</option>
                                     <option value="UPI">UPI</option>
                                     <option value="Cash">Cash</option>
                                 </select>
-                                <i class="fas fa-chevron-down dropdown-icon"></i>
                                 <span id="defaultPaymentMethodError" class="error-message"></span>
                             </div>
 
