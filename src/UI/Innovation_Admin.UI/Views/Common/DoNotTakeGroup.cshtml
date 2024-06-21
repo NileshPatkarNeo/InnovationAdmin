@@ -21,7 +21,6 @@
 
         .table {
             margin-top: 20px;
-            /*  border: 1px solid #dee2e6; */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             background-color: #fff;
             width: 100%;
@@ -81,7 +80,7 @@
 </head>
 <body>
     <h1>Do Not Take Groups</h1>
-    <div style="height:50px; margin:0 20px">
+    <div style="height:50px; margin:0">
         <p>
             <a asp-action="CreateDoNotTakeGroup" class="btn btn-primary float-end"> <i class="bi bi-plus-circle"></i>Add</a>
         </p>
@@ -97,7 +96,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.GroupName)
                 </th>
-                <th></th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>

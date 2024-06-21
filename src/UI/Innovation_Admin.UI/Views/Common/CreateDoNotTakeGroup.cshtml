@@ -7,7 +7,6 @@
 
 <head>
     <link href="~/css/DoNotTakeGroup/CreateDoNotTakeGroup.css" rel="stylesheet" />
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
@@ -31,17 +30,38 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="GroupName" class="control-label"></label>
-                    <input id="groupName" asp-for="GroupName" class="form-control" maxlength="50" onkeypress="return onlyAlphabets(event,this); " />
-                    <span asp-validation-for="GroupName" class="text-danger"></span>
+                    <input id="groupName" asp-for="GroupName" class="form-control" maxlength="50" onkeypress="return onlyAlphabets(event,this);" />
                     <div id="groupNameError" class="error-message"></div>
                 </div>
 
                 <div class="btn-container">
-                    <input type="submit" value="Create" class="btn btn-primary test" />
-                    <a asp-action="DoNotTakeGroup" class="btn btn-secondary test">Back</a>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="DoNotTakeGroup" class="btn btn-secondary">Back</a>
                 </div>
             </form>
         </div>
     </div>
-    </body>
-    <script src="~/js/DoNotTakeGroups/CreateDoNotTakeGroups.js"></script>
+
+   
+
+    <script>
+        function onlyAlphabets(e, t) {
+            try {
+                if (window.event) {
+                    var charCode = window.event.keyCode;
+                }
+                else if (e) {
+                    var charCode = e.which;
+                }
+                else { return true; }
+                if (charCode < 48  && charCode < 57)
+                    return true;
+                else
+                    return false;
+            }
+            catch (err) {
+                alert(err.Description);
+            }
+        }
+    </script>
+</body>

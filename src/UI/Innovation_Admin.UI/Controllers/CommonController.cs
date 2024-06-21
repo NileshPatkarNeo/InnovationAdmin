@@ -24,6 +24,8 @@ using Innovation_Admin.UI.Models.BillingMethodType;
 using Innovation_Admin.UI.Models.APAccountType;
 using Innovation_Admin.UI.Models.CorrespondenceNote;
 using Innovation_Admin.UI.Models.DoNotTakeGroup;
+using System.ComponentModel.Design;
+using Innovation_Admin.UI.Services.Repositories;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -61,6 +63,7 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> SysPrefCompany()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefCompanies();
+           
             return View(getAllSysPrefCompanies);
         }
 
@@ -83,10 +86,15 @@ namespace Innovation_Admin.UI.Controllers
 
 
             var result = await _common.CreateSysPrefCompany(company);
-
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
-                ModelState.AddModelError(string.Empty, result.Message ?? "An error occurred while creating the SysPrefCompany.");
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("SysPrefCompany");
+
+            }
+            else if (result.Message == "Failed to add company.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("SysPrefCompany");
             }
             return RedirectToAction("SysPrefCompany");
@@ -97,22 +105,48 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditSysPrefCompany([FromQuery] string companyId)
         {
             var sysPrefCompany = await _common.GetSysPrefCompanyById(Guid.Parse(companyId));
+
             return View(sysPrefCompany.Data);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+     
         public async Task<IActionResult> EditSysPrefCompany(SysPrefCompanyDto updatedCompany)
         {
             var result = await _common.UpdateSysPrefCompany(updatedCompany);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("SysPrefCompany");
+
+            }
+            else if (result.Message == "Failed to Update company.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("SysPrefCompany");
+            }
             return RedirectToAction("SysPrefCompany");
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteSysPrefCompany(Guid companyId)
+        //{
+        //    var isDeleted = await _common.DeleteSysPrefCompany(companyId);
+        // return RedirectToAction("SysPrefCompany");
+        //}
         [HttpPost]
         public async Task<IActionResult> DeleteSysPrefCompany(Guid companyId)
         {
-            var isDeleted = await _common.DeleteSysPrefCompany(companyId);
-            return RedirectToAction("SysPrefCompany");
+            bool isDeleted = await _common.DeleteSysPrefCompany(companyId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the Company Details" });
+            }
         }
 
         #endregion
@@ -129,41 +163,39 @@ namespace Innovation_Admin.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult CreateAdminUser()
+        public async Task<IActionResult>  CreateAdminUser()
         {
+            var getAllAdminRoles = await _common.GetAllAdminRoles();
+            ViewBag.RoleList = new SelectList(getAllAdminRoles, "Role_ID", "Role_Name");
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateAdminUser(CreateAdminUserDto company)
         {
-
+          
             var result = await _common.CreateAdminUser(company);
-
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("AdminUser");
 
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
-
-
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("AdminUser");
             }
-
-
             return RedirectToAction("AdminUser");
+
         }
 
         [HttpGet]
         public async Task<IActionResult> EditAdminUser([FromQuery] string adminId)
         {
             var sysPrefCompany = await _common.GetAdminUserById(Guid.Parse(adminId));
+            var getAllAdminRoles = await _common.GetAllAdminRoles();
+            ViewBag.RoleList = new SelectList(getAllAdminRoles, "Role_ID", "Role_Name");
             return View(sysPrefCompany.Data);
         }
 
@@ -171,28 +203,38 @@ namespace Innovation_Admin.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditAdminUser(AdminUserDto updatedAdmin)
         {
+
             var result = await _common.UpdateAdminUser(updatedAdmin);
-
-
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin);
-            }
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("AdminUser");
 
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("AdminUser");
+            }
             return RedirectToAction("AdminUser");
+  
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteAdminUser(Guid companyId)
         {
-            var isDeleted = await _common.DeleteAdminUser(companyId);
-            if (!isDeleted)
-            {
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            bool isDeleted = await _common.DeleteAdminUser(companyId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("AdminUser");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+  
         }
 
 
@@ -219,19 +261,15 @@ namespace Innovation_Admin.UI.Controllers
 
             var result = await _common.CreateAdminRole(adminRole);
 
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("AdminRole");
 
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the AdminRole.");
-                }
-
+            }
+            else if (result.Message == "Failed to add company.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("AdminRole");
             }
 
@@ -251,27 +289,38 @@ namespace Innovation_Admin.UI.Controllers
         {
             var result = await _common.UpdateAdminRole(updatedAdminRole);
 
-
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdminRole);
+                TempData["Message"] = "Updated Successfully ";
+                return RedirectToAction("AdminRole");
+
+            }
+            else if (result.Message == "Failed to Update company.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("AdminRole");
             }
 
             return RedirectToAction("AdminRole");
         }
+
+       
 
         [HttpPost]
         public async Task<IActionResult> DeleteAdminRole(Guid adminRoleId)
         {
-            var isDeleted = await _common.DeleteAdminRole(adminRoleId);
-            if (!isDeleted)
-            {
+            bool isDeleted = await _common.DeleteAdminRole(adminRoleId);
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the adminRole.");
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("AdminRole");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the admin role." });
+            }
         }
+
 
         #endregion
 
@@ -293,12 +342,19 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefGeneralBehaviour(CreateSysPrefGeneralBehaviourDto company)
         {
-            if (!ModelState.IsValid)
-            {
-
-                return View(company);
-            }
+           
             var result = await _common.CreateSysPrefGeneralBehaviour(company);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("SysPrefGeneralBehaviour");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("SysPrefGeneralBehaviour");
+            }
             return RedirectToAction("SysPrefGeneralBehaviour");
         }
 
@@ -319,7 +375,26 @@ namespace Innovation_Admin.UI.Controllers
             return View(sysPrefCompany.Data);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSysPrefGeneralBehaviour(SysPrefGeneralBehaviourDto updatedCompany)
+        {
+             var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
 
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("SysPrefGeneralBehaviour");
+
+            }
+            else if (result.Message == "Failed to update.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("SysPrefGeneralBehaviour");
+            }
+
+            return RedirectToAction("SysPrefGeneralBehaviour");
+        }
 
         [HttpGet]
         public async Task<IActionResult> SysPrefGeneralBehaviourDetails(Guid Preference_ID)
@@ -338,39 +413,24 @@ namespace Innovation_Admin.UI.Controllers
             return View(sysPrefGeneralBehaviour.Data);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSysPrefGeneralBehaviour(SysPrefGeneralBehaviourDto updatedCompany)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(updatedCompany);
-            }
-
-            var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
-
-            if (!result.IsSuccess)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedCompany);
-            }
-
-            return RedirectToAction("SysPrefGeneralBehaviour");
-        }
-
-
-
+       
         [HttpPost]
         public async Task<IActionResult> DeleteSysPrefGeneralBehaviour(Guid Preference_ID)
         {
-            var isDeleted = await _common.DeleteSysPrefGeneralBehaviour(Preference_ID);
-            if (!isDeleted)
-            {
+            bool isDeleted = await _common.DeleteSysPrefGeneralBehaviour(Preference_ID);
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the GeneralBehaviour.");
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("SysPrefGeneralBehaviour");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the admin role." });
+            }
+
         }
+
+      
 
         #endregion
 
@@ -393,21 +453,21 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePharmacyGroup(PharmacyGroupDto group)
         {
+            
             if (!ModelState.IsValid)
+                {
+                   return View(group); 
+              }
+                var result = await _common.CreatePharmacyGroup(group);
+            if (result.Message == null)
             {
-                return View(group);
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("PharmacyGroups");
+
             }
-            var result = await _common.CreatePharmacyGroup(group);
-            if (!result.IsSuccess)
+            else if (result.Message == "Failed to add group.")
             {
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the Pharmacy Group.");
-                }
+                TempData["Message"] = result.Message;
                 return RedirectToAction("PharmacyGroups");
             }
             return RedirectToAction("PharmacyGroups");
@@ -443,10 +503,16 @@ namespace Innovation_Admin.UI.Controllers
 
             var result = await _common.UpdatePharmacyGroup(updatedgroup);
 
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedgroup);
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("PharmacyGroups");
+
+            }
+            else if (result.Message == "Failed to add group.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("PharmacyGroups");
             }
 
             return RedirectToAction("PharmacyGroups");
@@ -457,13 +523,23 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeletePharmacyGroup(Guid Id)
         {
-            var isDeleted = await _common.DeletePharmacyGroup(Id);
-            if (!isDeleted)
-            {
+            //var isDeleted = await _common.DeletePharmacyGroup(Id);
+            //if (!isDeleted)
+            //{
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the group.");
+            //    ModelState.AddModelError(string.Empty, "Failed to delete the group.");
+            //}
+            //return RedirectToAction("PharmacyGroups");
+            bool isDeleted = await _common.DeletePharmacyGroup(Id);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("PharmacyGroups");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
         }
 
 
@@ -554,6 +630,9 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefFinancial.");
                 }
+
+                TempData["Message"] = "Successfully Added";
+
                 return RedirectToAction("SysPrefFinancial");
             }
             return RedirectToAction("SysPrefFinancial");
@@ -578,6 +657,8 @@ namespace Innovation_Admin.UI.Controllers
                 ModelState.AddModelError(string.Empty, result.Message);
                 return View(updatedFinancial);
             }
+            TempData["Message"] = "Updated Successfully ";
+
             return RedirectToAction("SysPrefFinancial");
         }
 
@@ -603,11 +684,14 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteSysPrefFinancial(Guid financialId)
         {
             var isDeleted = await _common.DeleteSysPrefFinancial(financialId);
-            if (!isDeleted)
+            if (isDeleted)
             {
-                ModelState.AddModelError(string.Empty, "Failed to delete the financial record.");
+                return Json(new { success = true });
             }
-            return RedirectToAction("SysPrefFinancial");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the financial." });
+            }
         }
 
         #endregion
@@ -629,28 +713,20 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> CreateSysPrefSecurityEmail(CreateSysPrefSecurityEmailDto email)
         {
-
             var result = await _common.CreateSysPrefSecurityEmail(email);
-
-            if (!result.IsSuccess)
+            if (result.Message == null)
             {
+                TempData["Message"] = "Successfully Added";
+                return RedirectToAction("SysPrefSecurityEmail");
 
-                if (result.Message != null)
-                {
-                    ModelState.AddModelError(string.Empty, result.Message);
-                }
-                else
-                {
-
-                    ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefCompany.");
-                }
-
-
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
                 return RedirectToAction("SysPrefSecurityEmail");
             }
-
-
             return RedirectToAction("SysPrefSecurityEmail");
+
         }
 
         [HttpGet]
@@ -665,28 +741,35 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> EditSysPrefSecurityEmail(SysPrefSecurityEmailDto updatedAdmin)
         {
             var result = await _common.UpdateSysPrefSecurityEmail(updatedAdmin);
-
-
-            if (!result.IsSuccess)
+            if (result.Message != null)
             {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(updatedAdmin);
-            }
+                TempData["Message"] = "Successfully Updated";
+                return RedirectToAction("SysPrefSecurityEmail");
 
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("SysPrefSecurityEmail");
+            }
             return RedirectToAction("SysPrefSecurityEmail");
+
         }
 
 
         [HttpPost]
         public async Task<IActionResult> DeleteSysPrefSecurityEmail(Guid emailId)
         {
-            var isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
-            if (!isDeleted)
-            {
+            bool isDeleted = await _common.DeleteSysPrefSecurityEmail(emailId);
 
-                ModelState.AddModelError(string.Empty, "Failed to delete the company.");
+            if (isDeleted)
+            {
+                return Json(new { success = true });
             }
-            return RedirectToAction("SysPrefSecurityEmail");
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
         }
 
         #endregion
@@ -880,6 +963,34 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllReceiptBatch);
         }
 
+
+        //[HttpGet]
+        //public async Task<IActionResult> IsBatchUnique(string name, Guid id)
+        //{
+        //    var allbatch = await _common.GetAllReceiptBatchSource();
+        //    var isUnique = !allbatch.Any(batch => batch.Name == name && batch.Id != id);
+
+        //    return Json(isUnique);
+        //}
+
+        public async Task<IActionResult> IsBatchUnique(string name, Guid id)
+        {
+            var allbatch = await _common.GetAllReceiptBatchSource();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
         [HttpGet]
         public IActionResult CreateReceiptBatchSource()
         {
@@ -892,7 +1003,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateReceiptBatchSource(batch);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Receipt Batch Successfully Added";
                 return RedirectToAction("ReceiptBatchSource");
 
             }
@@ -918,11 +1029,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateReceiptBatchSource(updatedBatch);
             if (result.Message == null)
             {
-                TempData["Message"] = "Receipt batch updated successfully";
+                TempData["Message"] = "Receipt Batch Successfully Updated";
                 return RedirectToAction("ReceiptBatchSource");
 
             }
-            else if (result.Message != "Failed to add Receipt BAtch.")
+            else if (result.Message != "Failed to add Receipt Batch.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("ReceiptBatchSource");
@@ -1409,15 +1520,14 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllDoNotTakeGroup);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> IsGroupCodeUnique(int groupCode, Guid id)
         {
-            var allGroups = await _common.GetAllDoNotTakeGroups(); 
+            var allGroups = await _common.GetAllDoNotTakeGroups();
             var isUnique = !allGroups.Any(group => group.GroupCode == groupCode && group.Id != id);
-
             return Json(isUnique);
         }
+
 
         [HttpGet]
         public IActionResult CreateDoNotTakeGroup()

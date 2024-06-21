@@ -18,12 +18,12 @@
         h1 {
             text-align: center;
             color: #333;
-            margin-top: 20px;
+           
             font-size: 2em;
         }
 
         .table {
-            margin-top: 20px;
+            margin-top: 10px;
             /*  border: 1px solid #dee2e6; */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             background-color: #fff;
@@ -34,26 +34,27 @@
             .table th,
             .table td {
                 vertical-align: middle;
-                text-align: center;
+                text-align: left;
                 padding: 10px;
             }
 
             .table th {
-                background-color: #f8f9fa;
-                border: 1px solid #dee2e6;
+                background-color: lightgray;
+                text-align:center;
+           
             }
 
-            .table td {
-                border: 1px solid #dee2e6;
-            }
+       
 
                 /* Define fixed widths */
                 .table th:nth-child(1), .table td:nth-child(1) {
-                    width: 80px; /* Fixed width for Sr. No column */
+                    width: 80px;
+                    text-align:center;
                 }
 
                 .table th:nth-child(4), .table td:nth-child(4) {
-                    width: 150px; /* Fixed width for Action column */
+                    width: 150px;
+                    text-align:center;/* Fixed width for Action column */
                 }
 
         .btn {
@@ -79,7 +80,7 @@
 <body>
     <h1>Receipt Batch Source</h1>
 
-    <div style="height:50px; margin:0 20px">
+    <div style="height:40px; margin:0 0">
         <p>
             <a asp-action="CreateReceiptBatchSource" class="btn btn-primary float-end">
                 <i class="bi bi-plus-circle"></i> Add
@@ -87,7 +88,7 @@
         </p>
     </div>
 
-    <table id="ReceiptBatchSource" class="table">
+    <table id="ReceiptBatchSource" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Sr.No</th>
@@ -100,7 +101,7 @@
             @foreach (var (item, index) in Model.Select((value, i) => (value, i)))
             {
                 <tr>
-                    <td>@(index + 1)</td>
+                    <td>@((index + 1).ToString())</td>
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Type)</td>
                     <td>

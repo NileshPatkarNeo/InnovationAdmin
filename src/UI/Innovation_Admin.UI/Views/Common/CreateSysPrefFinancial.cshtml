@@ -6,7 +6,7 @@
 }
 
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         h1.text-center, h4.text-center {
             margin-bottom: 20px;
@@ -14,7 +14,22 @@
 
         .form-group {
             margin-bottom: 1rem;
+            position: relative;
         }
+
+            .form-group select {
+                padding-right: 30px; /* To make room for the icon */
+                appearance: none; /* Remove default dropdown arrow */
+            }
+
+            .form-group .dropdown-icon {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                pointer-events: none; /* So the icon does not block the dropdown interaction */
+                font-size: 1.2em; /* Adjust the size as needed */
+            }
 
         .btn {
             display: inline-flex;
@@ -51,6 +66,7 @@
                             <div class="form-group mb-3">
                                 <label asp-for="CompanyID" class="control-label">Company <span class="text-danger">*</span></label>
                                 <select asp-for="CompanyID" class="form-control" asp-items="@ViewBag.CompanyList" id="CompanyID"></select>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
                                 <span id="companyIDError" class="text-danger"></span>
                             </div>
 
@@ -62,6 +78,7 @@
                                     <option value="UPI">UPI</option>
                                     <option value="Cash">Cash</option>
                                 </select>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
                                 <span id="defaultPaymentMethodError" class="error-message"></span>
                             </div>
 

@@ -1,13 +1,14 @@
 ﻿@model Innovation_Admin.UI.Models.SysPrefCompany.SysPrefCompanyDto
+
 @{
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
-<style>
-    body
-    {
 
-    height:50vh;}
-    
+<style>
+    body {
+        height: 50vh;
+    }
+
     .test {
         margin-top: 30px;
     }
@@ -18,34 +19,34 @@
 </style>
 
 <body>
-<h1 class="text-center test">Create System Preference</h1>
+    <h1 class="text-center test">Create System Preference</h1>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 test2">
-            <div class="card bg-light shadow">
-                <div class="card-body">
-                    <form asp-action="CreateSysPrefCompany" method="post" id="createCompanyForm" onsubmit="return validateForm()">
-                        <div class="form-group mb-4">
-                            <label asp-for="CompanyName" class="control-label">Company Name <span class="text-danger">*</span></label>
-                            <input asp-for="CompanyName" id="CompanyName" class="form-control" maxlength="60" />
-                            <span id="companyNameError" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label asp-for="TermForPharmacy" class="control-label">Term For Pharmacy <span class="text-danger">*</span></label>
-                            <input asp-for="TermForPharmacy" id="TermForPharmacy" class="form-control" maxlength="60" />
-                            <span id="termForPharmacyError" class="text-danger"></span>
-                        </div>
-                        <div class="form-group text-center">
-                            <input type="submit" value="Create" class="btn btn-primary mr-3" />
-                            <a asp-action="SysPrefCompany" class="btn btn-secondary">Back</a>
-                        </div>
-                    </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 test2">
+                <div class="card bg-light shadow">
+                    <div class="card-body">
+                        <form asp-action="CreateSysPrefCompany" method="post" id="createCompanyForm" onsubmit="return validateForm()">
+                            <div class="form-group mb-4">
+                                <label asp-for="CompanyName" class="control-label">Company Name <span class="text-danger">*</span></label>
+                                <input asp-for="CompanyName" id="CompanyName" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
+                                <span id="companyNameError" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label asp-for="TermForPharmacy" class="control-label">Term For Pharmacy <span class="text-danger">*</span></label>
+                                <input asp-for="TermForPharmacy" id="TermForPharmacy" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
+                                <span id="termForPharmacyError" class="text-danger"></span>
+                            </div>
+                            <div class="form-group text-center">
+                                <input type="submit" value="Create" class="btn btn-primary mr-3" />
+                                <a asp-action="SysPrefCompany" class="btn btn-secondary">Back</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 </body>
-<script src="~/js/CreateSysPrefCompanyy.js"></script>
+
+<script src="~/js/CreateSysPrefCompany.js"></script>
