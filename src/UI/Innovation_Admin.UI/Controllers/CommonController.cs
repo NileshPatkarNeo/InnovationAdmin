@@ -250,6 +250,25 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
+        public async Task<JsonResult> IsRoleNameUnique(string role_Name, Guid id)
+        {
+            var allRoles = await _common.GetAllAdminRoles();
+            bool isUnique = false;
+
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase) && role.Role_ID != id);
+            }
+
+            return Json(isUnique);
+        }
+
+
+
         [HttpGet]
         public IActionResult CreateAdminRole()
         {
@@ -263,11 +282,11 @@ namespace Innovation_Admin.UI.Controllers
 
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Admin Role Successfully Added";
                 return RedirectToAction("AdminRole");
 
             }
-            else if (result.Message == "Failed to add company.")
+            else if (result.Message == "Failed to add role.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("AdminRole");
@@ -291,11 +310,11 @@ namespace Innovation_Admin.UI.Controllers
 
             if (result.Message == null)
             {
-                TempData["Message"] = "Updated Successfully ";
+                TempData["Message"] = "Admin Role Successfully Updated ";
                 return RedirectToAction("AdminRole");
 
             }
-            else if (result.Message == "Failed to Update company.")
+            else if (result.Message == "Failed to Update role.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("AdminRole");
@@ -607,6 +626,23 @@ namespace Innovation_Admin.UI.Controllers
             var getAllSysPrefFinancials = await _common.GetAllSysPrefFinancials();
             return View(getAllSysPrefFinancials);
         }
+        public async Task<JsonResult> IsCompanyNameUnique(string companyName, Guid id)
+        {
+            var allFinancials = await _common.GetAllSysPrefFinancials();
+            bool isUnique = false;
+
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allFinancials.Any(financial => financial.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allFinancials.Any(financial => financial.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase) && financial.CompanyID != id);
+            }
+
+            return Json(isUnique);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> CreateSysPrefFinancial()
@@ -792,6 +828,25 @@ namespace Innovation_Admin.UI.Controllers
             return View();
         }
 
+        public async Task<IActionResult> IsNameUnique(string name, Guid id)
+        {
+            var allQuotes = await _common.GetAllQuotes();
+            bool isUnique = false;
+
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && quote.ID != id);
+            }
+
+            return Json(isUnique);
+        }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateQuote(CreateQuoteDto quote)
@@ -808,7 +863,7 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the quote.");
                 }
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Quotes Successfully Added";
 
                 return RedirectToAction("Quotes");
             }
@@ -835,7 +890,7 @@ namespace Innovation_Admin.UI.Controllers
                 return View(updatedQuote);
             }
 
-            TempData["Message"] = "Updated Successfully";
+            TempData["Message"] = "Quotes Successfully Updated";
 
 
             return RedirectToAction("Quotes");
@@ -1328,6 +1383,24 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllTemplates);
         }
 
+        public async Task<IActionResult> IsTemplateNameUnique(string name, Guid id)
+        {
+            var allTemplates = await _common.GetAllTemplates();
+            bool isUnique = false;
+
+            if (id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allTemplates.Any(template => template.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allTemplates.Any(template => template.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && template.ID != id);
+            }
+
+            return Json(isUnique);
+        }
+
+
         [HttpGet]
         public IActionResult CreateTemplate()
         {
@@ -1353,7 +1426,7 @@ namespace Innovation_Admin.UI.Controllers
                 {
                     await template.PdfFile.CopyToAsync(fileStream);
                 }
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Template Successfully Added";
 
                 return RedirectToAction("Templates");
             }
@@ -1399,7 +1472,7 @@ namespace Innovation_Admin.UI.Controllers
                 }
 
                 var response = await _common.UpdateTemplate(updatedTemplate);
-                TempData["Message"] = "Updated Successfully";
+                TempData["Message"] = "Template Successfully Updated";
 
                 return RedirectToAction("Templates");
             }

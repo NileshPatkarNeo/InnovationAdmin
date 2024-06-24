@@ -6,58 +6,14 @@
 }
 
 <head>
-    
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
-    <style>
-        h1.text-center {
-            margin-bottom: 20px;
-        }
-        body
-        {
-        margin:0px;
-        padding:0px;}
-        
-      .table {
-            margin-top: 20px;
-            border: 1px solid #dee2e6;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-            .table th, .table td {
-                vertical-align: middle;
-                text-align: center;
-            }
-
-            .table th {
-                background-color: #f8f9fa;
-            }
-
-        .table-bordered th, .table-bordered td {
-            border: 1px solid #dee2e6;
-        }
-
-        .btn {
-            margin: 2px;
-        }
-
-        .add-button-container, .dt-search {
-            text-align: right;
-            margin-bottom: 10px;
-            margin-right:30px;
-        }
-
-            .add-button-container a {
-                margin-right: 10px;
-            }
-    </style>
+    <link rel="stylesheet" href="~/css/CommonCss/CommonList.css" />
 </head>
 
 <div class="container">
     <h1 class="text-center">Admin Role</h1>
 
-    <div class="add-button-container">
+    <div class="add-button-container" style="height:40px; margin:0 0">
         <a asp-action="CreateAdminRole" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Add
         </a>
@@ -110,7 +66,6 @@
             pageLength: 5,
             lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
             paging: true,
-            sorting:true,
         serverSide: false,
         columns: [
             { name: "Sr.No", orderable: true },
