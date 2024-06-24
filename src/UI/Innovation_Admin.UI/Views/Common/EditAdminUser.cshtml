@@ -5,99 +5,60 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <style>
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-check {
-            margin-bottom: 15px;
-        }
-
-        .btn {
-            width: auto;
-        }
-
-        .form-group .btn {
-            display: inline-block;
-        }
-
-            .form-group .btn + .btn {
-                margin-left: 10px;
-            }
-    </style>
-</head>
-<body>
-    <h1>Edit Admin User</h1>
-    <hr />
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <form asp-action="EditAdminUser" method="post" novalidate>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="User_ID" class="control-label">User ID</label>
-                            <input asp-for="User_ID" class="form-control" readonly />
-                            <span asp-validation-for="User_ID" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="User_Name" class="control-label">User Name<span class="text-danger">*</span></label>
-                            <input asp-for="User_Name" class="form-control" id="User_Name" />
-                            <span asp-validation-for="User_Name" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Role" class="control-label">Role<span class="text-danger">*</span></label>
-                            <select asp-for="Role" class="form-control" asp-items="@ViewBag.RoleList" id="Role"></select>
-                            <span asp-validation-for="Role" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Email" class="control-label">Email<span class="text-danger">*</span></label>
-                            <input asp-for="Email" class="form-control" type="email" id="Email" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password" class="control-label">Password<span class="text-danger">*</span></label>
-                            <input asp-for="Password" class="form-control" id="Password" type="password" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group form-check">
-                            <input class="form-check-input" asp-for="Status" id="Status" />
-                            <label class="form-check-label" for="Status">@Html.DisplayNameFor(model => model.Status)</label>
-                            <span asp-validation-for="Status" class="text-danger"></span>
-                        </div>
-                        <div class="form-group d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
-                            <a asp-action="AdminUser" class="btn btn-secondary btn-lg">Back to List</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <link href="~/css/ReceiptBatchSource/EditReceiptBatchSource.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+
+</head>
+<body>
+    <h1>Edit Admin User</h1>
+    <div class="form-container">
+        <form asp-action="EditAdminUser" method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="display:none">
+                <label asp-for="User_ID" class="control-label">User ID</label>
+                <input asp-for="User_ID" class="form-control" readonly />
+                <span asp-validation-for="User_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User_Name" class="control-label">User Name<span class="text-danger">*</span></label>
+                <input asp-for="User_Name" class="form-control" id="User_Name" />
+                <span asp-validation-for="User_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label">Role<span class="text-danger">*</span></label>
+                <select asp-for="Role" class="form-control form-select-md form-select" asp-items="@ViewBag.RoleList" id="Role"></select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email<span class="text-danger">*</span></label>
+                <input asp-for="Email" class="form-control" type="email" id="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password<span class="text-danger">*</span></label>
+                <input asp-for="Password" class="form-control" id="Password" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group align-items-center">
+                <input class="form-check-input" asp-for="Status" id="Status" />
+                <label class="form-check-label" for="Status">@Html.DisplayNameFor(model => model.Status)</label>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="button-container  form-group d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                <a asp-action="AdminUser" class="btn btn-secondary btn-lg">Back</a>
+            </div>
+        </form>
+    </div>
+
 </body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+

@@ -2,48 +2,35 @@
 
 @{
     ViewData["Title"] = "Create DataSource";
-    Layout = "_AdminHomePage";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
 <head>
-
-    <link rel="stylesheet" href="~/css/DataSource/CreateDataSource.css" />
+    <link href="~/css/billingmethodtype/createbillingmethodtypee.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </head>
+
 <body>
     <h1>Create Data Source</h1>
 
-    <div class="d-flex justify-content-center align-items-start min-vh-100">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                 
-                    <form id="createDataSourceForm" asp-action="CreateDataSource">
-                        <div class="form-group">
-                            
-                            <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
+    <div class="form-container">
+        <form id="createDataSourceForm" asp-action="CreateDataSource">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                           
-                            <input asp-for="Name" class="form-control" maxlength="31" id="Name" />
-
-                         
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group d-flex justify-content-between">
-                            
-                            <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
-
-                    
-                            <a asp-action="DataSource" class="btn btn-secondary btn-lg flex-fill">Back</a>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
+                <input asp-for="Name" id="Name" class="form-control" maxlength="31" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-        </div>
-    </div>
 
-    <script type="text/javascript" src="~/js/DataSource/CreateDataSource.js"></script>
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="DataSource" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
 </body>
+
+<script src="~/js/DataSource/CreateDataSource.js"></script>

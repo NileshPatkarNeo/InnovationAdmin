@@ -8,10 +8,10 @@ namespace Innovation_Admin.UI.Models.AdminUser
     public class CreateAdminUserDto
     {
         [JsonProperty("user_Name")]
-        [Required(ErrorMessage = "User Name is required")]
-        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name can only contain characters")]
+        [Required(ErrorMessage = "User Name is required.")]
+        [RegularExpression(@"^[a-zA-Z]+\s*[a-zA-Z]*$", ErrorMessage = "Name can only contain characters")]
         [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
-        [StringLength(30, ErrorMessage = "User Name cannot be longer than 30 characters")]
+        [MaxLength(30, ErrorMessage = "Name cannot exceed 30 characters")]
         [Remote(action: "IsAdminUserUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
         public string User_Name { get; set; }
 

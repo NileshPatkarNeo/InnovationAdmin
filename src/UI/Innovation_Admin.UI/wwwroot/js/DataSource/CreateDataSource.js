@@ -7,8 +7,8 @@
 
     // Validate Name
     var name = document.getElementById("Name").value;
-    var nameError = document.getElementById("nameError");
-    if (name.trim() === "") {
+        var nameError = document.getElementById("Name_error");
+    if (name.value.trim() === "") {
         nameError.textContent = "Name is required.";
     isValid = false;
     } else if (!/^[a-zA-Z\s]*$/.test(name)) {

@@ -14,11 +14,11 @@
         } else if (!/^[a-zA-Z\s]*$/.test(userName)) {
         userNameError.textContent = "Name can only contain characters";
     isValid = false;
-        } else if (userName.length < 2) {
+        } else if (userName.value.length < 2) {
         userNameError.textContent = "Name should be at least 2 characters.";
     isValid = false;
         }
-        else if (userName.length > 30) {
+        else if (userName.value.length > 30) {
         userNameError.textContent = "User Name should be 30 characters or less.";
     isValid = false;
         } else {

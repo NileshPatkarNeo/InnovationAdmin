@@ -6,52 +6,38 @@
 }
 
 <head>
-
-    <link rel="stylesheet" href="~/css/DataSource/EditDataSource.css" />
+    <link href="~/css/datasource/editdatasource.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </head>
+
 <body>
     <h1>Edit Data Source</h1>
     <hr />
 
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                
-                    <form asp-action="EditDataSource" novalidate>
-                        
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-container">
+        <form id="editDataSourceForm" asp-action="EditDataSource" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                      
-                        <div class="form-group" style="display:none">
-                            <label asp-for="ID" class="control-label">ID</label>
-                            <input asp-for="ID" class="form-control" readonly />
-                            <span asp-validation-for="ID" class="text-danger"></span>
-                        </div>
-
-                      
-                        <div class="form-group">
-                            <label asp-for="Name" class="control-label">Name<span class="text-danger">*</span></label>
-                            <input asp-for="Name" class="form-control" maxlength="31" id="Name" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-
-                       
-                        <div class="form-group d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
-                            <a asp-action="DataSource" class="btn btn-secondary btn-lg">Back</a>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="ID" class="control-label">ID</label>
+                <input asp-for="ID" class="form-control" readonly />
+                <span asp-validation-for="ID" class="text-danger"></span>
             </div>
-        </div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
+                <input asp-for="Name" id="Name" class="form-control" maxlength="31" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                <a asp-action="DataSource" class="btn btn-secondary btn-lg">Back</a>
+            </div>
+        </form>
     </div>
-
-
-
-
-    <script type="text/javascript" src="~/js/DataSource/EditDataSource.js"></script>
 </body>
+
+<script src="~/js/DataSource/EditDataSource.js"></script>

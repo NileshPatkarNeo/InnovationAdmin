@@ -5,93 +5,128 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>Create Admin User</h1>
+<head>
 
-
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <form id="createAdminUserForm" asp-action="CreateAdminUser" autocomplete="off">
-                    <div class="form-group">
-                        <label asp-for="User_Name" class="control-label">User Name<span class="text-danger">*</span></label>
-                        <input asp-for="User_Name" class="form-control" id="User_Name" />
-                        <span asp-validation-for="User_Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Role" class="control-label">Role<span class="text-danger">*</span></label>
-                        <select asp-for="Role" class="form-control" asp-items="@ViewBag.RoleList" id="Role"></select>
-                        <span asp-validation-for="Role" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label">Email<span class="text-danger">*</span></label>
-                        <input asp-for="Email" class="form-control" id="Email" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label">Password<span class="text-danger">*</span></label>
-                        <input asp-for="Password" class="form-control" id="Password" type="password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group form-check">
-                        <input class="form-check-input" asp-for="Status" id="Status" />
-                        <label class="form-check-label" for="Status">@Html.DisplayNameFor(model => model.Status)</label>
-                        <span asp-validation-for="Status" class="text-danger"></span>
-                    </div>
-                    <div class="form-group d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
-                        <a asp-action="AdminUser" class="btn btn-secondary btn-lg flex-fill">Back</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Custom CSS for additional styling -->
-<style>
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .card {
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-check {
-        margin-bottom: 15px;
-    }
-
-    .btn {
-        width: auto;
-    }
-
-    .form-group .btn {
-        display: inline-block;
-    }
-
-        .form-group .btn + .btn {
-            margin-left: 10px;
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+  
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
         }
 
-    .flex-fill {
-        flex: 1;
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        #receiptBatchForm {
+            margin-top: 40px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+
+
+        .button-container {
+            display: flex;
+            gap: 50px;
+            margin-top: 20px;
+        }
+
+            .button-container .btn {
+                width: 45%;
+            }
+
+            .button-container a,
+            .button-container input[type="submit"] {
+                flex: 1;
+                text-align: center;
+            }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+
+            a:hover {
+                color: #0056b3;
+                text-decoration: none;
+            }
+
+    </style>
+</head>
+
+<body>
+    <h1>Create Admin User</h1>
+
+    <div class="form-container">
+        <form id="createAdminUserForm" asp-action="CreateAdminUser" novalidate>
+            <div class="form-group">
+                <label asp-for="User_Name" class="control-label">User Name<span class="text-danger">*</span></label>
+                <input asp-for="User_Name" class="form-control" id="User_Name" />
+                <span asp-validation-for="User_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label">Role<span class="text-danger">*</span></label>
+                <select asp-for="Role" class="form-control" asp-items="@ViewBag.RoleList" id="Role"></select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email<span class="text-danger">*</span></label>
+                <input asp-for="Email" class="form-control" id="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password<span class="text-danger">*</span></label>
+                <input asp-for="Password" class="form-control" id="Password" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <input class="form-check-input" asp-for="Status" id="Status" />
+                <label class="form-check-label" for="Status">@Html.DisplayNameFor(model => model.Status)</label>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-action="AdminUser" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-</style>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
-
-<script type="text/javascript" src="~/js/AdminUser/CreateAdminUser.js"></script>
+    <script src="~/js/adminuser/createadminuser.js"></script>
+    
+</body>
