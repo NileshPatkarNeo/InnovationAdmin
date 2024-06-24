@@ -17,7 +17,7 @@ namespace Innovation_Admin.UI.Models.SysPrefFinancial
         public Guid CompanyID { get; set; }
 
         [IgnoreMember]
-        [Remote(action: "IsCompanyNameUnique", controller: "Common", ErrorMessage = "Company Name is already in use.")]
+        [Remote(action: "IsCompanyNameUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(FinancialID), ErrorMessage = "Company Name is already in use.")]
         [JsonProperty("companyName")]
         public string CompanyName { get; set; }
 

@@ -23,7 +23,7 @@ document.getElementById("editQuoteForm").addEventListener("submit", function (ev
     if (nameInput.value.trim() === "") {
         nameError.textContent = "Quote is required.";
         isValid = false;
-    } else if (nameInput.length < 2) {
+    } else if (nameInput.value.length < 2) {
         nameError.textContent = "Quote should be at least 2 characters.";
         isValid = false;
     }
@@ -39,12 +39,12 @@ document.getElementById("editQuoteForm").addEventListener("submit", function (ev
     if (quoteByInput.value.trim() === "") {
         quoteByError.textContent = "Quote By is required.";
         isValid = false;
-    } else if (nameInput.length < 2) {
-        nameError.textContent = "Quote By should be at least 2 characters.";
+    } else if (quoteByInput.value.length < 2) {
+        quoteByError.textContent = "Quote By should be at least 2 characters.";
         isValid = false;
     }
-    else if (quoteByInput.value.length > 25) {
-        quoteByError.textContent = "Quote By cannot exceed 25 characters.";
+    else if (quoteByInput.value.length > 50) {
+        quoteByError.textContent = "Quote By cannot exceed 50 characters.";
         isValid = false;
     }
 

@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 <head>
-<link href="~/css/Templates/CreateTemplate.css" rel="stylesheet" />
+    <link href="~/css/receiptbatchsource/createreceiptbatchsource.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
@@ -14,70 +15,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
-<h1 class="text-center">Create Template</h1>
+    <h1 class="text-center">Create Template</h1>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="form-box">
-            <form id="createTemplateForm" asp-action="CreateTemplate" novalidate enctype="multipart/form-data">
-                <div class="text-danger">
-                    @if (ViewData.ModelState.ErrorCount > 0)
-                    {
-                        <div class="alert alert-danger">
-                            <p>Please fix the errors below:</p>
-                            <ul>
-                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                                {
-                                    <li>@error.ErrorMessage</li>
-                                }
-                            </ul>
-                        </div>
-                    }
-                </div>
+    <div class="form-container">
+        <form id="createTemplateForm" asp-action="CreateTemplate" novalidate enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-group mb-3">
-                    <label asp-for="Name" class="control-label">
-                        Name <span class="text-danger">*</span>
-                    </label>
-                    <input asp-for="Name" class="form-control" maxlength="51" required id="Name" onkeypress="return onlyAlphabets(event,this);" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                    <span class="text-danger" id="Name_error"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="PdfFile" class="control-label">
-                        Pdf File <span class="text-danger">*</span>
-                    </label>
-                        <input type="file" asp-for="PdfFile" class="form-control" required id="PdfFile" accept="application/pdf" />
-                    <span asp-validation-for="PdfFile" class="text-danger"></span>
-                    <span class="text-danger" id="PdfFile_error"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Domain" class="control-label">
-                        Domain <span class="text-danger">*</span>
-                    </label>
-                        <select asp-for="Domain" class="form-control  form-select-md form-select" required>
-                        <option value="">-- Select Domain --</option>
-                        <option value="Default">Default</option>
-                        <option value="PAYABLES">PAYABLES</option>
-                        <option value="CLAIMLOADBATCH">CLAIMLOADBATCH</option>
-                    </select>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">
+                    Name <span class="text-danger">*</span>
+                </label>
+                <input asp-for="Name" id="Name" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <span class="text-danger" id="Name_error"></span>
+            </div>
 
-                    <span asp-validation-for="Domain" class="text-danger"></span>
-                    <span class="text-danger" id="Domain_error"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="PdfFile" class="control-label">
+                    Pdf File <span class="text-danger">*</span>
+                </label>
+                <input type="file" asp-for="PdfFile" id="PdfFile" class="form-control" accept="application/pdf" />
+                <span asp-validation-for="PdfFile" class="text-danger"></span>
+                <span class="text-danger" id="PdfFile_error"></span>
+            </div>
 
-                <div class="btn-group">
-                    <div>
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>
-                    <div>
-                        <a asp-action="Templates" class="btn btn-secondary">Back</a>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label asp-for="Domain" class="control-label">
+                    Domain <span class="text-danger">*</span>
+                </label>
+                <select asp-for="Domain" id="Domain" class="form-control">
+                    <option value="">-- Select Domain --</option>
+                    <option value="Default">Default</option>
+                    <option value="PAYABLES">PAYABLES</option>
+                    <option value="CLAIMLOADBATCH">CLAIMLOADBATCH</option>
+                </select>
+                <span asp-validation-for="Domain" class="text-danger"></span>
+                <span class="text-danger" id="Domain_error"></span>
+            </div>
+
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Templates" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
     </div>
-</div>
 </body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

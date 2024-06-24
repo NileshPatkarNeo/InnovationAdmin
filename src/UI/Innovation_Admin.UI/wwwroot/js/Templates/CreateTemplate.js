@@ -2,7 +2,7 @@ $(function () {
     $("#PdfFile").on('change', function (event) {
         var file = event.target.files[0];
         if (file.size >= 2 * 1024 * 1024) {
-            alert("JPG images of maximum 2MB");
+            alert("PDF of maximum 2MB");
             $("#createTemplateForm").get(0).reset();
             return;
         }
@@ -39,10 +39,13 @@ document.getElementById("createTemplateForm").addEventListener("submit", functio
     const nameInput = document.getElementById("Name");
     const nameError = document.getElementById("Name_error");
     nameError.textContent = "";
-    if (nameInput.value.length > 50) {
+    if (nameInput.value.trim() === "") {
+        nameError.textContent = "Name is required.";
+        isValid = false;
+    } else if (nameInput.value.length > 50) {
         nameError.textContent = "Name cannot exceed 50 characters.";
         isValid = false;
-    } else if (nameInput.length < 2) {
+    } else if (nameInput.value.length < 2) {
         nameError.textContent = "Name should be at least 2 characters.";
         isValid = false;
     }

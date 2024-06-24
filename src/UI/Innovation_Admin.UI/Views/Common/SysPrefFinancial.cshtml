@@ -7,54 +7,16 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/css/SysPrefFinancial/SysPrefFinancial.css" rel="stylesheet" />
 
-
-    <style>
-        h1.text-center {
-            margin-bottom: 20px;
-        }
-
-        body {
-            margin: 0px;
-            padding: 0px;
-        }
-
-        .table {
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center; 
-        }
-
-            .table th, .table td {
-                vertical-align: middle; 
-            }
-
-        .table-bordered th, .table-bordered td {
-            border: 1px solid #dee2e6;
-        }
-
-
-        .btn-container {
-            text-align: right;
-            margin-bottom: 10px;
-            padding-right: 29px;
-        }
-
-        .table-container {
-            margin-top: 25px;
-        }
-
-        .add-button-container {
-            margin-right: 20px;
-        }
-    </style>
+  
 </head>
 
 <h1 class="text-center">System Preference Financial</h1>
 
-<div class="btn-container">
+<div style="height:40px; margin:0 0">
 
-    <a asp-action="CreateSysPrefFinancial" asp-controller="Common" class="btn btn-primary " class="add-button-container">
+    <a asp-action="CreateSysPrefFinancial" asp-controller="Common" class="btn btn-primary float-end">
         <i class="bi bi-plus-circle"></i>  Add
     </a>
 </div>
@@ -110,7 +72,6 @@
         pageLength: 5,
         lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
         paging: true,
-        sorting: true,
         serverSide: false,
         columns: [
             { name: "Sr.No", orderable: true },

@@ -23,7 +23,7 @@ document.getElementById("createAdminRoleForm").addEventListener("submit", functi
     if (roleNameInput.value.length > 20) {
         roleNameError.textContent = "Role Name cannot exceed 20 characters.";
         isValid = false;
-    }
+    } 
    
 
     // Description Validation

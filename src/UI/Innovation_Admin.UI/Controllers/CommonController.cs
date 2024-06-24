@@ -253,10 +253,21 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<JsonResult> IsRoleNameUnique(string role_Name, Guid id)
         {
             var allRoles = await _common.GetAllAdminRoles();
-            var isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase) && role.Role_ID != id);
+            bool isUnique = false;
+
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase) && role.Role_ID != id);
+            }
 
             return Json(isUnique);
         }
+
+
 
         [HttpGet]
         public IActionResult CreateAdminRole()
@@ -271,11 +282,11 @@ namespace Innovation_Admin.UI.Controllers
 
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Admin Role Successfully Added";
                 return RedirectToAction("AdminRole");
 
             }
-            else if (result.Message == "Failed to add company.")
+            else if (result.Message == "Failed to add role.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("AdminRole");
@@ -299,11 +310,11 @@ namespace Innovation_Admin.UI.Controllers
 
             if (result.Message == null)
             {
-                TempData["Message"] = "Updated Successfully ";
+                TempData["Message"] = "Admin Role Successfully Updated ";
                 return RedirectToAction("AdminRole");
 
             }
-            else if (result.Message == "Failed to Update company.")
+            else if (result.Message == "Failed to Update role.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("AdminRole");
@@ -616,10 +627,20 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<JsonResult> IsCompanyNameUnique(string companyName, Guid id)
         {
             var allFinancials = await _common.GetAllSysPrefFinancials();
-            var isUnique = !allFinancials.Any(financial => financial.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase) && financial.CompanyID != id);
+            bool isUnique = false;
+
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allFinancials.Any(financial => financial.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allFinancials.Any(financial => financial.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase) && financial.CompanyID != id);
+            }
 
             return Json(isUnique);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> CreateSysPrefFinancial()
@@ -808,10 +829,20 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> IsNameUnique(string name, Guid id)
         {
             var allQuotes = await _common.GetAllQuotes();
-            var isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && quote.ID != id);
+            bool isUnique = false;
+
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && quote.ID != id);
+            }
 
             return Json(isUnique);
         }
+
 
 
         [HttpPost]
@@ -1344,10 +1375,20 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> IsTemplateNameUnique(string name, Guid id)
         {
             var allTemplates = await _common.GetAllTemplates();
-            var isUnique = !allTemplates.Any(template => template.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && template.ID != id);
+            bool isUnique = false;
+
+            if (id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allTemplates.Any(template => template.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allTemplates.Any(template => template.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && template.ID != id);
+            }
 
             return Json(isUnique);
         }
+
 
         [HttpGet]
         public IActionResult CreateTemplate()
