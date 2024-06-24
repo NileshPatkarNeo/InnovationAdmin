@@ -38,17 +38,21 @@
 h1 {
     text-align: center;
     color: #333;
+ 
 }
 
 
 
 .button-container {
     display: flex;
-    justify-content: space-around;
     gap: 50px;
     margin-top: 20px;
 }
 
+    .button-container .btn {
+    width : 45%;
+   
+    }
     .button-container a,
     .button-container input[type="submit"] {
         flex: 1;

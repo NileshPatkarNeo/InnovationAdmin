@@ -16,7 +16,7 @@
     margin-top: 50px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-weight: 700;
+ /*   font-weight: 700;*/
 }
 
 .btn-container {
@@ -37,6 +37,6 @@ body {
 
 .error-message {
     color: red;
-    font-size: 0.875rem;
+/*    font-size: 0.875rem;*/
     margin-top: 5px;
 }
