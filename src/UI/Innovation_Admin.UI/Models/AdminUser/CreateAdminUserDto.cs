@@ -1,4 +1,5 @@
 ﻿using Innovation_Admin.UI.Models.ResponsesModel;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,8 +8,11 @@ namespace Innovation_Admin.UI.Models.AdminUser
     public class CreateAdminUserDto
     {
         [JsonProperty("user_Name")]
-        [Required(ErrorMessage = "User Name is required")]
-        [StringLength(20, ErrorMessage = "User Name cannot be longer than 20 characters")]
+        [Required(ErrorMessage = "User Name is required.")]
+        [RegularExpression(@"^[a-zA-Z]+\s*[a-zA-Z]*$", ErrorMessage = "Name can only contain characters")]
+        [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
+        [MaxLength(30, ErrorMessage = "Name cannot exceed 30 characters")]
+        [Remote(action: "IsAdminUserUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
         public string User_Name { get; set; }
 
         [JsonProperty("role")]
