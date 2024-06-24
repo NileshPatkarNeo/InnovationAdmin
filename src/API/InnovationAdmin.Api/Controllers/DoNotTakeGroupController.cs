@@ -76,8 +76,8 @@ namespace InnovationAdmin.Api.Controllers
         //    }
         //    return BadRequest(response);
         //}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateDoNotTakeGroupCommand command)
+        [HttpPut]
+        public async Task<IActionResult> Update( [FromBody] UpdateDoNotTakeGroupCommand command)
         {
             // Your update logic here
             var result = await _mediator.Send(command);

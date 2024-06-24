@@ -2,46 +2,58 @@
 @{
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
+
 <head>
     <link href="~/css/ReceiptBatchSource/EditReceiptBatchSource.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </head>
+
 <body>
     <h1>Edit Receipt Batch</h1>
 
     <div class="form-container">
         <form id="receiptBatchForm" asp-action="EditReceiptBatchSource">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group" style="display:none;">
-                <label asp-for="Id" class="control-label"></label>
+                <label asp-for="Id" class="control-label">ID</label>
                 <input id="Id" asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input id="Name" asp-for="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this);" />
+                <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
+                <input id="Name" asp-for="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group" style="position: relative;">
-                <label asp-for="Type" class="control-label"></label>
-                <div style="display: flex; align-items: center;">
-                    <input id="Type" asp-for="Type" class="form-control readonly" readonly />
-                    <button type="button" class="dropdown-button" onclick="toggleDropdown()">▼</button>
-                </div>
-                <div id="dropdownMenu" class="dropdown-menu">
-                    <a href="#" onclick="selectType('Banking')">Bank</a>
-                    <a href="#" onclick="selectType('CreditCard')">Cedit Card</a>
-                    <a href="#" onclick="selectType('UPI')">UPI</a>
-                    <a href="#" onclick="selectType('EDI')">EDI</a> 
-                </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Type" class="control-label">Type <span class="text-danger">*</span></label>
+                
+                <select asp-for="Type" class="form-select  form-control ">
+                   
+                    <option value="Bank">Bank</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="UPI">UPI</option>
+                    <option value="EDI">EDI</option>
+                 
+
+                </select>
+               
+
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
-            <div class="@* form-group *@ button-container">
+
+            <div class="button-container">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="ReceiptBatchSource" class="btn btn-secondary">Back</a>
             </div>
         </form>
     </div>
 </body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/ReceiptBatch/EditReceiptBatch.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/ReceiptBatch/EditReceiptBatch.js"></script>

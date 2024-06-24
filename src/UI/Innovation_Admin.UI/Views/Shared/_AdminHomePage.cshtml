@@ -1,68 +1,108 @@
-﻿<head>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Innovation_Admin.UI.styles.css" asp-append-version="true" />
-    
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-    
-   @*  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMZ/6pWkU/iw4Uu9I7tAwVfRQF4Oe5P1n8r6l3" crossorigin="anonymous" />
-   *@  <style>
-
-
-        .bg-dark .nav-link {
-            color: white;
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/Innovation_Admin.UI.styles.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;  
         }
 
-            .bg-dark .nav-link:hover {
-                color: #ddd;
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+            height: 100vh;  
+            overflow: hidden;  
+        }
+
+        .sidebar {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 250px; /* Set the width of the sidebar */
+            height: 100%;
+            background-color: #343a40; /* Sidebar background color */
+            color: white; /* Sidebar text color */
+            padding-top: 20px; /* Optional: Padding for top */
+            z-index: 1000; /* Ensure sidebar stays above content */
+            overflow-y: auto; /* Enable vertical scrolling if needed */
+        }
+
+        .content {
+            margin-left: 250px; /* Adjust margin to accommodate sidebar width */
+            padding: 20px; /* Optional: Add padding to content */
+            height: 100%;
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .nav-link {
+            color: white !important; /* Override Bootstrap's nav-link color */
+        }
+
+            .nav-link:hover {
+                color: #ccc !important; /* Hover color for nav-link */
             }
 
-        .bg-dark .nav-pills .nav-link.active, .bg-dark .nav-pills .show > .nav-link {
-            color: white;
-            background-color: #495057;
+        #submenu1 .nav-link {
+            color: yellowgreen !important;
         }
 
-        .nav .collapse > .nav-link {
-            color: yellowgreen;
-        }
-
-            .nav .collapse > .nav-link:hover {
-                background-color: #e9ecef;
-                color: black;
+            #submenu1 .nav-link:hover
+            {
+                color : lightgreen !important;
             }
 
-        .nav .collapse.show .nav-link {
-            color: yellowgreen;
+        #submenu3 .nav-link {
+            color: yellowgreen !important;
         }
 
-        .nav .collapse .submenu-icon {
-            margin-right: 5px;
+        #submenu3 .nav-link:hover {
+                color: lightgreen !important;
+        }
+        #submenu4 .nav-link {
+            color: yellowgreen !important;
         }
 
-        .nav .collapse .submenu-link {
-            padding-left: 30px;
+        #submenu4 .nav-link:hover {
+                color: lightgreen !important;
         }
+
+        .active, .show > .nav-link {
+            background-color: #495057 !important;
+        }
+
+        .content-area {
+            padding: 20px;
+            height: calc(100vh - 40px); 
+            overflow-y: auto;
+        }
+
+
+
+      
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-auto  col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-
-
-
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    
-                    
+            <!-- Sidebar -->
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark sidebar">
+                <div class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white">
                     <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline">Innovation Admin</span>
                     </a>
 
-
-
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                       
-                        
+
+
                         <li class="nav-item">
                             <a href="/Common/HomePage" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
@@ -72,23 +112,25 @@
 
 
                         <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle list-color">
                                 <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">System Preference</span>
                             </a>
 
 
-                            <ul  class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                             
+                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+
                                 <li class="w-100">
                                     <a href="/Common/SysPrefCompany" class="nav-link px-0 ">
                                         <i class="bi bi-building"></i> <span class="d-none d-sm-inline">System Company Preference</span>
                                     </a>
                                 </li>
+
                                 <li>
                                     <a href="/Common/SysPrefGeneralBehaviour" class="nav-link px-0 ">
                                         <i class=" bi bi-tools"></i> <span class="d-none d-sm-inline">System General Behaviour</span>
                                     </a>
                                 </li>
+
                                 <li>
                                     <a href="/Common/AdminUser" class="nav-link px-0">
                                         <i class="bi bi-person-bounding-box"></i> <span class="d-none d-sm-inline">Admin User</span>
@@ -114,7 +156,7 @@
 
 
                         <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle list-color">
                                 <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Lookup Tables</span>
                             </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
@@ -174,40 +216,51 @@
                             </ul>
                         </li>
 
+
+
+
                         <li>
-                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle list-color">
                                 <i class=" bi bi-file-earmark-text"></i> <span class="ms-1 d-none d-sm-inline">Manage Templates</span>
                             </a>
 
 
-                            <ul class="collapse nav flex-column ms-1 " id="submenu4"  data-bs-parent="#menu">
+                            <ul class="collapse nav flex-column ms-1 " id="submenu4" data-bs-parent="#menu">
                                 <li>
                                     <a href="/Common/Templates" class="nav-link px-0">
                                         <i class="bi bi-file-earmark"></i> <span class="d-none d-sm-inline">Templates</span>
                                     </a>
                                 </li>
-                               
+
                             </ul>
                         </li>
 
 
 
                     </ul>
+
+
+
                     <hr>
-                    <div class="pb-4">
+
+                    <div class="pb-4 logout-container">
                         <a href="@Url.Action("Logout","Account")" class="btn btn-danger">Logout</a>
                     </div>
                 </div>
             </div>
-            <div class="col py-3">
-                @RenderBody()
+
+            <!-- Content Area -->
+            <div class="col py-3 content">
+                <div class="content-area">
+                    @RenderBody()
+                </div>
             </div>
         </div>
     </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-   @await RenderSectionAsync("Scripts", required:false)
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
+</html>
