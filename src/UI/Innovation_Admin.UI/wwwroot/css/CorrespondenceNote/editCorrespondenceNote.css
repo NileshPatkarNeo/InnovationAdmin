@@ -1,42 +1,126 @@
-﻿h1 {
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
     text-align: center;
-    margin-bottom: 20px;
 }
 
-.card {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
     padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.card-body {
-    padding: 20px;
+.form-group label {
+    font-weight: bold;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    position: relative;
 }
 
-.btn {
-    width: auto;
-}
-
-.form-group .btn {
-    display: inline-block;
-}
-
-    .form-group .btn + .btn {
-        margin-left: 10px;
+    .form-group input {
+        /*     width: calc(100% - 35px);  */
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 4px;
     }
 
-.flex-fill {
-    flex: 1;
+    .form-group .dropdown-button {
+        width: 30px;
+        height: 30px;
+        margin: 5px 0;
+        margin-left: 5px;
+        cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+    width: 100%;
 }
 
-.min-vh-100 {
-    min-height: 100vh;
+    .dropdown-menu a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #333;
+    }
+
+
+
+        .dropdown-menu a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+.btn-secondary {
+    width: 100px;
+    height: 39px;
 }
 
-.align-items-start {
-    align-items: flex-start !important;
-    margin-top: 10vh;
+
+.btn-primary {
+    width: 100px;
+    height: 39px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.button-container {
+    display: flex;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+    .button-container .btn {
+        width: 45%;
+    }
+
+    .button-container a,
+    .button-container input[type="submit"] {
+        flex: 1;
+        text-align: center;
+        a
+
+{
+    color: #007bff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.text-danger {
+    color: red;
+}
+
+.readonly {
+    background-color: #e9ecef;
+    cursor: not-allowed;
 }
