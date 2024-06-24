@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
-    <link href="~/css/remittancetype/remittancetype.css" rel="stylesheet" />
+    <link href="~/css/correspondencenote/list.css" rel="stylesheet" />
 </head>
-<div class="add-div">
+<div style="height:40px; margin:0 0">
     <p>
         <a asp-action="CreateRemittanceType" class="btn btn-primary float-end"><i class="bi bi-plus-circle"></i> Add</a>
     </p>
 </div>
 <body>
-<table class="table table-striped" id="remittanceType">
+    <table class="table table-bordered table-hover" id="remittanceType">
     <thead>
         <tr>
             <th>Sr.No</th>
@@ -40,7 +40,7 @@
                 <td>
                     <a href="@Url.Action("EditRemittanceType", new { Id = item.Id })" class="btn btn-warning">
                         <i class="bi bi-pencil-fill"></i>
-                    </a> |
+                    </a> 
                     <a href="#" onclick="confirmDelete('@item.Id')" class="btn btn-danger">
                         <i class="bi bi-trash"></i>
                     </a>
@@ -50,7 +50,7 @@
             serialNumber++;
         }
     </tbody>
-</table>'
+</table>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
@@ -67,5 +67,4 @@
 }
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script src="~/js/remittancetype.js"></script>
+<script src="~/js/remittancetypess/remittancetype.js"></script>

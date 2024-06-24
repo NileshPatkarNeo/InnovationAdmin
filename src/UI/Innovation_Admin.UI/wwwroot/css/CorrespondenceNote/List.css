@@ -1,0 +1,65 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+}
+
+.table {
+    margin-top: 10px;
+    /*  border: 1px solid #dee2e6; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    width: 100%;
+    table-layout: fixed; /* Ensures the table follows the defined widths */
+}
+
+    .table th,
+    .table td {
+        vertical-align: middle;
+        text-align: left;
+        padding: 10px;
+    }
+
+    .table th {
+        background-color: lightgray;
+        text-align: center;
+    }
+
+
+
+        /* Define fixed widths */
+        .table th:nth-child(1), .table td:nth-child(1) {
+            width: 80px;
+            text-align: center;
+        }
+
+        .table th:nth-child(3), .table td:nth-child(3) {
+            width: 150px;
+            text-align: center; /* Fixed width for Action column */
+        }
+
+.btn {
+    margin: 2px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.add-button-container {
+    text-align: right;
+    margin-bottom: 10px;
+    margin-right: 30px;
+}
+
+    .add-button-container a {
+        margin-right: 10px;
+    }
+
+

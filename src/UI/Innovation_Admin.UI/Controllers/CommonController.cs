@@ -346,7 +346,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateSysPrefGeneralBehaviour(company);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "General Behaviour Successfully Added";
                 return RedirectToAction("SysPrefGeneralBehaviour");
 
             }
@@ -383,7 +383,7 @@ namespace Innovation_Admin.UI.Controllers
 
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "General Behaviour Successfully Updated";
                 return RedirectToAction("SysPrefGeneralBehaviour");
 
             }
@@ -461,7 +461,7 @@ namespace Innovation_Admin.UI.Controllers
                 var result = await _common.CreatePharmacyGroup(group);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Pharmacy Name Successfully Added";
                 return RedirectToAction("PharmacyGroups");
 
             }
@@ -505,7 +505,7 @@ namespace Innovation_Admin.UI.Controllers
 
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "Pharmacy Name Successfully Updated";
                 return RedirectToAction("PharmacyGroups");
 
             }
@@ -523,13 +523,7 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeletePharmacyGroup(Guid Id)
         {
-            //var isDeleted = await _common.DeletePharmacyGroup(Id);
-            //if (!isDeleted)
-            //{
-
-            //    ModelState.AddModelError(string.Empty, "Failed to delete the group.");
-            //}
-            //return RedirectToAction("PharmacyGroups");
+            
             bool isDeleted = await _common.DeletePharmacyGroup(Id);
 
             if (isDeleted)
@@ -542,6 +536,14 @@ namespace Innovation_Admin.UI.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> IsPharmacyNameUnique(string pharmacyName, Guid id)
+        {
+            var allGroups = await _common.GetAllPharmcayGroup();
+            var isUnique = !allGroups.Any(group => group.PharmacyName == pharmacyName && group.Id != id);
+
+            return Json(isUnique);
+        }
 
         #endregion
 
@@ -883,7 +885,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateRemittanceType(type);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Remittance Type Successfully Added";
                 return RedirectToAction("RemittanceTypes");
 
             }
@@ -926,7 +928,7 @@ namespace Innovation_Admin.UI.Controllers
 
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "Remittance Type Successfully Updated";
                 return RedirectToAction("RemittanceTypes");
 
             }
@@ -951,6 +953,15 @@ namespace Innovation_Admin.UI.Controllers
             }
             return RedirectToAction("RemittanceTypes");
         }
+
+        public async Task<IActionResult> IsNameeUnique(string name, Guid id)
+        {
+            var allQuotes = await _common.GetAllRemittanceType();
+            var isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && quote.Id != id);
+
+            return Json(isUnique);
+        }
+
 
         #endregion
 
@@ -1454,7 +1465,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateCorrespondenceNote(noteModel);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Correspondence Note Successfully Added";
                 return RedirectToAction("CorrespondenceNotes");
 
             }
@@ -1482,7 +1493,7 @@ namespace Innovation_Admin.UI.Controllers
            var result = await _common.UpdateCorrespondenceNote(updatedNote);
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "Correspondence Note Successfully Updated";
                 return RedirectToAction("CorrespondenceNotes");
 
             }
@@ -1508,6 +1519,17 @@ namespace Innovation_Admin.UI.Controllers
                 return Json(new { success = false, message = "Failed to delete." });
             }
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> IsNoteUnique(string note, Guid id)
+        {
+            var allGroups = await _common.GetAllCorrespondenceNotes();
+            var isUnique = !allGroups.Any(group => group.Note == note && group.Id != id);
+
+            return Json(isUnique);
+        }
+
 
         #endregion
 

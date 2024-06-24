@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (note.length < 2) {
             noteError.textContent = "Note should be at least 2 characters.";
             isValid = false;
-        } else if (note.length > 100) {
-            noteError.textContent = "Note should be at most 100 characters.";
+        } else if (note.length > 50) {
+            noteError.textContent = "Note cannot exceed 50 characters.";
             isValid = false;
         } else if (!/^[a-zA-Z\s]*$/.test(note)) {
             noteError.textContent = "Note can only contain alphabet characters and spaces.";
