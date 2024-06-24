@@ -1141,7 +1141,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> IsNameUnique(string name, Guid id)
+        public async Task<IActionResult> IsDataNameUnique(string name, Guid id)
         {
             var allsource = await _common.GetAllDataSource();
             var isUnique = !allsource.Any(group => group.Name ==name && group.ID != id);
