@@ -1520,11 +1520,30 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllDoNotTakeGroup);
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> IsGroupCodeUnique(int groupCode, Guid id)
+        //{
+        //    var allGroups = await _common.GetAllDoNotTakeGroups();
+        //    var isUnique = !allGroups.Any(group => group.GroupCode == groupCode && group.Id != id);
+        //    return Json(isUnique);
+        //}
+
+        // // Check if a GroupCode is unique
         [HttpGet]
         public async Task<IActionResult> IsGroupCodeUnique(int groupCode, Guid id)
-        {
+       {
             var allGroups = await _common.GetAllDoNotTakeGroups();
-            var isUnique = !allGroups.Any(group => group.GroupCode == groupCode && group.Id != id);
+            bool isUnique = false;
+
+            if (id == Guid.Empty)
+            {
+                isUnique = !allGroups.Any(group => group.GroupCode == groupCode);
+            }
+            else
+            {
+                isUnique = !allGroups.Any(group => group.GroupCode == groupCode && group.Id != id);
+            }
+
             return Json(isUnique);
         }
 

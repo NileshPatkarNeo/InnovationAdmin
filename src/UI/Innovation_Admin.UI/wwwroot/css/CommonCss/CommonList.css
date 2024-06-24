@@ -12,28 +12,33 @@ h1 {
 
 .table {
     margin-top: 10px;
-    /*  border: 1px solid #dee2e6; */
+   
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     width: 100%;
-    table-layout: fixed; /* Ensures the table follows the defined widths */
+    table-layout: fixed;
 }
 
-    .table th,
-    .table td {
+   
+
+    .table th {
         vertical-align: middle;
         text-align: left;
         padding: 10px;
-    }
-
-    .table th {
         background-color: lightgray;
         text-align: center;
     }
 
+    .table td {
+        vertical-align: middle;
+        text-align: left;
+        padding: 10px;
+        word-wrap: break-word;  
+        word-break: break-all; 
+    }
 
 
-        /* Define fixed widths */
+       
         .table th:nth-child(1), .table td:nth-child(1) {
             width: 80px;
             text-align: center;
@@ -41,9 +46,9 @@ h1 {
 
         .table th:nth-child(4), .table td:nth-child(4) {
             width: 150px;
-            text-align: center; /* Fixed width for Action column */
+            text-align: center;  
         }
-
+   
 .btn {
     margin: 2px;
     color: #fff;

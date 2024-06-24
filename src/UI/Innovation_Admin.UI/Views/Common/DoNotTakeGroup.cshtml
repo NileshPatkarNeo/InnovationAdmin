@@ -5,88 +5,19 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-   <style>
-        body {
-            margin: 0px;
-            padding: 0px;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
-            font-size: 2em;
-        }
-
-        .table {
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #fff;
-            width: 100%;
-            table-layout: fixed; /* Ensures the table follows the defined widths */
-        }
-
-            .table th,
-            .table td {
-                vertical-align: middle;
-                text-align: center;
-                padding: 10px;
-            }
-
-            .table th {
-                background-color: #f8f9fa;
-                border: 1px solid #dee2e6;
-            }
-
-            .table td {
-                border: 1px solid #dee2e6;
-            }
-
-                /* Define fixed widths */
-                .table th:nth-child(1), .table td:nth-child(1) {
-                    width: 80px; /* Fixed width for Sr. No column */
-                }
-
-                .table th:nth-child(4), .table td:nth-child(4) {
-                    width: 150px; /* Fixed width for Action column */
-                }
-
-            .table td {
-                word-wrap: break-word; /* Break long words to fit within the cell */
-                word-break: break-all; /* Force break long words */
-            }
 
 
-        .btn {
-            margin: 2px;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-        }
-
-        .add-button-container {
-            text-align: right;
-            margin-bottom: 10px;
-            margin-right: 30px;
-        }
-
-            .add-button-container a {
-                margin-right: 10px;
-            }
-
-   </style>
+   <link href="~/css/CommonCss/CommonList.css" rel="stylesheet" />
 </head>
 <body>
     <h1>Do Not Take Groups</h1>
-    <div style="height:50px; margin:0">
+    <div style="height:40px; margin:0 0">
         <p>
             <a asp-action="CreateDoNotTakeGroup" class="btn btn-primary float-end"> <i class="bi bi-plus-circle"></i>Add</a>
         </p>
     </div>
 
-    <table class="table table-bordered table-hove" id="DoNotTakeGroup">
+    <table class="table table-bordered table-hover" id="DoNotTakeGroup">
         <thead>
             <tr>
                 <th>Sr.No</th>
