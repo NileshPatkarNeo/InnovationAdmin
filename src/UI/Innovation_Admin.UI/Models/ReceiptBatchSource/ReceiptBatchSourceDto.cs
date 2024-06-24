@@ -15,6 +15,7 @@ namespace Innovation_Admin.UI.Models.ReceiptBatchSource
         [MinLength(2, ErrorMessage = "Receipt Batch should be at least 2 characters")]
         [MaxLength(50, ErrorMessage = "Receipt Batch cannot exceed 50 characters")]
         [Remote(action: "IsBatchUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(Id), ErrorMessage = "Receipt Batch Source is already in use.")]
+        [RegularExpression(@"^(?!\s*$).+", ErrorMessage = "Name cannot be empty")]
         public string Name { get; set; }
 
         [JsonProperty("type")]
