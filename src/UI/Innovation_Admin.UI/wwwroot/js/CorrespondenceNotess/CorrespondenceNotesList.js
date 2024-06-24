@@ -1,19 +1,19 @@
-$("#quoteTable").dataTable({
+$("#correspondenceNoteTable").dataTable({
     pageLength: 5,
     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     paging: true,
+    //sorting: true,
     serverSide: false,
     columns: [
         { name: "Sr.No", orderable: true },
-        { name: "Quote Name", orderable: true },
-        { name: "Quote By", orderable: true },
+        { name: "Note", orderable: true },
         { name: "Action", orderable: false }
     ]
 });
 
-function confirmDelete(quoteId) {
+function confirmDelete(noteId) {
     Swal.fire({
-        title: 'Are you sure to Delete?',
+        title: 'Are you sure to Delete ?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -23,9 +23,9 @@ function confirmDelete(quoteId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/Common/DeleteQuote',
+                url: '/Common/DeleteCorrespondenceNote',
                 type: 'POST',
-                data: { quoteId: quoteId },
+                data: { noteId: noteId },
                 success: function (response) {
                     if (response.success) {
                         Swal.fire(

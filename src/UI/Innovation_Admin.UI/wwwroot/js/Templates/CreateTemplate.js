@@ -2,18 +2,18 @@ $(function () {
     $("#PdfFile").on('change', function (event) {
         var file = event.target.files[0];
         if (file.size >= 2 * 1024 * 1024) {
-            alert("JPG images of maximum 2MB");
+            alert("PDF of maximum 2MB");
             $("#createTemplateForm").get(0).reset();
             return;
         }
 
         if (!file.type.match('application/pdf')) {
             alert("only PDF file");
-            $("#createTemplateForm").get(0).reset(); 
+            $("#createTemplateForm").get(0).reset();
             return;
         }
 
-      
+
     });
 });
 
@@ -44,6 +44,9 @@ document.getElementById("createTemplateForm").addEventListener("submit", functio
         isValid = false;
     } else if (nameInput.value.length > 50) {
         nameError.textContent = "Name cannot exceed 50 characters.";
+        isValid = false;
+    } else if (nameInput.value.length < 2) {
+        nameError.textContent = "Name should be at least 2 characters.";
         isValid = false;
     }
 

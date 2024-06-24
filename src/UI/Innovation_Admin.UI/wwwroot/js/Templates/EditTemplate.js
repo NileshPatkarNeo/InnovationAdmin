@@ -39,10 +39,14 @@ document.getElementById("editTemplateForm").addEventListener("submit", function 
     if (nameInput.value.trim() === "") {
         nameError.textContent = "Name is required.";
         isValid = false;
-    } else if (nameInput.value.length > 50) {
-        nameError.textContent = "Name cannot exceed 50 characters.";
+    } else if (nameInput.length < 2) {
+        nameError.textContent = "Name should be at least 2 characters.";
         isValid = false;
     }
+    else if (nameInput.value.length > 50) {
+        nameError.textContent = "Name cannot exceed 50 characters.";
+        isValid = false;
+    } 
 
 
 

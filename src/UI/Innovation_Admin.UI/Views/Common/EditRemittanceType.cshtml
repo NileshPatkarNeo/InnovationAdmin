@@ -4,39 +4,42 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1 class="text-center mb-4">Edit Remittance Type</h1>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form asp-action="EditRemittanceType" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px;">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group" style="display: none;">
-                    <label asp-for="Id" class="control-label"></label>
-                    <input asp-for="Id" class="form-control" readonly="readonly" />
-                    <span asp-validation-for="Id" class="text-danger"></span>
-                </div>
-                @Html.HiddenFor(model => model.Id)
-                <div class="form-group mb-4">
-                    <label asp-for="Name" class="control-label">Name<span style="color: red;">*</span></label>
-                    <input asp-for="Name" class="form-control" style="margin-top: 10px;" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group text-center">
-                    <div class="d-inline-block">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-check-circle"></i> Save
-                        </button>
-                    </div>
-                    <div class="d-inline-block">
-                        <a asp-action="RemittanceTypes" class="btn btn-secondary ms-2">
-                            <i class="bi bi-arrow-left-circle"></i> Back
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <link href="~/css/correspondencenote/editcorrespondencenote.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1 class="text-center mb-4">Edit Remittance Type</h1>
+
+    <div class="form-container">
+        <form id="editRemittanceTypeForm" asp-action="EditRemittanceType" method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" style="display:none;">
+                <label asp-for="Id" class="control-label">ID</label>
+                <input id="Id" asp-for="Id" class="form-control" readonly="readonly" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
+                <input id="Name" asp-for="Name" class="form-control" maxlength="31" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="button-container">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="RemittanceTypes" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
     </div>
-</div>
-@{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/remittancetypess/editremittancetype.js"></script>

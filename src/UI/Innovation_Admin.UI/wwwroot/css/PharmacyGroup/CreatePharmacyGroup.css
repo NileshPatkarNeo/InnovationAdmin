@@ -12,7 +12,7 @@
     border-radius: 8px;
 }
 
-#createGroupForm {
+#receiptBatchForm {
     margin-top: 40px;
 }
 
@@ -42,18 +42,18 @@ h1 {
 
 
 
-.btn-container {
+.button-container {
     display: flex;
     gap: 50px;
     margin-top: 20px;
 }
 
-    .btn-container .btn {
+    .button-container .btn {
         width: 45%;
     }
 
-    .btn-container a,
-    .btn-container input[type="submit"] {
+    .button-container a,
+    .button-container input[type="submit"] {
         flex: 1;
         text-align: center;
     }
@@ -69,3 +69,4 @@ a {
         color: #0056b3;
         text-decoration: none;
     }
+ss

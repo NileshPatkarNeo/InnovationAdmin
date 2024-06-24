@@ -4,103 +4,39 @@
     ViewData["Title"] = "CreateAdminRole";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
+<head>
+    <link href="~/css/receiptbatchsource/createreceiptbatchsource.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <h1 class="text-center">Create Admin Role</h1>
 
-<style>
-    h1.text-center,
-    hr {
-        margin-bottom: 20px;
-    }
+    <div class="form-container">
+        <form id="createAdminRoleForm" asp-action="CreateAdminRole">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    .form-box {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 20px;
-    }
+            <div class="form-group">
+                <label asp-for="Role_Name" class="control-label">Role Name <span class="text-danger">*</span></label>
+                <input asp-for="Role_Name" id="Role_Name" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event,this);" />
+                <span asp-validation-for="Role_Name" class="text-danger"></span>
+                <span class="text-danger" id="Role_Name_error"></span>
+            </div>
 
-    .form-group {
-        margin-bottom: 1rem;
-    }
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Description <span class="text-danger">*</span></label>
+                <input asp-for="Description" id="Description" class="form-control" maxlength="101" onkeypress="return onlyAlphabets(event,this);" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <span class="text-danger" id="Description_error"></span>
+            </div>
 
-    .btn-group {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-    }
-
-        .btn-group .btn {
-            margin: 0 5px;
-        }
-</style>
-
-<h1 class="text-center">Create Admin Role</h1>
-
-
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="form-box">
-            <form id="createAdminRoleForm" asp-action="CreateAdminRole" novalidate>
-                <div class="text-danger">
-                    @if (ViewData.ModelState.ErrorCount > 0)
-                    {
-                        <div class="alert alert-danger">
-                            <p>Please fix the errors below:</p>
-                            <ul>
-                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                                {
-                                    <li>@error.ErrorMessage</li>
-                                }
-                            </ul>
-                        </div>
-                    }
-                </div>
-
-                <div class="form-group mb-3">
-                    <label asp-for="Role_Name" class="control-label">
-                        Role Name <span class="text-danger">*</span>
-                    </label>
-                    <input asp-for="Role_Name" class="form-control" maxlength="21" required id="Role_Name" onkeypress="return onlyAlphabets(event,this);"  />
-                    <span asp-validation-for="Role_Name" class="text-danger"></span>
-                    <span class="text-danger" id="Role_Name_error"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Description" class="control-label">
-                        Description <span class="text-danger">*</span>
-                    </label>
-                    <input asp-for="Description" class="form-control" maxlength="61" required id="Description" onkeypress="return onlyAlphabets(event,this);"  />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                    <span class="text-danger" id="Description_error"></span>
-                </div>
-                <div class="btn-group">
-                    <div>
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>
-                    <div>
-                        <a asp-action="AdminRole" class="btn btn-secondary">Back</a>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="AdminRole" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
     </div>
-</div>
-    <script src="~/js/CreateAdminRole.js"></script>
-    <script>
-    function onlyAlphabets(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            }
-            else if (e) {
-                var charCode = e.which;
-            }
-            else { return true; }
-            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
-                return true;
-            else
-                return false;
-        }
-        catch (err) {
-            alert(err.Description);
-        }
-    }
-</script>
+</body>
+   <script src="~/js/CreateAdminRole.js"></script>
+   

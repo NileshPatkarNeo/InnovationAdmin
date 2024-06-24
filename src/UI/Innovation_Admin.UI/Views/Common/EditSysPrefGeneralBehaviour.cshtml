@@ -4,102 +4,63 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<style>
-     .test {
-        text-align: center;
-    }
-     .test2 {
-        margin-top: 30px;
-    }
-    .margin-bottom-lg {
-        margin-bottom: 50px; 
-    }
-    .test3 {
-        padding: 11px;
-    }
-    .form-box {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-        margin: 20px;
-    }
-    .btn-group {
-        display: flex;
-        justify-content: space-between;
-    }
-</style>
+<link href="~/css/correspondencenote/editcorrespondencenote.css" rel="stylesheet" />
+<body>
+    <h1>Edit System Preference General Behaviour</h1>
 
-<h1 class="text-center test">Edit System Preference General Behaviour</h1>
+    <div class="form-container">
+        <form id="editForm" asp-action="EditSysPrefGeneralBehaviour">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 test2">
-            <div class="card bg-light shadow">
-                <div class="card-body">
-                    <form asp-action="EditSysPrefGeneralBehaviour">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-box">
-                            <div class="form-group">
-                                <label asp-for="Preference_ID" class="control-label">Id <span class="text-danger">*</span></label>
-                                <input asp-for="Preference_ID" class="form-control" readonly="readonly" />
-                                <span asp-validation-for="Preference_ID" class="text-danger"></span>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="Auto_Change_Claim_Status" /> Auto Change Claim Status
-                                </label>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="Claim_Status_Receipting" /> Claim Status Receipting
-                                </label>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="Claim_Status_Payment" /> Claim Status Payment
-                                </label>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="Claim_Status_Zero_Paid" /> Claim Status Zero Paid
-                                </label>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="Claim_Status_Procare_Claim_Load" /> Claim Status Procare Claim Load
-                                </label>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="Logout_Redirect" /> Logout Redirect
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Records_Locked_Seconds" class="control-label">Records Locked Seconds <span class="text-danger">*</span></label>
-                                <input asp-for="Records_Locked_Seconds" class="form-control" />
-                                <span asp-validation-for="Records_Locked_Seconds" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="User_Timeout" class="control-label">User Timeout <span class="text-danger">*</span></label>
-                                <input asp-for="User_Timeout" class="form-control" />
-                                <span asp-validation-for="User_Timeout" class="text-danger"></span>
-                            </div>
-                        
-                             <div class="form-group text-center test3">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-check-circle"></i> Save
-                                </button>
-                                <a asp-action="SysPrefGeneralBehaviour" class="btn btn-secondary ms-2">
-                                    <i class="bi bi-arrow-left-circle"></i> Back
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Auto_Change_Claim_Status" /> Auto Change Claim Status
+                </label>
             </div>
-        </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Receipting" /> Claim Status Receipting
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Payment" /> Claim Status Payment
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Zero_Paid" /> Claim Status Zero Paid
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Claim_Status_Procare_Claim_Load" /> Claim Status Procare Claim Load
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Logout_Redirect" /> Logout Redirect
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Records_Locked_Seconds" class="control-label">Records Locked Seconds <span class="text-danger">*</span></label>
+                <input asp-for="Records_Locked_Seconds" class="form-control" />
+                <span asp-validation-for="Records_Locked_Seconds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User_Timeout" class="control-label">User Timeout <span class="text-danger">*</span></label>
+                <input asp-for="User_Timeout" class="form-control" />
+                <span asp-validation-for="User_Timeout" class="text-danger"></span>
+            </div>
+
+            <div class="button-container">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="SysPrefGeneralBehaviour" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
     </div>
-</div>
+</body>
 
 @section Scripts {
     @{

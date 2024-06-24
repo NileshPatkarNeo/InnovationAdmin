@@ -1,17 +1,17 @@
-$("#quoteTable").dataTable({
+$("#pharmacyGroup").dataTable({
     pageLength: 5,
     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     paging: true,
     serverSide: false,
     columns: [
         { name: "Sr.No", orderable: true },
-        { name: "Quote Name", orderable: true },
-        { name: "Quote By", orderable: true },
+        { name: "Pharmacy Name", orderable: true },
         { name: "Action", orderable: false }
     ]
 });
 
-function confirmDelete(quoteId) {
+
+function confirmDelete(Id) {
     Swal.fire({
         title: 'Are you sure to Delete?',
         text: "You won't be able to revert this!",
@@ -23,9 +23,9 @@ function confirmDelete(quoteId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/Common/DeleteQuote',
+                url: '/Common/DeletePharmacyGroup',
                 type: 'POST',
-                data: { quoteId: quoteId },
+                data: { ID: Id },
                 success: function (response) {
                     if (response.success) {
                         Swal.fire(

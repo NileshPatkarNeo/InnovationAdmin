@@ -1,34 +1,49 @@
 ﻿@model Innovation_Admin.UI.Models.CorrespondenceNote.CreateCorrespondenceNoteDto
 
 @{
-   Layout = "_AdminHomePage";
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<h1>Create Correspondence Note</h1>
+<head>
+    <link href="~/css/ReceiptBatchSource/CreateReceiptBatchSource.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <link href="~/css/correspondencenote/createcorrespondencenote.css" rel="stylesheet" />
+</head>
 
-<div class="d-flex justify-content-center align-items-start min-vh-100">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <form id="createCorrespondenceNoteForm" asp-action="CreateCorrespondenceNote" novalidate>
-                    <div class="form-group">
-                        <label asp-for="Note" class="control-label">Note<span class="text-danger">*</span></label>
-                        <input asp-for="Note" class="form-control" id="Note" />
-                        <span id="noteError" class="text-danger"></span>
-                    </div>
-                    <div class="form-group d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary btn-lg flex-fill">Create</button>
-                        <a asp-action="CorrespondenceNotes" class="btn btn-secondary btn-lg flex-fill">Back</a>
-                    </div>
-                </form>
+<body>
+    <h1 class="text-center test">Create Correspondence Note</h1>
+
+    <div class="form-container">
+        <form id="createCorrespondenceNoteForm" asp-action="CreateCorrespondenceNote" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Note" class="control-label">Note <span class="text-danger">*</span></label>
+                <input asp-for="Note" id="Note" class="form-control" maxlength="51" />
+                <span asp-validation-for="Note" class="text-danger"></span>
             </div>
-        </div>
+
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="CorrespondenceNotes" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
     </div>
-</div>
+</body>
+
+<script src="~/js/correspondencenote/createcorrespondencenote.js"></script>
 
 @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 
-<link href="~/css/correspondencenote/createcorrespondencenote.css" rel="stylesheet" />
-<script src="~/js/createCorrespondenceNote.js"></script>
+<script>
+    document.getElementById("Note").addEventListener("input", function () {
+        var errorSpan = document.querySelector("span[data-valmsg-for='Note']");
+        if (errorSpan) {
+            errorSpan.textContent = "";
+        }
+    });
+</script>

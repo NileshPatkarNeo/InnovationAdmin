@@ -4,6 +4,8 @@
     ViewData["Title"] = "EditAdminRole";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
+<head>
+
 <style>
     h1.text-center {
         margin-bottom: 20px;
@@ -35,6 +37,10 @@
     }
 </style>
 
+
+
+</head>
+<body>
 <h1 class="text-center">Edit Admin Role</h1>
 
 <div class="row justify-content-center">
@@ -65,7 +71,7 @@
                     <label asp-for="Role_Name" class="control-label">
                         @Html.DisplayNameFor(model => model.Role_Name) <span class="text-danger">*</span>
                     </label>
-                    <input asp-for="Role_Name" class="form-control" maxlength="21" required id="Role_Name" onkeypress="return onlyAlphabets(event,this);" />
+                    <input asp-for="Role_Name" class="form-control" maxlength="51" required id="Role_Name" onkeypress="return onlyAlphabets(event,this);" />
                     <span asp-validation-for="Role_Name" class="text-danger"></span>
                     <span class="text-danger" id="Role_Name_error"></span>
                 </div>
@@ -73,7 +79,7 @@
                     <label asp-for="Description" class="control-label">
                         @Html.DisplayNameFor(model => model.Description) <span class="text-danger">*</span>
                     </label>
-                    <input asp-for="Description" class="form-control" maxlength="59" required id="Description" onkeypress="return onlyAlphabets(event,this);" />
+                    <input asp-for="Description" class="form-control" maxlength="101" required id="Description" onkeypress="return onlyAlphabets(event,this);" />
                     <span asp-validation-for="Description" class="text-danger"></span>
                     <span class="text-danger" id="Description_error"></span>
                 </div>
@@ -89,6 +95,10 @@
         </div>
     </div>
 </div>
-
+</body>
 
 <script src="~/js/EditAdminRole.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>

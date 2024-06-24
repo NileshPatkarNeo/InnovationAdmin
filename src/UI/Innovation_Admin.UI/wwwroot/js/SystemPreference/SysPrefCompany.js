@@ -1,20 +1,23 @@
-$("#remittanceType").dataTable({
+﻿
+$("#SysPrefCompany").dataTable({
     pageLength: 5,
     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     paging: true,
-    sorting: true,
+
     serverSide: false,
     columns: [
         { name: "Sr.No", orderable: true },
-        { name: "Name", orderable: true },
+        { name: "CompanyName", orderable: true },
+        { name: "TermForPharmacy", orderable: true },
         { name: "Action", orderable: false }
     ]
 });
 
 
-function confirmDelete(Id) {
+
+function confirmDelete(roleId) {
     Swal.fire({
-        title: 'Are you sure?',
+        title: 'Are you sure to Delete?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -24,9 +27,9 @@ function confirmDelete(Id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/Common/DeleteRemittanceType',
+                url: '/Common/DeleteSysPrefCompany',
                 type: 'POST',
-                data: { ID: Id },
+                data: { companyId: roleId },
                 success: function (response) {
                     if (response.success) {
                         Swal.fire(
