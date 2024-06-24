@@ -5,39 +5,41 @@
 
 <head>
     <link href="~/css/ReceiptBatchSource/CreateReceiptBatchSource.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </head>
 
 <body>
-<h1>Create Receipt Batch</h1>
+    <h1>Create Receipt Batch</h1>
 
-<div class="form-container">
-    <form id="receiptBatchForm" asp-action="CreateReceiptBatchSource">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-container">
+        <form id="receiptBatchForm" asp-action="CreateReceiptBatchSource">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <div class="form-group">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" id="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this); " />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Type" class="control-label"></label>
-            <select asp-for="Type" id="Type" class="form-control">
-                <option value="">-- Select Type --</option>
-                <option value="Bank">Bank</option>
-                <option value="Credit Card">Credit Card</option>
-                <option value="UPI">UPI</option>
-                <option value="EDI">EDI</option>
-            </select>
-            <span asp-validation-for="Type" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
+                <input asp-for="Name" id="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this);" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label">Type <span class="text-danger">*</span></label>
+                <select asp-for="Type" id="Type" class="form-control">
+                    <option value="">-- Select Type --</option>
+                    <option value="Bank">Bank</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="UPI">UPI</option>
+                    <option value="EDI">EDI</option>
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
 
-        <div class="button-container">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="ReceiptBatchSource" class="btn btn-secondary">Back</a>
-        </div>
-    </form>
-</div>
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="ReceiptBatchSource" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
 </body>
-
 
 <script src="~/js/ReceiptBatch/CreateReceiptBatch.js"></script>

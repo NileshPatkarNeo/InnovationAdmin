@@ -974,6 +974,34 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllReceiptBatch);
         }
 
+
+        //[HttpGet]
+        //public async Task<IActionResult> IsBatchUnique(string name, Guid id)
+        //{
+        //    var allbatch = await _common.GetAllReceiptBatchSource();
+        //    var isUnique = !allbatch.Any(batch => batch.Name == name && batch.Id != id);
+
+        //    return Json(isUnique);
+        //}
+
+        public async Task<IActionResult> IsBatchUnique(string name, Guid id)
+        {
+            var allbatch = await _common.GetAllReceiptBatchSource();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
         [HttpGet]
         public IActionResult CreateReceiptBatchSource()
         {
@@ -986,7 +1014,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateReceiptBatchSource(batch);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Receipt Batch Successfully Added";
                 return RedirectToAction("ReceiptBatchSource");
 
             }
@@ -1012,11 +1040,11 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateReceiptBatchSource(updatedBatch);
             if (result.Message == null)
             {
-                TempData["Message"] = "Receipt batch updated successfully";
+                TempData["Message"] = "Receipt Batch Successfully Updated";
                 return RedirectToAction("ReceiptBatchSource");
 
             }
-            else if (result.Message != "Failed to add Receipt BAtch.")
+            else if (result.Message != "Failed to add Receipt Batch.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("ReceiptBatchSource");
@@ -1514,6 +1542,14 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllDoNotTakeGroup);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> IsGroupCodeUnique(int groupCode, Guid id)
+        {
+            var allGroups = await _common.GetAllDoNotTakeGroups();
+            var isUnique = !allGroups.Any(group => group.GroupCode == groupCode && group.Id != id);
+            return Json(isUnique);
+        }
+
 
         [HttpGet]
         public IActionResult CreateDoNotTakeGroup()
@@ -1559,7 +1595,7 @@ namespace Innovation_Admin.UI.Controllers
                 return RedirectToAction("DoNotTakeGroup");
 
             }
-            else if (result.Message != "Failed to add Receipt BAtch.")
+            else if (result.Message != "Failed to update Group.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("DoNotTakeGroup");
