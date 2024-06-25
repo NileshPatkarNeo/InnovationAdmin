@@ -16,5 +16,9 @@ namespace InnovationAdmin.Domain.Entities
         [Required(ErrorMessage = "Color is required")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "Color must be between 1 and 50 characters")]
         public string Color { get; set; }
+
+        public bool Status { get; set; }
+
+
     }
 }

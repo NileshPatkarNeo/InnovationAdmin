@@ -26,8 +26,15 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatu
                 return new Response<ClaimStatusDto>("Claim not found.");
             }
 
-            var claimDto = _mapper.Map<ClaimStatusDto>(claimStatus);
-            return new Response<ClaimStatusDto>(claimDto);
+            if (claimStatus.Status)
+            {
+                var claimDto = _mapper.Map<ClaimStatusDto>(claimStatus);
+                return new Response<ClaimStatusDto>(claimDto);
+            }
+            else
+            {
+                return new Response<ClaimStatusDto>("Claim status is inactive.");
+            }
         }
     }
 }
