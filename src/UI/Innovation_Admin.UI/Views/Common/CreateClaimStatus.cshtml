@@ -1,0 +1,122 @@
+﻿@model Innovation_Admin.UI.Models.ClaimStatus.ClaimStatusDto
+
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<head>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group select {
+            border-radius: 4px;
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        .color-box {
+            display: inline-block;
+            width: 100%;
+            height: 50px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 50px;
+            margin-top: 20px;
+        }
+
+            .button-container .btn {
+                width: 45%;
+            }
+
+            .button-container a,
+            .button-container input[type="submit"] {
+                flex: 1;
+                text-align: center;
+            }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+
+            a:hover {
+                color: #0056b3;
+                text-decoration: none;
+            }
+
+           
+    </style>
+</head>
+<body>
+<h1>Claim Status</h1>
+    <div class="form-container">
+        <form id="ClaimStatusForm" asp-action="CreateClaimStatus" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event,this);" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-2">
+                <label asp-for="Color" class="control-label">Color</label>
+                <input type="color" asp-for="Color" class="form-control form-control-color" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="ClaimStatus" class="btn btn-secondary">Back</a>
+            </div>
+         </form>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+                <script src="~/js/ReceiptBatch/CreateReceiptBatch.js"></script>

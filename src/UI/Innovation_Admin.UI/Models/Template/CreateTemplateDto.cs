@@ -11,6 +11,7 @@ namespace Innovation_Admin.UI.Models.Template
         [JsonProperty("name")]
         [Required(ErrorMessage = "Name is required.")]
         [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
+        [RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Name can only contain characters")]
         [Remote(action: "IsTemplateNameUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
         [StringLength(50, ErrorMessage = "Name cannot exceed 50 characters..")]
         public string Name { get; set; }

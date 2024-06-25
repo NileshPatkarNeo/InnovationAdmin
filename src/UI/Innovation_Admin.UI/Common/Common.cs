@@ -41,6 +41,10 @@ using Innovation_Admin.UI.Models.CategoryType;
 using Innovation_Admin.UI.Models.ResponsesModel.CategoryType;
 using Innovation_Admin.UI.Models.PharmacyType;
 using Innovation_Admin.UI.Models.ResponsesModel.PharmacyType;
+using Innovation_Admin.UI.Models.ContractTerms;
+using Innovation_Admin.UI.Models.ResponsesModel.ContractTerm;
+using Innovation_Admin.UI.Models.ClaimStatus;
+using Innovation_Admin.UI.Models.ResponsesModel.ClaimStatus;
 
 namespace Innovation_Admin.UI.Common
 {
@@ -68,11 +72,13 @@ namespace Innovation_Admin.UI.Common
        
         private readonly ICorrespondenceNote correspondenceNote;
         private readonly IPharmacyType pharmacyTypes;
+        private readonly IContractTerms contractTerms;
+        private readonly IClaimStatus claimStatus;
 
 
         
       
-        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote,IDoNotTakeGroup _doNotTakeGroup, ICategoryTypes _categoryTypes, IPharmacyType _pharmacyTypes)
+        public Common(ISysPrefCompanies _sysPrefCompanies, ISysPrefFinancials _sysPrefFinancial, IAdminUser _adminUser, IConfiguration configuration, IOptions<ApiBaseUrl> apiBaseUrl, IAdminRoles _adminRoles, ISysPrefGeneralBehaviouries _sysPrefBehaviouries, IPharmacyGroup _pharmacyGroups, IAccountManager _accountManager, ISysPrefSecurityEmails _sysPrefSecurityEmails, IDataSources _dataSources, IRemittanceType _remittanceTypes, IQuotes _quotes, IReceiptBatchSource _receiptBatchSource,IBillingMethodTypes _billingMethodTypes,IAPAccountTypes _aPAccountTypes, ITemplates _templates, ICorrespondenceNote _correspondenceNote,IDoNotTakeGroup _doNotTakeGroup, ICategoryTypes _categoryTypes, IPharmacyType _pharmacyTypes , IContractTerms _contractTerms,IClaimStatus _claimStatus)
 
 
         {
@@ -97,6 +103,8 @@ namespace Innovation_Admin.UI.Common
             doNotTakeGroup = _doNotTakeGroup;
             categoryTypes = _categoryTypes;
             pharmacyTypes = _pharmacyTypes;
+            contractTerms = _contractTerms;
+            claimStatus = _claimStatus;
         }
 
         #region System_Preference
@@ -857,6 +865,89 @@ namespace Innovation_Admin.UI.Common
             }
 
             return new List<PharmacyTypeDto>();
+        }
+        #endregion
+
+
+        #region ClaimStatus
+
+        public async Task<IEnumerable<ClaimStatusDto>> GetAllClaimStatus()
+        {
+            GetAllClaimStatusResponseModel getAllClaimStatusResponseModel = new GetAllClaimStatusResponseModel();
+
+            getAllClaimStatusResponseModel = await claimStatus.GetAllClaimStatus();
+
+            if (getAllClaimStatusResponseModel.IsSuccess)
+            {
+                if (getAllClaimStatusResponseModel != null && getAllClaimStatusResponseModel.Data.Count() > 0)
+                {
+                    return getAllClaimStatusResponseModel.Data;
+                }
+            }
+
+            return new List<ClaimStatusDto>();
+        }
+
+
+
+        public async Task<CreateClaimStatusResponseModel> CreateClaimStatus(ClaimStatusDto claim)
+        {
+            return await claimStatus.CreateClaimStatus(claim);
+        }
+
+
+        public async Task<UpdateClaimStatusResponseModel> UpdateClaimStatus(ClaimStatusDto updatedClaim)
+        {
+            return await claimStatus.UpdateClaimStatus(updatedClaim);
+        }
+        public async Task<GetClaimStatusByIdResponseModel> GetClaimStatusById(Guid Id)
+        {
+            return await claimStatus.GetClaimStatusById(Id);
+        }
+
+        public async Task<bool> DeleteClaimStatus(Guid Id)
+        {
+            return await claimStatus.DeleteClaimStatus(Id);
+        }
+
+        #endregion
+
+        #region ContractTerms
+        public async Task<IEnumerable<ContractTermDto>> GetAllContractTerms()
+        {
+            GetAllContractTermsResponseModel getAllContractTermsResponseModel = new GetAllContractTermsResponseModel();
+
+            getAllContractTermsResponseModel = await contractTerms.GetAllContractTerms();
+
+            if (getAllContractTermsResponseModel.IsSuccess)
+            {
+                if (getAllContractTermsResponseModel != null && getAllContractTermsResponseModel.Data.Count() > 0)
+                {
+                    return getAllContractTermsResponseModel.Data;
+                }
+            }
+
+            return new List<ContractTermDto>();
+        }
+
+        public async Task<CreateContractTermResponseModel> CreateContractTerm(CreateContractTermDto newContractTerm)
+        {
+            return await contractTerms.CreateContractTerm(newContractTerm);
+        }
+
+        public async Task<UpdateContractTermResponseModel> UpdateContractTerm(ContractTermDto updatedContractTerm)
+        {
+            return await contractTerms.UpdateContractTerm(updatedContractTerm);
+        }
+
+        public async Task<GetContractTermByIdResponseModel> GetContractTermById(Guid contractTermId)
+        {
+            return await contractTerms.GetContractTermById(contractTermId);
+        }
+
+        public async Task<bool> DeleteContractTerm(Guid contractTermId)
+        {
+            return await contractTerms.DeleteContractTerm(contractTermId);
         }
         #endregion
     }
