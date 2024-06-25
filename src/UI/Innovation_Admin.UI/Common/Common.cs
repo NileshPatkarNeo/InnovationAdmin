@@ -866,6 +866,31 @@ namespace Innovation_Admin.UI.Common
 
             return new List<PharmacyTypeDto>();
         }
+
+        public async Task<CreatePharmacyTypeResponseModel> CreatePharmacyType(PharmacyTypeDto group)
+        {
+            return await pharmacyTypes.CreatePharmacyType(group);
+        }
+
+        public async Task<UpdatePharmacyTypeResponseModel> UpdatePharmacyType(PharmacyTypeDto updatedGroup)
+        {
+            return await pharmacyTypes.UpdatePharmacyType(updatedGroup);
+        }
+
+        public async Task<GetPharmacyTypeByIdResponseModel> GetPharmacyTypeById(Guid Id)
+        {
+            return await pharmacyTypes.GetPharmacyTypeById(Id);
+        }
+        public async Task<bool> DeletePharmacyType(Guid Id)
+        {
+            return await pharmacyTypes.DeletePharmacyType(Id);
+        }
+
+
+
+
+
+
         #endregion
 
 

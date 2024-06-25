@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace Innovation_Admin.UI.Models.PharmacyType
@@ -10,12 +11,20 @@ namespace Innovation_Admin.UI.Models.PharmacyType
 
         [JsonProperty("description")]
         [Required(ErrorMessage = "Description is required")]
-        [StringLength(25, ErrorMessage = "Description cannot be longer than 100 characters")]
+        [StringLength(50, ErrorMessage = "Description cannot be longer than 50 characters")]
+        [MinLength(2, ErrorMessage = "Description should have at least 2 characters.")]
+        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Description can only contain alphabetic characters and spaces")]
+        //[Remote(action: "IsPharmacyTypeUnique", controller: "Common", ErrorMessage = "Pharmacy Type is already in use.")]
         public string Description { get; set; }
 
         [JsonProperty("code")]
         [Required(ErrorMessage = "Code is required")]
         [Range(1, 100, ErrorMessage = "code must be between 1-100")]
         public int Code { get; set; }
+
+        [StringLength(1000)]
+        [JsonProperty("message")]
+        public string? Message { get; set; }
+
     }
 }

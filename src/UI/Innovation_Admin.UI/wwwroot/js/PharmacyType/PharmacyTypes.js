@@ -2,7 +2,7 @@ $("#pharmacyTypeTable").dataTable({
     pageLength: 5,
     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     paging: true,
-    sorting: true,
+    
     serverSide: false,
     columns: [
         { name: "Sr.No", orderable: true },
@@ -12,21 +12,21 @@ $("#pharmacyTypeTable").dataTable({
     ]
 });
 
-function confirmDelete(pharmacyTypeId) {
-    Swal.fire({
-        title: 'Are you sure?',
+function confirmDelete(Id) {
+       Swal.fire({
+        title: 'Are you sure to Delete ?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes'
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 url: '/Common/DeletePharmacyType',
                 type: 'POST',
-                data: { pharmacyTypeId: pharmacyTypeId },
+                data: { Id: Id },
                 success: function (response) {
                     if (response.success) {
                         Swal.fire(

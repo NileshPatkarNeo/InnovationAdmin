@@ -20,5 +20,7 @@ namespace InnovationAdmin.Domain.Entities
         [Required]
         [MaxLength(100)]
         public int Code { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
