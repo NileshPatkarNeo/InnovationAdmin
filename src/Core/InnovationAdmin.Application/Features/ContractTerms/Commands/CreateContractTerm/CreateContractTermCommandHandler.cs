@@ -35,7 +35,8 @@ namespace InnovationAdmin.Application.Features.ContractTerms.Commands.CreateCont
             {
                 Name = request.Name,
                 ContractType = request.ContractType,
-                ContractTypeCode = request.ContractTypeCode
+                ContractTypeCode = request.ContractTypeCode,
+                Status = true
             };
 
             contractTerm = await _contractTermsRepository.AddAsync(contractTerm);

@@ -23,5 +23,7 @@ namespace InnovationAdmin.Domain.Entities
         [Required(ErrorMessage = "ContractTypeCode is required")]
         [Range(1, int.MaxValue, ErrorMessage = "ContractTypeCode should be a positive integer.")]
         public int ContractTypeCode { get; set; }
+
+        public bool Status {  get; set; }
     }
 }

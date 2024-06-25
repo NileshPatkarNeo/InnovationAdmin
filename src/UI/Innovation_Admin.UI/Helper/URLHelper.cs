@@ -248,5 +248,16 @@ namespace Innovation_Admin.UI.Helper
         public const string GetAllCategoryType = "/api/CategoryType/all?api-version=1";
 
         #endregion
+
+        #region Contract Terms
+        public const string GetAllContractTerms = "/api/Quote?api-version=1";
+
+        public const string CreateContractTerm = "/api/Quote/create?api-version=1";
+
+        public const string GetContractTermById = "/api/Quote/{id}?api-version=1";
+
+        public const string UpdateContractTerm = "/api/Quote?api-version=1";
+
+        public const string DeleteContractTerm = "/api/Quote/{id}?api-version=1";
     }
 }
