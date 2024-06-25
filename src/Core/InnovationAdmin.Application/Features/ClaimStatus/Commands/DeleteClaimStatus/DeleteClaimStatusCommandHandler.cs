@@ -1,7 +1,8 @@
 ﻿using InnovationAdmin.Application.Contracts.Persistence;
 using InnovationAdmin.Application.Responses;
 using MediatR;
-
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace InnovationAdmin.Application.Features.ClaimStatus.Commands.DeleteClaimStatus
 {
@@ -11,22 +12,25 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Commands.DeleteClaimS
 
         public DeleteClaimStatusCommandHandler(IClaimStatusRepository claimStatusRepository)
         {
-           _claimStatusRepository = claimStatusRepository;
+            _claimStatusRepository = claimStatusRepository;
         }
 
         public async Task<Response<bool>> Handle(DeleteClaimStatusCommand request, CancellationToken cancellationToken)
         {
-            var claimToDelete = await _claimStatusRepository.GetByIdAsync(request.Id);
+            var claimToUpdate = await _claimStatusRepository.GetByIdAsync(request.Id);
 
-            if (claimToDelete == null)
+            if (claimToUpdate == null)
             {
                 return new Response<bool>($"Claim Status with id {request.Id} not found.");
             }
 
-            await _claimStatusRepository.DeleteAsync(claimToDelete);
+           
+            claimToUpdate.IsDeleted = true;
 
-            return new Response<bool>(true, "Claim Status deleted successfully.");
+          
+            await _claimStatusRepository.UpdateAsync(claimToUpdate);
+
+            return new Response<bool>(true, "Claim Status Deleted successfully.");
         }
     }
 }
-

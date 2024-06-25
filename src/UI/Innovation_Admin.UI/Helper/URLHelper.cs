@@ -247,6 +247,37 @@ namespace Innovation_Admin.UI.Helper
         #region CategoryType
         public const string GetAllCategoryType = "/api/CategoryType/all?api-version=1";
 
+        public const string CreateCategoryType = "/api/CategoryType?api-version=1";
+        public const string UpdateCategoryType = "/api/CategoryType?api-version=1";
+        public const string GetCategoryTypeById = "/api/CategoryType/{id}?api-version=1";
+        public const string DeleteCategoryType = "/api/CategoryType/{id}?api-version=1";
+
+
+        #endregion
+
+        #region Contract Terms
+        public const string GetAllContractTerms = "/api/Quote?api-version=1";
+
+        public const string CreateContractTerm = "/api/Quote/create?api-version=1";
+
+        public const string GetContractTermById = "/api/Quote/{id}?api-version=1";
+
+        public const string UpdateContractTerm = "/api/Quote?api-version=1";
+
+        public const string DeleteContractTerm = "/api/Quote/{id}?api-version=1";
+        #endregion
+
+
+        #region ClaimStatus
+        public const string GetAllClaimStatus = "/api/ClaimStatus?api-version=1";
+
+        public const string GetClaimStatusByID = "/api/ClaimStatus/{id}?api-version=1";
+
+        public const string CreateClaimStatus = "/api/ClaimStatus?api-version=1";
+
+        public const string UpdateClaimStatus = "/api/ClaimStatus/?api-version=1";
+
+        public const string DeleteClaimStatus = "/api/ClaimStatus/{id}?api-version=1";
         #endregion
     }
 }

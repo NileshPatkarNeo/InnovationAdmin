@@ -32,7 +32,9 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Commands.CreateClaimS
             var claim = new Domain.Entities.ClaimStatus
             {
                 Name = request.Name,
-                Color = request.Color
+                Color = request.Color,
+                IsDeleted = false
+              
 
             };
             claim = await _claimStatusRepository.AddAsync(claim);

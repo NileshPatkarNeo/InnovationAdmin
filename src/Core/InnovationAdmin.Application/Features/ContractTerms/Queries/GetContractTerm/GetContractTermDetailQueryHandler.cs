@@ -22,9 +22,14 @@ namespace InnovationAdmin.Application.Features.ContractTerms.Queries.GetContract
 
         public async Task<Response<ContractTermVM>> Handle(GetContractTermDetailQuery request, CancellationToken cancellationToken)
         {
+            var responseOne = new Response<ContractTermVM>();
             var contractTerm = await _contractTermsRepository.GetByIdAsync(request.ID);
-
-            if (contractTerm == null)
+            if(!contractTerm.Status)
+            {
+                responseOne.Message = "Status is Inactive Contact to Admin";
+                return responseOne;
+            }
+            else if (contractTerm == null)
             {
                 throw new NotFoundException(nameof(ContractTermVM), request.ID);
             }

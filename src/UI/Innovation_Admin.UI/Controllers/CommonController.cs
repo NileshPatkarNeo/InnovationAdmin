@@ -27,6 +27,9 @@ using Innovation_Admin.UI.Models.DoNotTakeGroup;
 using System.ComponentModel.Design;
 using Innovation_Admin.UI.Services.Repositories;
 using System.Xml.Linq;
+using Innovation_Admin.UI.Models.ContractTerms;
+using Innovation_Admin.UI.Models.ClaimStatus;
+using Innovation_Admin.UI.Models.CategoryType;
 using Innovation_Admin.UI.Models.PharmacyType;
 
 namespace Innovation_Admin.UI.Controllers
@@ -66,7 +69,7 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> SysPrefCompany()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefCompanies();
-
+           
             return View(getAllSysPrefCompanies);
         }
 
@@ -113,7 +116,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpPost]
-
+     
         public async Task<IActionResult> EditSysPrefCompany(SysPrefCompanyDto updatedCompany)
         {
             var result = await _common.UpdateSysPrefCompany(updatedCompany);
@@ -163,11 +166,30 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllAdminUser);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> IsAdminUserUnique(string user_Name, Guid id)
+        //[HttpGet]
+        //public async Task<JsonResult> IsAdminUserUnique(string user_Name, Guid id)
+        //{
+        //    var alladmin = await _common.GetAllAdminUser();
+        //    var isUnique = !alladmin.Any(admin => admin.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && admin.User_ID != id);
+
+        //    return Json(isUnique);
+        //}
+
+
+        public async Task<IActionResult> IsAdminUserUnique(string user_Name, Guid user_ID)
         {
-            var alladmin = await _common.GetAllAdminUser();
-            var isUnique = !alladmin.Any(admin => admin.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && admin.User_ID != id);
+            var allbilling = await _common.GetAllAdminUser();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(user_ID.ToString()) || user_ID == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && batch.User_ID != user_ID);
+
+            }
 
             return Json(isUnique);
         }
@@ -260,18 +282,17 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
-        public async Task<JsonResult> IsRoleNameUnique(string role_Name, Guid id)
+        public async Task<IActionResult> IsRoleNameUnique(string role_Name, Guid role_ID)
         {
             var allRoles = await _common.GetAllAdminRoles();
             bool isUnique = false;
-
-            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (string.IsNullOrEmpty(role_ID.ToString()) || role_ID == Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
                 isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
-                isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase) && role.Role_ID != id);
+                isUnique = !allRoles.Any(role => role.Role_Name.Equals(role_Name, StringComparison.OrdinalIgnoreCase) && role.Role_ID != role_ID);
             }
 
             return Json(isUnique);
@@ -679,7 +700,7 @@ namespace Innovation_Admin.UI.Controllers
                     ModelState.AddModelError(string.Empty, "An error occurred while creating the SysPrefFinancial.");
                 }
 
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Financial Successfully Added";
 
                 return RedirectToAction("SysPrefFinancial");
             }
@@ -705,7 +726,7 @@ namespace Innovation_Admin.UI.Controllers
                 ModelState.AddModelError(string.Empty, result.Message);
                 return View(updatedFinancial);
             }
-            TempData["Message"] = "Updated Successfully ";
+            TempData["Message"] = " Financial Successfully Updated ";
 
             return RedirectToAction("SysPrefFinancial");
         }
@@ -751,6 +772,24 @@ namespace Innovation_Admin.UI.Controllers
         {
             var getAllSysPrefSecurityEmail = await _common.GetAllSysPrefSecurityEmail();
             return View(getAllSysPrefSecurityEmail);
+        }
+
+        public async Task<IActionResult> IsSecurityEmailUnique(string defaultFromName, Guid sysPrefSecurityEmailId)
+        {
+            var allbilling = await _common.GetAllSysPrefSecurityEmail();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(sysPrefSecurityEmailId.ToString()) || sysPrefSecurityEmailId == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.DefaultFromName.Equals(defaultFromName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.DefaultFromName.Equals(defaultFromName, StringComparison.OrdinalIgnoreCase) && batch.SysPrefSecurityEmailId != sysPrefSecurityEmailId);
+
+            }
+
+            return Json(isUnique);
         }
 
         [HttpGet]
@@ -917,7 +956,7 @@ namespace Innovation_Admin.UI.Controllers
             }
             else
             {
-                return Json(new { success = false, message = "Failed to delete the admin role." });
+                return Json(new { success = false, message = "Failed to delete the quote." });
             }
         }
 
@@ -1142,11 +1181,29 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllDataSource);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> IsDataNameUnique(string name, Guid id)
+        //[HttpGet]
+        //public async Task<IActionResult> IsDataNameUnique(string name, Guid id)
+        //{
+        //    var allsource = await _common.GetAllDataSource();
+        //    var isUnique = !allsource.Any(group => group.Name ==name && group.ID != id);
+
+        //    return Json(isUnique);
+        //}
+
+        public async Task<IActionResult> IsDataSourceUnique(string name, Guid id)
         {
-            var allsource = await _common.GetAllDataSource();
-            var isUnique = !allsource.Any(group => group.Name == name && group.ID != id);
+            var allbilling = await _common.GetAllDataSource();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1234,11 +1291,29 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllBillingMethodType);
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //public async Task<IActionResult> IsBillingMethodTypeUnique(string name, Guid id)
+        //{
+        //    var allBilling = await _common.GetAllBillingMethodType();
+        //    var isUnique = !allBilling.Any(billing => billing.Name == name && billing.ID != id);
+
+        //    return Json(isUnique);
+        //}
+
         public async Task<IActionResult> IsBillingMethodTypeUnique(string name, Guid id)
         {
-            var allBilling = await _common.GetAllBillingMethodType();
-            var isUnique = !allBilling.Any(billing => billing.Name == name && billing.ID != id);
+            var allbilling = await _common.GetAllBillingMethodType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1327,11 +1402,29 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllAPAccountType);
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //public async Task<IActionResult> IsAPAccountNameUnique(string name, Guid id)
+        //{
+        //    var allaacount = await _common.GetAllAPAccountType();
+        //    var isUnique = !allaacount.Any(account => account.Name == name && account.ID != id);
+
+        //    return Json(isUnique);
+        //}
+
         public async Task<IActionResult> IsAPAccountNameUnique(string name, Guid id)
         {
-            var allaacount = await _common.GetAllAPAccountType();
-            var isUnique = !allaacount.Any(account => account.Name == name && account.ID != id);
+            var allaccount = await _common.GetAllAPAccountType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allaccount.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allaccount.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1753,6 +1846,100 @@ namespace Innovation_Admin.UI.Controllers
             var getAllCategoryType = await _common.GetAllCategoryType();
             return View(getAllCategoryType);
         }
+
+
+        public async Task<IActionResult> IsCategoryTypeUnique(string name, Guid id)
+        {
+            var allbilling = await _common.GetAllCategoryType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.DocumentName.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.DocumentName.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+        [HttpGet]
+        public IActionResult CreateCategoryType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateCategoryType(CreateCategoryTypeDto category)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+            var result = await _common.CreateCategoryType(category);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "CategoryType Successfully Added";
+                return RedirectToAction("CategoryType");
+
+            }
+            else if (result.Message == "Failed to add DataSource")
+            { 
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CategoryType");
+            }
+            return RedirectToAction("CategoryType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCategoryType(string id)
+        {
+            var categoryType = await _common.GetCategoryTypeById(Guid.Parse(id));
+            return View(categoryType.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCategoryType(CategoryTypeDto updatedCategory)
+        {
+            var result = await _common.UpdateCategoryType(updatedCategory);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "CategoryType Successfully Updated";
+                return RedirectToAction("DataSource");
+
+            }
+            else if (result.Message == "Failed to add DataSource.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CategoryType");
+            }
+            return RedirectToAction("CategoryType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCategoryType(Guid categoryId)
+        {
+            var isDeleted = await _common.DeleteCategoryType(categoryId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        
         #endregion
 
         #region PharmacyType
@@ -1849,6 +2036,220 @@ namespace Innovation_Admin.UI.Controllers
 
 
         #endregion
+
+        #region ContractTerms
+        public async Task<IActionResult> ContractTerms()
+        {
+            var getAllContractTerms = await _common.GetAllContractTerms();
+            return View(getAllContractTerms);
+        }
+
+        [HttpGet]
+        public IActionResult CreateContractTerm()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> IsContractTermNameUnique(string name, Guid id)
+        {
+            var allContractTerms = await _common.GetAllContractTerms();
+            bool isUnique = false;
+
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allContractTerms.Any(contractTerm => contractTerm.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allContractTerms.Any(contractTerm => contractTerm.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && contractTerm.ID != id);
+            }
+
+            return Json(isUnique);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateContractTerm(CreateContractTermDto contractTerm)
+        {
+            var result = await _common.CreateContractTerm(contractTerm);
+
+            if (result.Data is null)
+            {
+                if (result.Message != null)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred while creating the contract term.");
+                }
+                TempData["Message"] = "Contract Term Successfully Added";
+
+                return RedirectToAction("ContractTerms");
+            }
+
+            return RedirectToAction("ContractTerms");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditContractTerm([FromQuery] string contractTermId)
+        {
+            var contractTerm = await _common.GetContractTermById(Guid.Parse(contractTermId));
+            return View(contractTerm.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditContractTerm(ContractTermDto updatedContractTerm)
+        {
+            var result = await _common.UpdateContractTerm(updatedContractTerm);
+
+            if (!result.IsSuccess)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(updatedContractTerm);
+            }
+
+            TempData["Message"] = "Contract Term Successfully Updated";
+
+            return RedirectToAction("ContractTerms");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteContractTerm(Guid contractTermId)
+        {
+            var isDeleted = await _common.DeleteContractTerm(contractTermId);
+
+            if (isDeleted)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the contract term." });
+            }
+        }
+        #endregion
+
+
+
+
+
+        #region CliamStatus
+
+        [HttpGet]
+        public async Task<IActionResult> ClaimStatus()
+        {
+            var getAllClaimStatus = await _common.GetAllClaimStatus();
+            return View(getAllClaimStatus);
+        }
+
+
+        public async Task<IActionResult> IsStatusUnique(string name, Guid id)
+        {
+            var allbatch = await _common.GetAllClaimStatus();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+        public async Task<IActionResult> IsColorUnique(string color, Guid id)
+        {
+            var allbatch = await _common.GetAllClaimStatus();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Color.Equals(color, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Color.Equals(color, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+        [HttpGet]
+        public IActionResult CreateClaimStatus()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateClaimStatus(ClaimStatusDto claim)
+        {
+            var result = await _common.CreateClaimStatus(claim);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Claim Status Successfully Added";
+                return RedirectToAction("ClaimStatus");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ClaimStatus");
+            }
+            return RedirectToAction("ClaimStatus");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditClaimStatus(string Id)
+        {
+            var claimStatus = await _common.GetClaimStatusById(Guid.Parse(Id));
+            return View(claimStatus.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditClaimStatus(ClaimStatusDto updatedClaim)
+        {
+            var result = await _common.UpdateClaimStatus(updatedClaim);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Claim Status Successfully Updated";
+                return RedirectToAction("ClaimStatus");
+
+            }
+            else if (result.Message != "Failed to add Claim Status.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ClaimStatus");
+            }
+            return RedirectToAction("ClaimStatus");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteClaimStatus(Guid Id)
+        {
+            var isDeleted = await _common.DeleteClaimStatus(Id);
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+        #endregion
+
+
+
+
+
     }
 }
 

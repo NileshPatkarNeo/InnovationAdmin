@@ -23,7 +23,7 @@ namespace InnovationAdmin.Application.Features.ContractTerms.Queries.GetContract
         public async Task<Response<IEnumerable<ContractTermListVM>>> Handle(GetContractTermsListQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
-            var allContractTerms = (await _contractTermsRepository.ListAllAsync()).OrderBy(x => x.Name);
+            var allContractTerms = (await _contractTermsRepository.ListAllAsync()).Where(x=>x.Status == true).OrderBy(x => x.Name);
             var contractTermsList = _mapper.Map<IEnumerable<ContractTermListVM>>(allContractTerms);
             _logger.LogInformation("Handle Completed");
             return new Response<IEnumerable<ContractTermListVM>>(contractTermsList, "success");
