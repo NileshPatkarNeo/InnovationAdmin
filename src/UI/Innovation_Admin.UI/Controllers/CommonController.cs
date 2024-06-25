@@ -29,6 +29,7 @@ using Innovation_Admin.UI.Services.Repositories;
 using System.Xml.Linq;
 using Innovation_Admin.UI.Models.ContractTerms;
 using Innovation_Admin.UI.Models.ClaimStatus;
+using Innovation_Admin.UI.Models.CategoryType;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -163,12 +164,31 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllAdminUser);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> IsAdminUserUnique(string user_Name, Guid id)
+        //[HttpGet]
+        //public async Task<JsonResult> IsAdminUserUnique(string user_Name, Guid id)
+        //{
+        //    var alladmin = await _common.GetAllAdminUser();
+        //    var isUnique = !alladmin.Any(admin => admin.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && admin.User_ID != id);
+
+        //    return Json(isUnique);
+        //}
+
+
+        public async Task<IActionResult> IsAdminUserUnique(string user_Name, Guid user_ID)
         {
-            var alladmin = await _common.GetAllAdminUser();
-            var isUnique = !alladmin.Any(admin => admin.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && admin.User_ID != id);
-        
+            var allbilling = await _common.GetAllAdminUser();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(user_ID.ToString()) || user_ID == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && batch.User_ID != user_ID);
+
+            }
+
             return Json(isUnique);
         }
 
@@ -752,6 +772,24 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllSysPrefSecurityEmail);
         }
 
+        public async Task<IActionResult> IsSecurityEmailUnique(string defaultFromName, Guid sysPrefSecurityEmailId)
+        {
+            var allbilling = await _common.GetAllSysPrefSecurityEmail();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(sysPrefSecurityEmailId.ToString()) || sysPrefSecurityEmailId == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.DefaultFromName.Equals(defaultFromName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.DefaultFromName.Equals(defaultFromName, StringComparison.OrdinalIgnoreCase) && batch.SysPrefSecurityEmailId != sysPrefSecurityEmailId);
+
+            }
+
+            return Json(isUnique);
+        }
+
         [HttpGet]
         public IActionResult CreateSysPrefSecurityEmail()
         {
@@ -1141,11 +1179,29 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllDataSource);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> IsDataNameUnique(string name, Guid id)
+        //[HttpGet]
+        //public async Task<IActionResult> IsDataNameUnique(string name, Guid id)
+        //{
+        //    var allsource = await _common.GetAllDataSource();
+        //    var isUnique = !allsource.Any(group => group.Name ==name && group.ID != id);
+
+        //    return Json(isUnique);
+        //}
+
+        public async Task<IActionResult> IsDataSourceUnique(string name, Guid id)
         {
-            var allsource = await _common.GetAllDataSource();
-            var isUnique = !allsource.Any(group => group.Name ==name && group.ID != id);
+            var allbilling = await _common.GetAllDataSource();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1233,11 +1289,29 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllBillingMethodType);
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //public async Task<IActionResult> IsBillingMethodTypeUnique(string name, Guid id)
+        //{
+        //    var allBilling = await _common.GetAllBillingMethodType();
+        //    var isUnique = !allBilling.Any(billing => billing.Name == name && billing.ID != id);
+
+        //    return Json(isUnique);
+        //}
+
         public async Task<IActionResult> IsBillingMethodTypeUnique(string name, Guid id)
         {
-            var allBilling = await _common.GetAllBillingMethodType();
-            var isUnique = !allBilling.Any(billing => billing.Name == name && billing.ID != id);
+            var allbilling = await _common.GetAllBillingMethodType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1326,11 +1400,29 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllAPAccountType);
         }
 
-        [HttpGet]
+        //[HttpGet]
+        //public async Task<IActionResult> IsAPAccountNameUnique(string name, Guid id)
+        //{
+        //    var allaacount = await _common.GetAllAPAccountType();
+        //    var isUnique = !allaacount.Any(account => account.Name == name && account.ID != id);
+
+        //    return Json(isUnique);
+        //}
+
         public async Task<IActionResult> IsAPAccountNameUnique(string name, Guid id)
         {
-            var allaacount = await _common.GetAllAPAccountType();
-            var isUnique = !allaacount.Any(account => account.Name == name && account.ID != id);
+            var allaccount = await _common.GetAllAPAccountType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allaccount.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allaccount.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1752,6 +1844,100 @@ namespace Innovation_Admin.UI.Controllers
             var getAllCategoryType = await _common.GetAllCategoryType();
             return View(getAllCategoryType);
         }
+
+
+        public async Task<IActionResult> IsCategoryTypeUnique(string name, Guid id)
+        {
+            var allbilling = await _common.GetAllCategoryType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbilling.Any(batch => batch.DocumentName.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbilling.Any(batch => batch.DocumentName.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+        [HttpGet]
+        public IActionResult CreateCategoryType()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateCategoryType(CreateCategoryTypeDto category)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+            var result = await _common.CreateCategoryType(category);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "CategoryType Successfully Added";
+                return RedirectToAction("CategoryType");
+
+            }
+            else if (result.Message == "Failed to add DataSource")
+            { 
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CategoryType");
+            }
+            return RedirectToAction("CategoryType");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCategoryType(string id)
+        {
+            var categoryType = await _common.GetCategoryTypeById(Guid.Parse(id));
+            return View(categoryType.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCategoryType(CategoryTypeDto updatedCategory)
+        {
+            var result = await _common.UpdateCategoryType(updatedCategory);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "CategoryType Successfully Updated";
+                return RedirectToAction("DataSource");
+
+            }
+            else if (result.Message == "Failed to add DataSource.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("CategoryType");
+            }
+            return RedirectToAction("CategoryType");
+
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCategoryType(Guid categoryId)
+        {
+            var isDeleted = await _common.DeleteCategoryType(categoryId);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+        
         #endregion
 
         #region PharmacyType

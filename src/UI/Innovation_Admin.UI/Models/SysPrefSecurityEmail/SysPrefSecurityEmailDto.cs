@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,6 +13,7 @@ namespace Innovation_Admin.UI.Models.SysPrefSecurityEmail
         [JsonProperty("defaultFromName")]
         [Required(ErrorMessage = "Default From Name is required.")]
         [StringLength(20, ErrorMessage = "Default From Name cannot exceed 50 characters.")]
+        [Remote(action: "IsSecurityEmailUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(SysPrefSecurityEmailId), ErrorMessage = "Name is already in use.")]
         public string DefaultFromName { get; set; }
 
         [JsonProperty("defaultFromAddress")]

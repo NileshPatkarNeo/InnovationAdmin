@@ -247,6 +247,12 @@ namespace Innovation_Admin.UI.Helper
         #region CategoryType
         public const string GetAllCategoryType = "/api/CategoryType/all?api-version=1";
 
+        public const string CreateCategoryType = "/api/CategoryType?api-version=1";
+        public const string UpdateCategoryType = "/api/CategoryType?api-version=1";
+        public const string GetCategoryTypeById = "/api/CategoryType/{id}?api-version=1";
+        public const string DeleteCategoryType = "/api/CategoryType/{id}?api-version=1";
+
+
         #endregion
 
         #region Contract Terms
