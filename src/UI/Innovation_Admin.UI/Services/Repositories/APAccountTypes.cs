@@ -19,11 +19,15 @@ namespace Innovation_Admin.UI.Services.Repositories
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-        public APAccountTypes(IOptions<ApiBaseUrl> apiBaseUrl)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public APAccountTypes(IOptions<ApiBaseUrl> apiBaseUrl, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
+
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
 
         public async Task<GetAllAPAccountTypeResponseModel> GetAllAPAccountType()
         {
@@ -53,13 +57,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(accounttype);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateAPAccountType,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -85,13 +90,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedAPAccountType);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.UpdateAPAccountType.Replace("{id}", updatedAPAccountType.ID.ToString()), // Define the 
                     HttpMethod.Put, // Use PUT method for updates
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {

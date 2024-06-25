@@ -818,6 +818,26 @@ namespace Innovation_Admin.UI.Common
 
             return new List<CategoryTypeDto>();
         }
+
+        public async Task<CreateCategoryTypeResponseModel> CreateCategoryType(CreateCategoryTypeDto category)
+        {
+            return await categoryTypes.CreateCategoryType(category);
+        }
+
+        public async Task<UpdateCategoryTypeResponseModel> UpdateCategoryType(CategoryTypeDto updatedcategory)
+        {
+            return await categoryTypes.UpdateCategoryType(updatedcategory);
+        }
+        public async Task<GetCategoryTypeByIdResponseModel> GetCategoryTypeById(Guid dataId)
+        {
+            return await categoryTypes.GetCategoryTypeById(dataId);
+        }
+
+        public async Task<bool> DeleteCategoryType(Guid dataId)
+        {
+            return await categoryTypes.DeleteCategoryType(dataId);
+        }
+
         #endregion
 
         #region PharmacyType

@@ -14,15 +14,18 @@ namespace Innovation_Admin.UI.Services.Repositories
     {
         private APIRepository _apiRepository;
         private Response<string> _oApiResponse;
-        private string _sToken = string.Empty;
+        string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AdminUser(IOptions<ApiBaseUrl> apiBaseUrl)
+        public AdminUser(IOptions<ApiBaseUrl> apiBaseUrl, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
 
         public async Task<GetAllAdminUserResponseModel> GetAllAdminUser()
         {
@@ -53,13 +56,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(company);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateAdminUser,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -85,13 +89,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedAdmin);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.UpdateAdminUser.Replace("{id}", updatedAdmin.User_ID.ToString()), 
                     HttpMethod.Put, 
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {

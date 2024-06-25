@@ -12,7 +12,7 @@ namespace Innovation_Admin.UI.Models.DataSource
         [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name can only contain characters")]
         [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
         [MaxLength(30, ErrorMessage = "Name cannot exceed 30 characters")]
-        [Remote(action: "IsNameUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
+        [Remote(action: "IsDataSourceUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
         public string Name { get; set; }
 
         [StringLength(1000)]
