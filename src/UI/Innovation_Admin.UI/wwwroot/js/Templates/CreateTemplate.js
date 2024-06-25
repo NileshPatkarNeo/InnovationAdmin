@@ -32,23 +32,20 @@ function onlyAlphabets(e, t) {
     }
 }
 
-document.getElementById("createTemplateForm").addEventListener("submit", function (event) {
-    let isValid = true;
+//document.getElementById("createTemplateForm").addEventListener("submit", function (event) {
+//    let isValid = true;
 
-    // Name Validation
-    const nameInput = document.getElementById("Name");
-    const nameError = document.getElementById("Name_error");
-    nameError.textContent = "";
-    if (nameInput.value.trim() === "") {
-        nameError.textContent = "Name is required.";
-        isValid = false;
-    } else if (nameInput.value.length > 50) {
-        nameError.textContent = "Name cannot exceed 50 characters.";
-        isValid = false;
-    } else if (nameInput.value.length < 2) {
-        nameError.textContent = "Name should be at least 2 characters.";
-        isValid = false;
-    }
+//    // Name Validation
+//    const nameInput = document.getElementById("Name");
+//    const nameError = document.getElementById("Name_error");
+//    nameError.textContent = "";
+//    if (nameInput.value.length > 50) {
+//        nameError.textContent = "Name cannot exceed 50 characters.";
+//        isValid = false;
+//    } else if (nameInput.value.length < 2) {
+//        nameError.textContent = "Name should be at least 2 characters.";
+//        isValid = false;
+//    }
 
     // PDF Template File Validation
     const pdfTemplateFileInput = document.getElementById("PdfTemplateFile");
