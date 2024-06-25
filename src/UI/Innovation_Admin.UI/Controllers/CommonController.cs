@@ -27,6 +27,7 @@ using Innovation_Admin.UI.Models.DoNotTakeGroup;
 using System.ComponentModel.Design;
 using Innovation_Admin.UI.Services.Repositories;
 using System.Xml.Linq;
+using Innovation_Admin.UI.Models.PharmacyType;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -40,7 +41,8 @@ namespace Innovation_Admin.UI.Controllers
         private readonly IAuthenticationService _authenticationService;
 
 
-        public CommonController(CommonCall.Common common, IAuthenticationService authenticationService, IWebHostEnvironment webHostEnvironment) {
+        public CommonController(CommonCall.Common common, IAuthenticationService authenticationService, IWebHostEnvironment webHostEnvironment)
+        {
 
             _common = common;
             _authenticationService = authenticationService;
@@ -64,7 +66,7 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> SysPrefCompany()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefCompanies();
-           
+
             return View(getAllSysPrefCompanies);
         }
 
@@ -111,7 +113,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpPost]
-     
+
         public async Task<IActionResult> EditSysPrefCompany(SysPrefCompanyDto updatedCompany)
         {
             var result = await _common.UpdateSysPrefCompany(updatedCompany);
@@ -166,12 +168,12 @@ namespace Innovation_Admin.UI.Controllers
         {
             var alladmin = await _common.GetAllAdminUser();
             var isUnique = !alladmin.Any(admin => admin.User_Name.Equals(user_Name, StringComparison.OrdinalIgnoreCase) && admin.User_ID != id);
-        
+
             return Json(isUnique);
         }
 
         [HttpGet]
-        public async Task<IActionResult>  CreateAdminUser()
+        public async Task<IActionResult> CreateAdminUser()
         {
             var getAllAdminRoles = await _common.GetAllAdminRoles();
             ViewBag.RoleList = new SelectList(getAllAdminRoles, "Role_ID", "Role_Name");
@@ -181,7 +183,7 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAdminUser(CreateAdminUserDto company)
         {
-          
+
             var result = await _common.CreateAdminUser(company);
             if (result.Message == null)
             {
@@ -225,7 +227,7 @@ namespace Innovation_Admin.UI.Controllers
                 return RedirectToAction("AdminUser");
             }
             return RedirectToAction("AdminUser");
-  
+
         }
 
         [HttpPost]
@@ -242,7 +244,7 @@ namespace Innovation_Admin.UI.Controllers
             {
                 return Json(new { success = false, message = "Failed to delete." });
             }
-  
+
         }
 
 
@@ -331,7 +333,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("AdminRole");
         }
 
-       
+
 
         [HttpPost]
         public async Task<IActionResult> DeleteAdminRole(Guid adminRoleId)
@@ -369,7 +371,7 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSysPrefGeneralBehaviour(CreateSysPrefGeneralBehaviourDto company)
         {
-           
+
             var result = await _common.CreateSysPrefGeneralBehaviour(company);
             if (result.Message == null)
             {
@@ -406,7 +408,7 @@ namespace Innovation_Admin.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditSysPrefGeneralBehaviour(SysPrefGeneralBehaviourDto updatedCompany)
         {
-             var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
+            var result = await _common.UpdateSysSysPrefGeneralBehaviour(updatedCompany);
 
             if (result.Message != null)
             {
@@ -440,7 +442,7 @@ namespace Innovation_Admin.UI.Controllers
             return View(sysPrefGeneralBehaviour.Data);
         }
 
-       
+
         [HttpPost]
         public async Task<IActionResult> DeleteSysPrefGeneralBehaviour(Guid Preference_ID)
         {
@@ -457,7 +459,7 @@ namespace Innovation_Admin.UI.Controllers
 
         }
 
-      
+
 
         #endregion
 
@@ -480,12 +482,12 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePharmacyGroup(PharmacyGroupDto group)
         {
-            
+
             if (!ModelState.IsValid)
-                {
-                   return View(group); 
-              }
-                var result = await _common.CreatePharmacyGroup(group);
+            {
+                return View(group);
+            }
+            var result = await _common.CreatePharmacyGroup(group);
             if (result.Message == null)
             {
                 TempData["Message"] = "Pharmacy Name Successfully Added";
@@ -550,7 +552,7 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeletePharmacyGroup(Guid Id)
         {
-            
+
             bool isDeleted = await _common.DeletePharmacyGroup(Id);
 
             if (isDeleted)
@@ -1144,7 +1146,7 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> IsDataNameUnique(string name, Guid id)
         {
             var allsource = await _common.GetAllDataSource();
-            var isUnique = !allsource.Any(group => group.Name ==name && group.ID != id);
+            var isUnique = !allsource.Any(group => group.Name == name && group.ID != id);
 
             return Json(isUnique);
         }
@@ -1588,7 +1590,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditCorrespondenceNote( string Id)
+        public async Task<IActionResult> EditCorrespondenceNote(string Id)
         {
             var sysPrefCompany = await _common.GetCorrespondenceNoteById(Guid.Parse(Id));
             return View(sysPrefCompany.Data);
@@ -1598,7 +1600,7 @@ namespace Innovation_Admin.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditCorrespondenceNote(CorrespondenceNoteDto updatedNote)
         {
-           var result = await _common.UpdateCorrespondenceNote(updatedNote);
+            var result = await _common.UpdateCorrespondenceNote(updatedNote);
             if (result.Message != null)
             {
                 TempData["Message"] = "Correspondence Note Successfully Updated";
@@ -1661,7 +1663,7 @@ namespace Innovation_Admin.UI.Controllers
         // // Check if a GroupCode is unique
         [HttpGet]
         public async Task<IActionResult> IsGroupCodeUnique(int groupCode, Guid id)
-       {
+        {
             var allGroups = await _common.GetAllDoNotTakeGroups();
             bool isUnique = false;
 
@@ -1710,7 +1712,7 @@ namespace Innovation_Admin.UI.Controllers
             return View(doNotTakeGroup.Data);
         }
 
-       
+
 
         [HttpPost]
         public async Task<IActionResult> EditDoNotTakeGroup(DoNotTakeGroupDto updatedgroup)
@@ -1762,13 +1764,97 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAlltype);
         }
 
+
+        [HttpGet]
+        public IActionResult CreatePharmacyType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePharmacyType(PharmacyTypeDto group)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(group);
+            }
+            var result = await _common.CreatePharmacyType(group);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Pharmacy Type Successfully Added";
+                return RedirectToAction("PharmacyTypes");
+
+            }
+            else if (result.Message == "Failed to add type.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("PharmacyTypes");
+            }
+            return RedirectToAction("PharmacyTypes");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditPharmacyType(string Id)
+        {
+            var sysPrefCompany = await _common.GetPharmacyTypeById(Guid.Parse(Id));
+            return View(sysPrefCompany.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPharmacyType(PharmacyTypeDto updatedNote)
+
+        {
+            var result = await _common.UpdatePharmacyType(updatedNote);
+            if (result.Message != null)
+            {
+                TempData["Message"] = "Pharmacy Type Successfully Updated";
+                return RedirectToAction("PharmacyTypes");
+
+            }
+            else if (result.Message == "Failed to add.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("PharmacyTypes");
+            }
+            return RedirectToAction("PharmacyTypes");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePharmacyType( Guid Id)
+        {
+
+            bool isDeleted = await _common.DeletePharmacyType(Id);
+
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete." });
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         #endregion
     }
 }
-    
-  
 
- 
+
+
+
 
 
 

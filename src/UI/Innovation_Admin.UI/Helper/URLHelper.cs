@@ -233,13 +233,13 @@ namespace Innovation_Admin.UI.Helper
 
         public const string GetAllPharmacyType = "/api/PharmacyType?api-version=1";
 
-        public const string CreatePharmacyType = "/api/Category?api-version=1";
+        public const string CreatePharmacyType = "/api/PharmacyType?api-version=1";
 
-        public const string UpdatePharmacyType = "/api/Category/{id}?api-version=1";
+        public const string UpdatePharmacyType = "/api/PharmacyType/{id}?api-version=1";
 
-        public const string GetPharmacyTypeById = "/api/Category/{id}?api-version=1";
+        public const string GetPharmacyTypeById = "/api/PharmacyType/{id}?api-version=1";
 
-        public const string DeletePharmacyType = "/api/Category/{id}?api-version=1";
+        public const string DeletePharmacyType = "/api/PharmacyType/{id}?api-version=1";
 
         #endregion
 

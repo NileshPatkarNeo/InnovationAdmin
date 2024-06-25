@@ -34,7 +34,9 @@ namespace InnovationAdmin.Application.Features.PharmacyType.Commands.CreatePharm
             var batch = new Domain.Entities.PharmacyType
             {
                 Description = request.Description,
-                Code = request.Code
+                Code = request.Code,
+                IsDeleted = true
+
             };
 
             batch = await _pharmacyGroupRepository.AddAsync(batch);

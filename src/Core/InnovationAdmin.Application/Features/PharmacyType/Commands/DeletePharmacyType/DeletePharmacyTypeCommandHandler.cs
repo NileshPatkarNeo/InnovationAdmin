@@ -21,16 +21,24 @@ namespace InnovationAdmin.Application.Features.PharmacyType.Commands.DeletePharm
 
         public async Task<Response<bool>> Handle(DeletePharmacyTypeCommand request, CancellationToken cancellationToken)
         {
-            var pharmacyTypeToDelete = await _pharmacyTypeRepository.GetByIdAsync(request.Id);
+            
+            var claimToUpdate = await _pharmacyTypeRepository.GetByIdAsync(request.Id);
 
-            if (pharmacyTypeToDelete == null)
+            if (claimToUpdate == null)
             {
-                return new Response<bool>($"PharmacyType with id {request.Id} not found.");
+                return new Response<bool>($"Pharmacy Type with id {request.Id} not found.");
             }
 
-            await _pharmacyTypeRepository.DeleteAsync(pharmacyTypeToDelete);
 
-            return new Response<bool>(true, "PharmacyType deleted successfully.");
+            claimToUpdate.IsDeleted = false;
+
+
+            await _pharmacyTypeRepository.UpdateAsync(claimToUpdate);
+
+            return new Response<bool>(true, "Pharmacy Type Deleted successfully.");
+
+
+
         }
 
 

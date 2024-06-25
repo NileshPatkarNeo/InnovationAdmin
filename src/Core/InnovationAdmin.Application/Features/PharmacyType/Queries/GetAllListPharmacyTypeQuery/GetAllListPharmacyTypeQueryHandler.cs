@@ -24,7 +24,7 @@ namespace InnovationAdmin.Application.Features.PharmacyType.Queries.GetAllListPh
         }
         public async Task<Response<IEnumerable<PharmacyTypeDto>>> Handle(GetAllPharmacyTypeQuery request, CancellationToken cancellationToken)
         {
-            var type = await _pharmacyTypeRepository.ListAllAsync();
+            var type = (await _pharmacyTypeRepository.ListAllAsync()).Where(x=>x.IsDeleted == true);
             var typeDto = _mapper.Map<IEnumerable<PharmacyTypeDto>>(type);
             return new Response<IEnumerable<PharmacyTypeDto>>(typeDto);
         }
