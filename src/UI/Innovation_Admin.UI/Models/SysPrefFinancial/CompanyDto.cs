@@ -1,10 +1,14 @@
-﻿namespace Innovation_Admin.UI.Models.SysPrefFinancial
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Innovation_Admin.UI.Models.SysPrefFinancial
 {
    
         public class CompanyDto
         {
             public Guid CompanyId { get; set; }
-            public string CompanyName { get; set; }
+
+        [Remote(action: "IsCompanyNameUnique", controller: "Common", ErrorMessage = "Company Name is already in use.")]
+        public string CompanyName { get; set; }
         }
 
     

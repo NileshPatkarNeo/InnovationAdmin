@@ -7,11 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
         // Validate User Name
         var userName = document.getElementById("User_Name").value;
         var userNameError = document.getElementById("userNameError");
+        userName = userName.trim(); // Add these line 
         if (userName.trim() === "") {
-            userNameError.textContent = "User Name is required.";
+            userNameError.textContent = "UserName is required.";
             isValid = false;
-        } else if (userName.length > 20) {
-            userNameError.textContent = "User Name should be 20 characters or less.";
+        } else if (!/^[a-zA-Z\s]*$/.test(userName)) {
+            userNameError.textContent = "Name can only contain characters";
+            isValid = false;
+        } else if (userName.length < 2) {
+            userNameError.textContent = "Name should be at least 2 characters.";
+            isValid = false;
+        } else if (userName.length > 30) {
+            userNameError.textContent = "Name cannot exceed 30 characters.";
             isValid = false;
         } else {
             userNameError.textContent = "";
