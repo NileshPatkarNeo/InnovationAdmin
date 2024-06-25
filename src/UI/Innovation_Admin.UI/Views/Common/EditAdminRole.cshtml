@@ -5,96 +5,41 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 <head>
-
-<style>
-    h1.text-center {
-        margin-bottom: 20px;
-    }
-
-    hr {
-        margin-bottom: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 1rem;
-    }
-
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        margin:5px;
-    }
-
-    .form-group label .text-danger {
-        font-weight: bold;
-    }
-
-    .form-box {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 20px;
-    }
-</style>
-
-
-
+    <link href="~/css/receiptbatchsource/editreceiptbatchsource.css" rel="stylesheet" />
 </head>
 <body>
-<h1 class="text-center">Edit Admin Role</h1>
+    <h1 class="text-center">Edit Admin Role</h1>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="form-box">
-            <form id="editAdminRoleForm" asp-action="EditAdminRole" class="w-100" novalidate>
-                <div class="text-danger">
-                    @if (ViewData.ModelState.ErrorCount > 0)
-                    {
-                        <div class="alert alert-danger">
-                            <p>Please fix the errors below:</p>
-                            <ul>
-                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                                {
-                                    <li>@error.ErrorMessage</li>
-                                }
-                            </ul>
-                        </div>
-                    }
-                </div>
+    <div class="form-container">
+        <form id="editAdminRoleForm" asp-action="EditAdminRole" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-group mb-3" style="display:none">
-                    <label asp-for="Role_ID" class="control-label"></label>
-                    <input asp-for="Role_ID" class="form-control" />
-                    <span asp-validation-for="Role_ID" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Role_Name" class="control-label">
-                        @Html.DisplayNameFor(model => model.Role_Name) <span class="text-danger">*</span>
-                    </label>
-                    <input asp-for="Role_Name" class="form-control" maxlength="51" required id="Role_Name" onkeypress="return onlyAlphabets(event,this);" />
-                    <span asp-validation-for="Role_Name" class="text-danger"></span>
-                    <span class="text-danger" id="Role_Name_error"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="Description" class="control-label">
-                        @Html.DisplayNameFor(model => model.Description) <span class="text-danger">*</span>
-                    </label>
-                    <input asp-for="Description" class="form-control" maxlength="101" required id="Description" onkeypress="return onlyAlphabets(event,this);" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                    <span class="text-danger" id="Description_error"></span>
-                </div>
-                <div class="form-group mb-3 d-flex justify-content-center">
-                    <div>
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                    </div>
-                    <div>
-                        <a asp-action="AdminRole" class="btn btn-secondary">Back</a>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="Role_ID" class="control-label">ID</label>
+                <input id="Role_ID" asp-for="Role_ID" class="form-control" />
+                <span asp-validation-for="Role_ID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Role_Name" class="control-label">Role Name <span class="text-danger">*</span></label>
+                <input id="Role_Name" asp-for="Role_Name" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
+                <span asp-validation-for="Role_Name" class="text-danger"></span>
+                <span class="text-danger" id="Role_Name_error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Description <span class="text-danger">*</span></label>
+                <input id="Description" asp-for="Description" class="form-control" maxlength="101" onkeypress="return onlyAlphabets(event, this);" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <span class="text-danger" id="Description_error"></span>
+            </div>
+
+            <div class="button-container">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="AdminRole" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
     </div>
-</div>
 </body>
 
 <script src="~/js/EditAdminRole.js"></script>
