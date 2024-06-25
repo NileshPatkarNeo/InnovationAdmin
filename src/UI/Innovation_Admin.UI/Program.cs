@@ -54,6 +54,7 @@ builder.Services.AddScoped<IDoNotTakeGroup, DoNotTakeGroup>();
 builder.Services.AddScoped<IPharmacyType, PharmacyTypes>();
 builder.Services.AddScoped<IContractTerms, ContractTerms>();
 
+builder.Services.AddScoped<IClaimStatus, ClaimStatus>();
 builder.Services.AddScoped<Common>();
 
 

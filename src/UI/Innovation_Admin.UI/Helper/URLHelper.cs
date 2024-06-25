@@ -259,5 +259,19 @@ namespace Innovation_Admin.UI.Helper
         public const string UpdateContractTerm = "/api/Quote?api-version=1";
 
         public const string DeleteContractTerm = "/api/Quote/{id}?api-version=1";
+        #endregion
+
+
+        #region ClaimStatus
+        public const string GetAllClaimStatus = "/api/ClaimStatus?api-version=1";
+
+        public const string GetClaimStatusByID = "/api/ClaimStatus/{id}?api-version=1";
+
+        public const string CreateClaimStatus = "/api/ClaimStatus?api-version=1";
+
+        public const string UpdateClaimStatus = "/api/ClaimStatus/?api-version=1";
+
+        public const string DeleteClaimStatus = "/api/ClaimStatus/{id}?api-version=1";
+        #endregion
     }
 }

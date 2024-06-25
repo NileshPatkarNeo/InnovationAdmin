@@ -87,18 +87,20 @@ namespace InnovationAdmin.Api.Controllers
             }
             return BadRequest(response);
         }
-
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            var command = new  DeleteClaimStatusCommand { Id = id };
+            var command = new DeleteClaimStatusCommand { Id = id };
             var result = await _mediator.Send(command);
+
             if (result.Data)
             {
                 return Ok(result);
             }
+
             return NotFound(result);
         }
+
 
 
     }
