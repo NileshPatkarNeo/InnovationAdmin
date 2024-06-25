@@ -33,7 +33,7 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Commands.CreateClaimS
             {
                 Name = request.Name,
                 Color = request.Color,
-               Status = true
+                IsDeleted = false
               
 
             };

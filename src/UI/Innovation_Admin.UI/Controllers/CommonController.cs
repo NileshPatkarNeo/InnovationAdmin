@@ -27,6 +27,7 @@ using Innovation_Admin.UI.Models.DoNotTakeGroup;
 using System.ComponentModel.Design;
 using Innovation_Admin.UI.Services.Repositories;
 using System.Xml.Linq;
+using Innovation_Admin.UI.Models.ClaimStatus;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -1763,6 +1764,126 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         #endregion
+
+
+
+
+
+        #region CliamStatus
+
+        [HttpGet]
+        public async Task<IActionResult> ClaimStatus()
+        {
+            var getAllClaimStatus = await _common.GetAllClaimStatus();
+            return View(getAllClaimStatus);
+        }
+
+
+        public async Task<IActionResult> IsStatusUnique(string name, Guid id)
+        {
+            var allbatch = await _common.GetAllClaimStatus();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+        public async Task<IActionResult> IsColorUnique(string color, Guid id)
+        {
+            var allbatch = await _common.GetAllClaimStatus();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Color.Equals(color, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Color.Equals(color, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+        [HttpGet]
+        public IActionResult CreateClaimStatus()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateClaimStatus(ClaimStatusDto claim)
+        {
+            var result = await _common.CreateClaimStatus(claim);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Claim Status Successfully Added";
+                return RedirectToAction("ClaimStatus");
+
+            }
+            else if (result.Message != "Failed to add Receipt BAtch.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ClaimStatus");
+            }
+            return RedirectToAction("ClaimStatus");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditClaimStatus(string Id)
+        {
+            var claimStatus = await _common.GetClaimStatusById(Guid.Parse(Id));
+            return View(claimStatus.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditClaimStatus(ClaimStatusDto updatedClaim)
+        {
+            var result = await _common.UpdateClaimStatus(updatedClaim);
+            if (result.Message == null)
+            {
+                TempData["Message"] = "Claim Status Successfully Updated";
+                return RedirectToAction("ClaimStatus");
+
+            }
+            else if (result.Message != "Failed to add Claim Status.")
+            {
+                TempData["Message"] = result.Message;
+                return RedirectToAction("ClaimStatus");
+            }
+            return RedirectToAction("ClaimStatus");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteClaimStatus(Guid Id)
+        {
+            var isDeleted = await _common.DeleteClaimStatus(Id);
+            if (isDeleted)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete the template." });
+            }
+        }
+        #endregion
+
+
+
+
+
     }
 }
     

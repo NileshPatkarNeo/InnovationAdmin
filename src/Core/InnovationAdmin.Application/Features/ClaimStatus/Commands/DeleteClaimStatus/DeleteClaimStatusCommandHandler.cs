@@ -25,7 +25,7 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Commands.DeleteClaimS
             }
 
            
-            claimToUpdate.Status = false;
+            claimToUpdate.IsDeleted = true;
 
           
             await _claimStatusRepository.UpdateAsync(claimToUpdate);

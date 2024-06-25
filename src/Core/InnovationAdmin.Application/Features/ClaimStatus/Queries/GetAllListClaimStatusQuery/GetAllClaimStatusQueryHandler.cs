@@ -19,7 +19,7 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Queries.GetAllListCla
         }
         public async Task<Response<IEnumerable<ClaimStatusDto>>> Handle(GetAllClaimStatusQuery request, CancellationToken cancellationToken)
         {
-            var claim = (await _claimStatusRepository.ListAllAsync()).Where(x => x.Status == true);
+            var claim = (await _claimStatusRepository.ListAllAsync()).Where(x => x.IsDeleted == false);
             var claimDto = _mapper.Map<IEnumerable<ClaimStatusDto>>(claim);
             return new Response<IEnumerable<ClaimStatusDto>>(claimDto);
         }
