@@ -19,12 +19,15 @@ namespace Innovation_Admin.UI.Services.Repositories
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-        public PharmacyGroups(IOptions<ApiBaseUrl> apiBaseUrl)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public PharmacyGroups(IOptions<ApiBaseUrl> apiBaseUrl, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
-
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
         public async Task<GetAllPharmacyGroupResponseModel> GetAllPharmacyGroups()
         {
             GetAllPharmacyGroupResponseModel response = new GetAllPharmacyGroupResponseModel();
@@ -54,13 +57,13 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(group);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
+                _sToken = Session?.GetString("Token")?.ToString();
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreatePharmacyGroup,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -88,13 +91,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedGroup);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.UpdatePharmacyGroup.Replace("{id}", updatedGroup.Id.ToString()), // Define the 
                     HttpMethod.Put, // Use PUT method for updates
                     content,
-                    string.Empty);
+                   _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {

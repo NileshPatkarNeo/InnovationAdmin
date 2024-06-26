@@ -14,7 +14,7 @@ namespace Innovation_Admin.UI.Models.RemittanceType
         [StringLength(30, ErrorMessage = "Name cannot be longer than 30 characters")]
         [MinLength(2, ErrorMessage = "Name should have at least 2 characters.")]
         [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name can only contain alphabetic characters and spaces")]
-        [Remote(action: "IsNameeUnique", controller: "Common", ErrorMessage = "Name is already in use.")]
+        [Remote(action: "IsNameeUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(Id), ErrorMessage = "Name is already in use.")]
         public string Name { get; set; }
 
         [StringLength(1000)]
