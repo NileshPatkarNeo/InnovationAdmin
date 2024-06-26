@@ -35,7 +35,7 @@ using Innovation_Admin.UI.Models.PharmacyType;
 namespace Innovation_Admin.UI.Controllers
 {
 
-    //  [AuthFilter]
+    [AuthFilter]
     public class CommonController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -2183,10 +2183,6 @@ namespace Innovation_Admin.UI.Controllers
         }
         #endregion
 
-
-
-
-
         #region CliamStatus
 
         [HttpGet]
@@ -2221,15 +2217,13 @@ namespace Innovation_Admin.UI.Controllers
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
-
                 isUnique = !allbatch.Any(batch => batch.Color.Equals(color, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
                 isUnique = !allbatch.Any(batch => batch.Color.Equals(color, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
 
-            }
-
+            } 
             return Json(isUnique);
         }
 
@@ -2247,14 +2241,13 @@ namespace Innovation_Admin.UI.Controllers
             {
                 TempData["Message"] = "Claim Status Successfully Added";
                 return RedirectToAction("ClaimStatus");
-
             }
             else if (result.Message != "Failed to add Receipt BAtch.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("ClaimStatus");
             }
-            return RedirectToAction("ClaimStatus");
+            return RedirectToAction("ClaimStatus"); 
         }
 
 

@@ -1,40 +1,37 @@
 ﻿using AutoMapper;
 using InnovationAdmin.Application.Contracts.Persistence;
+using InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatusQuery;
 using InnovationAdmin.Application.Responses;
 using MediatR;
 
-
-namespace InnovationAdmin.Application.Features.ClaimStatus.Queries.GetClaimStatusQuery
+public class GetClaimStatusByIdQueryHandler : IRequestHandler<GetClaimStatusByIdQuery, Response<ClaimStatusDto>>
 {
-    public class GetClaimStatusByIdQueryHandler : IRequestHandler<GetClaimStatusByIdQuery, Response<ClaimStatusDto>>
-    {
-        private readonly IClaimStatusRepository _claimStatusRepository;
-        private readonly IMapper _mapper;
+    private readonly IClaimStatusRepository _claimStatusRepository;
+    private readonly IMapper _mapper;
 
-        public GetClaimStatusByIdQueryHandler(IClaimStatusRepository claimStatusRepository, IMapper mapper)
+    public GetClaimStatusByIdQueryHandler(IClaimStatusRepository claimStatusRepository, IMapper mapper)
+    {
+        _claimStatusRepository = claimStatusRepository;
+        _mapper = mapper;
+    }
+
+    public async Task<Response<ClaimStatusDto>> Handle(GetClaimStatusByIdQuery request, CancellationToken cancellationToken)
+    {
+        var claimStatus = await _claimStatusRepository.GetByIdAsync(request.Id);
+
+        if (claimStatus == null)
         {
-            _claimStatusRepository = claimStatusRepository;
-            _mapper = mapper;
+            return new Response<ClaimStatusDto>("Claim not found.");
         }
 
-        public async Task<Response<ClaimStatusDto>> Handle(GetClaimStatusByIdQuery request, CancellationToken cancellationToken)
+        if (!claimStatus.IsDeleted)
         {
-            var claimStatus = await _claimStatusRepository.GetByIdAsync(request.Id);
-
-            if (claimStatus == null)
-            {
-                return new Response<ClaimStatusDto>("Claim not found.");
-            }
-
-            if (claimStatus.IsDeleted)
-            {
-                var claimDto = _mapper.Map<ClaimStatusDto>(claimStatus);
-                return new Response<ClaimStatusDto>(claimDto);
-            }
-            else
-            {
-                return new Response<ClaimStatusDto>("Claim status is inactive.");
-            }
+            var claimDto = _mapper.Map<ClaimStatusDto>(claimStatus);
+            return new Response<ClaimStatusDto>(claimDto);
+        }
+        else
+        {
+            return new Response<ClaimStatusDto>("Claim status is inactive.");
         }
     }
 }
