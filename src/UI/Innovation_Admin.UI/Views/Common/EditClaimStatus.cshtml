@@ -7,7 +7,6 @@
 <head>
     <link href="~/css/ReceiptBatchSource/EditReceiptBatchSource.css" rel="stylesheet" />
 </head>
-
 <body>
     <h1>Edit Claim Status</h1>
     <div class="form-container">
@@ -26,17 +25,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label" style="display: inline-block; width: 50px;">Color:</label>
-              <div class="d-flex align-items-center justify-content-between">
-
-                <div style="display: inline-block; width: 250px; height: 50px; background-color: @Model.Color; border: 1px solid #ccc; vertical-align: middle;">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div id="colorDisplay" style="display: inline-block; width: 250px; height: 50px; background-color: @Model.Color; border: 1px solid #ccc; vertical-align: middle;">
+                    </div>
+                    <input asp-for="Color" id="colorPicker" type="color" class="form-control form-control-color" style="display: inline-block; width: 50px; height: 50px; margin-right: 10px;" />
                 </div>
-                <input asp-for="Color" type="color" class="form-control form-control-color" style="display: inline-block; width: 50px; height: 50px; margin-right: 10px;" />
-              </div>
-
                 <span asp-validation-for="Color" class="text-danger" style="display: block; margin-top: 10px;"></span>
             </div>
-
-
 
             <div class="button-container">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -52,4 +47,4 @@
     }
 }
 
-<script src="~/js/ReceiptBatch/EditReceiptBatch.js"></script>
+<script src="~/js/ClaimStatus/EditClaimStatus.js"></script>

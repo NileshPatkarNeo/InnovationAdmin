@@ -11,7 +11,6 @@ namespace InnovationAdmin.Application.Features.ClaimStatus.Queries.GetAllListCla
     {
         private readonly IClaimStatusRepository _claimStatusRepository;
         private readonly IMapper _mapper;
-
         public GetAllClaimStatusQueryHandler(IClaimStatusRepository claimStatusRepository, IMapper mapper)
         {
            _claimStatusRepository = claimStatusRepository;
