@@ -2202,7 +2202,7 @@ namespace Innovation_Admin.UI.Controllers
                 TempData["Message"] = result.Message;
                 return RedirectToAction("ClaimStatus");
             }
-            return RedirectToAction("ClaimStatus");
+            return RedirectToAction("ClaimStatus"); 
         }
 
 

@@ -50,14 +50,14 @@ namespace InnovationAdmin.Api.Controllers
         public async Task<IActionResult> GetClaimStatusById(Guid Id)
         {
             var query = new GetClaimStatusByIdQuery(Id);
-            var batch = await _mediator.Send(query);
+            var claim = await _mediator.Send(query);
 
-            if (batch == null)
+            if (claim == null)
             {
                 return NotFound();
             }
 
-            return Ok(batch);
+            return Ok(claim);
         }
 
         [HttpGet]
@@ -87,6 +87,8 @@ namespace InnovationAdmin.Api.Controllers
             }
             return BadRequest(response);
         }
+
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
