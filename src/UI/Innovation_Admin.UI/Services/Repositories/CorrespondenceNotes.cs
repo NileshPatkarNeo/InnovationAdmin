@@ -24,12 +24,16 @@ namespace Innovation_Admin.UI.Services.Repositories
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-
-        public CorrespondenceNotes(IOptions<ApiBaseUrl> apiBaseUrl)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+            
+        public CorrespondenceNotes(IOptions<ApiBaseUrl> apiBaseUrl, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
+
         public async Task<GetAllCorrespondenceNoteResponseModel> GetAllCorrespondenceNotes()
         {
             GetAllCorrespondenceNoteResponseModel response = new GetAllCorrespondenceNoteResponseModel();
@@ -59,13 +63,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(notemodel);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateCorrespondenceNote,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                   _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -92,13 +97,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedNote);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.UpdateCorrespondenceNote.Replace("{id}", updatedNote.Id.ToString()), // Define the 
                     HttpMethod.Put, // Use PUT method for updates
                     content,
-                    string.Empty);
+                   _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
