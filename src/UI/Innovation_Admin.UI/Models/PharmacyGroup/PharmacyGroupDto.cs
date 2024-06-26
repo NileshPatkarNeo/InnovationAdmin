@@ -15,7 +15,7 @@ namespace Innovation_Admin.UI.Models.PharmacyGroup
         [StringLength(25, ErrorMessage = "Pharmacy Name cannot be longer than 25 characters")]
         [MinLength(2, ErrorMessage = "Pharmacy Name should have at least 2 characters.")]
         [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Pharmacy Name can only contain alphabetic characters and spaces")]
-        [Remote(action: "IsPharmacyNameUnique", controller: "Common", ErrorMessage = "Pharmacy Name is already in use.")]
+        [Remote(action: "IsPharmacyNameUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(Id), ErrorMessage = "Pharmacy Name is already in use.")]
         public string PharmacyName { get; set; }
 
         

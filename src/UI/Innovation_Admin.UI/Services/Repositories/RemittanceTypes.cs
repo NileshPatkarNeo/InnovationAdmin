@@ -17,11 +17,16 @@ namespace Innovation_Admin.UI.Services.Repositories
         private string _sToken = string.Empty;
         private readonly IOptions<ApiBaseUrl> _apiBaseUrl;
         private readonly IConfiguration _configuration;
-        public RemittanceTypes(IOptions<ApiBaseUrl> apiBaseUrl)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public RemittanceTypes(IOptions<ApiBaseUrl> apiBaseUrl, IHttpContextAccessor httpContextAccessor)
         {
             _apiBaseUrl = apiBaseUrl;
             _apiRepository = new APIRepository(_configuration);
+            _httpContextAccessor = httpContextAccessor;
         }
+        private ISession Session => _httpContextAccessor.HttpContext.Session;
+
         public async Task<GetAllRemittanceTypeResponseModel> GetAllRemittanceTypes()
         {
             GetAllRemittanceTypeResponseModel response = new GetAllRemittanceTypeResponseModel();
@@ -51,13 +56,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(type);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.CreateRemittanceType,
                     HttpMethod.Post,
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {
@@ -84,13 +90,14 @@ namespace Innovation_Admin.UI.Services.Repositories
             {
                 var jsonContent = JsonConvert.SerializeObject(updatedType);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                _sToken = Session?.GetString("Token")?.ToString();
 
                 var apiResponse = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     URLHelper.UpdateRemittanceType.Replace("{id}", updatedType.Id.ToString()), // Define the 
                     HttpMethod.Put, // Use PUT method for updates
                     content,
-                    string.Empty);
+                    _sToken);
 
                 if (!string.IsNullOrEmpty(apiResponse.data))
                 {

@@ -587,10 +587,20 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> IsPharmacyNameUnique(string pharmacyName, Guid id)
+        public async Task<IActionResult> IsPharmacyNameUnique(string name, Guid id)
         {
             var allGroups = await _common.GetAllPharmcayGroup();
-            var isUnique = !allGroups.Any(group => group.PharmacyName == pharmacyName && group.Id != id);
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allGroups.Any(batch => batch.PharmacyName.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allGroups.Any(batch => batch.PharmacyName.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1060,8 +1070,18 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsNameeUnique(string name, Guid id)
         {
-            var allQuotes = await _common.GetAllRemittanceType();
-            var isUnique = !allQuotes.Any(quote => quote.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && quote.Id != id);
+            var allbatch = await _common.GetAllRemittanceType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -2026,8 +2046,40 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
+        public async Task<IActionResult> IsPharmacyTypeUnique(string description, Guid id)
+        {
+            var allbatch = await _common.GetAllPharmcayType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
 
+                isUnique = !allbatch.Any(batch => batch.Description.Equals(description, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Description.Equals(description, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
 
+            }
+
+            return Json(isUnique);
+        }
+
+        public async Task<IActionResult> IsPharmacyCodeUnique(int code, Guid id)
+        {
+            var allPharmacyTypes = await _common.GetAllPharmcayType();
+            bool isUnique = false;
+
+            if (id == Guid.Empty || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                isUnique = !allPharmacyTypes.Any(pharmacyType => pharmacyType.Code == code);
+            }
+            else
+            {
+                isUnique = !allPharmacyTypes.Any(pharmacyType => pharmacyType.Code == code && pharmacyType.Id != id);
+            }
+
+            return Json(isUnique);
+        }
 
 
 
