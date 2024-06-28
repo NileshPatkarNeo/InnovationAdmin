@@ -4,11 +4,9 @@ using Innovation_Admin.UI.Models.AdminUser;
 using Innovation_Admin.UI.Models.AdminRole;
 using Microsoft.AspNetCore.Mvc;
 using CommonCall = Innovation_Admin.UI.Common;
-
 using Innovation_Admin.UI.Services.IRepositories;
 using Innovation_Admin.UI.Filter;
 using Innovation_Admin.UI.Models.PharmacyGroup;
-
 using Innovation_Admin.UI.Models.Account_Manager;
 using Innovation_Admin.UI.Models.SysPrefFinancial;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,15 +16,10 @@ using Innovation_Admin.UI.Models.RemittanceType;
 using Innovation_Admin.UI.Models.ReceiptBatchSource;
 using Innovation_Admin.UI.Models.DataSource;
 using Innovation_Admin.UI.Models.Template;
-using Microsoft.AspNetCore.Hosting;
-using Innovation_Admin.UI.Services.Repositories;
 using Innovation_Admin.UI.Models.BillingMethodType;
 using Innovation_Admin.UI.Models.APAccountType;
 using Innovation_Admin.UI.Models.CorrespondenceNote;
 using Innovation_Admin.UI.Models.DoNotTakeGroup;
-using System.ComponentModel.Design;
-using Innovation_Admin.UI.Services.Repositories;
-using System.Xml.Linq;
 using Innovation_Admin.UI.Models.ContractTerms;
 using Innovation_Admin.UI.Models.ClaimStatus;
 using Innovation_Admin.UI.Models.CategoryType;
@@ -632,7 +625,6 @@ namespace Innovation_Admin.UI.Controllers
         }
 
 
-
         [HttpGet]
         public async Task<IActionResult> EditAccountManager(string Id)
         {
@@ -652,7 +644,15 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> DeleteAccountManager(Guid Id)
         {
             var isDeleted = await _common.DeleteAccountManager(Id);
-            return RedirectToAction("GetAllAccountManagers");
+            if (isDeleted)
+            {
+                return Json(new {success = true});
+            }
+            else
+            {
+                return Json(new { success = false, message="Failed to delete" });
+            }
+            //return RedirectToAction("GetAllAccountManagers");
         }
 
 
@@ -2242,7 +2242,7 @@ namespace Innovation_Admin.UI.Controllers
                 TempData["Message"] = "Claim Status Successfully Added";
                 return RedirectToAction("ClaimStatus");
             }
-            else if (result.Message != "Failed to add Receipt BAtch.")
+            else if (result.Message != "Failed to add Claim Status.")
             {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("ClaimStatus");
@@ -2250,8 +2250,7 @@ namespace Innovation_Admin.UI.Controllers
             return RedirectToAction("ClaimStatus"); 
         }
 
-
-        [HttpGet]
+        [HttpGet] 
         public async Task<IActionResult> EditClaimStatus(string Id)
         {
             var claimStatus = await _common.GetClaimStatusById(Guid.Parse(Id));
@@ -2266,7 +2265,6 @@ namespace Innovation_Admin.UI.Controllers
             {
                 TempData["Message"] = "Claim Status Successfully Updated";
                 return RedirectToAction("ClaimStatus");
-
             }
             else if (result.Message != "Failed to add Claim Status.")
             {
