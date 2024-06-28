@@ -3,6 +3,7 @@ using InnovationAdmin.Application.Features.PharmacyType.Commands.DeletePharmacyT
 using InnovationAdmin.Application.Features.PharmacyType.Commands.UpdatePharmacyType;
 using InnovationAdmin.Application.Features.PharmacyType.Queries.GetAllListPharmacyTypeQuery;
 using InnovationAdmin.Application.Features.PharmacyType.Queries.GetPharmacyTypeQuery;
+using InnovationAdmin.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,23 @@ namespace InnovationAdmin.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreatePharmacyTypeCommand createPharmacyTypeCommand)
         {
+            if (createPharmacyTypeCommand == null)
+            {
+                return BadRequest(new Response<CreatePharmacyTypeDto>
+                {
+                    Succeeded = false,
+                    Message = "Invalid input"
+                });
+            }
 
+            if (string.IsNullOrWhiteSpace(createPharmacyTypeCommand.Description))
+            {
+                return BadRequest(new Response<CreatePharmacyTypeDto>
+                {
+                    Succeeded = false,
+                    Message = "Description cannot be blank"
+                });
+            }
 
             var response = await _mediator.Send(createPharmacyTypeCommand);
             if (response.Succeeded)
@@ -52,14 +69,14 @@ namespace InnovationAdmin.Api.Controllers
 
         [HttpGet("{id}", Name = "GetPharmacyTypeById")]
         public async Task<ActionResult> GetPharmacyTypeById(string id)
-        {
+        {            
             if (!Guid.TryParse(id, out var guidId))
             {
                 return BadRequest("Invalid ID format.");
             }
 
-            var getpharmacyGroup = new GetPharmacyTypeByIdQuery { Id = guidId };
-            var response = await _mediator.Send(getpharmacyGroup);
+            var getPharmacyTypeByIdQuery = new GetPharmacyTypeByIdQuery { Id = guidId };
+            var response = await _mediator.Send(getPharmacyTypeByIdQuery);
 
             if (response == null)
             {
