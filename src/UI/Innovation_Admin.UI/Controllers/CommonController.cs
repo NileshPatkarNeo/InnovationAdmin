@@ -1930,7 +1930,7 @@ namespace Innovation_Admin.UI.Controllers
             if (result.Message != null)
             {
                 TempData["Message"] = "CategoryType Successfully Updated";
-                return RedirectToAction("DataSource");
+                return RedirectToAction("CategoryType");
 
             }
             else if (result.Message == "Failed to add DataSource.")

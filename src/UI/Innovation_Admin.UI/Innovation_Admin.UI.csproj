@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Files\" />
+    <Folder Include="wwwroot\js\CategoryType\" />
     <Folder Include="wwwroot\js\RemittanceTypess\" />
     <Folder Include="wwwroot\js\AdminUser\" />
   </ItemGroup>

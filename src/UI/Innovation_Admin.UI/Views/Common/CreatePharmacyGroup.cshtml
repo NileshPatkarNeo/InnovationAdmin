@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label asp-for="PharmacyName" class="control-label">Pharmacy Name <span class="text-danger">*</span></label>
-                <input id="PharmacyName" asp-for="PharmacyName" class="form-control" maxlength="26" />
+                <input id="PharmacyName" asp-for="PharmacyName" class="form-control" maxlength="26" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="PharmacyName" class="text-danger"></span>
             </div>
 
@@ -36,10 +36,29 @@
 
 
 <script>
-    document.getElementById("PharmacyName").addEventListener("input", function () {
-        var errorSpan = document.querySelector("span[data-valmsg-for='PharmacyName']");
-        if (errorSpan) {
-            errorSpan.textContent = "";
+    // document.getElementById("PharmacyName").addEventListener("input", function () {
+    //     var errorSpan = document.querySelector("span[data-valmsg-for='PharmacyName']");
+    //     if (errorSpan) {
+    //         errorSpan.textContent = "";
+    //     }
+    // });
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32)
+                return true;
+            else
+                return false;
         }
-    });
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
 </script>

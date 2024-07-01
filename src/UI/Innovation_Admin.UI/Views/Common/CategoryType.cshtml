@@ -1,23 +1,19 @@
 ﻿@model IEnumerable<Innovation_Admin.UI.Models.CategoryType.CategoryTypeDto>
 
 @{
-    ViewData["Title"] = "CategoryType";
+    
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <h1>CategoryType</h1>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="~/css/receiptbatchsource/listreceiptbatchsource.css" rel="stylesheet" />
-
+    <link href="~/css/categorytype/categorytype.css" rel="stylesheet" />
 </head>
 
-<div style="height:40px; margin:0 0">
+<div style="height: 60px; margin: 0 20px;">
     <p>
-        <a asp-action="Create" class="btn btn-primary float-end">
+        <a asp-action="CreateCategoryType" class="btn btn-primary float-end">
             <i class="bi bi-plus-circle"></i> Add
         </a>
     </p>
@@ -27,46 +23,49 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ID)
+                Sr.No
+                <button class="btn btn-link p-0" onclick="sortTable(0)">
+                    <i class="bi bi-arrow-up-down"></i>
+                </button>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DocumentName)
+                Document Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GroupName)
+                Group Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClaimName)
+                Claim Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AdjustmentName)
+                Adjustment Name
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message)
-            </th>
+            
             <th>Actions</th>
         </tr>
     </thead>
     <tbody id="categoryTypeTableBody">
         @{
+            int serialNumber = 1;
             foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                    <td>@serialNumber</td>
                     <td>@Html.DisplayFor(modelItem => item.DocumentName)</td>
                     <td>@Html.DisplayFor(modelItem => item.GroupName)</td>
                     <td>@Html.DisplayFor(modelItem => item.ClaimName)</td>
                     <td>@Html.DisplayFor(modelItem => item.AdjustmentName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                    
                     <td>
-                        <a href="@Url.Action("Edit", new { id = item.ID })" class="btn btn-warning btn-sm">
-                            <i class="bi bi-pencil-fill"></i> Edit
+                        <a href="@Url.Action("EditCategoryType", new { id = item.ID })" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil-fill"></i> 
                         </a>
                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('@item.ID')">
-                            <i class="bi bi-trash"></i> Delete
+                            <i class="bi bi-trash"></i>
                         </button>
                     </td>
                 </tr>
+                serialNumber++;
             }
         }
     </tbody>
@@ -75,8 +74,10 @@
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="text/javascript" src="~/js/CategoryType/CategoryTypes.js"></script>
 

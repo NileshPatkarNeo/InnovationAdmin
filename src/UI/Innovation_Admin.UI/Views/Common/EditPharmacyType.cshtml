@@ -24,12 +24,12 @@
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <label asp-for="Description" class="control-label">Description<span class="text-danger"> *</span></label>
+                <input asp-for="Description" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
+                <label asp-for="Code" class="control-label">Code<span class="text-danger"> *</span></label>
                 <input asp-for="Code" class="form-control" />
                 <span asp-validation-for="Code" class="text-danger"></span>
             </div>
@@ -48,3 +48,24 @@
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 
+<script>
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32)
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>
