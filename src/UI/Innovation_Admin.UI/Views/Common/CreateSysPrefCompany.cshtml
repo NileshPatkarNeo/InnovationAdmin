@@ -4,49 +4,35 @@
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
 
-<style>
-    body {
-        height: 50vh;
-    }
+<head>
+    <link href="~/css/ReceiptBatchSource/CreateReceiptBatchSource.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
-    .test {
-        margin-top: 30px;
-    }
-
-    .test2 {
-        margin-top: 50px;
-    }
-</style>
-
+</head>
 <body>
     <h1 class="text-center test">Create System Preference</h1>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 test2">
-                <div class="card bg-light shadow">
-                    <div class="card-body">
-                        <form asp-action="CreateSysPrefCompany" method="post" id="createCompanyForm" onsubmit="return validateForm()">
-                            <div class="form-group mb-4">
-                                <label asp-for="CompanyName" class="control-label">Company Name <span class="text-danger">*</span></label>
-                                <input asp-for="CompanyName" id="CompanyName" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
-                                <span id="companyNameError" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-4">
-                                <label asp-for="TermForPharmacy" class="control-label">Term For Pharmacy <span class="text-danger">*</span></label>
-                                <input asp-for="TermForPharmacy" id="TermForPharmacy" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
-                                <span id="termForPharmacyError" class="text-danger"></span>
-                            </div>
-                            <div class="form-group text-center">
-                                <input type="submit" value="Create" class="btn btn-primary mr-3" />
-                                <a asp-action="SysPrefCompany" class="btn btn-secondary">Back</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <div class="form-container">
+        <form asp-action="CreateSysPrefCompany" method="post" id="createCompanyForm">
+            <div class="form-group ">
+                <label asp-for="CompanyName" class="control-label">Company Name <span class="text-danger">*</span></label>
+                <input asp-for="CompanyName" id="CompanyName" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
+                <span id="companyNameError" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group ">
+                <label asp-for="TermForPharmacy" class="control-label">Term For Pharmacy <span class="text-danger">*</span></label>
+                <input asp-for="TermForPharmacy" id="TermForPharmacy" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
+                <span id="termForPharmacyError" class="text-danger"></span>
+            </div>
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="SysPrefCompany" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
     </div>
+  
 </body>
 
 <script src="~/js/SystemPreference/CreateSysPrefCompanyy.js"></script>
