@@ -21,7 +21,7 @@
 
             <div class="form-group mb-4">
                 <label asp-for="Note" class="control-label">Note <span class="text-danger">*</span></label>
-                <input asp-for="Note" class="form-control" id="Note" maxlength="51" />
+                <input asp-for="Note" class="form-control" id="Note" maxlength="51" onkeypress="return onlyAlphabets(event, this);"/>
                 <span asp-validation-for="Note" class="text-danger"></span>
             </div>
 
@@ -41,3 +41,25 @@
 <link href="~/css/correspondencenote/editcorrespondencenote.css" rel="stylesheet" />
 
 <script src="~/js/correspondencenotess/editcorrespondencenote.js"></script>
+
+<script>
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32)
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>

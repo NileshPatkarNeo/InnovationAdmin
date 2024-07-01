@@ -1,0 +1,53 @@
+﻿@model Innovation_Admin.UI.Models.CategoryType.CreateCategoryTypeDto
+
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<head>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <link href="~/css/receiptbatchsource/createreceiptbatchsource.css" rel="stylesheet" />
+</head>
+<body>
+    <h1 class="text-center test">Create Category Type</h1>
+
+    <div class="form-container">
+        <form id="receiptBatchForm" asp-action="CreateCategoryType" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="DocumentName" class="control-label">Document Name<span class="text-danger"> *</span></label>
+                <input asp-for="DocumentName" class="form-control" maxlength="51"/>
+                <span asp-validation-for="DocumentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupName" class="control-label">Group Name<span class="text-danger"> *</span></label>
+                <input asp-for="GroupName" class="form-control" maxlength="51" />
+                <span asp-validation-for="GroupName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClaimName" class="control-label">Claim Name<span class="text-danger"> *</span></label>
+                <input asp-for="ClaimName" class="form-control" maxlength="51"/>
+                <span asp-validation-for="ClaimName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdjustmentName" class="control-label">Adjustment Name<span class="text-danger"> *</span></label>
+                <input asp-for="AdjustmentName" class="form-control" maxlength="51"/>
+                <span asp-validation-for="AdjustmentName" class="text-danger"></span>
+            </div>
+            <div class="button-container">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="CategoryType" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+<script src="~/js/correspondencenote/createcorrespondencenote.js"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

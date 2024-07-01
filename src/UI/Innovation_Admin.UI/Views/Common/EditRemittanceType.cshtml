@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name <span class="text-danger">*</span></label>
-                <input id="Name" asp-for="Name" class="form-control" maxlength="31" />
+                <input id="Name" asp-for="Name" class="form-control" maxlength="31" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
@@ -43,3 +43,24 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="~/js/remittancetypess/editremittancetype.js"></script>
+<script>
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32)
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>
