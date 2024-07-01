@@ -154,12 +154,13 @@ namespace Innovation_Admin.UI.Services.Repositories
             try
             {
                 string url = URLHelper.DeleteClaimStatus.Replace("{id}", Id.ToString());
+                _sToken = Session?.GetString("Token")?.ToString();
                 var response = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     url,
                     HttpMethod.Delete,
                     new ByteArrayContent(Array.Empty<byte>()),
-                    string.Empty
+                    _sToken
                 );
 
                 return response != null && response.Success;

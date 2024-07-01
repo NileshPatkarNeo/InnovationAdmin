@@ -78,7 +78,7 @@ namespace InnovationAdmin.Api.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult> Update( [FromBody] UpdateClaimStatusCommand  updateClaimStatusCommand)
+        public async Task<ActionResult> Update(Guid id, [FromBody] UpdateClaimStatusCommand  updateClaimStatusCommand)
         {
             var response = await _mediator.Send(updateClaimStatusCommand);
             if (response.Succeeded)

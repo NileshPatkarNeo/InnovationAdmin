@@ -1,5 +1,4 @@
 ﻿using InnovationAdmin.Api.Controllers;
-using InnovationAdmin.Application.Features.PharmacyGroup.Commands.DeletePharmacyGroup;
 using InnovationAdmin.Application.Features.PharmacyType.Commands.CreatePharmacyType;
 using InnovationAdmin.Application.Features.PharmacyType.Commands.DeletePharmacyType;
 using InnovationAdmin.Application.Features.PharmacyType.Commands.UpdatePharmacyType;
