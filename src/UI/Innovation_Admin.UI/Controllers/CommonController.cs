@@ -652,7 +652,7 @@ namespace Innovation_Admin.UI.Controllers
             {
                 return Json(new { success = false, message="Failed to delete" });
             }
-            //return RedirectToAction("GetAllAccountManagers");
+           
         }
 
 
