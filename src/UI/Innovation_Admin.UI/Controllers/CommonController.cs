@@ -29,6 +29,7 @@ namespace Innovation_Admin.UI.Controllers
 {
 
     [AuthFilter]
+    [NoCache]
     public class CommonController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
