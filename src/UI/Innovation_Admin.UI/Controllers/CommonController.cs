@@ -62,7 +62,7 @@ namespace Innovation_Admin.UI.Controllers
         public async Task<IActionResult> SysPrefCompany()
         {
             var getAllSysPrefCompanies = await _common.GetAllSysPrefCompanies();
-           
+
             return View(getAllSysPrefCompanies);
         }
 
@@ -109,7 +109,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpPost]
-     
+
         public async Task<IActionResult> EditSysPrefCompany(SysPrefCompanyDto updatedCompany)
         {
             var result = await _common.UpdateSysPrefCompany(updatedCompany);
@@ -202,7 +202,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateAdminUser(company);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Admin User Successfully Added";
                 return RedirectToAction("AdminUser");
 
             }
@@ -232,7 +232,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateAdminUser(updatedAdmin);
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "Admin User Successfully Updated";
                 return RedirectToAction("AdminUser");
 
             }
@@ -646,13 +646,13 @@ namespace Innovation_Admin.UI.Controllers
             var isDeleted = await _common.DeleteAccountManager(Id);
             if (isDeleted)
             {
-                return Json(new {success = true});
+                return Json(new { success = true });
             }
             else
             {
-                return Json(new { success = false, message="Failed to delete" });
+                return Json(new { success = false, message = "Failed to delete" });
             }
-           
+
         }
 
 
@@ -1867,25 +1867,6 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllCategoryType);
         }
 
-
-        public async Task<IActionResult> IsCategoryTypeUnique(string name, Guid id)
-        {
-            var allbilling = await _common.GetAllCategoryType();
-            bool isUnique = false;
-            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
-            {
-
-                isUnique = !allbilling.Any(batch => batch.DocumentName.Equals(name, StringComparison.OrdinalIgnoreCase));
-            }
-            else
-            {
-                isUnique = !allbilling.Any(batch => batch.DocumentName.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
-
-            }
-
-            return Json(isUnique);
-        }
-
         [HttpGet]
         public IActionResult CreateCategoryType()
         {
@@ -1902,12 +1883,12 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateCategoryType(category);
             if (result.Message == null)
             {
-                TempData["Message"] = "CategoryType Successfully Added";
+                TempData["Message"] = "Category Type Successfully Added";
                 return RedirectToAction("CategoryType");
 
             }
             else if (result.Message == "Failed to add DataSource")
-            { 
+            {
                 TempData["Message"] = result.Message;
                 return RedirectToAction("CategoryType");
             }
@@ -1929,7 +1910,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateCategoryType(updatedCategory);
             if (result.Message != null)
             {
-                TempData["Message"] = "CategoryType Successfully Updated";
+                TempData["Message"] = "Category Type Successfully Updated";
                 return RedirectToAction("CategoryType");
 
             }
@@ -1959,8 +1940,89 @@ namespace Innovation_Admin.UI.Controllers
             }
         }
 
-        
+
+        [HttpGet]
+        public async Task<IActionResult> IsDocumentNameUnique(string documentName, Guid id)
+        {
+            var allbatch = await _common.GetAllCategoryType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.DocumentName.Equals(documentName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.DocumentName.Equals(documentName, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> IsGroupNameUnique(string groupName, Guid id)
+        {
+            var allbatch = await _common.GetAllCategoryType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.GroupName.Equals(groupName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.GroupName.Equals(groupName, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> IsClaimNameUnique(string claimName, Guid id)
+        {
+            var allbatch = await _common.GetAllCategoryType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.ClaimName.Equals(claimName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.ClaimName.Equals(claimName, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+
+
+        public async Task<IActionResult> IsAdjustmentNameUnique(string adjustmentName, Guid id)
+        {
+            var allbatch = await _common.GetAllCategoryType();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.AdjustmentName.Equals(adjustmentName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.AdjustmentName.Equals(adjustmentName, StringComparison.OrdinalIgnoreCase) && batch.ID != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+
         #endregion
+
 
         #region PharmacyType
 
@@ -2030,7 +2092,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeletePharmacyType( Guid Id)
+        public async Task<IActionResult> DeletePharmacyType(Guid Id)
         {
 
             bool isDeleted = await _common.DeletePharmacyType(Id);
@@ -2223,7 +2285,7 @@ namespace Innovation_Admin.UI.Controllers
             {
                 isUnique = !allbatch.Any(batch => batch.Color.Equals(color, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
 
-            } 
+            }
             return Json(isUnique);
         }
 
@@ -2247,10 +2309,10 @@ namespace Innovation_Admin.UI.Controllers
                 TempData["Message"] = result.Message;
                 return RedirectToAction("ClaimStatus");
             }
-            return RedirectToAction("ClaimStatus"); 
+            return RedirectToAction("ClaimStatus");
         }
 
-        [HttpGet] 
+        [HttpGet]
         public async Task<IActionResult> EditClaimStatus(string Id)
         {
             var claimStatus = await _common.GetClaimStatusById(Guid.Parse(Id));
