@@ -16,25 +16,29 @@
     <div class="form-container">
         <form asp-action="EditCategoryType" method="post" id="editCorrespondenceNoteForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <div style="display:none;" class="form-group">
+                <label asp-for="ID" class="control-label">ID <span class="text-danger"> *</span></label>
+                <input asp-for="ID" class="form-control" maxlength="51" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="DocumentName" class="control-label">Document Name <span class="text-danger"> *</span></label>
-                <input asp-for="DocumentName" class="form-control" maxlength="51"/>
+                <input asp-for="DocumentName" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="DocumentName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GroupName" class="control-label">Group Name <span class="text-danger"> *</span></label>
-                <input asp-for="GroupName" class="form-control" maxlength="51" />
+                <input asp-for="GroupName" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="GroupName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ClaimName" class="control-label">Claim Name <span class="text-danger"> *</span></label>
-                <input asp-for="ClaimName" class="form-control" maxlength="51" />
+                <input asp-for="ClaimName" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="ClaimName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AdjustmentName" class="control-label">Adjustment Name <span class="text-danger"> *</span></label>
-                <input asp-for="AdjustmentName" class="form-control" maxlength="51" />
+                <input asp-for="AdjustmentName" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
                 <span asp-validation-for="AdjustmentName" class="text-danger"></span>
             </div>
            
@@ -52,3 +56,24 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32)
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+</script>

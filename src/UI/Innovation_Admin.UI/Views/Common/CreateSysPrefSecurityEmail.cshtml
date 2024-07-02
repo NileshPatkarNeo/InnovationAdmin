@@ -56,6 +56,11 @@
     </div>
 </body>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
-    <script src="~/js/CreateSysPrefSecurityEmail.js"></script>
+<script src="~/js/CreateSysPrefSecurityEmail.js"></script>
 
+}
