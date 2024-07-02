@@ -580,18 +580,18 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> IsPharmacyNameUnique(string name, Guid id)
+        public async Task<IActionResult> IsPharmacyNameUnique(string pharmacyName, Guid id)
         {
             var allGroups = await _common.GetAllPharmcayGroup();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
 
-                isUnique = !allGroups.Any(batch => batch.PharmacyName.Equals(name, StringComparison.OrdinalIgnoreCase));
+                isUnique = !allGroups.Any(batch => batch.PharmacyName.Equals(pharmacyName, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
-                isUnique = !allGroups.Any(batch => batch.PharmacyName.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+                isUnique = !allGroups.Any(batch => batch.PharmacyName.Equals(pharmacyName, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
 
             }
 
