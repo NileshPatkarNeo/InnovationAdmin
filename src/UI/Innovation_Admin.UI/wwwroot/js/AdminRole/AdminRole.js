@@ -1,23 +1,19 @@
-﻿
-
-$("#ContractTerm").dataTable({
+﻿$("#adminRoleTable").dataTable({
     pageLength: 5,
     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
     paging: true,
     serverSide: false,
     columns: [
         { name: "Sr.No", orderable: true },
-        { name: "Name", orderable: true },
-        { name: "ContractType", orderable: true },
-        { name: "ContractTypeCode", orderable: true },
+        { name: "Role Name", orderable: true },
+        { name: "Description", orderable: true },
         { name: "Action", orderable: false }
     ]
 });
 
-
-function confirmDelete(receiptId) {
+function confirmDelete(roleId) {
     Swal.fire({
-        title: 'Are you sure to Delete?',
+        title: 'Are you sure to delete?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -27,9 +23,9 @@ function confirmDelete(receiptId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/Common/DeleteContractTerm',
+                url: '/Common/DeleteAdminRole',
                 type: 'POST',
-                data: { Id: receiptId },
+                data: { adminRoleId: roleId },
                 success: function (response) {
                     if (response.success) {
                         Swal.fire(

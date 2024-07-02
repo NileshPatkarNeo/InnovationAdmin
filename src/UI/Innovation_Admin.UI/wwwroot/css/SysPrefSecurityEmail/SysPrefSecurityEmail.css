@@ -1,6 +1,6 @@
 ﻿body {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     font-family: Arial, sans-serif;
 }
 
@@ -11,30 +11,35 @@ h1 {
 }
 
 .table {
-    margin: 10px auto; /* Center table horizontally */
+    margin-top: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse; /* Ensure no gaps between cells */
-}
+   /* table-layout: fixed;*/
+    border-collapse: collapse; /* Add for consistency */
+    padding: 0 ;  }
 
-    .table th, .table td {
+    .table th,
+    .table td {
         vertical-align: middle;
+        text-align: left;
         padding: 10px;
-        word-break: break-all; /* Break long words */
-        text-align: center; /* Center-align text */
+        word-break: break-word; /* Ensures long words break properly */
+        overflow-wrap: break-word; /* Adds better compatibility */
+        text-align: center; /* Center-align text for consistency */
     }
 
     .table th {
         background-color: lightgray;
     }
 
-        .table th:nth-child(1), .table td:nth-child(1) {
+        .table th:nth-child(1),
+        .table td:nth-child(1) {
             width: 80px;
         }
 
-        .table th:nth-child(5), .table td:nth-child(5) {
+        .table th:nth-child(6),
+        .table td:nth-child(6) {
             width: 150px;
         }
 
@@ -48,7 +53,8 @@ h1 {
 
 .add-button-container {
     text-align: right;
-    margin: 10px 30px; /* Keep margin consistent */
+    margin-bottom: 10px;
+    margin-right: 30px;
 }
 
     .add-button-container a {

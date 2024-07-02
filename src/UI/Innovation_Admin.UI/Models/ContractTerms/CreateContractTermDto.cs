@@ -1,6 +1,7 @@
 ﻿using Innovation_Admin.UI.Models.ResponsesModel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Innovation_Admin.UI.Models.ContractTerms
@@ -20,11 +21,13 @@ namespace Innovation_Admin.UI.Models.ContractTerms
         [RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Contract Type can only contain characters.")]
         [MinLength(2, ErrorMessage = "Contract Type should be at least 2 characters.")]
         [StringLength(50, ErrorMessage = "Contract Type length cannot exceed 50 characters.")]
+        [DisplayName("Contract Type")]
         public string ContractType { get; set; }
 
         [JsonProperty("contractTypeCode")]
         [Required(ErrorMessage = "Contract Type Code is required.")]
         [Range(1, int.MaxValue, ErrorMessage = "Contract Type Code should be a positive integer.")]
+        [DisplayName("COntract Type Code")]
         public int ContractTypeCode { get; set; }
     }
 }
