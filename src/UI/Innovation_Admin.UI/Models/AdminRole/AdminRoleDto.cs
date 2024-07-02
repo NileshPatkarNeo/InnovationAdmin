@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -16,6 +17,7 @@ namespace Innovation_Admin.UI.Models.AdminRole
         [Remote(action: "IsRoleNameUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(Role_ID), ErrorMessage = "Role Name is already in use.")]
         [MinLength(2, ErrorMessage = "Role Name should be at least 2 characters.")]
         [StringLength(50, ErrorMessage = "Role Name cannot exceed 50 characters.")]
+        [DisplayName("Role Name")]
         public string Role_Name { get; set; }
 
         [JsonProperty("description")]

@@ -29,6 +29,7 @@ namespace Innovation_Admin.UI.Controllers
 {
 
     [AuthFilter]
+    [NoCache]
     public class CommonController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -1110,6 +1111,13 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsBatchUnique(string name, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false); // Name is required and should not be whitespace
+            }
+
+            name = name.Trim();
+
             var allbatch = await _common.GetAllReceiptBatchSource();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -2144,9 +2152,9 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditContractTerm([FromQuery] string contractTermId)
+        public async Task<IActionResult> EditContractTerm( string id)
         {
-            var contractTerm = await _common.GetContractTermById(Guid.Parse(contractTermId));
+            var contractTerm = await _common.GetContractTermById(Guid.Parse(id));
             return View(contractTerm.Data);
         }
 
@@ -2183,7 +2191,7 @@ namespace Innovation_Admin.UI.Controllers
         }
         #endregion
 
-        #region CliamStatus
+        #region ClaimStatus
 
         [HttpGet]
         public async Task<IActionResult> ClaimStatus()

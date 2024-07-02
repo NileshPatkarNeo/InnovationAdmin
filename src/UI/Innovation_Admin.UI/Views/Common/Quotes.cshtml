@@ -1,59 +1,60 @@
 ﻿@model IEnumerable<Innovation_Admin.UI.Models.Quote.QuoteDto>
-
 @{
-    ViewData["Title"] = "Quotes";
     Layout = "~/Views/Shared/_AdminHomePage.cshtml";
 }
-
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="~/css/CommonCss/CommonList.css" rel="stylesheet" />
 </head>
+<body>
+<h1>Quotes</h1>
 
-<div class="container">
-    <h1 class="text-center">Quotes</h1>
-
-    <div style="height:40px; margin:0 0">
-        <a asp-action="CreateQuote" class="btn btn-primary  float-end">
-            <i class="bi bi-plus-circle"></i> Add
-        </a>
+    <div style="height:40px; margin=0 0; ">
+        <p>
+            <a asp-action="CreateQuote" class="btn btn-primary float-end"><i class="bi bi-plus-circle"></i> Add</a>
+        </p>
     </div>
-
     <table class="table table-bordered table-hover" id="quoteTable">
-        <thead class="table-light">
-            <tr>
+    <thead>
+        <tr>
                 <th>Sr.No</th>
-                <th>Quote Name</th>
-                    <th>Quote By</th>
-                 <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            @{
-                int serialNumber = 1;
-            }
-            @foreach (var item in Model)
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuoteBy)
+            </th>
+           
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var (item, index) in Model.Select((value, i) => (value, i)))
             {
-                <tr>
-                    <td>@serialNumber</td>
-@*                     <td style="display:none">@Html.DisplayFor(modelItem => item.ID)</td>
- *@                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.QuoteBy)</td>
-                    <td>
-                        <a href="@Url.Action("EditQuote", new { quoteId = item.ID })" class="btn btn-warning btn-sm">
-                            <i class="bi bi-pencil-fill"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.ID')">
-                            <i class="bi bi-trash-fill"></i>
-                        </a>
-                    </td>
-                </tr>
-                serialNumber++;
-            }
-        </tbody>
-    </table>
-</div>
+        <tr>
+                    <td>@(index + 1)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteBy)
+            </td>
+          
+            <td>
+                    <a href="@Url.Action("EditQuote", new { quoteId = item.ID })" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.ID')">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
@@ -68,6 +69,3 @@
         toastr.success('@TempData["Message"]');
     </script>
 }
-
-
-

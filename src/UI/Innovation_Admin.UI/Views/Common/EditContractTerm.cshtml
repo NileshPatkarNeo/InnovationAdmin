@@ -1,0 +1,55 @@
+﻿@model Innovation_Admin.UI.Models.ContractTerms.ContractTermDto
+
+@{
+    Layout = "~/Views/Shared/_AdminHomePage.cshtml";
+}
+
+<head>
+    <link href="~/css/ReceiptBatchSource/CreateReceiptBatchSource.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</head>
+
+<body>
+<h1>Edit Contract Term</h1>
+
+
+    <div class="form-container">
+        <form asp-action="EditContractTerm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div style="display:none" class="form-group">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractType" class="control-label"></label>
+                <input asp-for="ContractType" class="form-control" />
+                <span asp-validation-for="ContractType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractTypeCode" class="control-label"></label>
+                <input asp-for="ContractTypeCode" class="form-control" />
+                <span asp-validation-for="ContractTypeCode" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                </label>
+            </div>
+            <div class="button-container">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="ContractTerms" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
