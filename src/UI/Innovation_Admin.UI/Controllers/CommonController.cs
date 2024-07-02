@@ -1113,7 +1113,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return Json(false); // Name is required and should not be whitespace
+                return Json(false); 
             }
 
             name = name.Trim();
