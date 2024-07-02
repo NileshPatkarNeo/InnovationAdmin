@@ -2145,9 +2145,9 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditContractTerm([FromQuery] string contractTermId)
+        public async Task<IActionResult> EditContractTerm( string id)
         {
-            var contractTerm = await _common.GetContractTermById(Guid.Parse(contractTermId));
+            var contractTerm = await _common.GetContractTermById(Guid.Parse(id));
             return View(contractTerm.Data);
         }
 
@@ -2184,7 +2184,7 @@ namespace Innovation_Admin.UI.Controllers
         }
         #endregion
 
-        #region CliamStatus
+        #region ClaimStatus
 
         [HttpGet]
         public async Task<IActionResult> ClaimStatus()
