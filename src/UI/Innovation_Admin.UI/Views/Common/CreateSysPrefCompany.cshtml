@@ -19,12 +19,12 @@
             <div class="form-group ">
                 <label asp-for="CompanyName" class="control-label">Company Name <span class="text-danger">*</span></label>
                 <input asp-for="CompanyName" id="CompanyName" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
-                <span id="companyNameError" class="text-danger"></span>
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
             </div>
             <div class="form-group ">
                 <label asp-for="TermForPharmacy" class="control-label">Term For Pharmacy <span class="text-danger">*</span></label>
                 <input asp-for="TermForPharmacy" id="TermForPharmacy" class="form-control" maxlength="60" onkeypress="return onlyAlphabets(event);" />
-                <span id="termForPharmacyError" class="text-danger"></span>
+                <span asp-validation-for="TermForPharmacy" class="text-danger"></span>
             </div>
             <div class="button-container">
                 <input type="submit" value="Create" class="btn btn-primary" />

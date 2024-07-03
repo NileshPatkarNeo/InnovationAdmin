@@ -67,6 +67,31 @@ namespace Innovation_Admin.UI.Controllers
             return View(getAllSysPrefCompanies);
         }
 
+        public async Task<IActionResult> IsCompanyUnique(string companyName, Guid id)
+             {
+            if (string.IsNullOrWhiteSpace(companyName))
+            {
+                return Json(false);
+            }
+
+            companyName = companyName.Trim();
+
+            var allbatch = await _common.GetAllSysPrefCompanies();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.CompanyName.Equals(companyName, StringComparison.OrdinalIgnoreCase) && batch.CompanyID != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
         [HttpGet]
         public IActionResult CreateSysPrefCompany()
         {
@@ -172,6 +197,13 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsAdminUserUnique(string user_Name, Guid user_ID)
         {
+
+            if (string.IsNullOrWhiteSpace(user_Name))
+            {
+                return Json(false);
+            }
+
+            user_Name = user_Name.Trim();
             var allbilling = await _common.GetAllAdminUser();
             bool isUnique = false;
             if (string.IsNullOrEmpty(user_ID.ToString()) || user_ID == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -612,6 +644,33 @@ namespace Innovation_Admin.UI.Controllers
             return View(accountManagers);
         }
 
+        public async Task<IActionResult> IsManagerUnique(string name, Guid id)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
+
+            var allbatch = await _common.GetAllReceiptBatchSource();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
+
+            return Json(isUnique);
+        }
+
+
+
         [HttpGet]
         public IActionResult CreateAccountManager()
         {
@@ -620,6 +679,10 @@ namespace Innovation_Admin.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAccountManager(AccountManagerDto manager)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             var result = await _common.CreateAccountManager(manager);
 
             return RedirectToAction("GetAllAccountManagers");
@@ -1113,7 +1176,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return Json(false); // Name is required and should not be whitespace
+                return Json(false);
             }
 
             name = name.Trim();
@@ -2174,6 +2237,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsContractTermNameUnique(string name, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
             var allContractTerms = await _common.GetAllContractTerms();
             bool isUnique = false;
 
@@ -2214,7 +2283,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditContractTerm( string id)
+        public async Task<IActionResult> EditContractTerm(string id)
         {
             var contractTerm = await _common.GetContractTermById(Guid.Parse(id));
             return View(contractTerm.Data);
@@ -2265,6 +2334,14 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsStatusUnique(string name, Guid id)
         {
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
+
             var allbatch = await _common.GetAllClaimStatus();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -2358,9 +2435,6 @@ namespace Innovation_Admin.UI.Controllers
             }
         }
         #endregion
-
-
-
 
 
     }
