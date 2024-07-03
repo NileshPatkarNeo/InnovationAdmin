@@ -1113,7 +1113,7 @@ namespace Innovation_Admin.UI.Controllers
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return Json(false); 
+                return Json(false);
             }
 
             name = name.Trim();
@@ -2174,6 +2174,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsContractTermNameUnique(string name, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
             var allContractTerms = await _common.GetAllContractTerms();
             bool isUnique = false;
 
@@ -2214,7 +2220,7 @@ namespace Innovation_Admin.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditContractTerm( string id)
+        public async Task<IActionResult> EditContractTerm(string id)
         {
             var contractTerm = await _common.GetContractTermById(Guid.Parse(id));
             return View(contractTerm.Data);
@@ -2265,6 +2271,14 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsStatusUnique(string name, Guid id)
         {
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
+
             var allbatch = await _common.GetAllClaimStatus();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
