@@ -6,9 +6,9 @@ namespace Innovation_Admin.UI.Models.APAccountType
 {
     public class CreateAPAccountTypeDto
     {
-        [JsonProperty("Name")]
+        [JsonProperty("name")]
         [Required(ErrorMessage = "Name is required.")]
-        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name can only contain characters")]
+        //[RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Name can only contain characters")]
         [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
         [MaxLength(30, ErrorMessage = "Name cannot exceed 30 characters")]
         [Remote(action: "IsAPAccountNameUnique", controller: "Common", ErrorMessage = "Name is already in use.")]

@@ -45,7 +45,7 @@ namespace Innovation_Admin.UI.Models.SysPrefFinancial
         public string DefaultReceiptBatchDescription { get; set; }
 
         [Required(ErrorMessage = "Claim Paid Threshold is required.")]
-        [Range(0, int.MaxValue, ErrorMessage = "Claim Paid Threshold must be a non-negative value.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Claim Paid Threshold must be a non-negative value.")]
         [JsonProperty("claimPaidThreshold")]
         public int ClaimPaidThreshold { get; set; }
 
@@ -55,7 +55,7 @@ namespace Innovation_Admin.UI.Models.SysPrefFinancial
         public string ClaimStatusWriteOff { get; set; }
 
         [Required(ErrorMessage = "Days To Block is required.")]
-        [Range(0, int.MaxValue, ErrorMessage = "Days To Block must be a non-negative value.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Days To Block must be a non-negative value.")]
         [JsonProperty("daysToBlock")]
         public int DaysToBlock { get; set; }
 

@@ -19,9 +19,15 @@
         <form asp-action="EditCorrespondenceNote" method="post" id="editCorrespondenceNoteForm" novalidate>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="form-group mb-4" style="display:none">
+                <label asp-for="Id" class="control-label">Id <span class="text-danger">*</span></label>
+                <input asp-for="Id" class="form-control" id="Note"/>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+
             <div class="form-group mb-4">
                 <label asp-for="Note" class="control-label">Note <span class="text-danger">*</span></label>
-                <input asp-for="Note" class="form-control" id="Note" maxlength="51" onkeypress="return onlyAlphabets(event, this);"/>
+                <textarea asp-for="Note" class="form-control" id="Note" maxlength="101" onkeypress="return onlyAlphabets(event, this);"></textarea>
                 <span asp-validation-for="Note" class="text-danger"></span>
             </div>
 
