@@ -11,9 +11,9 @@ namespace Innovation_Admin.UI.Models.PharmacyType
 
         [JsonProperty("description")]
         [Required(ErrorMessage = "Description is required")]
-        [StringLength(50, ErrorMessage = "Description cannot be longer than 50 characters")]
+        [StringLength(50, ErrorMessage = "Description cannot exceed 50 characters.")]
         [MinLength(2, ErrorMessage = "Description should have at least 2 characters.")]
-        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Description can only contain alphabetic characters and spaces")]
+        //[RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Description can only contain alphabetic characters and spaces")]
         [Remote(action: "IsPharmacyTypeUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(Id), ErrorMessage = "Pharmacy Type is already in use.")]
         public string Description { get; set; }
 

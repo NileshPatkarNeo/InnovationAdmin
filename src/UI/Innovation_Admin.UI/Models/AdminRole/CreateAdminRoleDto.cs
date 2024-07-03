@@ -8,11 +8,11 @@ namespace Innovation_Admin.UI.Models.AdminRole
     public class CreateAdminRoleDto
     {
         [JsonProperty("role_Name")]
-        [Required(ErrorMessage = "Role Name is required.")]
-        [RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Name can only contain characters")]
-        [MinLength(2, ErrorMessage = "Role Name should be at least 2 characters.")]
+        [Required(ErrorMessage = "Name is required.")]
+        //[RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Name can only contain characters")]
+        [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
         [Remote(action: "IsRoleNameUnique", controller: "Common", ErrorMessage = "Role Name is already in use.")]
-        [StringLength(50, ErrorMessage = "Role Name cannot exceed 50 characters.")]
+        [StringLength(50, ErrorMessage = "Name cannot exceed 50 characters.")]
         public string Role_Name{ get; set; }
 
         [JsonProperty("description")]

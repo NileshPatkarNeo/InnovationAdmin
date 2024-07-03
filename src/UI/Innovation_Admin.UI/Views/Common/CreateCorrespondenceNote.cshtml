@@ -21,7 +21,7 @@
 
             <div class="form-group mb-4">
                 <label asp-for="Note" class="control-label">Note <span class="text-danger">*</span></label>
-                <input asp-for="Note" id="Note" class="form-control" maxlength="51" onkeypress="return onlyAlphabets(event, this);" />
+                <textarea asp-for="Note" id="Note" class="form-control" maxlength="101" onkeypress="return onlyAlphabets(event, this);"></textarea>
                 <span asp-validation-for="Note" class="text-danger"></span>
             </div>
 

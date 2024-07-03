@@ -6,12 +6,16 @@ namespace Innovation_Admin.UI.Models.CorrespondenceNote
 {
     public class CreateCorrespondenceNoteDto
     {
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
+
         [JsonProperty("note")]
         [Required(ErrorMessage = "Note is required.")]
-        [MaxLength(50, ErrorMessage = "Note cannot exceed 50 characters.")]
-        [MinLength(2, ErrorMessage = "Note should have at least 2 characters.")]
-        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Note can only contain alphanumeric characters and spaces.")]
-        [Remote(action: "IsNoteUnique", controller: "Common", ErrorMessage = "Note is already in use.")]
+        [MaxLength(100, ErrorMessage = "Note cannot exceed 100 characters.")]
+        [MinLength(2, ErrorMessage = "Note should be at least 2 characters.")]
+        //[RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Note can only contain alphanumeric characters and spaces.")]
+        
+        [Remote(action: "IsNoteUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(Id), ErrorMessage = "Note is already in use.")]
         public string Note { get; set; }
 
         [StringLength(1000)]

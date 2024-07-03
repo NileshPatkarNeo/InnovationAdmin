@@ -24,6 +24,7 @@ using Innovation_Admin.UI.Models.ContractTerms;
 using Innovation_Admin.UI.Models.ClaimStatus;
 using Innovation_Admin.UI.Models.CategoryType;
 using Innovation_Admin.UI.Models.PharmacyType;
+using System.Xml.Linq;
 
 namespace Innovation_Admin.UI.Controllers
 {
@@ -88,7 +89,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateSysPrefCompany(company);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Company Successfully Added";
                 return RedirectToAction("SysPrefCompany");
 
             }
@@ -116,7 +117,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateSysPrefCompany(updatedCompany);
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "company Successfully Updated";
                 return RedirectToAction("SysPrefCompany");
 
             }
@@ -278,6 +279,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsRoleNameUnique(string role_Name, Guid role_ID)
         {
+            if (string.IsNullOrWhiteSpace(role_Name))
+            {
+                return Json(false);
+            }
+
+            role_Name = role_Name.Trim();
             var allRoles = await _common.GetAllAdminRoles();
             bool isUnique = false;
             if (string.IsNullOrEmpty(role_ID.ToString()) || role_ID == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -583,6 +590,13 @@ namespace Innovation_Admin.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> IsPharmacyNameUnique(string pharmacyName, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(pharmacyName))
+            {
+                return Json(false);
+            }
+
+            pharmacyName = pharmacyName.Trim();
+
             var allGroups = await _common.GetAllPharmcayGroup();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -1071,6 +1085,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsNameeUnique(string name, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
             var allbatch = await _common.GetAllRemittanceType();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -1220,6 +1240,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsDataSourceUnique(string name, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
             var allbilling = await _common.GetAllDataSource();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -1441,6 +1467,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsAPAccountNameUnique(string name, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
             var allaccount = await _common.GetAllAPAccountType();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -1755,8 +1787,24 @@ namespace Innovation_Admin.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> IsNoteUnique(string note, Guid id)
         {
-            var allGroups = await _common.GetAllCorrespondenceNotes();
-            var isUnique = !allGroups.Any(group => group.Note == note && group.Id != id);
+            if (string.IsNullOrWhiteSpace(note))
+            {
+                return Json(false);
+            }
+
+            note = note.Trim();
+            var allbatch = await _common.GetAllCorrespondenceNotes();
+            bool isUnique = false;
+            if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+
+                isUnique = !allbatch.Any(batch => batch.Note.Equals(note, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                isUnique = !allbatch.Any(batch => batch.Note.Equals(note, StringComparison.OrdinalIgnoreCase) && batch.Id != id);
+
+            }
 
             return Json(isUnique);
         }
@@ -1881,6 +1929,7 @@ namespace Innovation_Admin.UI.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateCategoryType(CreateCategoryTypeDto category)
         {
 
@@ -1952,6 +2001,12 @@ namespace Innovation_Admin.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> IsDocumentNameUnique(string documentName, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(documentName))
+            {
+                return Json(false);
+            }
+
+            documentName = documentName.Trim();
             var allbatch = await _common.GetAllCategoryType();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -1971,6 +2026,12 @@ namespace Innovation_Admin.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> IsGroupNameUnique(string groupName, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(groupName))
+            {
+                return Json(false);
+            }
+
+            groupName = groupName.Trim();
             var allbatch = await _common.GetAllCategoryType();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -1992,6 +2053,12 @@ namespace Innovation_Admin.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> IsClaimNameUnique(string claimName, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(claimName))
+            {
+                return Json(false);
+            }
+
+            claimName = claimName.Trim();
             var allbatch = await _common.GetAllCategoryType();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -2012,6 +2079,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsAdjustmentNameUnique(string adjustmentName, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(adjustmentName))
+            {
+                return Json(false);
+            }
+
+            adjustmentName = adjustmentName.Trim();
             var allbatch = await _common.GetAllCategoryType();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -2118,6 +2191,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsPharmacyTypeUnique(string description, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                return Json(false); 
+            }
+
+            description = description.Trim();
             var allbatch = await _common.GetAllPharmcayType();
             bool isUnique = false;
             if (string.IsNullOrEmpty(id.ToString()) || id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -2136,6 +2215,7 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsPharmacyCodeUnique(int code, Guid id)
         {
+
             var allPharmacyTypes = await _common.GetAllPharmcayType();
             bool isUnique = false;
 

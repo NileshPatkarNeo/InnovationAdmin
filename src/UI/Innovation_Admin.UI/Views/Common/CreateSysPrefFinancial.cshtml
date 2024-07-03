@@ -173,5 +173,8 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/CreateSysPrefFinancial.js"></script>
+    <script src="~/js/CreateSysPrefFinancial.js"></script> 
 </body>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

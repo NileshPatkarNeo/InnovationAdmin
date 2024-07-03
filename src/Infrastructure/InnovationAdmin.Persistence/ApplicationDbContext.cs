@@ -2,6 +2,7 @@
 using InnovationAdmin.Domain.Common;
 using InnovationAdmin.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace InnovationAdmin.Persistence
@@ -62,6 +63,8 @@ namespace InnovationAdmin.Persistence
         public DbSet<ContractTerms> ContractTerms { get; set; }
 
         public DbSet<ClaimStatus> claimStatuses { get; set; }   
+
+        public DbSet<AuditTrail> AuditTrails { get; set; }
 
         private IDbContextTransaction _transaction;
 

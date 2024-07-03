@@ -13,7 +13,7 @@ namespace Innovation_Admin.UI.Models.AdminRole
     
         [JsonProperty("role_Name")]
         [Required(ErrorMessage = "Role Name is required.")]
-        [RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Name can only contain characters")]
+        //[RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Name can only contain characters")]
         [Remote(action: "IsRoleNameUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(Role_ID), ErrorMessage = "Role Name is already in use.")]
         [MinLength(2, ErrorMessage = "Role Name should be at least 2 characters.")]
         [StringLength(50, ErrorMessage = "Role Name cannot exceed 50 characters.")]

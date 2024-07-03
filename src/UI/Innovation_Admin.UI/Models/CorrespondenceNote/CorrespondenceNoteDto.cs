@@ -13,10 +13,10 @@ namespace Innovation_Admin.UI.Models.CorrespondenceNote
 
         [JsonProperty("note")]
         [Required(ErrorMessage = "Note is required")]
-        [MinLength(2, ErrorMessage = "Note should have at least 2 characters.")]
-        [StringLength(50, ErrorMessage = "Note cannot be longer than 50 characters")]
-        [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Note can only contain alphanumeric characters and spaces.")]
-        [Remote(action: "IsNoteUnique", controller: "Common", ErrorMessage = "Note is already in use.")]
+        [MinLength(2, ErrorMessage = "Note should be at least 2 characters.")]
+        [StringLength(100, ErrorMessage = "Note cannot exceed 100 characters.")]
+        //[RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Note can only contain alphanumeric characters and spaces.")]
+        [Remote(action: "IsNoteUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," +nameof(Id), ErrorMessage = "Note is already in use.")]
         public string Note { get; set; }
 
         [StringLength(1000)]

@@ -12,6 +12,11 @@
         <form id="editForm" asp-action="EditSysPrefGeneralBehaviour">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="form-group form-check" style="display:none">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Preference_ID" /> ID
+                </label>
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Auto_Change_Claim_Status" /> Auto Change Claim Status
