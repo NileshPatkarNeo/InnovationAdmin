@@ -11,4 +11,4 @@ namespace InnovationAdmin.Application.Features.PharmacyGroup.Queries.GetPharmacy
         public Guid Id { get; set; }
         public string PharmacyName { get; set; }
     }
-}
+}   

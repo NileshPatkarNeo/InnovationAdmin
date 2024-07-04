@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\InnovationAdmin.Application\InnovationAdmin.Application.csproj" />
+    <ProjectReference Include="..\InnovationAdmin.Identity\InnovationAdmin.Identity.csproj" />
   </ItemGroup>
 
 </Project>

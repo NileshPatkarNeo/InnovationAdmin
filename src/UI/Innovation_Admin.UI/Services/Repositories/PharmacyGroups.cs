@@ -154,13 +154,14 @@ namespace Innovation_Admin.UI.Services.Repositories
         {
             try
             {
+                _sToken = Session?.GetString("Token")?.ToString();
                 string url = URLHelper.DeletePharmacyGroup.Replace("{id}", Id.ToString());
                 var response = await _apiRepository.APICommunication(
                     _apiBaseUrl.Value.InnvoationAdminApiBaseUrl,
                     url,
                     HttpMethod.Delete,
                     new ByteArrayContent(Array.Empty<byte>()),
-                    string.Empty
+                    _sToken
                 );
 
                 return response != null && response.Success;
