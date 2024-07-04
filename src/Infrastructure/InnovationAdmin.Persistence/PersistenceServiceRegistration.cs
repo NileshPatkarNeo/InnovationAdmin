@@ -41,6 +41,8 @@ namespace InnovationAdmin.Persistence
             services.AddScoped<ICorrespondenceNotesRepository, CorrespondenceNotesRepository>();
             services.AddScoped<IDoNotTakeGroup, DoNotTakeGroupRepopsitory>();
             services.AddScoped<IClaimStatusRepository, ClaimStatusRepository>();
+            services.AddScoped<IAuditTrailRepository, AuditTrailRepository>();
+
 
             return services;
         }
