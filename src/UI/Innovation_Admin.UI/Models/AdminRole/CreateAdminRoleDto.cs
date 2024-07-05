@@ -7,7 +7,7 @@ namespace Innovation_Admin.UI.Models.AdminRole
 {
     public class CreateAdminRoleDto
     {
-        [JsonProperty("role_Name")]
+        [JsonProperty("name")]
         [Required(ErrorMessage = "Name is required.")]
         //[RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Name can only contain characters")]
         [MinLength(2, ErrorMessage = "Name should be at least 2 characters.")]
