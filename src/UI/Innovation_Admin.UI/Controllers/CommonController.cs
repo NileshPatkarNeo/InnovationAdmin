@@ -113,7 +113,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.CreateSysPrefCompany(company);
             if (result.Message == null)
             {
-                TempData["Message"] = "Successfully Added";
+                TempData["Message"] = "Company Preference Successfully Added";
                 return RedirectToAction("SysPrefCompany");
 
             }
@@ -141,7 +141,7 @@ namespace Innovation_Admin.UI.Controllers
             var result = await _common.UpdateSysPrefCompany(updatedCompany);
             if (result.Message != null)
             {
-                TempData["Message"] = "Successfully Updated";
+                TempData["Message"] = "Company Preference Updated Successfully";
                 return RedirectToAction("SysPrefCompany");
 
             }
@@ -953,6 +953,14 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsNameUnique(string name, Guid id)
         {
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
+
             var allQuotes = await _common.GetAllQuotes();
             bool isUnique = false;
 

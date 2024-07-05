@@ -13,7 +13,7 @@ namespace Innovation_Admin.UI.Models.Quote
 
         [JsonProperty("name")]
         [Required(ErrorMessage = "Quote is required.")]
-        [RegularExpression(@"^[a-zA-Z]+(\s[a-zA-Z]+)*$", ErrorMessage = "Name can only contain characters")]
+     
         [MinLength(2, ErrorMessage = "Quote should be at least 2 characters.")]
         [Remote(action: "IsNameUnique", controller: "Common", AdditionalFields = "__RequestVerificationToken," + nameof(ID),
          ErrorMessage = "Quote is already in use.")]
