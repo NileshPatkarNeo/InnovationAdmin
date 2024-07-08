@@ -339,9 +339,10 @@ namespace Innovation_Admin.UI.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateAdminRole(CreateAdminRoleDto adminRole)
         {
-
+           
             var result = await _common.CreateAdminRole(adminRole);
 
             if (result.Message == null)
@@ -1638,6 +1639,12 @@ namespace Innovation_Admin.UI.Controllers
 
         public async Task<IActionResult> IsTemplateNameUnique(string name, Guid id)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return Json(false);
+            }
+
+            name = name.Trim();
             var allTemplates = await _common.GetAllTemplates();
             bool isUnique = false;
 

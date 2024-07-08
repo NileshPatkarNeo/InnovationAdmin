@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label asp-for="Description" class="control-label">Description <span class="text-danger">*</span></label>
-                <input id="Description" asp-for="Description" class="form-control" maxlength="101" onkeypress="return onlyAlphabets(event, this);" />
+                <textarea id="Description" asp-for="Description" class="form-control" maxlength="101" onkeypress="return onlyAlphabets(event, this);"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
                 <span class="text-danger" id="Description_error"></span>
             </div>
